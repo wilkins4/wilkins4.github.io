@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Stephen Wilkinson's Portfolio</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+    <!-- Animate CSS for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #242424;
+            color: #d9d9d9;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2aa198;  /* accent color */
+        }
+        .navbar {
+            background-color: #2f2f2f;
+        }
+        .navbar .nav-link {
+            color: #d9d9d9;
+        }
+        .navbar .nav-link:hover {
+            color: #2aa198;  /* accent color */
+        }
+        .hero {
+            background-color: #1c2833;  /* updated color */
+        }
+        .bg-light {
+            background-color: #2f2f2f !important;
+        }
+        .text-white, .fa-lg {
+            color: #d9d9d9 !important;
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        .animate__animated.animate__fadeIn {
+            --animate-duration: 1.5s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand text-light" href="#">Stephen Wilkinson</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Projects
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="weather_app.html">Weather App</a>
+                        <a class="dropdown-item" href="finance_app.html">Finance App</a>
+                        <a class="dropdown-item" href="todo_app.html">Todo List App</a>
+                        <a class="dropdown-item" href="recipe_app.html">Recipe Finder App</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fab fa-github"></i> GitHub</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <!-- Hero Section -->
+    <header class="hero text-white text-center p-5">
+        <div class="animate__animated animate__fadeIn">
+            <h1>Welcome to my portfolio</h1>
+            <p class="lead">Enthusiastic software developer with a passion for web development</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mt-5">
+        <!-- About -->
+        <section id="about" class="section animate__animated animate__fadeIn">
+            <h2>About Me</h2>
+            <p>I am a web developer specializing in front-end development, with a strong foundation in HTML, CSS, JavaScript, and React. I'm passionate about creating user-centric solutions and committed to continuous learning and professional growth.</p>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="section animate__animated animate__fadeIn">
+            <h2>Experience</h2>
+            <h4>React Software Development Intern</h4>
+            <h5>Sub360 - February 2023 to August 2023</h5>
+            <p>Joined a remote, React-based development team, focusing on front-end development and user interface design. Collaborated with a team of developers to enhance web application functionality and user experience.</p>
+
+            <h4>Cook/Cashier</h4>
+            <h5>Samson's Concessions - September 2020 to April 2023</h5>
+            <p>Delivered exceptional customer service in a fast-paced food service environment. Managed cash handling processes, maintaining accurate cash drawer.</p>
+        </section>
+
+        <!-- Education -->
+        <section id="education" class="section animate__animated animate__fadeIn">
+            <h2>Education</h2>
+            <h4>Bachelor of Science in Digital Media Arts</h4>
+            <h5>Canisus College - Graduated 2016</h5>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="section animate__animated animate__fadeIn">
+            <h2>Skills</h2>
+            <ul>
+                <li>Front-end development: HTML5, CSS, JavaScript, React</li>
+                <li>Back-end development: Node.js</li>
+                <li>Operating Systems: Windows OS, macOS, Linux</li>
+                <li>Version Control: Git</li>
+                <li>Project Management: Jira</li>
+            </ul>
+        </section>
+
+        <!-- Certifications -->
+        <section id="certifications" class="section animate__animated animate__fadeIn">
+            <h2>Certifications</h2>
+            <ul>
+                <li>Google IT Support Professional Certificate</li>
+                <li>Google IT Automation with Python</li>
+                <li>Meta Front-End Developer Professional Certificate</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-light text-center p-3">
+        <p>&copy; 2023 Stephen Wilkinson</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
