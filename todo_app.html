@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Todo App - Stephen Wilkinson's Portfolio</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #242424;
+            color: #d9d9d9;
+            line-height: 1.6;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2aa198;
+            margin-bottom: 15px;
+        }
+        .navbar {
+            background-color: #2f2f2f;
+            margin-bottom: 25px;
+        }
+        .navbar .nav-link {
+            color: #d9d9d9;
+            transition: color 0.3s;
+        }
+        .navbar .nav-link:hover {
+            color: #2aa198;
+        }
+        .hero {
+            background-color: #1c2833;
+            margin-bottom: 30px;
+        }
+        .bg-light {
+            background-color: #2f2f2f !important;
+        }
+        .text-white, .fa-lg {
+            color: #d9d9d9 !important;
+        }
+        .section {
+            margin-bottom: 50px;
+        }
+        .animate__animated.animate__fadeIn {
+            --animate-duration: 1.5s;
+        }
+        .dropdown-item:hover {
+            background-color: #2aa198;
+            color: white;
+        }
+        .footer {
+            background-color: #2f2f2f;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand text-light" href="#">Stephen Wilkinson</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Projects
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="weather_app.html">Weather App</a>
+                            <a class="dropdown-item" href="finance_app.html">Finance App</a>
+                            <a class="dropdown-item" href="todo_app.html">Todo List App</a>
+                            <a class="dropdown-item" href="recipe_app.html">Recipe Finder App</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fab fa-github"></i> GitHub</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero text-white text-center p-5">
+        <div class="animate__animated animate__fadeIn">
+            <h1>Todo App</h1>
+            <p class="lead">Efficiently manage your daily tasks and boost productivity.</p>
+        </div>
+    </header>
+
+    <main class="container mt-5">
+        <section id="project-details" class="section animate__animated animate__fadeIn">
+            <h2>About the App</h2>
+            <p>The Todo App allows users to maintain a list of tasks they need to complete. You can add, mark as complete, and remove tasks as you navigate through your day.</p>
+            
+            <h2>Your Tasks</h2>
+            <ul id="todo-list">
+                <!-- Tasks will appear here -->
+            </ul>
+            <form id="add-task-form">
+                <input type="text" id="new-task" placeholder="Add a new task">
+                <button type="submit">Add Task</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="footer text-center">
+        <p class="text-white mb-0">&copy; 2023 Stephen Wilkinson</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
