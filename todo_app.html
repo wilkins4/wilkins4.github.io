@@ -30,8 +30,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script>
-        document.getElementById('headerInclude').innerHTML = '<object data="header.html"></object>';
-        document.getElementById('footerInclude').innerHTML = '<object data="footer.html"></object>';
+         $(document).ready(function() {
+            $("#headerInclude").load("header.html");
+            $("#footerInclude").load("footer.html");
+        });
     </script>
 </body>
 
