@@ -8,20 +8,18 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
     <div id="headerInclude"></div>
 
-    <!-- Recipe Finder main content -->
     <main class="container mt-5">
         <h2>Recipe Finder</h2>
         <input type="text" placeholder="Search for a recipe">
         <button>Search</button>
-        <div>
+        <div id="recipeResults">
             <h3>Recipe Results</h3>
-            <!-- Recipe results will appear here -->
         </div>
     </main>
 
@@ -33,7 +31,43 @@
          $(document).ready(function() {
             $("#headerInclude").load("header.html");
             $("#footerInclude").load("footer.html");
+
+            $("button").click(function() {
+                var query = $("input").val();
+                searchRecipes(query);
+            });
         });
+
+        function searchRecipes(query) {
+            var app_id = 'YOUR_APP_ID';
+            var app_key = 'YOUR_APP_KEY';
+            var url = `https://api.edamam.com/search?q=${query}&app_id=${app_id}&app_key=${app_key}`;
+
+            $.ajax({
+                url: url,
+                method: "GET",
+                success: function(data) {
+                    displayRecipes(data.hits);
+                },
+                error: function() {
+                    alert("Error fetching recipes. Please try again.");
+                }
+            });
+        }
+
+        function displayRecipes(recipes) {
+            var output = "";
+            recipes.forEach(function(recipe) {
+                output += `
+                    <div class="recipe-card">
+                        <img src="${recipe.recipe.image}" alt="${recipe.recipe.label}">
+                        <h4>${recipe.recipe.label}</h4>
+                        <a href="${recipe.recipe.url}" target="_blank">View Recipe</a>
+                    </div>
+                `;
+            });
+            $("#recipeResults").html(output);
+        }
     </script>
 </body>
 
