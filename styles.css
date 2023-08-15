@@ -16,12 +16,18 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 25px;
 }
 
+.navbar-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
 .navbar .nav-link {
     color: #F4F4F9;
     transition: color 0.3s;
 }
 
-.navbar .nav-link:hover {
+.navbar .nav-link:hover, .dropdown-item:hover {
     color: #5D737E;
 }
 
@@ -54,4 +60,34 @@ h1, h2, h3, h4, h5, h6 {
 .footer {
     background-color: #232526;
     padding: 20px 0;
+}
+
+.footer-nav {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer-nav li a {
+    color: #F4F4F9;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-nav li a:hover {
+    color: #5D737E;
+}
+
+.back-to-top {
+    display: block;
+    margin-top: 15px;
+    color: #F4F4F9;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.back-to-top:hover {
+    color: #5D737E;
 }
