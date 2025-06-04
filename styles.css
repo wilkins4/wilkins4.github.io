@@ -8,6 +8,7 @@ body {
     color: #F4F4F9;
     font-size: 16px;
     line-height: 1.6;
+    padding-top: 70px; /* Ensure content is below the sticky header */
 }
 
 p {
@@ -154,6 +155,7 @@ body.light-mode .section {
 body.light-mode {
     background-color: #F4F4F9;
     color: #1E2022;
+    padding-top: 70px; /* Match spacing for sticky header */
 }
 
 body.light-mode .navbar,
