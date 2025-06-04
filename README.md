@@ -12,6 +12,8 @@ Welcome to my personal portfolio repository. This portfolio showcases my skills,
 ## Features
 
 - Dark mode toggle with theme persistence
+- Accessible "Skip to Content" link
+- Animated navigation bar that appears on scroll
 
 ## Setup and Run
 
