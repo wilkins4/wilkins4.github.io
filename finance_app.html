@@ -20,10 +20,12 @@
     <!-- Finance App main content -->
     <main class="container mt-5">
         <h2>Finance App</h2>
-        <p>Input stock ticker and get historical data:</p>
-        <input type="text" placeholder="Enter stock ticker">
-        <button>Fetch Data</button>
-        <div>
+        <p>Input a stock ticker to get the latest price:</p>
+        <div class="form-inline mb-3">
+            <input id="tickerInput" type="text" class="form-control mr-2" placeholder="Enter stock ticker">
+            <button id="getStockBtn" class="btn btn-primary">Get Price</button>
+        </div>
+        <div id="stockData">
             <h3>Stock Data</h3>
             <!-- Stock data will appear here -->
         </div>
@@ -51,6 +53,44 @@
             if (localStorage.getItem("theme") === "light") {
                 $("body").addClass("light-mode");
             }
+
+            function showMessage(msg) {
+                $("#stockData").html(`<p>${msg}</p>`);
+            }
+
+            $("#getStockBtn").on("click", function() {
+                const ticker = $("#tickerInput").val().trim().toUpperCase();
+                if (!ticker) {
+                    showMessage("Please enter a stock ticker.");
+                    return;
+                }
+                const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=demo`;
+                $.getJSON(url)
+                    .done(function(data) {
+                        const quote = data["Global Quote"];
+                        if (quote && quote["05. price"]) {
+                            const html = `
+                                <p><strong>Symbol:</strong> ${quote["01. symbol"]}</p>
+                                <p><strong>Price:</strong> $${parseFloat(quote["05. price"]).toFixed(2)}</p>
+                                <p><strong>Open:</strong> $${parseFloat(quote["02. open"]).toFixed(2)}</p>
+                                <p><strong>High:</strong> $${parseFloat(quote["03. high"]).toFixed(2)}</p>
+                                <p><strong>Low:</strong> $${parseFloat(quote["04. low"]).toFixed(2)}</p>
+                            `;
+                            $("#stockData").html(html);
+                        } else {
+                            showMessage("Stock data unavailable.");
+                        }
+                    })
+                    .fail(function() {
+                        showMessage("Error fetching stock data.");
+                    });
+            });
+
+            $("#tickerInput").on("keypress", function(e) {
+                if (e.which === 13) {
+                    $("#getStockBtn").click();
+                }
+            });
         });
     </script>
 </body>
