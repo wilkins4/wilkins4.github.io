@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Baby Tracker - Stephen Wilkinson's Portfolio</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:400,700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div id="headerInclude"></div>
+
+    <main class="container mt-5">
+        <h2>Baby Tracker</h2>
+        <div class="form-row align-items-end">
+            <div class="form-group col-sm-3">
+                <label for="eventType">Event Type</label>
+                <select id="eventType" class="form-control">
+                    <option value="Feeding">Feeding</option>
+                    <option value="Diaper">Diaper</option>
+                    <option value="Sleep">Sleep</option>
+                    <option value="Medicine">Medicine</option>
+                </select>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="eventNote">Notes</label>
+                <input id="eventNote" class="form-control" type="text" placeholder="Details (optional)">
+            </div>
+            <div class="form-group col-sm-3">
+                <button id="addEvent" class="btn btn-primary btn-block">Add Event</button>
+            </div>
+        </div>
+        <table id="eventTable" class="table table-striped mt-4">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Type</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </main>
+
+    <div id="footerInclude"></div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $("#headerInclude").load("header.html", function() {
+                const toggle = $("#darkModeToggle");
+                toggle.on("click", function() {
+                    $("body").toggleClass("light-mode");
+                    localStorage.setItem("theme", $("body").hasClass("light-mode") ? "light" : "dark");
+                });
+            });
+            $("#footerInclude").load("footer.html");
+            if (localStorage.getItem("theme") === "light") {
+                $("body").addClass("light-mode");
+            }
+
+            const stored = localStorage.getItem('babyEvents');
+            let events = stored ? JSON.parse(stored) : [];
+
+            function renderEvents() {
+                let rows = '';
+                events.forEach(function(e) {
+                    rows += `<tr><td>${e.time}</td><td>${e.type}</td><td>${e.note}</td></tr>`;
+                });
+                $('#eventTable tbody').html(rows);
+            }
+
+            $('#addEvent').on('click', function() {
+                const type = $('#eventType').val();
+                const note = $('#eventNote').val();
+                const time = new Date().toLocaleString();
+                events.push({ time, type, note });
+                localStorage.setItem('babyEvents', JSON.stringify(events));
+                $('#eventNote').val('');
+                renderEvents();
+            });
+
+            renderEvents();
+        });
+    </script>
+</body>
+</html>

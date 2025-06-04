@@ -10,6 +10,7 @@ Welcome to my personal portfolio repository. This portfolio showcases my skills,
 - JavaScript
 
 ## Features
+- Baby Tracker app to log baby events with local storage
 
 - Dark mode toggle with theme persistence
 
