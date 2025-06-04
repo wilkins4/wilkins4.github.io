@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Weather App - Stephen Wilkinson's Portfolio</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="styles.css">
@@ -21,9 +21,11 @@
     <main class="container mt-5">
         <h2>Weather App</h2>
         <p>Enter a city to get the current weather:</p>
-        <input type="text" placeholder="Enter city">
-        <button>Get Weather</button>
-        <div>
+        <div class="form-inline mb-3">
+            <input id="cityInput" type="text" class="form-control mr-2" placeholder="Enter city">
+            <button id="getWeatherBtn" class="btn btn-primary">Get Weather</button>
+        </div>
+        <div id="weatherDetails">
             <h3>Weather Details</h3>
             <!-- Weather details will appear here -->
         </div>
@@ -51,6 +53,50 @@
             if (localStorage.getItem("theme") === "light") {
                 $("body").addClass("light-mode");
             }
+
+            function showMessage(msg) {
+                $("#weatherDetails").html(`<p>${msg}</p>`);
+            }
+
+            $("#getWeatherBtn").on("click", function() {
+                const city = $("#cityInput").val().trim();
+                if (!city) {
+                    showMessage("Please enter a city name.");
+                    return;
+                }
+                const geoUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}`;
+                $.getJSON(geoUrl)
+                    .done(function(geo) {
+                        if (!geo.results || !geo.results.length) {
+                            showMessage("City not found.");
+                            return;
+                        }
+                        const lat = geo.results[0].latitude;
+                        const lon = geo.results[0].longitude;
+                        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+                        $.getJSON(weatherUrl)
+                            .done(function(data) {
+                                if (data.current_weather) {
+                                    const w = data.current_weather;
+                                    const html = `
+                                        <p><strong>Temperature:</strong> ${w.temperature}&deg;C</p>
+                                        <p><strong>Wind Speed:</strong> ${w.windspeed} km/h</p>
+                                    `;
+                                    $("#weatherDetails").html(html);
+                                } else {
+                                    showMessage("Weather data unavailable.");
+                                }
+                            })
+                            .fail(function() { showMessage("Error fetching weather data."); });
+                    })
+                    .fail(function() { showMessage("Error fetching location data."); });
+            });
+
+            $("#cityInput").on("keypress", function(e) {
+                if (e.which === 13) {
+                    $("#getWeatherBtn").click();
+                }
+            });
         });
     </script>
 </body>
