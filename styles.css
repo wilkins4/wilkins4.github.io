@@ -63,6 +63,11 @@ h1, h2, h3, h4, h5, h6 {
     padding: 60px 0;
 }
 
+/* Add a subtle divider between sections for readability */
+.section + .section {
+    border-top: 1px solid #444;
+}
+
 .section:nth-of-type(even) {
     background-color: #2B2C2F;
 }
