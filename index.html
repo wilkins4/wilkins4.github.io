@@ -16,6 +16,16 @@
 <body>
     <a id="top"></a>
     <a href="#maincontent" class="skip-link">Skip to main content</a>
+    <div id="sidebar" class="collapsed">
+        <button id="sidebarToggle" aria-label="Toggle Sidebar"><i class="fas fa-bars"></i></button>
+        <ul class="sidebar-menu">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+        </ul>
+    </div>
     <div id="headerInclude"></div>
 
     <header class="hero text-white text-center p-5">
@@ -99,6 +109,10 @@
             if (localStorage.getItem("theme") === "light") {
                 $("body").addClass("light-mode");
             }
+
+            $("#sidebarToggle").on('click', function() {
+                $("#sidebar").toggleClass('collapsed');
+            });
 
             let previousScroll = 0;
             $(window).on('scroll', function() {
