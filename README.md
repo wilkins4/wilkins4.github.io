@@ -9,6 +9,10 @@ Welcome to my personal portfolio repository. This portfolio showcases my skills,
 - CSS
 - JavaScript
 
+## Features
+
+- Dark mode toggle with theme persistence
+
 ## Setup and Run
 
 1. Clone this repository.

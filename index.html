@@ -72,8 +72,17 @@
 
     <script>
         $(document).ready(function() {
-            $("#headerInclude").load("header.html");
+            $("#headerInclude").load("header.html", function() {
+                const toggle = $("#darkModeToggle");
+                toggle.on("click", function() {
+                    $("body").toggleClass("light-mode");
+                    localStorage.setItem("theme", $("body").hasClass("light-mode") ? "light" : "dark");
+                });
+            });
             $("#footerInclude").load("footer.html");
+            if (localStorage.getItem("theme") === "light") {
+                $("body").addClass("light-mode");
+            }
         });
     </script>
 </body>

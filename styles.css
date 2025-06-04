@@ -91,3 +91,26 @@ h1, h2, h3, h4, h5, h6 {
 .back-to-top:hover {
     color: #5D737E;
 }
+
+/* Light mode styles */
+body.light-mode {
+    background-color: #F4F4F9;
+    color: #1E2022;
+}
+
+body.light-mode .navbar,
+body.light-mode .footer {
+    background-color: #e9ecef;
+}
+
+body.light-mode .navbar .nav-link,
+body.light-mode .footer-nav li a,
+body.light-mode .back-to-top {
+    color: #1E2022 !important;
+}
+
+body.light-mode .navbar .nav-link:hover,
+body.light-mode .footer-nav li a:hover,
+body.light-mode .back-to-top:hover {
+    color: #5D737E !important;
+}
