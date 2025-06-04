@@ -17,9 +17,11 @@
     <!-- Todo App main content -->
     <main class="container mt-5">
         <h2>Todo App</h2>
-        <input type="text" placeholder="Enter task">
-        <button>Add Task</button>
-        <ul>
+        <div class="form-inline mb-3">
+            <input type="text" class="form-control todo-input" placeholder="Enter task">
+            <button class="btn btn-primary ml-2 add-task">Add Task</button>
+        </div>
+        <ul class="todo-list">
             <!-- Todo list items will appear here -->
         </ul>
     </main>
@@ -41,6 +43,62 @@
             if (localStorage.getItem("theme") === "light") {
                 $("body").addClass("light-mode");
             }
+
+            const input = $(".todo-input");
+            const list = $(".todo-list");
+
+            function saveTasks() {
+                const tasks = [];
+                list.find("li").each(function() {
+                    tasks.push({
+                        text: $(this).find("span").text(),
+                        completed: $(this).hasClass("completed")
+                    });
+                });
+                localStorage.setItem("todoTasks", JSON.stringify(tasks));
+            }
+
+            function addTask(text, completed) {
+                const li = $("<li class='todo-item'></li>");
+                const span = $("<span></span>").text(text);
+                const completeBtn = $("<button class='btn btn-success btn-sm'>Done</button>");
+                const deleteBtn = $("<button class='btn btn-danger btn-sm'>Delete</button>");
+                li.append(span, completeBtn, deleteBtn);
+                if (completed) li.addClass("completed");
+                list.append(li);
+            }
+
+            $(".add-task").on("click", function() {
+                const task = input.val().trim();
+                if (task) {
+                    addTask(task, false);
+                    input.val("");
+                    saveTasks();
+                }
+            });
+
+            input.on("keypress", function(e) {
+                if (e.which === 13) {
+                    $(".add-task").click();
+                }
+            });
+
+            list.on("click", ".btn-success", function() {
+                $(this).closest("li").toggleClass("completed");
+                saveTasks();
+            });
+
+            list.on("click", ".btn-danger", function() {
+                $(this).closest("li").remove();
+                saveTasks();
+            });
+
+            (function loadTasks() {
+                const stored = localStorage.getItem("todoTasks");
+                if (stored) {
+                    JSON.parse(stored).forEach(t => addTask(t.text, t.completed));
+                }
+            })();
         });
     </script>
 </body>
