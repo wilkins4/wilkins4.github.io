@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -28,6 +29,13 @@
         <div id="stockData">
             <h3>Stock Data</h3>
             <!-- Stock data will appear here -->
+        </div>
+        <div class="mt-4">
+            <canvas id="stockChart" height="200"></canvas>
+        </div>
+        <div id="recentTickers" class="mt-4">
+            <h4>Recent Searches</h4>
+            <ul class="list-inline"></ul>
         </div>
     </main>
 
@@ -54,9 +62,67 @@
                 $("body").addClass("light-mode");
             }
 
+            let chart;
             function showMessage(msg) {
                 $("#stockData").html(`<p>${msg}</p>`);
+                if (chart) {
+                    chart.destroy();
+                    chart = null;
+                }
+                $("#stockChart").hide();
             }
+
+            function renderChart(labels, data) {
+                const ctx = document.getElementById("stockChart");
+                if (chart) chart.destroy();
+                chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Closing Price',
+                            data: data,
+                            borderColor: 'rgba(75,192,192,1)',
+                            fill: false,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: { title: { display: true, text: 'Date' } },
+                            y: { title: { display: true, text: 'Price (USD)' } }
+                        }
+                    }
+                });
+                $("#stockChart").show();
+            }
+
+            function updateHistory(ticker) {
+                let history = JSON.parse(localStorage.getItem("tickerHistory") || "[]");
+                history = history.filter(t => t !== ticker);
+                history.unshift(ticker);
+                history = history.slice(0, 5);
+                localStorage.setItem("tickerHistory", JSON.stringify(history));
+                renderHistory();
+            }
+
+            function renderHistory() {
+                const history = JSON.parse(localStorage.getItem("tickerHistory") || "[]");
+                const ul = $("#recentTickers ul");
+                ul.empty();
+                history.forEach(t => {
+                    const li = $("<li class='list-inline-item history-item'></li>").text(t);
+                    li.on('click', function() {
+                        $("#tickerInput").val(t);
+                        $("#getStockBtn").click();
+                    });
+                    ul.append(li);
+                });
+            }
+
+            $("#stockChart").hide();
+            renderHistory();
 
             $("#getStockBtn").on("click", function() {
                 const ticker = $("#tickerInput").val().trim().toUpperCase();
@@ -64,22 +130,47 @@
                     showMessage("Please enter a stock ticker.");
                     return;
                 }
-                const url = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=demo`;
-                $.getJSON(url)
-                    .done(function(data) {
-                        const quote = data["Global Quote"];
-                        if (quote && quote["05. price"]) {
-                            const html = `
-                                <p><strong>Symbol:</strong> ${quote["01. symbol"]}</p>
-                                <p><strong>Price:</strong> $${parseFloat(quote["05. price"]).toFixed(2)}</p>
-                                <p><strong>Open:</strong> $${parseFloat(quote["02. open"]).toFixed(2)}</p>
-                                <p><strong>High:</strong> $${parseFloat(quote["03. high"]).toFixed(2)}</p>
-                                <p><strong>Low:</strong> $${parseFloat(quote["04. low"]).toFixed(2)}</p>
-                            `;
-                            $("#stockData").html(html);
-                        } else {
+                showMessage("Loading...");
+                const quoteUrl = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${ticker}&apikey=demo`;
+                const chartUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${ticker}&apikey=demo&outputsize=full`;
+
+                $.when($.getJSON(quoteUrl), $.getJSON(chartUrl))
+                    .done(function(quoteResp, chartResp) {
+                        const quoteData = quoteResp[0]["Global Quote"];
+                        if (!quoteData || !quoteData["05. price"]) {
                             showMessage("Stock data unavailable.");
+                            return;
                         }
+                        const html = `
+                            <p><strong>Symbol:</strong> ${quoteData["01. symbol"]}</p>
+                            <p><strong>Price:</strong> $${parseFloat(quoteData["05. price"]).toFixed(2)}</p>
+                            <p><strong>Open:</strong> $${parseFloat(quoteData["02. open"]).toFixed(2)}</p>
+                            <p><strong>High:</strong> $${parseFloat(quoteData["03. high"]).toFixed(2)}</p>
+                            <p><strong>Low:</strong> $${parseFloat(quoteData["04. low"]).toFixed(2)}</p>
+                        `;
+                        $("#stockData").html(html);
+
+                        const ts = chartResp[0]["Time Series (Daily)"];
+                        if (ts) {
+                            const year = new Date().getFullYear().toString();
+                            const labels = [];
+                            const data = [];
+                            Object.keys(ts).forEach(date => {
+                                if (date.startsWith(year)) {
+                                    labels.push(date);
+                                    data.push(parseFloat(ts[date]["4. close"]));
+                                }
+                            });
+                            labels.reverse();
+                            data.reverse();
+                            if (labels.length) {
+                                renderChart(labels, data);
+                            } else {
+                                $("#stockChart").hide();
+                            }
+                        }
+
+                        updateHistory(ticker);
                     })
                     .fail(function() {
                         showMessage("Error fetching stock data.");
