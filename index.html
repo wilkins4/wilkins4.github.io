@@ -92,16 +92,6 @@
                 $("body").addClass("light-mode");
             }
 
-            let previousScroll = 0;
-            $(window).on('scroll', function() {
-                const current = $(this).scrollTop();
-                if (current < previousScroll) {
-                    $('#main-nav').addClass('scrolled');
-                } else {
-                    $('#main-nav').removeClass('scrolled');
-                }
-                previousScroll = current;
-            });
         });
     </script>
 </body>
