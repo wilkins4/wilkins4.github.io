@@ -13,27 +13,65 @@
 
 <body>
     <div id="headerInclude"></div>
-
-    <!-- Weather App main content -->
-    <main class="container mt-5">
-        <h2>Weather App</h2>
-        <p>Enter a city to get the current weather:</p>
-        <input type="text" placeholder="Enter city">
-        <button>Get Weather</button>
-        <div>
-            <h3>Weather Details</h3>
-            <!-- Weather details will appear here -->
+    <div class="container mt-5">
+        <div class="row">
+            <aside class="col-md-3" id="sidebarInclude"></aside>
+            <main class="col-md-9">
+                <h2>Weather App</h2>
+                <p>Enter a city to get the current weather:</p>
+                <div class="input-group mb-3">
+                    <input id="cityInput" type="text" class="form-control" placeholder="Enter city">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" id="getWeather" type="button">Get Weather</button>
+                    </div>
+                </div>
+                <div id="weatherResult">
+                    <h3>Weather Details</h3>
+                </div>
+            </main>
         </div>
-    </main>
+    </div>
 
     <div id="footerInclude"></div>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script>
+        function displayWeather(data) {
+            if (!data || !data.current_weather) {
+                $('#weatherResult').html('<p class="text-warning">No data found.</p>');
+                return;
+            }
+            const w = data.current_weather;
+            $('#weatherResult').html(`<p>Temperature: ${w.temperature}&deg;C</p><p>Wind Speed: ${w.windspeed} km/h</p>`);
+        }
+
+        function fetchWeather(city) {
+            const geoUrl = `https://geocode.maps.co/?q=${encodeURIComponent(city)}`;
+            $.getJSON(geoUrl, (loc) => {
+                if (!loc || !loc[0]) {
+                    $('#weatherResult').html('<p class="text-warning">City not found.</p>');
+                    return;
+                }
+                const { lat, lon } = loc[0];
+                const wUrl = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+                $.getJSON(wUrl, displayWeather).fail(() => {
+                    $('#weatherResult').html('<p class="text-danger">Error fetching weather.</p>');
+                });
+            }).fail(() => {
+                $('#weatherResult').html('<p class="text-danger">Error fetching location.</p>');
+            });
+        }
+
         $(document).ready(function() {
-            $("#headerInclude").load("header.html");
-            $("#footerInclude").load("footer.html");
+            $('#headerInclude').load('header.html');
+            $('#footerInclude').load('footer.html');
+            $('#sidebarInclude').load('sidebar.html');
+
+            $('#getWeather').on('click', function() {
+                const city = $('#cityInput').val();
+                if (city) fetchWeather(city);
+            });
         });
     </script>
 </body>

@@ -91,3 +91,56 @@ h1, h2, h3, h4, h5, h6 {
 .back-to-top:hover {
     color: #5D737E;
 }
+
+/* Sidebar styles */
+.sidebar {
+    background-color: #232526;
+    padding: 20px;
+    height: 100%;
+    position: sticky;
+    top: 80px;
+}
+
+.sidebar-nav {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-nav li a {
+    color: #F4F4F9;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar-nav li a:hover {
+    background-color: #5D737E;
+    color: #F4F4F9;
+}
+
+/* Project card styling */
+.project-card {
+    background-color: #333740;
+    border: none;
+    color: #F4F4F9;
+    transition: transform 0.2s;
+}
+
+.project-card:hover {
+    transform: scale(1.03);
+}
+
+.recipe-card {
+    background-color: #333740;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    color: #F4F4F9;
+}
+
+.recipe-card img {
+    width: 100%;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}

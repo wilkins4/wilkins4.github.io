@@ -13,29 +13,56 @@
 
 <body>
     <div id="headerInclude"></div>
-
-    <!-- Finance App main content -->
-    <main class="container mt-5">
-        <h2>Finance App</h2>
-        <p>Input stock ticker and get historical data:</p>
-        <input type="text" placeholder="Enter stock ticker">
-        <button>Fetch Data</button>
-        <div>
-            <h3>Stock Data</h3>
-            <!-- Stock data will appear here -->
+    <div class="container mt-5">
+        <div class="row">
+            <aside class="col-md-3" id="sidebarInclude"></aside>
+            <main class="col-md-9">
+                <h2>Finance App</h2>
+                <p>Input stock ticker and get the current price:</p>
+                <div class="input-group mb-3">
+                    <input id="stockInput" type="text" class="form-control" placeholder="Enter stock ticker">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" id="fetchStock" type="button">Fetch Data</button>
+                    </div>
+                </div>
+                <div id="stockData">
+                    <h3>Stock Data</h3>
+                </div>
+            </main>
         </div>
-    </main>
+    </div>
 
     <div id="footerInclude"></div>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <script>
-         $(document).ready(function() {
-            $("#headerInclude").load("header.html");
-            $("#footerInclude").load("footer.html");
-        });
-    </script>
+      <script>
+          function displayStock(data) {
+              if (!data || !data.price) {
+                  $('#stockData').html('<p class="text-warning">Ticker not found.</p>');
+                  return;
+              }
+              $('#stockData').html(`<p>Current Price: $${data.price}</p>`);
+          }
+
+          function fetchStock(symbol) {
+              const url = `https://api.twelvedata.com/price?symbol=${symbol}&apikey=demo`;
+              $.getJSON(url, displayStock).fail(() => {
+                  $('#stockData').html('<p class="text-danger">Error fetching stock data.</p>');
+              });
+          }
+
+          $(document).ready(function() {
+              $('#headerInclude').load('header.html');
+              $('#footerInclude').load('footer.html');
+              $('#sidebarInclude').load('sidebar.html');
+
+              $('#fetchStock').on('click', function() {
+                  const sym = $('#stockInput').val().toUpperCase();
+                  if (sym) fetchStock(sym);
+              });
+          });
+      </script>
 </body>
 
 </html>

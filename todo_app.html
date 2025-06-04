@@ -13,25 +13,62 @@
 
 <body>
     <div id="headerInclude"></div>
-
-    <!-- Todo App main content -->
-    <main class="container mt-5">
-        <h2>Todo App</h2>
-        <input type="text" placeholder="Enter task">
-        <button>Add Task</button>
-        <ul>
-            <!-- Todo list items will appear here -->
-        </ul>
-    </main>
+    <div class="container mt-5">
+        <div class="row">
+            <aside class="col-md-3" id="sidebarInclude"></aside>
+            <main class="col-md-9">
+                <h2>Todo App</h2>
+                <div class="input-group mb-3">
+                    <input id="taskInput" type="text" class="form-control" placeholder="Enter task">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary add-task" type="button">Add Task</button>
+                    </div>
+                </div>
+                <ul id="taskList" class="list-group"></ul>
+            </main>
+        </div>
+    </div>
 
     <div id="footerInclude"></div>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <script>
-         $(document).ready(function() {
-            $("#headerInclude").load("header.html");
-            $("#footerInclude").load("footer.html");
+        function loadTasks() {
+            const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+            const list = $('#taskList');
+            list.empty();
+            tasks.forEach((task, idx) => {
+                list.append(`<li class="list-group-item d-flex justify-content-between" data-index="${idx}">
+                    <span>${task}</span>
+                    <button class="delete btn btn-sm btn-link text-danger">x</button>
+                </li>`);
+            });
+        }
+
+        function addTask() {
+            const val = $('#taskInput').val().trim();
+            if (!val) return;
+            const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+            tasks.push(val);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            $('#taskInput').val('');
+            loadTasks();
+        }
+
+        $(document).ready(function() {
+            $('#headerInclude').load('header.html');
+            $('#footerInclude').load('footer.html');
+            $('#sidebarInclude').load('sidebar.html', loadTasks);
+
+            $('.add-task').on('click', addTask);
+            $(document).on('click', '.delete', function() {
+                const index = $(this).closest('li').data('index');
+                const tasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+                tasks.splice(index, 1);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                loadTasks();
+            });
         });
     </script>
 </body>
