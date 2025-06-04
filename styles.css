@@ -108,6 +108,13 @@ h1, h2, h3, h4, h5, h6 {
     transition: color 0.3s;
 }
 
+@media (max-width: 575.98px) {
+    .footer-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
 .back-to-top:hover {
     color: #5D737E;
 }
