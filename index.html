@@ -83,10 +83,15 @@
         $(document).ready(function() {
             $("#headerInclude").load("header.html", function() {
                 const toggle = $("#darkModeToggle");
+                function updateToggleText() {
+                    toggle.text($("body").hasClass("light-mode") ? "Dark Mode" : "Light Mode");
+                }
                 toggle.on("click", function() {
                     $("body").toggleClass("light-mode");
                     localStorage.setItem("theme", $("body").hasClass("light-mode") ? "light" : "dark");
+                    updateToggleText();
                 });
+                updateToggleText();
             });
             $("#footerInclude").load("footer.html");
             if (localStorage.getItem("theme") === "light") {
