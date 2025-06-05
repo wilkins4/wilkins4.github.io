@@ -26,7 +26,7 @@
             <input id="tickerInput" type="text" class="form-control mr-2" placeholder="Enter stock ticker">
             <button id="getStockBtn" class="btn btn-primary">Get Price</button>
         </div>
-        <div id="stockData">
+        <div id="stockData" class="finance-card">
             <h3>Stock Data</h3>
             <!-- Stock data will appear here -->
         </div>
@@ -98,6 +98,47 @@
                 $("#stockChart").show();
             }
 
+            function displayData(quoteData, ts) {
+                const html = `
+                    <p><strong>Symbol:</strong> ${quoteData["01. symbol"]}</p>
+                    <p><strong>Price:</strong> $${parseFloat(quoteData["05. price"]).toFixed(2)}</p>
+                    <p><strong>Open:</strong> $${parseFloat(quoteData["02. open"]).toFixed(2)}</p>
+                    <p><strong>High:</strong> $${parseFloat(quoteData["03. high"]).toFixed(2)}</p>
+                    <p><strong>Low:</strong> $${parseFloat(quoteData["04. low"]).toFixed(2)}</p>
+                `;
+                $("#stockData").html(html);
+                if (ts) {
+                    const labels = [];
+                    const data = [];
+                    Object.keys(ts).forEach(date => {
+                        labels.push(date);
+                        data.push(parseFloat(ts[date]["4. close"]));
+                    });
+                    renderChart(labels.reverse(), data.reverse());
+                } else {
+                    $("#stockChart").hide();
+                }
+            }
+
+            function generateSampleData(ticker) {
+                const price = 100 + Math.random() * 50;
+                const quote = {
+                    "01. symbol": ticker,
+                    "02. open": (price - 1).toFixed(2),
+                    "03. high": (price + 1).toFixed(2),
+                    "04. low": (price - 2).toFixed(2),
+                    "05. price": price.toFixed(2)
+                };
+                const ts = {};
+                for (let i = 29; i >= 0; i--) {
+                    const d = new Date();
+                    d.setDate(d.getDate() - i);
+                    const key = d.toISOString().split('T')[0];
+                    ts[key] = { "4. close": (price + (Math.random() - 0.5) * 5).toFixed(2) };
+                }
+                return { quote, ts };
+            }
+
             function updateHistory(ticker) {
                 let history = JSON.parse(localStorage.getItem("tickerHistory") || "[]");
                 history = history.filter(t => t !== ticker);
@@ -141,39 +182,26 @@
                             showMessage("Stock data unavailable.");
                             return;
                         }
-                        const html = `
-                            <p><strong>Symbol:</strong> ${quoteData["01. symbol"]}</p>
-                            <p><strong>Price:</strong> $${parseFloat(quoteData["05. price"]).toFixed(2)}</p>
-                            <p><strong>Open:</strong> $${parseFloat(quoteData["02. open"]).toFixed(2)}</p>
-                            <p><strong>High:</strong> $${parseFloat(quoteData["03. high"]).toFixed(2)}</p>
-                            <p><strong>Low:</strong> $${parseFloat(quoteData["04. low"]).toFixed(2)}</p>
-                        `;
-                        $("#stockData").html(html);
-
                         const ts = chartResp[0]["Time Series (Daily)"];
                         if (ts) {
                             const year = new Date().getFullYear().toString();
-                            const labels = [];
-                            const data = [];
+                            const filtered = {};
                             Object.keys(ts).forEach(date => {
                                 if (date.startsWith(year)) {
-                                    labels.push(date);
-                                    data.push(parseFloat(ts[date]["4. close"]));
+                                    filtered[date] = ts[date];
                                 }
                             });
-                            labels.reverse();
-                            data.reverse();
-                            if (labels.length) {
-                                renderChart(labels, data);
-                            } else {
-                                $("#stockChart").hide();
-                            }
+                            displayData(quoteData, filtered);
+                        } else {
+                            displayData(quoteData, null);
                         }
-
                         updateHistory(ticker);
                     })
                     .fail(function() {
-                        showMessage("Error fetching stock data.");
+                        showMessage("Using sample data.");
+                        const sample = generateSampleData(ticker);
+                        displayData(sample.quote, sample.ts);
+                        updateHistory(ticker);
                     });
             });
 

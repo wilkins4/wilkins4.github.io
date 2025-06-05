@@ -251,3 +251,20 @@ body.light-mode .sidebar-menu li a {
     color: #1E2022;
 }
 
+/* Finance App styles */
+.finance-card {
+    background-color: #2B2C2F;
+    padding: 15px;
+    border-radius: 8px;
+}
+.history-item {
+    cursor: pointer;
+    margin-right: 5px;
+}
+.history-item:hover {
+    text-decoration: underline;
+}
+body.light-mode .finance-card {
+    background-color: #ffffff;
+}
+
