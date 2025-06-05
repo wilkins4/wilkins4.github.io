@@ -74,6 +74,11 @@
         <input id="searchInput" type="text" class="form-control" placeholder="Search stocks">
         <div id="suggestions" class="suggestions d-none"></div>
     </div>
+    <div class="btn-group btn-group-sm mb-3" role="group" aria-label="Timeframe" id="timeframeButtons">
+        <button type="button" class="btn btn-secondary active" data-range="1d">1 Day</button>
+        <button type="button" class="btn btn-secondary" data-range="1w">1 Week</button>
+        <button type="button" class="btn btn-secondary" data-range="1m">1 Month</button>
+    </div>
     <div id="marketOverview" class="row"></div>
     <div class="row">
         <div class="col-md-6">
@@ -124,14 +129,21 @@ $(document).ready(function(){
 
     const samplePrice = () => 30000 + Math.random() * 1000;
     const sampleChange = () => (Math.random() - 0.5) * 2;
-    const generateSeries = () => {
+    let timeframe = '1m';
+    const pointsByRange = {
+        '1d': 24,
+        '1w': 7,
+        '1m': 30
+    };
+    const generateSeries = (count) => {
         const data = [];
-        for(let i=0;i<30;i++) data.push(samplePrice() + sampleChange()*50);
+        for(let i=0;i<count;i++) data.push(samplePrice() + sampleChange()*50);
         return data;
     };
 
     const renderMarket = () => {
         $('#marketOverview').empty();
+        const len = pointsByRange[timeframe];
         indices.forEach(idx => {
             const price = samplePrice();
             const change = sampleChange();
@@ -145,7 +157,7 @@ $(document).ready(function(){
             $('#marketOverview').append(card);
             new Chart(card.find('canvas'), {
                 type: 'line',
-                data: { labels: Array.from({length:30},(_,i)=>i+1), datasets:[{ data: generateSeries(), borderColor: '#5D737E', fill:false, tension:0.3 }] },
+                data: { labels: Array.from({length: len}, (_, i)=>i+1), datasets:[{ data: generateSeries(len), borderColor: '#5D737E', fill:false, tension:0.3 }] },
                 options: {responsive:true, plugins:{legend:{display:false}}, scales:{x:{display:false},y:{display:false}}}
             });
         });
@@ -245,6 +257,13 @@ $(document).ready(function(){
     $('#suggestions').on('click','div',function(){
         $('#searchInput').val($(this).text());
         $('#suggestions').addClass('d-none');
+    });
+
+    $('#timeframeButtons').on('click', 'button', function(){
+        $('#timeframeButtons button').removeClass('active');
+        $(this).addClass('active');
+        timeframe = $(this).data('range');
+        renderMarket();
     });
 
     renderMarket();
