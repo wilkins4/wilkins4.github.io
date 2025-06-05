@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Finance Home - Stephen Wilkinson's Portfolio</title>
+    <title>Finance App - Stephen Wilkinson's Portfolio</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -71,7 +71,7 @@
 <div id="headerInclude"></div>
 <main class="container mt-4">
     <div class="position-relative mb-3">
-        <input id="searchInput" type="text" class="form-control" placeholder="Search ticker">
+        <input id="searchInput" type="text" class="form-control" placeholder="Search stocks">
         <div id="suggestions" class="suggestions d-none"></div>
     </div>
     <div id="marketOverview" class="row"></div>
@@ -151,8 +151,18 @@ $(document).ready(function(){
         });
     };
 
-    const stocks = ['AAPL','MSFT','GOOGL','AMZN','TSLA','META','BRK.A','JPM'];
-    const getRandomStocks = () => stocks.sort(()=>0.5-Math.random()).slice(0,3).map(s=>`${s} ${(Math.random()*10).toFixed(2)}%`);
+    const stocksData = [
+        { ticker:'AAPL', name:'Apple Inc.', sector:'Technology', pe:29, rsi:60 },
+        { ticker:'MSFT', name:'Microsoft Corp.', sector:'Technology', pe:35, rsi:55 },
+        { ticker:'GOOGL', name:'Alphabet Inc.', sector:'Communication Services', pe:25, rsi:50 },
+        { ticker:'AMZN', name:'Amazon.com Inc.', sector:'Consumer Cyclical', pe:70, rsi:65 },
+        { ticker:'TSLA', name:'Tesla Inc.', sector:'Consumer Cyclical', pe:80, rsi:72 },
+        { ticker:'JPM', name:'JPMorgan Chase & Co.', sector:'Financial', pe:10, rsi:40 },
+        { ticker:'XOM', name:'Exxon Mobil Corp.', sector:'Energy', pe:15, rsi:45 },
+        { ticker:'UNH', name:'UnitedHealth Group Inc.', sector:'Healthcare', pe:22, rsi:58 }
+    ];
+    const stockTickers = stocksData.map(s=>s.ticker);
+    const getRandomStocks = () => stockTickers.sort(()=>0.5-Math.random()).slice(0,3).map(s=>`${s} ${(Math.random()*10).toFixed(2)}%`);
 
     const renderLists = () => {
         const gainers = getRandomStocks();
@@ -204,14 +214,33 @@ $(document).ready(function(){
     ];
     renderTable($('#earningsCalendar'), earnings);
 
-    const allTickers = stocks;
+    const advancedSearch = query => {
+        const q = query.trim().toUpperCase();
+        if(!q) return [];
+        const ind = q.match(/(PE|RSI)\s*(>=|<=|>|<)\s*(\d+(\.\d+)?)/);
+        return stocksData.filter(s => {
+            if(ind){
+                const val = parseFloat(ind[3]);
+                const num = s[ind[1].toLowerCase()];
+                switch(ind[2]){
+                    case '>': return num > val;
+                    case '<': return num < val;
+                    case '>=': return num >= val;
+                    case '<=': return num <= val;
+                }
+                return false;
+            }
+            return s.ticker.includes(q) || s.name.toUpperCase().includes(q) || s.sector.toUpperCase().includes(q);
+        });
+    };
     $('#searchInput').on('input', function(){
-        const val = this.value.toUpperCase();
-        if(!val){ $('#suggestions').addClass('d-none'); return; }
-        const list = allTickers.filter(t=>t.startsWith(val)).slice(0,5);
-        if(list.length){
-            $('#suggestions').html(list.map(t=>`<div>${t}</div>`)).removeClass('d-none');
-        } else { $('#suggestions').addClass('d-none'); }
+        const results = advancedSearch(this.value);
+        if(results.length){
+            const html = results.slice(0,5).map(s=>`<div>${s.ticker} - ${s.name}</div>`).join('');
+            $('#suggestions').html(html).removeClass('d-none');
+        } else {
+            $('#suggestions').addClass('d-none');
+        }
     });
     $('#suggestions').on('click','div',function(){
         $('#searchInput').val($(this).text());
