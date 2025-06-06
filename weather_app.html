@@ -77,9 +77,13 @@
                             .done(function(data) {
                                 if (data.current_weather) {
                                     const w = data.current_weather;
+                                    const tempF = (w.temperature * 9/5) + 32;
                                     const html = `
-                                        <p><strong>Temperature:</strong> ${w.temperature}&deg;C</p>
+                                        <p><strong>Temperature:</strong> ${tempF.toFixed(1)}&deg;F</p>
                                         <p><strong>Wind Speed:</strong> ${w.windspeed} km/h</p>
+                                        <p><strong>Wind Direction:</strong> ${w.winddirection}&deg;</p>
+                                        <p><strong>Weather Code:</strong> ${w.weathercode}</p>
+                                        <p><strong>Last Updated:</strong> ${w.time}</p>
                                     `;
                                     $("#weatherDetails").html(html);
                                 } else {

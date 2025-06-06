@@ -14,7 +14,7 @@ Welcome to my personal portfolio repository. This portfolio showcases my skills,
 - Floating light/dark theme toggle with persistence
 - Accessible "Skip to Content" link
 - Animated navigation bar that appears on scroll
-- Weather app with current conditions and forecasts
+- Weather app with current conditions (now in Fahrenheit) and extra details
 - Finance app screen showcasing market overview panels, heat maps, news ticker, and economic calendars
 - Simple to-do list for task tracking
 
