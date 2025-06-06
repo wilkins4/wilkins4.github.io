@@ -58,8 +58,7 @@
                 $("#weatherDetails").html(`<p>${msg}</p>`);
             }
 
-            $("#getWeatherBtn").on("click", function() {
-                const zip = $("#zipInput").val().trim();
+            function fetchWeather(zip) {
                 if (!zip) {
                     showMessage("Please enter a ZIP code.");
                     return;
@@ -90,7 +89,16 @@
                             .fail(function() { showMessage("Error fetching weather data."); });
                     })
                     .fail(function() { showMessage("Error fetching location data."); });
+            }
+
+            $("#getWeatherBtn").on("click", function() {
+                const zip = $("#zipInput").val().trim();
+                fetchWeather(zip);
             });
+
+            const defaultZip = "10001";
+            $("#zipInput").val(defaultZip);
+            fetchWeather(defaultZip);
 
             $("#zipInput").on("keypress", function(e) {
                 if (e.which === 13) {
