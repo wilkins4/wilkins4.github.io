@@ -104,11 +104,69 @@
 <div id="footerInclude"></div>
 <script>
   // ───────────────────────────────────────────────────
-  // Replace "YOUR_API_KEY" with your actual Finnhub.io API key:
+  // Replace "YOUR_API_KEY" with your actual Finnhub.io API key. When the
+  // default placeholder is detected or if requests fail, the app falls back to
+  // sample data so the UI remains functional.
   const FINNHUB_API_KEY = "YOUR_API_KEY";
+
+  const USE_SAMPLE_DATA = FINNHUB_API_KEY === "YOUR_API_KEY";
+
+  // -------------------------- Sample Data ---------------------------
+  const SAMPLE_QUOTES = {
+    "^DJI": { currentPrice: 35000, changePercent: 0.5 },
+    "^IXIC": { currentPrice: 14000, changePercent: -0.3 },
+    "^GSPC": { currentPrice: 4500, changePercent: 0.2 },
+    "^RUT": { currentPrice: 1800, changePercent: 0.1 },
+  };
+
+  function randomSeries(base, points) {
+    const now = Math.floor(Date.now() / 1000);
+    return Array.from({ length: points }, (_, i) => ({
+      t: now - (points - i) * 86400,
+      c: base + Math.sin(i / 2) * 10 + Math.random() * 5,
+    }));
+  }
+
+  const SAMPLE_GAINERS = [
+    { ticker: "AAPL", pct: "4.2" },
+    { ticker: "MSFT", pct: "3.8" },
+    { ticker: "AMZN", pct: "3.1" },
+  ];
+  const SAMPLE_LOSERS = [
+    { ticker: "TSLA", pct: "-2.5" },
+    { ticker: "NFLX", pct: "-1.9" },
+    { ticker: "NVDA", pct: "-1.2" },
+  ];
+
+  const SAMPLE_SECTOR_PERF = {
+    Technology: 1.2,
+    Financial: -0.5,
+    Healthcare: 0.8,
+    "Consumer Cyclical": -0.3,
+    Energy: 0.4,
+    Utilities: -0.1,
+  };
+
+  const SAMPLE_NEWS = [
+    { time: "09:00", headline: "Markets open mixed on Monday" },
+    { time: "11:30", headline: "Tech sector leads early gains" },
+    { time: "14:15", headline: "Oil prices dip amid supply concerns" },
+  ];
+
+  const SAMPLE_ECON = [
+    { date: "2025-01-05", name: "Fed Chair Speech", impact: "High", actual: "-",
+      forecast: "-", previous: "-" },
+  ];
+
+  const SAMPLE_EARNINGS = [
+    { date: "2025-01-06", symbol: "AAPL", epsEstimate: 1.2, quarter: "Q1" },
+  ];
   // ───────────────────────────────────────────────────
 
   $(document).ready(function () {
+    if (USE_SAMPLE_DATA) {
+      console.warn('Using sample data. Set FINNHUB_API_KEY to enable live data.');
+    }
     // -------------- Dark/Light Mode Toggle (unchanged) ----------------
     $("#headerInclude").load("header.html", function () {
       const toggle = $("#darkModeToggle");
@@ -147,6 +205,10 @@
 
     // 3.1. Fetch real-time quote (current price + % change)
     function fetchQuote(symbol) {
+      if (USE_SAMPLE_DATA) {
+        const q = SAMPLE_QUOTES[symbol] || { currentPrice: 0, changePercent: 0 };
+        return Promise.resolve(q);
+      }
       return fetch(
         `https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(symbol)}&token=${FINNHUB_API_KEY}`
       )
@@ -156,7 +218,8 @@
           const prevClose = data.pc;
           const changePercent = prevClose ? ((currentPrice - prevClose) / prevClose) * 100 : 0;
           return { currentPrice, changePercent };
-        });
+        })
+        .catch(() => SAMPLE_QUOTES[symbol] || { currentPrice: 0, changePercent: 0 });
     }
 
     // 3.2. Fetch historical candle data for "rangeDays"
@@ -168,37 +231,52 @@
       const now = Math.floor(Date.now() / 1000);
       const from = now - rangeDays * 24 * 60 * 60;
 
+      if (USE_SAMPLE_DATA) {
+        return Promise.resolve(randomSeries(SAMPLE_QUOTES[symbol]?.currentPrice || 100, pointsByRange[timeframe]));
+      }
       return fetch(
         `https://finnhub.io/api/v1/stock/candle?symbol=${encodeURIComponent(symbol)}&resolution=${resolution}&from=${from}&to=${now}&token=${FINNHUB_API_KEY}`
       )
         .then((res) => res.json())
         .then((data) => {
-          if (data.s !== "ok") return [];
+          if (data.s !== "ok") return randomSeries(SAMPLE_QUOTES[symbol]?.currentPrice || 100, pointsByRange[timeframe]);
           return data.t.map((ts, i) => ({ t: ts, c: data.c[i] }));
-        });
+        })
+        .catch(() => randomSeries(SAMPLE_QUOTES[symbol]?.currentPrice || 100, pointsByRange[timeframe]));
     }
 
     // =================== 4. TOP GAINERS / LOSERS ====================
 
     function fetchTopGainers() {
+      if (USE_SAMPLE_DATA) {
+        return Promise.resolve(SAMPLE_GAINERS);
+      }
       return fetch(`https://finnhub.io/api/v1/stock/market/list/gainers?token=${FINNHUB_API_KEY}`)
         .then((res) => res.json())
         .then((data) => {
           return data.slice(0, 3).map((item) => ({ ticker: item.symbol, pct: item.percent.toFixed(2) }));
-        });
+        })
+        .catch(() => SAMPLE_GAINERS);
     }
 
     function fetchTopLosers() {
+      if (USE_SAMPLE_DATA) {
+        return Promise.resolve(SAMPLE_LOSERS);
+      }
       return fetch(`https://finnhub.io/api/v1/stock/market/list/losers?token=${FINNHUB_API_KEY}`)
         .then((res) => res.json())
         .then((data) => {
           return data.slice(0, 3).map((item) => ({ ticker: item.symbol, pct: item.percent.toFixed(2) }));
-        });
+        })
+        .catch(() => SAMPLE_LOSERS);
     }
 
     // =================== 5. SECTOR HEATMAP =========================
 
     function fetchSectorPerformance() {
+      if (USE_SAMPLE_DATA) {
+        return Promise.resolve(SAMPLE_SECTOR_PERF);
+      }
       return fetch(`https://finnhub.io/api/v1/stock/sector-performance?token=${FINNHUB_API_KEY}`)
         .then((res) => res.json())
         .then((data) => {
@@ -208,12 +286,16 @@
             map[entry.sector] = perf;
           });
           return map;
-        });
+        })
+        .catch(() => SAMPLE_SECTOR_PERF);
     }
 
     // =================== 6. MAJOR NEWS ==============================
 
     function fetchLatestNews() {
+      if (USE_SAMPLE_DATA) {
+        return Promise.resolve(SAMPLE_NEWS);
+      }
       return fetch(`https://finnhub.io/api/v1/news?category=general&token=${FINNHUB_API_KEY}`)
         .then((res) => res.json())
         .then((items) => {
@@ -221,7 +303,8 @@
             time: new Date(n.datetime * 1000).toLocaleTimeString(),
             headline: n.headline,
           }));
-        });
+        })
+        .catch(() => SAMPLE_NEWS);
     }
 
     // =================== 7. SIGNAL ALERTS (RSI) =====================
@@ -229,12 +312,17 @@
     function fetchRSI(symbol) {
       const now = Math.floor(Date.now() / 1000);
       const fourteenDaysAgo = now - 14 * 24 * 60 * 60;
+      if (USE_SAMPLE_DATA) {
+        const rsi = 50 + Math.sin(Date.now()) * 20;
+        return Promise.resolve(rsi);
+      }
       return fetch(`https://finnhub.io/api/v1/indicator?symbol=${symbol}&resolution=D&from=${fourteenDaysAgo}&to=${now}&indicator=rsi&timeperiod=14&token=${FINNHUB_API_KEY}`)
         .then((res) => res.json())
         .then((data) => {
           if (!data.rsi || data.rsi.length === 0) return null;
           return data.rsi[data.rsi.length - 1];
-        });
+        })
+        .catch(() => 50);
     }
 
     // =================== 8. ECONOMIC CALENDAR =======================
@@ -253,9 +341,13 @@
       const day2 = String(next7.getDate()).padStart(2, "0");
       const toDate = `${yyyy2}-${mm2}-${day2}`;
 
+      if (USE_SAMPLE_DATA) {
+        return Promise.resolve(SAMPLE_ECON);
+      }
       return fetch(`https://finnhub.io/api/v1/calendar/economic?from=${fromDate}&to=${toDate}&token=${FINNHUB_API_KEY}`)
         .then((res) => res.json())
-        .then((data) => data.economicCalendar || []);
+        .then((data) => data.economicCalendar || [])
+        .catch(() => SAMPLE_ECON);
     }
 
     // =================== 9. EARNINGS CALENDAR =======================
@@ -274,20 +366,28 @@
       const day2 = String(next7.getDate()).padStart(2, "0");
       const toDate = `${yyyy2}-${mm2}-${day2}`;
 
+      if (USE_SAMPLE_DATA) {
+        return Promise.resolve(SAMPLE_EARNINGS);
+      }
       return fetch(`https://finnhub.io/api/v1/calendar/earnings?from=${fromDate}&to=${toDate}&token=${FINNHUB_API_KEY}`)
         .then((res) => res.json())
-        .then((data) => data.earningsCalendar || []);
+        .then((data) => data.earningsCalendar || [])
+        .catch(() => SAMPLE_EARNINGS);
     }
 
     // =================== 10. SYMBOL LOOKUP (SEARCH) ================
 
     function symbolLookup(query) {
+      if (USE_SAMPLE_DATA) {
+        return Promise.resolve([{ ticker: "AAPL", name: "Apple Inc." }]);
+      }
       return fetch(`https://finnhub.io/api/v1/search?q=${encodeURIComponent(query)}&token=${FINNHUB_API_KEY}`)
         .then((res) => res.json())
         .then((data) => {
           if (!data.result) return [];
           return data.result.slice(0, 5).map((r) => ({ ticker: r.displaySymbol, name: r.description }));
-        });
+        })
+        .catch(() => [{ ticker: "AAPL", name: "Apple Inc." }]);
     }
 
     // ───────────────────────────────────────────────────
