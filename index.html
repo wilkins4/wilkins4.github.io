@@ -1,131 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Stephen Wilkinson's Portfolio</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap' rel='stylesheet'>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stephen Wilkinson - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      color: #E0E0E0;
+      background: #121212;
+      line-height: 1.6;
+      padding-top: 60px;
+    }
+    h1, h2, h3 {
+      font-family: 'Montserrat', sans-serif;
+      color: #A0D2DB;
+      margin: 0 0 15px;
+    }
+    .content-wrapper {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1B1B1B;
+      padding: 15px 20px;
+      z-index: 1000;
+    }
+    .site-nav a {
+      color: #E0E0E0;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .site-nav a:hover,
+    .site-nav a:focus {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #E0E0E0;
+      font-size: 1.5rem;
+    }
+    .hero-section {
+      text-align: center;
+      padding: 100px 20px 80px;
+      background: #1E2022;
+    }
+    .subtitle {
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+    .about-section,
+    .experience-section,
+    .education-section,
+    .skills-section {
+      padding: 60px 0;
+    }
+    .about-content {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+    .about-img img {
+      width: 100%;
+      max-width: 200px;
+      border-radius: 8px;
+    }
+    .experience-card,
+    .education-card {
+      background: #2B2C2F;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .company,
+    .school {
+      font-weight: 400;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+    .experience-card ul {
+      padding-left: 20px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+    .skills-group {
+      margin-bottom: 30px;
+    }
+    .skill-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .skill-badge {
+      background: #333740;
+      padding: 6px 12px;
+      border-radius: 15px;
+      font-size: 0.9rem;
+    }
+    .site-footer {
+      text-align: center;
+      padding: 40px 0;
+      background: #1B1B1B;
+      font-size: 0.875rem;
+    }
+    @media (max-width: 768px) {
+      .about-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    @media (max-width: 600px) {
+      .nav-links {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background: #1B1B1B;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        display: none;
+        padding: 10px 20px;
+      }
+      .nav-links.open {
+        display: block;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
 </head>
-
 <body>
-    <a id="top"></a>
-    <a href="#maincontent" class="skip-link">Skip to main content</a>
-    <div id="sidebar" class="collapsed">
-        <button id="sidebarToggle" aria-label="Toggle Sidebar"><i class="fas fa-bars"></i></button>
-        <ul class="sidebar-menu">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#certifications">Certifications</a></li>
-        </ul>
+<header class="site-header">
+  <nav class="site-nav">
+    <div class="brand"><a href="#">Stephen Wilkinson</a></div>
+    <button class="menu-toggle" aria-label="Toggle navigation">&#9776;</button>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="https://github.com/wilkins4" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/stephen-wilkinson-381784144/" target="_blank" rel="noopener">LinkedIn</a></li>
+    </ul>
+  </nav>
+</header>
+<section class="hero-section">
+  <div class="content-wrapper">
+    <h1>Stephen Wilkinson</h1>
+    <p class="subtitle">Enthusiastic software developer with a passion for web development</p>
+  </div>
+</section>
+<main>
+<section class="about-section" id="about">
+  <div class="content-wrapper about-content">
+    <div class="about-text">
+      <h2>About Me</h2>
+      <p>I am a web developer specializing in front-end development, with a strong foundation in HTML, CSS, JavaScript, and React. I'm passionate about creating user-centric solutions and committed to continuous learning and professional growth.</p>
     </div>
-    <div id="headerInclude"></div>
-
-    <header class="hero text-white text-center p-5">
-        <div class="animate__animated animate__fadeIn">
-            <h1>Welcome to my portfolio</h1>
-            <p class="lead">Enthusiastic software developer with a passion for web development</p>
-        </div>
-    </header>
-
-    <main id="maincontent" class="container mt-5">
-        <section id="about" class="section animate__animated animate__fadeIn">
-            <h2>About Me</h2>
-            <p>I am a web developer specializing in front-end development, with a strong foundation in HTML, CSS, JavaScript, and React. I'm passionate about creating user-centric solutions and committed to continuous learning and professional growth.</p>
-        </section>
-
-        <section id="experience" class="section animate__animated animate__fadeIn">
-            <h2>Experience</h2>
-            <h4>React Software Development Intern</h4>
-            <h5>Sub360 - February 2023 to August 2023</h5>
-            <ul>
-                <li>Collaborated on a remote React development team</li>
-                <li>Focused on front-end features and UI design</li>
-                <li>Enhanced application functionality and user experience</li>
-            </ul>
-
-            <h4>Cook/Cashier</h4>
-            <h5>Samson's Concessions - September 2020 to April 2023</h5>
-            <ul>
-                <li>Provided customer service in a fast-paced environment</li>
-                <li>Handled cash transactions with accuracy</li>
-            </ul>
-        </section>
-
-        <section id="education" class="section animate__animated animate__fadeIn">
-            <h2>Education</h2>
-            <h4>Bachelor of Science in Digital Media Arts</h4>
-            <h5>Canisus College - Graduated 2016</h5>
-        </section>
-
-        <section id="skills" class="section animate__animated animate__fadeIn">
-            <h2>Skills</h2>
-            <ul>
-                <li>Front-end development: HTML5, CSS, JavaScript, React</li>
-                <li>Back-end development: Node.js</li>
-                <li>Operating Systems: Windows OS, macOS, Linux</li>
-                <li>Version Control: Git</li>
-                <li>Project Management: Jira</li>
-            </ul>
-        </section>
-
-        <section id="certifications" class="section animate__animated animate__fadeIn">
-            <h2>Professional Certificates</h2>
-            <ul>
-                <li>Google IT Support Professional Certificate</li>
-                <li>Google IT Automation with Python</li>
-                <li>Meta Front-End Developer Professional Certificate</li>
-                <li>Search Engine Optimization (SEO) with Squarespace</li>
-            </ul>
-        </section>
-    </main>
-
-    <div id="footerInclude"></div>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $("#headerInclude").load("header.html", function() {
-                const toggle = $("#darkModeToggle");
-                function updateToggleText() {
-                    toggle.text($("body").hasClass("light-mode") ? "Dark Mode" : "Light Mode");
-                }
-                toggle.on("click", function() {
-                    $("body").toggleClass("light-mode");
-                    localStorage.setItem("theme", $("body").hasClass("light-mode") ? "light" : "dark");
-                    updateToggleText();
-                });
-                updateToggleText();
-            });
-            $("#footerInclude").load("footer.html");
-            if (localStorage.getItem("theme") === "light") {
-                $("body").addClass("light-mode");
-            }
-
-            $("#sidebarToggle").on('click', function() {
-                $("#sidebar").toggleClass('collapsed');
-            });
-
-            let previousScroll = 0;
-            $(window).on('scroll', function() {
-                const current = $(this).scrollTop();
-                if (current < previousScroll) {
-                    $('#main-nav').addClass('scrolled');
-                } else {
-                    $('#main-nav').removeClass('scrolled');
-                }
-                previousScroll = current;
-            });
-        });
-    </script>
+    <div class="about-img">
+      <img src="images/headshot.jpg" alt="Headshot of Stephen Wilkinson">
+    </div>
+  </div>
+</section>
+<section class="experience-section" id="experience">
+  <div class="content-wrapper">
+    <h2>Experience</h2>
+    <div class="experience-card">
+      <h3>React Software Development Intern</h3>
+      <p class="company">Sub360 – February 2023 to August 2023</p>
+      <ul>
+        <li>Collaborated on a remote React development team</li>
+        <li>Focused on front-end features and UI design</li>
+        <li>Enhanced application functionality and user experience</li>
+      </ul>
+    </div>
+    <div class="experience-card">
+      <h3>Cook/Cashier</h3>
+      <p class="company">Samson's Concessions – September 2020 to April 2023</p>
+      <ul>
+        <li>Provided customer service in a fast-paced environment</li>
+        <li>Handled cash transactions with accuracy</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="education-section" id="education">
+  <div class="content-wrapper">
+    <h2>Education</h2>
+    <div class="education-card">
+      <p class="degree">Bachelor of Science in Digital Media Arts</p>
+      <p class="school">Canisius College – Graduated 2016</p>
+    </div>
+  </div>
+</section>
+<section class="skills-section" id="skills">
+  <div class="content-wrapper">
+    <h2>Skills</h2>
+    <div class="skills-group">
+      <h3>Web Technologies</h3>
+      <div class="skill-badges">
+        <span class="skill-badge">HTML</span>
+        <span class="skill-badge">CSS</span>
+        <span class="skill-badge">JavaScript</span>
+        <span class="skill-badge">React</span>
+      </div>
+    </div>
+    <div class="skills-group">
+      <h3>Tools</h3>
+      <div class="skill-badges">
+        <span class="skill-badge">Git</span>
+        <span class="skill-badge">VS Code</span>
+        <span class="skill-badge">Linux</span>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="content-wrapper">
+    <p>&copy; 2025 Stephen Wilkinson</p>
+  </div>
+</footer>
+<script>
+const toggle = document.querySelector('.menu-toggle');
+const links = document.querySelector('.nav-links');
+toggle.addEventListener('click', () => {
+  links.classList.toggle('open');
+});
+</script>
 </body>
-
 </html>
