@@ -55,6 +55,10 @@ h1, h2, h3, h4, h5, h6 {
     color: #5D737E;
     text-decoration: underline;
 }
+.navbar-nav {
+    width: 100%;
+    justify-content: center;
+}
 
 .hero {
     background: linear-gradient(135deg, #333740, #1E2022);
