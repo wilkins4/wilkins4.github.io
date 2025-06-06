@@ -102,176 +102,385 @@
     <table id="earningsCalendar" class="table table-sm table-striped"></table>
 </main>
 <div id="footerInclude"></div>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 <script>
-$(document).ready(function(){
-    $("#headerInclude").load("header.html", function() {
-        const toggle = $("#darkModeToggle");
-        function updateToggleText() {
-            toggle.text($("body").hasClass("light-mode") ? "Dark Mode" : "Light Mode");
-        }
-        toggle.on("click", function() {
-            $("body").toggleClass("light-mode");
-            localStorage.setItem("theme", $("body").hasClass("light-mode") ? "light" : "dark");
-            updateToggleText();
-        });
+  // ───────────────────────────────────────────────────
+  // Replace "YOUR_FTPKEY" with your actual Finnhub.io API key:
+  const FINNHUB_API_KEY = "YOUR_FTPKEY";
+  // ───────────────────────────────────────────────────
+
+  $(document).ready(function () {
+    // -------------- Dark/Light Mode Toggle (unchanged) ----------------
+    $("#headerInclude").load("header.html", function () {
+      const toggle = $("#darkModeToggle");
+      function updateToggleText() {
+        toggle.text($("body").hasClass("light-mode") ? "Dark Mode" : "Light Mode");
+      }
+      toggle.on("click", function () {
+        $("body").toggleClass("light-mode");
+        localStorage.setItem("theme", $("body").hasClass("light-mode") ? "light" : "dark");
         updateToggleText();
+      });
+      updateToggleText();
     });
     $("#footerInclude").load("footer.html");
-    if (localStorage.getItem("theme") === "light") { $("body").addClass("light-mode"); }
+    if (localStorage.getItem("theme") === "light") {
+      $("body").addClass("light-mode");
+    }
 
+    // -------------- Index Definitions (same as before) ----------------
     const indices = [
-        { name: 'DOW', symbol: 'DJI' },
-        { name: 'NASDAQ', symbol: 'IXIC' },
-        { name: 'S&P 500', symbol: 'GSPC' },
-        { name: 'RUSSELL 2000', symbol: 'RUT' }
+      { name: "DOW", symbol: "^DJI" },
+      { name: "NASDAQ", symbol: "^IXIC" },
+      { name: "S&P 500", symbol: "^GSPC" },
+      { name: "RUSSELL 2000", symbol: "^RUT" },
     ];
 
-    const samplePrice = () => 30000 + Math.random() * 1000;
-    const sampleChange = () => (Math.random() - 0.5) * 2;
-    let timeframe = '1m';
+    // -------------- Timeframe Handling (unchanged) ----------------
+    let timeframe = "1m";
     const pointsByRange = {
-        '1d': 24,
-        '1w': 7,
-        '1m': 30
-    };
-    const generateSeries = (count) => {
-        const data = [];
-        for(let i=0;i<count;i++) data.push(samplePrice() + sampleChange()*50);
-        return data;
+      "1d": 1,
+      "1w": 7,
+      "1m": 30,
     };
 
-    const renderMarket = () => {
-        $('#marketOverview').empty();
-        const len = pointsByRange[timeframe];
-        indices.forEach(idx => {
-            const price = samplePrice();
-            const change = sampleChange();
-            const color = change >=0 ? 'text-success' : 'text-danger';
-            const card = $(
-                `<div class='col-md-6 col-lg-3'><div class='market-panel'>
-                    <h5>${idx.name}</h5>
-                    <p>$${price.toFixed(2)} <span class='${color}'>(${change.toFixed(2)}%)</span></p>
-                    <canvas id='chart-${idx.symbol}' height='80'></canvas>
-                </div></div>`);
-            $('#marketOverview').append(card);
-            new Chart(card.find('canvas'), {
-                type: 'line',
-                data: { labels: Array.from({length: len}, (_, i)=>i+1), datasets:[{ data: generateSeries(len), borderColor: '#5D737E', fill:false, tension:0.3 }] },
-                options: {responsive:true, plugins:{legend:{display:false}}, scales:{x:{display:false},y:{display:false}}}
-            });
+    // =================== 3. REAL DATA HELPERS ========================
+
+    // 3.1. Fetch real-time quote (current price + % change)
+    function fetchQuote(symbol) {
+      return fetch(
+        `https://finnhub.io/api/v1/quote?symbol=${encodeURIComponent(symbol)}&token=${FINNHUB_API_KEY}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          const currentPrice = data.c;
+          const prevClose = data.pc;
+          const changePercent = prevClose ? ((currentPrice - prevClose) / prevClose) * 100 : 0;
+          return { currentPrice, changePercent };
         });
-    };
+    }
 
-    const stocksData = [
-        { ticker:'AAPL', name:'Apple Inc.', sector:'Technology', pe:29, rsi:60 },
-        { ticker:'MSFT', name:'Microsoft Corp.', sector:'Technology', pe:35, rsi:55 },
-        { ticker:'GOOGL', name:'Alphabet Inc.', sector:'Communication Services', pe:25, rsi:50 },
-        { ticker:'AMZN', name:'Amazon.com Inc.', sector:'Consumer Cyclical', pe:70, rsi:65 },
-        { ticker:'TSLA', name:'Tesla Inc.', sector:'Consumer Cyclical', pe:80, rsi:72 },
-        { ticker:'JPM', name:'JPMorgan Chase & Co.', sector:'Financial', pe:10, rsi:40 },
-        { ticker:'XOM', name:'Exxon Mobil Corp.', sector:'Energy', pe:15, rsi:45 },
-        { ticker:'UNH', name:'UnitedHealth Group Inc.', sector:'Healthcare', pe:22, rsi:58 }
-    ];
-    const stockTickers = stocksData.map(s=>s.ticker);
-    const getRandomStocks = () => stockTickers.sort(()=>0.5-Math.random()).slice(0,3).map(s=>`${s} ${(Math.random()*10).toFixed(2)}%`);
+    // 3.2. Fetch historical candle data for "rangeDays"
+    function fetchHistorical(symbol, rangeDays) {
+      let resolution = "D";
+      if (rangeDays <= 1) resolution = "30";
+      else if (rangeDays <= 7) resolution = "60";
 
-    const renderLists = () => {
-        const gainers = getRandomStocks();
-        const losers = getRandomStocks();
-        $('#gainers').html(gainers.map(g=>`<li class='text-success'>${g}</li>`));
-        $('#losers').html(losers.map(l=>`<li class='text-danger'>${l}</li>`));
-    };
+      const now = Math.floor(Date.now() / 1000);
+      const from = now - rangeDays * 24 * 60 * 60;
 
-    const heatSectors = ['Technology','Financial','Healthcare','Consumer Cyclical','Energy','Utilities'];
-    const renderHeatmap = () => {
-        $('#heatMap').empty();
-        heatSectors.forEach(sec => {
-            const perf = (Math.random()-0.5)*4;
-            const color = perf>0 ? `rgba(40,167,69,${Math.min(1,perf/4+0.3)})` : `rgba(220,53,69,${Math.min(1,-perf/4+0.3)})`;
-            const div = $(`<div style='background:${color}' title='${sec}: ${perf.toFixed(2)}%'>${sec}</div>`);
-            $('#heatMap').append(div);
+      return fetch(
+        `https://finnhub.io/api/v1/stock/candle?symbol=${encodeURIComponent(symbol)}&resolution=${resolution}&from=${from}&to=${now}&token=${FINNHUB_API_KEY}`
+      )
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.s !== "ok") return [];
+          return data.t.map((ts, i) => ({ t: ts, c: data.c[i] }));
         });
-    };
+    }
 
-    const headlines = [
-        'Stocks edge higher amid earnings reports',
-        'Federal Reserve signals rate pause',
-        'Oil prices fall on demand concerns',
-        'Tech sector leads market gains'
-    ];
-    const renderNews = () => {
-        const html = headlines.map(h=>`<span class='news-item'>${new Date().toLocaleTimeString()} - ${h}</span>`).join('');
+    // =================== 4. TOP GAINERS / LOSERS ====================
+
+    function fetchTopGainers() {
+      return fetch(`https://finnhub.io/api/v1/stock/market/list/gainers?token=${FINNHUB_API_KEY}`)
+        .then((res) => res.json())
+        .then((data) => {
+          return data.slice(0, 3).map((item) => ({ ticker: item.symbol, pct: item.percent.toFixed(2) }));
+        });
+    }
+
+    function fetchTopLosers() {
+      return fetch(`https://finnhub.io/api/v1/stock/market/list/losers?token=${FINNHUB_API_KEY}`)
+        .then((res) => res.json())
+        .then((data) => {
+          return data.slice(0, 3).map((item) => ({ ticker: item.symbol, pct: item.percent.toFixed(2) }));
+        });
+    }
+
+    // =================== 5. SECTOR HEATMAP =========================
+
+    function fetchSectorPerformance() {
+      return fetch(`https://finnhub.io/api/v1/stock/sector-performance?token=${FINNHUB_API_KEY}`)
+        .then((res) => res.json())
+        .then((data) => {
+          const map = {};
+          (data.sectorPerformance || []).forEach((entry) => {
+            const perf = parseFloat(entry.performance.replace("%", ""));
+            map[entry.sector] = perf;
+          });
+          return map;
+        });
+    }
+
+    // =================== 6. MAJOR NEWS ==============================
+
+    function fetchLatestNews() {
+      return fetch(`https://finnhub.io/api/v1/news?category=general&token=${FINNHUB_API_KEY}`)
+        .then((res) => res.json())
+        .then((items) => {
+          return (items || []).slice(0, 10).map((n) => ({
+            time: new Date(n.datetime * 1000).toLocaleTimeString(),
+            headline: n.headline,
+          }));
+        });
+    }
+
+    // =================== 7. SIGNAL ALERTS (RSI) =====================
+
+    function fetchRSI(symbol) {
+      const now = Math.floor(Date.now() / 1000);
+      const fourteenDaysAgo = now - 14 * 24 * 60 * 60;
+      return fetch(`https://finnhub.io/api/v1/indicator?symbol=${symbol}&resolution=D&from=${fourteenDaysAgo}&to=${now}&indicator=rsi&timeperiod=14&token=${FINNHUB_API_KEY}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.rsi || data.rsi.length === 0) return null;
+          return data.rsi[data.rsi.length - 1];
+        });
+    }
+
+    // =================== 8. ECONOMIC CALENDAR =======================
+
+    function fetchEconomicCalendar() {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, "0");
+      const day = String(today.getDate()).padStart(2, "0");
+      const fromDate = `${yyyy}-${mm}-${day}`;
+
+      const next7 = new Date();
+      next7.setDate(next7.getDate() + 7);
+      const yyyy2 = next7.getFullYear();
+      const mm2 = String(next7.getMonth() + 1).padStart(2, "0");
+      const day2 = String(next7.getDate()).padStart(2, "0");
+      const toDate = `${yyyy2}-${mm2}-${day2}`;
+
+      return fetch(`https://finnhub.io/api/v1/calendar/economic?from=${fromDate}&to=${toDate}&token=${FINNHUB_API_KEY}`)
+        .then((res) => res.json())
+        .then((data) => data.economicCalendar || []);
+    }
+
+    // =================== 9. EARNINGS CALENDAR =======================
+
+    function fetchEarningsCalendar() {
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      const mm = String(today.getMonth() + 1).padStart(2, "0");
+      const day = String(today.getDate()).padStart(2, "0");
+      const fromDate = `${yyyy}-${mm}-${day}`;
+
+      const next7 = new Date();
+      next7.setDate(next7.getDate() + 7);
+      const yyyy2 = next7.getFullYear();
+      const mm2 = String(next7.getMonth() + 1).padStart(2, "0");
+      const day2 = String(next7.getDate()).padStart(2, "0");
+      const toDate = `${yyyy2}-${mm2}-${day2}`;
+
+      return fetch(`https://finnhub.io/api/v1/calendar/earnings?from=${fromDate}&to=${toDate}&token=${FINNHUB_API_KEY}`)
+        .then((res) => res.json())
+        .then((data) => data.earningsCalendar || []);
+    }
+
+    // =================== 10. SYMBOL LOOKUP (SEARCH) ================
+
+    function symbolLookup(query) {
+      return fetch(`https://finnhub.io/api/v1/search?q=${encodeURIComponent(query)}&token=${FINNHUB_API_KEY}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data.result) return [];
+          return data.result.slice(0, 5).map((r) => ({ ticker: r.displaySymbol, name: r.description }));
+        });
+    }
+
+    // ───────────────────────────────────────────────────
+    // 11. RENDER FUNCTIONS (rewrite existing ones)
+    // ───────────────────────────────────────────────────
+
+    function renderMarket() {
+      $('#marketOverview').empty();
+      const rangeDays = pointsByRange[timeframe];
+      indices.forEach((idx) => {
+        const card = $(
+          `<div class='col-md-6 col-lg-3'>
+             <div class='market-panel'>
+               <h5>${idx.name}</h5>
+               <p id='quote-${idx.symbol}'>Loading…</p>
+               <canvas id='chart-${idx.symbol}' height='80'></canvas>
+             </div>
+           </div>`
+        );
+        $('#marketOverview').append(card);
+
+        fetchQuote(idx.symbol).then(({ currentPrice, changePercent }) => {
+          const colorClass = changePercent >= 0 ? 'text-success' : 'text-danger';
+          $(`#quote-${idx.symbol}`).html(`$${currentPrice.toFixed(2)} <span class='${colorClass}'>(${changePercent.toFixed(2)}%)</span>`);
+        });
+
+        fetchHistorical(idx.symbol, rangeDays).then((series) => {
+          const labels = series.map((pt, i) => i + 1);
+          const closes = series.map((pt) => pt.c);
+          new Chart(card.find('canvas'), {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  data: closes,
+                  borderColor: '#5D737E',
+                  backgroundColor: 'transparent',
+                  fill: false,
+                  tension: 0.3,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              plugins: { legend: { display: false } },
+              scales: {
+                x: { display: false },
+                y: { display: false },
+              },
+            },
+          });
+        });
+      });
+    }
+
+    function renderLists() {
+      fetchTopGainers().then((gainers) => {
+        const html = gainers.map((g) => `<li class='text-success'>${g.ticker} ${g.pct}%</li>`).join('');
+        $('#gainers').html(html);
+      });
+
+      fetchTopLosers().then((losers) => {
+        const html = losers.map((l) => `<li class='text-danger'>${l.ticker} ${l.pct}%</li>`).join('');
+        $('#losers').html(html);
+      });
+    }
+
+    function renderHeatmap() {
+      $('#heatMap').empty();
+      fetchSectorPerformance().then((perfMap) => {
+        const sectorsOrder = ['Technology','Financial','Healthcare','Consumer Cyclical','Energy','Utilities'];
+        sectorsOrder.forEach((sec) => {
+          const perf = perfMap[sec] ?? 0;
+          let alpha = Math.min(1, Math.abs(perf) / 5 + 0.3);
+          const color = perf > 0 ? `rgba(40,167,69,${alpha})` : `rgba(220,53,69,${alpha})`;
+          const div = $(`<div style='background:${color}' title='${sec}: ${perf.toFixed(2)}%'>${sec}</div>`);
+          $('#heatMap').append(div);
+        });
+      });
+    }
+
+    function renderNews() {
+      fetchLatestNews().then((headlines) => {
+        const html = headlines.map((h) => `<span class='news-item'>${h.time} - ${h.headline}</span>`).join('');
         $('#newsTicker').html(html);
-    };
+      });
+    }
 
-    const signals = [ 'AAPL breaks resistance', 'TSLA forms double top', 'AMZN hits new high', 'MSFT approaching support' ];
-    $('#signals').html(signals.map(s=>`<li>${s}</li>`));
+    async function renderSignalAlerts() {
+      const symbolsToCheck = ['AAPL', 'TSLA', 'AMZN', 'MSFT'];
+      const alerts = [];
+      for (let sym of symbolsToCheck) {
+        const rsiVal = await fetchRSI(sym);
+        if (rsiVal === null) continue;
+        if (rsiVal > 70) alerts.push(`${sym} is overbought (RSI ${rsiVal.toFixed(1)})`);
+        if (rsiVal < 30) alerts.push(`${sym} is oversold (RSI ${rsiVal.toFixed(1)})`);
+      }
+      if (!alerts.length) {
+        $('#signals').html('<li>No new signals.</li>');
+      } else {
+        $('#signals').html(alerts.map((a) => `<li>${a}</li>`).join(''));
+      }
+    }
 
-    const econ = [
-        { date:'2024-06-01', event:'Nonfarm Payrolls', impact:'High', actual:'250K', expected:'200K', previous:'220K' },
-        { date:'2024-06-03', event:'ISM Manufacturing', impact:'Medium', actual:'52', expected:'51', previous:'50' }
-    ];
-    const renderTable = (tbl, data) => {
-        const header = Object.keys(data[0]);
-        const th = '<tr>' + header.map(h=>`<th>${h}</th>`).join('') + '</tr>';
-        const rows = data.map(d=> '<tr>'+ header.map(h=>`<td>${d[h]}</td>`).join('') + '</tr>').join('');
-        tbl.html(th+rows);
-    };
-    renderTable($('#econCalendar'), econ);
-
-    const earnings = [
-        { date:'2024-06-02', ticker:'AAPL', est:'$1.20', importance:'High' },
-        { date:'2024-06-04', ticker:'MSFT', est:'$2.30', importance:'Medium' }
-    ];
-    renderTable($('#earningsCalendar'), earnings);
-
-    const advancedSearch = query => {
-        const q = query.trim().toUpperCase();
-        if(!q) return [];
-        const ind = q.match(/(PE|RSI)\s*(>=|<=|>|<)\s*(\d+(\.\d+)?)/);
-        return stocksData.filter(s => {
-            if(ind){
-                const val = parseFloat(ind[3]);
-                const num = s[ind[1].toLowerCase()];
-                switch(ind[2]){
-                    case '>': return num > val;
-                    case '<': return num < val;
-                    case '>=': return num >= val;
-                    case '<=': return num <= val;
-                }
-                return false;
-            }
-            return s.ticker.includes(q) || s.name.toUpperCase().includes(q) || s.sector.toUpperCase().includes(q);
-        });
-    };
-    $('#searchInput').on('input', function(){
-        const results = advancedSearch(this.value);
-        if(results.length){
-            const html = results.slice(0,5).map(s=>`<div>${s.ticker} - ${s.name}</div>`).join('');
-            $('#suggestions').html(html).removeClass('d-none');
-        } else {
-            $('#suggestions').addClass('d-none');
+    function renderEconomicCalendar() {
+      fetchEconomicCalendar().then((rows) => {
+        if (!rows.length) {
+          $('#econCalendar').html('<tr><td colspan="6">No upcoming events.</td></tr>');
+          return;
         }
-    });
-    $('#suggestions').on('click','div',function(){
-        $('#searchInput').val($(this).text());
+        const header = `<tr>
+          <th>date</th>
+          <th>event</th>
+          <th>impact</th>
+          <th>actual</th>
+          <th>expected</th>
+          <th>previous</th>
+        </tr>`;
+        const tbody = rows.map((r) => `<tr><td>${r.date}</td><td>${r.name}</td><td>${r.impact}</td><td>${r.actual || '-'}</td><td>${r.forecast || '-'}</td><td>${r.previous || '-'}</td></tr>`).join('');
+        $('#econCalendar').html(header + tbody);
+      });
+    }
+
+    function renderEarningsCalendar() {
+      fetchEarningsCalendar().then((rows) => {
+        if (!rows.length) {
+          $('#earningsCalendar').html('<tr><td colspan="4">No upcoming earnings.</td></tr>');
+          return;
+        }
+        const header = `<tr>
+          <th>date</th>
+          <th>ticker</th>
+          <th>est</th>
+          <th>importance</th>
+        </tr>`;
+        const tbody = rows.map((r) => `<tr><td>${r.date}</td><td>${r.symbol}</td><td>${r.epsEstimate ? `$${r.epsEstimate.toFixed(2)}` : '-'}</td><td>${r.quarter}</td></tr>`).join('');
+        $('#earningsCalendar').html(header + tbody);
+      });
+    }
+
+    $('#searchInput').on('input', function () {
+      const q = this.value.trim();
+      if (!q) {
         $('#suggestions').addClass('d-none');
+        return;
+      }
+      symbolLookup(q).then((results) => {
+        if (results.length) {
+          const html = results.map((s) => `<div>${s.ticker} - ${s.name}</div>`).join('');
+          $('#suggestions').html(html).removeClass('d-none');
+        } else {
+          $('#suggestions').addClass('d-none');
+        }
+      });
+    });
+    $('#suggestions').on('click', 'div', function () {
+      const text = $(this).text().split(' - ')[0];
+      $('#searchInput').val(text);
+      $('#suggestions').addClass('d-none');
     });
 
-    $('#timeframeButtons').on('click', 'button', function(){
-        $('#timeframeButtons button').removeClass('active');
-        $(this).addClass('active');
-        timeframe = $(this).data('range');
-        renderMarket();
+    $('#timeframeButtons').on('click', 'button', function () {
+      $('#timeframeButtons button').removeClass('active');
+      $(this).addClass('active');
+      timeframe = $(this).data('range');
+      renderMarket();
     });
 
     renderMarket();
     renderLists();
     renderHeatmap();
     renderNews();
-    setInterval(()=>{ renderMarket(); renderLists(); renderHeatmap(); }, 60000);
-});
+    renderSignalAlerts();
+    renderEconomicCalendar();
+    renderEarningsCalendar();
+
+    setInterval(() => {
+      renderMarket();
+      renderLists();
+      renderHeatmap();
+    }, 60000);
+
+    setInterval(() => {
+      renderNews();
+      renderSignalAlerts();
+    }, 120000);
+
+    setInterval(() => {
+      renderEconomicCalendar();
+      renderEarningsCalendar();
+    }, 86400000);
+  });
 </script>
 </body>
 </html>
