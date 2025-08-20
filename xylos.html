@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scourge of Xylos - Stephen Wilkinson</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .game-section{
+      background-color:#232526;
+      border:1px solid #333740;
+      border-radius:8px;
+      padding:20px;
+      box-shadow:0 0 10px rgba(0,0,0,0.3);
+    }
+    body.light-mode .game-section{
+      background-color:#ffffff;
+      color:#1E2022;
+    }
+    .btn-accent{
+      background-color:#658E9C;
+      color:#F4F4F9;
+    }
+    .btn-accent:hover{
+      background-color:#5D737E;
+      color:#F4F4F9;
+    }
+    #log{
+      max-height:16rem;
+      overflow-y:auto;
+    }
+  </style>
+</head>
+<body>
+<a id="top"></a>
+<div id="headerInclude"></div>
+
+<div class="container my-4">
+  <header class="d-flex flex-column flex-md-row justify-content-between align-items-start mb-3">
+    <div>
+      <h1 class="mb-0">The Scourge of Xylos</h1>
+      <p class="text-muted small">Black Templars mini-crusade • single-file prototype</p>
+    </div>
+    <div class="btn-group btn-group-sm mt-3 mt-md-0">
+      <button id="restartBtn" class="btn btn-secondary">Restart</button>
+      <button id="toggleLogBtn" class="btn btn-secondary">Toggle Log (L)</button>
+      <button id="rerollSeedBtn" class="btn btn-accent">Re-roll Seed</button>
+    </div>
+  </header>
+
+  <div class="row">
+    <section class="col-md-8 mb-3">
+      <div class="game-section">
+        <div id="narrative" class="mb-3"></div>
+        <div id="choices" class="row"></div>
+      </div>
+    </section>
+
+    <aside class="col-md-4 mb-3">
+      <div class="game-section">
+        <h2 class="h5">Crusade Status</h2>
+        <div class="mt-3">
+          <div class="d-flex justify-content-between">
+            <span>XP</span>
+            <span id="xp">0</span>
+          </div>
+          <div class="mt-2">
+            <div class="d-flex justify-content-between">
+              <span>Level</span>
+              <span id="level">0</span>
+            </div>
+            <div class="progress" style="height:6px;">
+              <div id="xpBar" class="progress-bar" style="width:0%;"></div>
+            </div>
+          </div>
+          <div class="mt-3">
+            <p class="mb-1">Units</p>
+            <ul id="unitList" class="list-unstyled mb-2"></ul>
+          </div>
+          <div class="mt-3">
+            <p class="mb-1">Flags</p>
+            <ul id="flagList" class="list-unstyled mb-2 small"></ul>
+          </div>
+          <div class="pt-2 border-top mt-3">
+            <p class="mb-1">Seed</p>
+            <code id="seedText" class="small"></code>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <section id="logWrap" class="mt-3 d-none">
+    <div class="game-section">
+      <h2 class="h5">Event Log</h2>
+      <div id="log" class="small"></div>
+    </div>
+  </section>
+</div>
+
+<div id="footerInclude"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#headerInclude").load("header.html", function(){
+    const toggle = $("#darkModeToggle");
+    function updateToggleText(){
+      toggle.text($("body").hasClass("light-mode") ? "Dark Mode" : "Light Mode");
+    }
+    toggle.on("click", function(){
+      $("body").toggleClass("light-mode");
+      localStorage.setItem("theme", $("body").hasClass("light-mode") ? "light" : "dark");
+      updateToggleText();
+    });
+    updateToggleText();
+  });
+  $("#footerInclude").load("footer.html");
+  if(localStorage.getItem("theme")==="light"){
+    $("body").addClass("light-mode");
+  }
+});
+</script>
+<script>
+// --- Deterministic RNG (seedable) ---
+function makeRNG(seed){
+  let s = seed >>> 0;
+  return function(){
+    s += 0x6D2B79F5;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  }
+}
+
+// --- Core State ---
+const defaultState = () => ({
+  node: 'intro',
+  xp: 0,
+  level: 0,
+  flags: {},
+  units: [
+    { name: 'Marshal', xp: 0, level: 0 },
+    { name: 'Crusade Ancient', xp: 0, level: 0 }
+  ],
+  seed: Date.now() & 0xffffffff
+});
+
+let state = loadState() || defaultState();
+let rng = makeRNG(state.seed);
+
+// --- Story Graph (data-driven) ---
+const N = {
+  intro: {
+    text: `The fortress-monastery of St. Jove’s Hand has fallen to a World Eaters warband—goaded by Word Bearers' sermons. The wasteland ahead holds two ruins that may yield data or survivors. Choose your approach.`,
+    choices: [
+      { label: 'Advance on the left ruin', next: 'left_approach', action: null, hotkey: '1' },
+      { label: 'Advance on the right ruin', next: 'right_approach', action: null, hotkey: '2' }
+    ]
+  },
+
+  // Left path
+  left_approach: {
+    text: `You push on the left flank. Ork sentries are near; a quick strike could seize the ground.`,
+    choices: [
+      { label: 'Swift assault (DC 3 Tactics check)', next: (ok)=> ok ? 'left_success' : 'left_fail',
+        action: (s)=> skillCheck(s, 'tactics', 3), hotkey: '1' },
+      { label: 'Cautious advance', next: 'left_fail_soft', action: null, hotkey: '2' }
+    ]
+  },
+  left_success: {
+    text: `Objective secured. A data-slate pings a distress signal from Imperial cultists in a gorge. Ork Kommandos converge—but Tyranid Termagants erupt to meet them.`,
+    choices: [
+      { label: 'Join the fray on Tyranid side', next: (win)=> win ? 'help_nids_win' : 'help_nids_lose', action: (s)=> skirmish(s, 'nids'), hotkey: '1' },
+      { label: 'Hold position; let them fight', next: (nidsWin)=> nidsWin ? 'watch_nids_win' : 'watch_orks_win', action: observeBattle, hotkey: '2' }
+    ],
+    onEnter: (s)=> gainXP(s, 1, 'Objective secured +1 XP')
+  },
+  left_fail: {
+    text: `Ambush! A WAAAGH erupts. You are forced back; one unit takes a glancing hit.`,
+    choices: [ { label: 'Fall back (continue)', next: 'end_fail', action: (s)=> flag(s,'left_alert',true), hotkey: '1' } ]
+  },
+  left_fail_soft: {
+    text: `Caution avoids losses, but the Orks mobilize. The objective remains contested.`,
+    choices: [ { label: 'Withdraw (continue)', next: 'end_fail', action: (s)=> flag(s,'left_alert',true), hotkey: '1' } ]
+  },
+
+  // Right path
+  right_approach: {
+    text: `You pivot to the right ruin. Vox-caster static hints at a recorded message—Sister of Battle origin.`,
+    choices: [
+      { label: 'Breach & clear (DC 3 Tactics)', next: (ok)=> ok ? 'right_success' : 'right_fail', action: (s)=> skillCheck(s,'tactics',3), hotkey: '1' },
+      { label: 'Methodical entry', next: 'right_fail_soft', action: null, hotkey: '2' }
+    ]
+  },
+  right_success: {
+    text: `Objective secured. Recording details the fall of St. Jove’s Hand. Orks close in—Termagants answer the noise.`,
+    choices: [
+      { label: 'Support Tyranids vs Orks', next: (win)=> win ? 'help_nids_win' : 'help_nids_lose', action: (s)=> skirmish(s,'nids'), hotkey: '1' },
+      { label: 'Let them fight it out', next: (nidsWin)=> nidsWin ? 'watch_nids_win' : 'watch_orks_win', action: observeBattle, hotkey: '2' }
+    ],
+    onEnter: (s)=> gainXP(s, 1, 'Objective secured +1 XP')
+  },
+  right_fail: {
+    text: `Booby-trap! You disengage under fire. The ruin stays hostile.`,
+    choices: [ { label: 'Regroup (continue)', next: 'end_fail', action: (s)=> flag(s,'right_alert',true), hotkey: '1' } ]
+  },
+  right_fail_soft: {
+    text: `Slow clearing buys safety but cedes tempo. Enemies harden defenses.`,
+    choices: [ { label: 'Withdraw (continue)', next: 'end_fail', action: (s)=> flag(s,'right_alert',true), hotkey: '1' } ]
+  },
+
+  // Mid outcomes
+  help_nids_win: {
+    text: `With your fire supporting the swarm, Orks rout. The Termagants pivot on you; you purge them and uncover a bio-trap.`,
+    choices: [ { label: 'Continue', next: 'end_win', action: (s)=> gainXP(s,2,'Combat victory +2 XP'), hotkey: '1' } ]
+  },
+  help_nids_lose: {
+    text: `Your aid falters. Orks grind down the swarm, then counter-charge. You extract under pressure.`,
+    choices: [ { label: 'Continue', next: 'end_fail', action: null, hotkey: '1' } ]
+  },
+  watch_nids_win: {
+    text: `You hold the line. Tyranids butcher the Orks—then skitter toward you. You cleanse the stragglers.`,
+    choices: [ { label: 'Continue', next: 'end_win', action: (s)=> gainXP(s,1,'After-action +1 XP'), hotkey: '1' } ]
+  },
+  watch_orks_win: {
+    text: `The Orks prevail and are emboldened. Withdrawal is prudent.`,
+    choices: [ { label: 'Continue', next: 'end_fail', action: (s)=> flag(s,'orks_reinforced',true), hotkey: '1' } ]
+  },
+
+  // Endings
+  end_win: {
+    text: `Mission complete. The path ahead is clearer; Chaos remains.`,
+    choices: [ { label: 'Restart', next: 'intro', action: resetRun, hotkey: '1' } ]
+  },
+  end_fail: {
+    text: `Mission failed. Losses are limited, but momentum is gone.`,
+    choices: [ { label: 'Restart', next: 'intro', action: resetRun, hotkey: '1' } ]
+  }
+};
+
+// --- Mechanics helpers ---
+function log(msg){
+  const el = document.createElement('div');
+  el.textContent = msg;
+  document.getElementById('log').appendChild(el);
+  const box = document.getElementById('log');
+  box.scrollTop = box.scrollHeight;
+}
+
+function flag(s, key, val=true) { s.flags[key] = val; log(`Flag set: ${key} = ${val}`); saveState(); return s; }
+function gainXP(s, amount, reason='') { s.xp += amount; log(`+${amount} XP ${reason? '('+reason+')':''}`); levelCheck(s); saveState(); return s; }
+function levelCheck(s) {
+  const thresholds = [0, 3, 6, 10, 15];
+  let lvl = 0;
+  for (let i=0;i<thresholds.length;i++) if (s.xp >= thresholds[i]) lvl = i;
+  if (lvl !== s.level) { s.level = lvl; log(`Level up → ${lvl}`); }
+}
+function d6() { return 1 + Math.floor(rng()*6); }
+
+function skillCheck(s, skill, dc) {
+  const bonus = s.level;
+  const roll = d6();
+  const total = roll + bonus;
+  const ok = total >= dc;
+  log(`Skill(${skill}) roll d6=${roll} + bonus(${bonus}) = ${total} vs DC ${dc} → ${ok? 'SUCCESS':'FAIL'}`);
+  return ok;
+}
+
+function skirmish(s, side) {
+  const pr = d6() + s.level;
+  const erBase = d6();
+  const er = erBase + (s.flags.orks_reinforced ? 1 : 0);
+  const win = pr > er;
+  log(`Skirmish: you ${pr} vs enemy ${er} → ${win? 'WIN':'LOSE'}`);
+  if (win) gainXP(s, 2, 'Battle');
+  return win;
+}
+
+function observeBattle(s) {
+  const orks = d6();
+  const nids = d6();
+  const nidsWin = nids > orks;
+  log(`Observe: Orks ${orks} vs Nids ${nids} → ${nidsWin? 'Nids win':'Orks win'}`);
+  return nidsWin;
+}
+
+function resetRun(s) {
+  const keepSeed = s.seed;
+  state = defaultState();
+  state.seed = keepSeed;
+  rng = makeRNG(state.seed);
+  saveState();
+  log('--- Run reset (seed preserved) ---');
+}
+
+// --- Render ---
+function render() {
+  const node = N[state.node];
+  if (!state._entered) state._entered = {};
+  if (node.onEnter && !state._entered[state.node]) {
+    node.onEnter(state);
+    state._entered[state.node] = true;
+  }
+
+  document.getElementById('narrative').textContent = node.text;
+
+  const choices = document.getElementById('choices');
+  choices.innerHTML = '';
+  node.choices.forEach((c, idx) => {
+    const col = document.createElement('div');
+    col.className = 'col-sm-6 mb-2';
+    const btn = document.createElement('button');
+    btn.className = 'btn btn-block ' + (idx%2 ? 'btn-secondary' : 'btn-accent');
+    btn.innerHTML = `<span>${c.label}</span>${c.hotkey?` <kbd class='ml-2'>${c.hotkey}</kbd>`:''}`;
+    btn.onclick = () => choose(c);
+    col.appendChild(btn);
+    choices.appendChild(col);
+  });
+
+  document.getElementById('xp').textContent = state.xp;
+  document.getElementById('level').textContent = state.level;
+  const pct = Math.min(100, (state.xp % 3) / 3 * 100);
+  document.getElementById('xpBar').style.width = pct + '%';
+
+  const ul = document.getElementById('unitList');
+  ul.innerHTML = '';
+  state.units.forEach(u => {
+    const li = document.createElement('li');
+    li.className = 'd-flex justify-content-between';
+    li.innerHTML = `<span>${u.name}</span><span class='text-muted'>Lv ${u.level} • ${u.xp}xp</span>`;
+    ul.appendChild(li);
+  });
+
+  const fl = document.getElementById('flagList');
+  fl.innerHTML = '';
+  Object.keys(state.flags).forEach(k => {
+    const li = document.createElement('li');
+    li.textContent = `${k}: ${state.flags[k]}`;
+    fl.appendChild(li);
+  });
+  document.getElementById('seedText').textContent = String(state.seed);
+
+  saveState();
+}
+
+function choose(choice) {
+  const node = N[state.node];
+  const actionResult = choice.action ? choice.action(state) : undefined;
+  let next = choice.next;
+  if (typeof next === 'function') next = next(actionResult);
+  if (!N[next]) { console.warn('Invalid next node', next); return; }
+  state.node = next;
+  render();
+}
+
+// --- Persistence ---
+function saveState() { try { localStorage.setItem('xylos_state', JSON.stringify(state)); } catch(e){} }
+function loadState() { try { const s = localStorage.getItem('xylos_state'); return s ? JSON.parse(s) : null; } catch(e){ return null; } }
+
+// --- Controls ---
+document.getElementById('toggleLogBtn').addEventListener('click', () => {
+  document.getElementById('logWrap').classList.toggle('d-none');
+});
+document.getElementById('restartBtn').addEventListener('click', () => {
+  state = defaultState(); rng = makeRNG(state.seed); saveState();
+  document.getElementById('log').innerHTML = '';
+  log('--- New run (fresh seed) ---');
+  render();
+});
+document.getElementById('rerollSeedBtn').addEventListener('click', () => {
+  state.seed = (Math.floor(Math.random()*2**32)) >>> 0; rng = makeRNG(state.seed);
+  log(`Seed changed → ${state.seed}`);
+  saveState(); render();
+});
+
+window.addEventListener('keydown', (e) => {
+  if (e.key.toLowerCase() === 'l') {
+    document.getElementById('logWrap').classList.toggle('d-none');
+  }
+  const node = N[state.node];
+  const idx = parseInt(e.key,10) - 1;
+  if (!isNaN(idx) && node && node.choices[idx]) {
+    choose(node.choices[idx]);
+  }
+});
+
+// --- Boot ---
+render();
+</script>
+</body>
+</html>
