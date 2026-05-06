@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Stephen Wilkinson | IT Support, Cybersecurity, and Front-End Portfolio</title>
-  <meta name="description" content="Portfolio of Stephen Wilkinson, an entry-level IT support and cybersecurity candidate in Palm Bay, Florida with hands-on labs, troubleshooting practice, and React experience.">
-  <meta name="keywords" content="Stephen Wilkinson, IT Support, Help Desk, Cybersecurity, React, JavaScript, Networking, Troubleshooting, Customer Service, Portfolio">
+  <title>Stephen Wilkinson | IT Support &amp; Cybersecurity | CompTIA A+ &amp; Network+ Certified</title>
+  <meta name="description" content="Stephen Wilkinson — CompTIA A+ and Network+ certified IT support professional in Palm Bay, FL. Seeking entry-level help desk, desktop support, or junior cybersecurity roles. Open to remote.">
+  <meta name="keywords" content="Stephen Wilkinson, IT Support, Help Desk, Cybersecurity, CompTIA A+, CompTIA Network+, React, JavaScript, Networking, Troubleshooting, Palm Bay Florida, Remote">
   <meta name="author" content="Stephen Wilkinson">
-  <meta property="og:title" content="Stephen Wilkinson | IT Support, Cybersecurity, and Front-End Portfolio">
-  <meta property="og:description" content="Entry-level IT support, cybersecurity fundamentals, networking labs, troubleshooting, and front-end development work.">
+  <meta property="og:title" content="Stephen Wilkinson | IT Support &amp; Cybersecurity Portfolio">
+  <meta property="og:description" content="CompTIA A+ &amp; Network+ certified IT professional with hands-on home lab experience, React development background, and a service-first mindset.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wilkins4.github.io/index.html">
   <meta property="og:image" content="https://wilkins4.github.io/images/og-preview.jpg">
@@ -25,13 +25,18 @@
   <header class="site-header">
     <div class="container nav-wrap">
       <a class="brand" href="#top">Stephen Wilkinson</a>
-      <nav aria-label="Primary navigation">
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="primary-nav">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+      <nav aria-label="Primary navigation" id="primary-nav">
         <ul class="nav-list">
           <li><a href="#about">About</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#experience">Experience</a></li>
           <li><a href="#projects">Projects</a></li>
-          <li><a href="#education-certifications">Education & Certifications</a></li>
+          <li><a href="#education-certifications">Education &amp; Certs</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -39,29 +44,36 @@
   </header>
 
   <main id="main-content">
+
     <section class="hero section" id="top">
       <div class="container hero-grid">
         <div>
-          <p class="eyebrow">Palm Bay, Florida · Open to Entry-Level IT Roles</p>
-          <h1>Entry-Level IT Support Professional with Cybersecurity and Front-End Foundations</h1>
-          <p class="lead">I am Stephen Wilkinson, a cybersecurity student building practical help desk and troubleshooting skills through home labs, networking practice, and customer-facing experience. I also bring front-end development experience with React and JavaScript.</p>
+          <p class="eyebrow">Palm Bay, FL &middot; Open to Remote &middot; Available Now</p>
+          <h1>IT Support Professional &amp; <span class="h1-accent">Cybersecurity Student</span></h1>
+          <div class="cert-row" aria-label="Certifications">
+            <span class="cert-chip cert-done">&#10003; CompTIA A+</span>
+            <span class="cert-chip cert-done">&#10003; CompTIA Network+</span>
+            <span class="cert-chip cert-progress">&#8987; Security+ In Progress</span>
+          </div>
+          <p class="lead">I build real-world IT skills through home labs, hands-on troubleshooting, and cybersecurity coursework. With CompTIA A+ and Network+ already earned, I am ready for help desk, desktop support, or junior cybersecurity roles.</p>
           <div class="cta-group">
             <a class="button button-primary" href="#contact">Contact Me</a>
-            <a class="button button-secondary" href="#projects">View Projects and Labs</a>
+            <a class="button button-resume" href="resume.pdf" download>&#8595;&nbsp;Download Resume</a>
+            <a class="button button-secondary" href="#projects">View Labs &amp; Projects</a>
           </div>
           <ul class="quick-links" aria-label="Professional links">
-            <li><a href="#" aria-label="GitHub profile placeholder">GitHub</a></li>
-            <li><a href="#" aria-label="LinkedIn profile placeholder">LinkedIn</a></li>
-            <li><a href="mailto:your-email@example.com">your-email@example.com</a></li>
+            <li><a href="https://github.com/wilkins4" target="_blank" rel="noopener noreferrer">&#128279; GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/stephen-wilkinson" target="_blank" rel="noopener noreferrer">&#128279; LinkedIn</a></li>
+            <li><a href="mailto:scwilkinson36@gmail.com">scwilkinson36@gmail.com</a></li>
           </ul>
         </div>
         <aside class="hero-panel" aria-label="Core focus areas">
-          <h2>Focused On</h2>
+          <h2>What I Bring</h2>
           <ul>
-            <li>Help desk and desktop support workflows</li>
-            <li>Networking fundamentals and diagnostics</li>
-            <li>Cybersecurity best practices and hardening basics</li>
-            <li>Clear technical communication and customer service</li>
+            <li>CompTIA A+ &amp; Network+ certified &mdash; Security+ in progress</li>
+            <li>Hands-on home labs: VLANs, DNS/DHCP, NAS, Docker, Pi</li>
+            <li>React internship experience &amp; front-end development</li>
+            <li>Patient communication and customer service track record</li>
           </ul>
         </aside>
       </div>
@@ -71,8 +83,9 @@
       <div class="container grid-two">
         <div>
           <h2>About</h2>
-          <p>I am an entry-level IT support candidate preparing for help desk, desktop support, and junior cybersecurity roles. My background combines practical troubleshooting, technical communication, and front-end development.</p>
-          <p>I earned a BS in Digital Media Arts from Canisius College in 2016 and I am currently pursuing cybersecurity studies at Eastern Florida State College. I am especially motivated by resolving user issues, documenting solutions clearly, and building dependable support habits.</p>
+          <p>I am an IT support professional and cybersecurity student actively seeking help desk, desktop support, and junior cybersecurity roles. My background combines verified industry certifications, hands-on home-lab practice, front-end development experience, and strong customer-service skills.</p>
+          <p>I earned a BS in Digital Media Arts from Canisius College in 2016 and am currently pursuing cybersecurity coursework at Eastern Florida State College. I hold CompTIA A+ and Network+ and am actively studying for Security+. I am especially motivated by resolving user issues cleanly, documenting solutions clearly, and building dependable support habits.</p>
+          <p class="availability-note">&#128197; Available immediately &middot; On-site (Palm Bay, FL area) or fully remote</p>
         </div>
         <figure class="profile-card">
           <img src="images/headshot.jpg" alt="Portrait of Stephen Wilkinson" loading="lazy" width="320" height="320">
@@ -85,12 +98,36 @@
       <div class="container">
         <h2>Skills</h2>
         <div class="card-grid two-up">
-          <article class="card"><h3>IT Support & Troubleshooting</h3><p>Windows support workflows, user account help, update issues, basic remote support, printer/network troubleshooting, and system recovery fundamentals.</p></article>
-          <article class="card"><h3>Networking Fundamentals</h3><p>TCP/IP, DNS, DHCP, Wi-Fi and Ethernet troubleshooting, routing/switching concepts, VLAN planning, and device inventory basics.</p></article>
-          <article class="card"><h3>Cybersecurity Foundations</h3><p>CIA triad, least privilege, patching habits, authentication basics, endpoint hygiene, logging awareness, and backup practices.</p></article>
-          <article class="card"><h3>Front-End Development</h3><p>HTML, CSS, JavaScript, and React, with attention to clear interfaces and practical user experience.</p></article>
-          <article class="card"><h3>Tools & Platforms</h3><p>Git, GitHub, VS Code, Wireshark, Nmap/Zenmap, Microsoft Office, Google Workspace, Linux basics, and macOS familiarity.</p></article>
-          <article class="card"><h3>Customer Service Strengths</h3><p>Clear communication, calm issue handling, prioritization under pressure, team collaboration, and consistent follow-through.</p></article>
+          <article class="card">
+            <h3>IT Support &amp; Troubleshooting</h3>
+            <p>Windows support workflows, user account help, update issues, basic remote support, printer and network troubleshooting, and system recovery fundamentals.</p>
+            <div class="tag-row"><span class="tag">Windows 10/11</span><span class="tag">Remote Desktop</span><span class="tag">Help Desk</span><span class="tag">Ticketing</span><span class="tag">Event Viewer</span></div>
+          </article>
+          <article class="card">
+            <h3>Networking Fundamentals</h3>
+            <p>TCP/IP, DNS, DHCP, Wi-Fi and Ethernet troubleshooting, routing and switching concepts, VLAN planning, and device inventory basics.</p>
+            <div class="tag-row"><span class="tag">TCP/IP</span><span class="tag">DNS / DHCP</span><span class="tag">VLANs</span><span class="tag">Wi-Fi</span><span class="tag">Wireshark</span></div>
+          </article>
+          <article class="card">
+            <h3>Cybersecurity Foundations</h3>
+            <p>CIA triad, least privilege, patching practices, authentication basics, endpoint hygiene, log awareness, and backup strategy.</p>
+            <div class="tag-row"><span class="tag">CIA Triad</span><span class="tag">Least Privilege</span><span class="tag">Patching</span><span class="tag">MFA</span><span class="tag">Logging</span></div>
+          </article>
+          <article class="card">
+            <h3>Front-End Development</h3>
+            <p>HTML, CSS, JavaScript, and React, with attention to accessible and practical user interfaces. Git-based version control workflow.</p>
+            <div class="tag-row"><span class="tag">HTML / CSS</span><span class="tag">JavaScript</span><span class="tag">React</span><span class="tag">Git / GitHub</span><span class="tag">VS Code</span></div>
+          </article>
+          <article class="card">
+            <h3>Tools &amp; Platforms</h3>
+            <p>Git, GitHub, VS Code, Wireshark, Nmap/Zenmap, Microsoft Office, Google Workspace, Linux CLI basics, macOS, and Docker.</p>
+            <div class="tag-row"><span class="tag">Linux CLI</span><span class="tag">Nmap / Zenmap</span><span class="tag">Docker</span><span class="tag">Microsoft 365</span><span class="tag">macOS</span></div>
+          </article>
+          <article class="card">
+            <h3>Soft Skills &amp; Communication</h3>
+            <p>Clear and patient technical communication, calm issue handling under pressure, team collaboration, detailed documentation, and consistent follow-through.</p>
+            <div class="tag-row"><span class="tag">Documentation</span><span class="tag">Customer Service</span><span class="tag">Collaboration</span><span class="tag">Remote Work</span></div>
+          </article>
         </div>
       </div>
     </section>
@@ -100,20 +137,21 @@
         <h2>Experience</h2>
         <div class="timeline">
           <article class="card timeline-item">
-            <h3>React Software Development Intern, Sub360</h3>
-            <p class="meta">February 2023 to August 2023</p>
+            <h3>React Software Development Intern &mdash; Sub360</h3>
+            <p class="meta">February 2023 &ndash; August 2023 &middot; Remote</p>
             <ul>
-              <li>Collaborated in a remote team environment, providing clear updates and documentation across shared tools.</li>
-              <li>Investigated and resolved front-end issues through testing and iterative troubleshooting.</li>
-              <li>Improved handoffs by documenting feature behavior and implementation details.</li>
+              <li>Built and debugged React components in a shared codebase, using Git and GitHub for branching, commits, and pull requests in a team workflow.</li>
+              <li>Investigated and resolved front-end issues through browser dev tools, isolated testing, and iterative debugging cycles.</li>
+              <li>Documented component behavior and implementation details, improving team knowledge handoff and reducing onboarding friction.</li>
             </ul>
+            <div class="tag-row"><span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">Git</span><span class="tag">Remote</span></div>
           </article>
           <article class="card timeline-item">
-            <h3>Cook and Cashier, Samson's Concessions</h3>
-            <p class="meta">September 2020 to April 2023</p>
+            <h3>Cook and Cashier &mdash; Samson&rsquo;s Concessions</h3>
+            <p class="meta">September 2020 &ndash; April 2023</p>
             <ul>
               <li>Delivered reliable customer-facing service in a fast-paced environment requiring accuracy and professionalism.</li>
-              <li>Managed multiple priorities under pressure while maintaining quality and communication.</li>
+              <li>Managed multiple priorities under pressure while maintaining quality and communication standards.</li>
               <li>Built strong habits around accountability, teamwork, and dependable execution.</li>
             </ul>
           </article>
@@ -123,13 +161,35 @@
 
     <section class="section" id="projects">
       <div class="container">
-        <h2>Projects and Labs</h2>
+        <h2>Projects &amp; Labs</h2>
+        <p class="section-intro">Hands-on projects that demonstrate practical IT, networking, and cybersecurity skills built outside of formal coursework.</p>
         <div class="card-grid two-up">
-          <article class="card"><h3>Home Network Lab</h3><p>Built and maintained a home setup with router, switch, and access point. Practiced VLAN planning, DNS/DHCP troubleshooting, Wi-Fi configuration, and device inventory.</p></article>
-          <article class="card"><h3>Help Desk Troubleshooting Labs</h3><p>Practiced support scenarios involving Windows configuration, event logs, user account assistance, remote desktop, updates, restore options, and printer/network issues.</p></article>
-          <article class="card"><h3>NAS and Backup Workflow</h3><p>Set up TerraMaster NAS workflows with external storage for structured, network-accessible backup organization.</p></article>
-          <article class="card"><h3>Raspberry Pi and Docker Experiments</h3><p>Explored self-hosted services, lightweight automation, and local network tooling in a controlled home-lab environment.</p></article>
-          <article class="card"><h3>React Baby Tracker App</h3><p>Created a React concept app for tracking feeding, sleep, diapers, vitamins, and trends, strengthening JavaScript and component-based development practice.</p></article>
+          <article class="card">
+            <h3>Home Network Lab</h3>
+            <p>Designed and configured a home network with a managed switch, Wi-Fi access point, and router. Implemented VLAN segmentation, configured local DNS and DHCP, diagnosed connectivity issues, and maintained a device inventory &mdash; directly mirroring enterprise support scenarios.</p>
+            <div class="tag-row"><span class="tag">VLANs</span><span class="tag">DNS / DHCP</span><span class="tag">Routing &amp; Switching</span><span class="tag">Network Troubleshooting</span></div>
+          </article>
+          <article class="card">
+            <h3>Help Desk Troubleshooting Labs</h3>
+            <p>Simulated and resolved real support scenarios: Windows 10/11 configuration issues, Event Log analysis, user account management, remote desktop setup, OS restore and recovery, update failures, and printer and network connectivity problems.</p>
+            <div class="tag-row"><span class="tag">Windows 10/11</span><span class="tag">Event Viewer</span><span class="tag">Remote Desktop</span><span class="tag">System Recovery</span></div>
+          </article>
+          <article class="card">
+            <h3>NAS &amp; Backup Workflow</h3>
+            <p>Deployed a TerraMaster NAS device with organized external storage. Configured network-accessible backup schedules and folder structures, gaining practical experience with data organization, redundancy planning, and access control.</p>
+            <div class="tag-row"><span class="tag">NAS</span><span class="tag">Backup Strategy</span><span class="tag">Data Management</span><span class="tag">Access Control</span></div>
+          </article>
+          <article class="card">
+            <h3>Raspberry Pi &amp; Docker Experiments</h3>
+            <p>Deployed self-hosted services on a Raspberry Pi using Docker containers. Practiced Linux CLI, service configuration, log monitoring, and lightweight local network tooling in a controlled home-lab environment.</p>
+            <div class="tag-row"><span class="tag">Raspberry Pi</span><span class="tag">Docker</span><span class="tag">Linux CLI</span><span class="tag">Self-Hosting</span></div>
+          </article>
+          <article class="card">
+            <h3>React Baby Tracker App</h3>
+            <p>Designed and built a React application for tracking infant feeding, sleep, diaper changes, vitamins, and daily trends. Demonstrates component-based architecture, state management, and practical JavaScript development.</p>
+            <div class="tag-row"><span class="tag">React</span><span class="tag">JavaScript</span><span class="tag">State Management</span><span class="tag">UI Design</span></div>
+            <a class="project-link" href="https://github.com/wilkins4" target="_blank" rel="noopener noreferrer">View on GitHub &rarr;</a>
+          </article>
         </div>
       </div>
     </section>
@@ -138,17 +198,32 @@
       <div class="container split-stack">
         <article class="card">
           <h2>Education</h2>
-          <h3>Eastern Florida State College</h3>
-          <p>Cybersecurity studies in progress.</p>
-          <h3>Canisius College</h3>
-          <p>BS in Digital Media Arts, 2016.</p>
+          <div class="edu-item">
+            <h3>Eastern Florida State College</h3>
+            <p class="meta">Cybersecurity &mdash; In Progress</p>
+            <p>Building foundational cybersecurity knowledge including network security, threat analysis, and security operations concepts.</p>
+          </div>
+          <div class="edu-item">
+            <h3>Canisius College</h3>
+            <p class="meta">BS Digital Media Arts &middot; 2016</p>
+            <p>Developed technical problem-solving, project management, and communication skills that complement IT support work.</p>
+          </div>
         </article>
         <article class="card">
           <h2>Certifications</h2>
           <ul class="cert-list">
-            <li><strong>CompTIA A+</strong> — Completed</li>
-            <li><strong>CompTIA Network+</strong> — Completed</li>
-            <li><strong>CompTIA Security+</strong> — In progress</li>
+            <li class="cert-item cert-item-done">
+              <div><strong>CompTIA A+</strong><p class="cert-desc">Core hardware, software, networking, and OS support</p></div>
+              <span class="cert-status cert-status-done">&#10003; Earned</span>
+            </li>
+            <li class="cert-item cert-item-done">
+              <div><strong>CompTIA Network+</strong><p class="cert-desc">Networking concepts, protocols, troubleshooting</p></div>
+              <span class="cert-status cert-status-done">&#10003; Earned</span>
+            </li>
+            <li class="cert-item cert-item-progress">
+              <div><strong>CompTIA Security+</strong><p class="cert-desc">Security operations, threat management, compliance</p></div>
+              <span class="cert-status cert-status-progress">&#8987; In Progress</span>
+            </li>
           </ul>
         </article>
       </div>
@@ -157,16 +232,41 @@
     <section class="section" id="contact">
       <div class="container contact-card">
         <h2>Contact</h2>
-        <p>If you are hiring for entry-level IT support, help desk, junior cybersecurity, or technical support roles, I would welcome the opportunity to connect.</p>
-        <p><a class="button button-primary" href="mailto:your-email@example.com">Email Me</a></p>
+        <p>If you are hiring for entry-level IT support, help desk, desktop support, or junior cybersecurity roles &mdash; I would welcome the opportunity to connect. I am available immediately and open to remote work.</p>
+        <div class="contact-actions">
+          <a class="button button-primary" href="mailto:scwilkinson36@gmail.com">&#9993;&nbsp;Email Me</a>
+          <a class="button button-resume" href="resume.pdf" download>&#8595;&nbsp;Download Resume</a>
+          <a class="button button-secondary" href="https://github.com/wilkins4" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="button button-secondary" href="https://www.linkedin.com/in/stephen-wilkinson" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
       </div>
     </section>
+
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; 2026 Stephen Wilkinson. Built as a lightweight static site for GitHub Pages.</p>
+      <p>&copy; 2026 Stephen Wilkinson &middot; <a href="mailto:scwilkinson36@gmail.com">scwilkinson36@gmail.com</a> &middot; <a href="https://github.com/wilkins4" target="_blank" rel="noopener noreferrer">GitHub</a></p>
     </div>
   </footer>
+
+  <script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navList = document.querySelector('.nav-list');
+    if (navToggle && navList) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = navList.classList.toggle('nav-open');
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+        navToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+      });
+      navList.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navList.classList.remove('nav-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+          navToggle.setAttribute('aria-label', 'Open navigation');
+        });
+      });
+    }
+  </script>
 </body>
 </html>
