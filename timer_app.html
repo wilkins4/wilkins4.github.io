@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simple Timer App | Stephen Wilkinson</title>
+  <meta name="description" content="Simple stopwatch and timer interface with start, stop, reset, and lap support.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+    :root{--bg:#0b1220;--panel:#111a2e;--line:#2c3a57;--text:#ecf2ff;--muted:#b4c0d6;--brand:#78b8ff;--accent:#98f5cf}
+    *{box-sizing:border-box} body{margin:0;font:16px/1.5 Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(180deg,#0b1220,#111a2e);color:var(--text)}
+    .wrap{width:min(900px,92%);margin:2rem auto}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:1rem 1.2rem;margin-bottom:1rem}
+    h1,h2{margin:.2rem 0 .8rem} .sub{color:var(--muted);margin-top:0}
+    .display{font-size:clamp(2rem,6vw,4rem);font-weight:700;letter-spacing:.04em;margin:.4rem 0 1rem}
+    .row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+    button,input{border-radius:10px;border:1px solid var(--line);padding:.65rem .8rem;font:inherit}
+    button{cursor:pointer;background:#1a2742;color:var(--text)} button:hover{filter:brightness(1.1)}
+    .primary{background:var(--brand);color:#071427;border-color:transparent}
+    .accent{background:var(--accent);color:#062116;border-color:transparent}
+    input{background:#0b1220;color:var(--text)}
+    ol{margin:.6rem 0 0;padding-left:1.1rem;max-height:180px;overflow:auto}
+    a{color:var(--brand)}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <p><a href="index.html">← Back to portfolio</a></p>
+
+    <section class="card">
+      <h1>Simple Stopwatch</h1>
+      <p class="sub">Start, stop, reset, and lap tracking.</p>
+      <div class="display" id="swDisplay">00:00.00</div>
+      <div class="row">
+        <button class="primary" id="swStart">Start</button>
+        <button id="swStop">Stop</button>
+        <button id="swReset">Reset</button>
+        <button class="accent" id="swLap">Lap</button>
+      </div>
+      <ol id="lapList" aria-label="Lap times"></ol>
+    </section>
+
+    <section class="card">
+      <h2>Simple Countdown Timer</h2>
+      <p class="sub">Set minutes and seconds, then start, stop, or reset.</p>
+      <div class="row">
+        <label for="mins">Min</label><input id="mins" type="number" min="0" value="1" style="width:80px">
+        <label for="secs">Sec</label><input id="secs" type="number" min="0" max="59" value="0" style="width:80px">
+      </div>
+      <div class="display" id="timerDisplay">01:00</div>
+      <div class="row">
+        <button class="primary" id="tmStart">Start</button>
+        <button id="tmStop">Stop</button>
+        <button id="tmReset">Reset</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const swDisplay = document.getElementById('swDisplay');
+    const lapList = document.getElementById('lapList');
+    let swStartTime = 0, swElapsed = 0, swInterval = null;
+
+    function formatStopwatch(ms) {
+      const totalCentiseconds = Math.floor(ms / 10);
+      const minutes = Math.floor(totalCentiseconds / 6000);
+      const seconds = Math.floor((totalCentiseconds % 6000) / 100);
+      const centiseconds = totalCentiseconds % 100;
+      return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}.${String(centiseconds).padStart(2, '0')}`;
+    }
+
+    function updateStopwatch() {
+      const now = Date.now();
+      swDisplay.textContent = formatStopwatch(swElapsed + (now - swStartTime));
+    }
+
+    document.getElementById('swStart').addEventListener('click', () => {
+      if (swInterval) return;
+      swStartTime = Date.now();
+      swInterval = setInterval(updateStopwatch, 10);
+    });
+
+    document.getElementById('swStop').addEventListener('click', () => {
+      if (!swInterval) return;
+      clearInterval(swInterval);
+      swInterval = null;
+      swElapsed += Date.now() - swStartTime;
+      swDisplay.textContent = formatStopwatch(swElapsed);
+    });
+
+    document.getElementById('swReset').addEventListener('click', () => {
+      clearInterval(swInterval);
+      swInterval = null;
+      swStartTime = 0;
+      swElapsed = 0;
+      swDisplay.textContent = '00:00.00';
+      lapList.innerHTML = '';
+    });
+
+    document.getElementById('swLap').addEventListener('click', () => {
+      const current = swInterval ? swElapsed + (Date.now() - swStartTime) : swElapsed;
+      if (current === 0) return;
+      const li = document.createElement('li');
+      li.textContent = `Lap ${lapList.children.length + 1}: ${formatStopwatch(current)}`;
+      lapList.prepend(li);
+    });
+
+    const mins = document.getElementById('mins');
+    const secs = document.getElementById('secs');
+    const timerDisplay = document.getElementById('timerDisplay');
+    let timerInitial = 60, timerRemaining = 60, timerInterval = null;
+
+    function formatTimer(totalSeconds) {
+      const m = Math.floor(totalSeconds / 60);
+      const s = totalSeconds % 60;
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function readTimerInput() {
+      const m = Math.max(0, Number(mins.value) || 0);
+      const s = Math.min(59, Math.max(0, Number(secs.value) || 0));
+      mins.value = m;
+      secs.value = s;
+      return m * 60 + s;
+    }
+
+    function updateTimerDisplay() {
+      timerDisplay.textContent = formatTimer(timerRemaining);
+    }
+
+    document.getElementById('tmStart').addEventListener('click', () => {
+      if (timerInterval) return;
+      if (timerRemaining <= 0) {
+        timerInitial = readTimerInput();
+        timerRemaining = timerInitial;
+      }
+      if (timerRemaining <= 0) return;
+      timerInterval = setInterval(() => {
+        timerRemaining--;
+        updateTimerDisplay();
+        if (timerRemaining <= 0) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          timerDisplay.textContent = '00:00';
+          alert('Time is up!');
+        }
+      }, 1000);
+    });
+
+    document.getElementById('tmStop').addEventListener('click', () => {
+      clearInterval(timerInterval);
+      timerInterval = null;
+    });
+
+    document.getElementById('tmReset').addEventListener('click', () => {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      timerInitial = readTimerInput();
+      timerRemaining = timerInitial;
+      updateTimerDisplay();
+    });
+
+    mins.addEventListener('change', () => {
+      if (!timerInterval) {
+        timerInitial = readTimerInput();
+        timerRemaining = timerInitial;
+        updateTimerDisplay();
+      }
+    });
+    secs.addEventListener('change', () => {
+      if (!timerInterval) {
+        timerInitial = readTimerInput();
+        timerRemaining = timerInitial;
+        updateTimerDisplay();
+      }
+    });
+
+    updateTimerDisplay();
+  </script>
+</body>
+</html>
