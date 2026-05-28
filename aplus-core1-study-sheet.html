@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A+ Core 1 (220-1101) — One-Hour Cram Sheet</title>
+<style>
+  :root{
+    --ink:#16202b; --muted:#5b6b7b; --line:#d8dee6; --soft:#f3f6fa;
+    --accent:#1f5fbf; --accent-bg:#e9f0fb; --good:#1c7a43; --bad:#b3261e; --warn:#9a6700;
+    --hi:#fff6d6;
+  }
+  *{box-sizing:border-box;}
+  html{font-size:15px;}
+  body{
+    margin:0; background:#e8ebf0; color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.45;
+  }
+  .page{max-width:880px; margin:22px auto; background:#fff; padding:34px 40px 48px; box-shadow:0 2px 18px rgba(0,0,0,.12); border-radius:8px;}
+  header.top{border-bottom:3px solid var(--accent); padding-bottom:14px; margin-bottom:8px;}
+  header.top h1{font-size:25px; margin:0 0 4px; letter-spacing:.2px;}
+  header.top .meta{color:var(--muted); font-size:13px;}
+  .exambox{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 6px;}
+  .exambox .pill{background:var(--accent-bg); border:1px solid #cfe0f7; color:var(--accent);
+    border-radius:7px; padding:7px 11px; font-size:12.5px; font-weight:600;}
+  .exambox .pill b{font-weight:800;}
+
+  h2{font-size:18px; margin:26px 0 8px; padding:6px 10px; background:var(--accent); color:#fff; border-radius:6px;}
+  h2 .wt{float:right; font-weight:600; opacity:.92; font-size:13.5px;}
+  h3{font-size:14.5px; margin:16px 0 5px; color:var(--accent); border-bottom:1px solid var(--line); padding-bottom:3px;}
+  p{margin:6px 0;}
+  ul{margin:6px 0 6px; padding-left:20px;}
+  li{margin:3px 0;}
+  b.k{color:var(--ink);}
+  .small{font-size:12.5px; color:var(--muted);}
+  .two{column-count:2; column-gap:26px;}
+  .two li{break-inside:avoid;}
+  .note{background:var(--hi); border-left:4px solid var(--warn); padding:8px 12px; border-radius:5px; margin:10px 0; font-size:13px;}
+  .tip{background:#eafaf0; border-left:4px solid var(--good); padding:8px 12px; border-radius:5px; margin:10px 0; font-size:13px;}
+
+  table{width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:13px;}
+  th,td{border:1px solid var(--line); padding:5px 9px; text-align:left; vertical-align:top;}
+  th{background:var(--soft); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.3px; color:var(--muted);}
+  td code, code{background:var(--soft); padding:1px 5px; border-radius:4px; font-family:"SF Mono",Menlo,Consolas,monospace; font-size:12.5px;}
+  tr:nth-child(even) td{background:#fafcfe;}
+  .port{font-weight:800; color:var(--accent); white-space:nowrap;}
+  .tcp{color:var(--bad); font-weight:700;} .udp{color:var(--good); font-weight:700;} .both{color:var(--warn); font-weight:700;}
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:0 26px;}
+  @media(max-width:680px){.grid2,.two{grid-template-columns:1fr; column-count:1;}}
+
+  .footer{margin-top:28px; border-top:1px solid var(--line); padding-top:10px; color:var(--muted); font-size:11.5px;}
+  .toolbar{max-width:880px; margin:14px auto -6px; text-align:right;}
+  .toolbar button{font-family:inherit; border:1px solid var(--line); background:#fff; padding:7px 14px; border-radius:7px; cursor:pointer; font-weight:600; font-size:13px;}
+  .toolbar button:hover{border-color:var(--accent); color:var(--accent);}
+
+  @media print{
+    body{background:#fff;}
+    .page{box-shadow:none; margin:0; max-width:none; padding:0 6mm; border-radius:0;}
+    .toolbar{display:none;}
+    h2{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    .note,.tip,.exambox .pill,th,tr:nth-child(even) td{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    h2{break-after:avoid;} table,ul{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="toolbar"><button onclick="window.print()">Print / Save as PDF</button></div>
+<div class="page">
+
+<header class="top">
+  <h1>CompTIA A+ Core 1 (220-1101) — One-Hour Cram Sheet</h1>
+  <div class="meta">High-yield facts across all five domains &middot; built for a final review pass</div>
+  <div class="exambox">
+    <span class="pill"><b>90</b> questions max</span>
+    <span class="pill"><b>90</b> minutes</span>
+    <span class="pill">Multiple-choice + performance-based</span>
+    <span class="pill">Scaled <b>100&ndash;900</b>, pass <b>675</b></span>
+    <span class="pill">Mobile 13% &middot; Net 23% &middot; HW 25% &middot; Cloud 11% &middot; Troubleshoot 28%</span>
+  </div>
+</header>
+
+<div class="tip"><b>Strategy:</b> Troubleshooting (28%) + Networking (23%) + Hardware (25%) = <b>76%</b> of the exam. Spend most of your hour there. Read each question fully &mdash; watch for words like FIRST, BEST, MOST likely, and "choose two."</div>
+
+<!-- ============ TROUBLESHOOTING ============ -->
+<h2>1. Troubleshooting Methodology &amp; Common Scenarios <span class="wt">~28%</span></h2>
+
+<h3>The 6-Step CompTIA Process (memorize the order)</h3>
+<ol>
+  <li><b class="k">Identify the problem</b> &mdash; gather info, question the user, identify changes, <i>back up before making changes</i>.</li>
+  <li><b class="k">Establish a theory</b> of probable cause (question the obvious; consider "easiest fixes first").</li>
+  <li><b class="k">Test the theory</b> to determine cause. If confirmed &rarr; next step. If not &rarr; new theory or escalate.</li>
+  <li><b class="k">Establish a plan of action</b> to resolve the problem and implement the solution.</li>
+  <li><b class="k">Verify full system functionality</b> and, if applicable, implement <i>preventive measures</i>.</li>
+  <li><b class="k">Document</b> findings, actions, and outcomes.</li>
+</ol>
+<p class="small">Mnemonic: <b>"I</b>dentify, <b>T</b>heorize, <b>T</b>est, <b>P</b>lan, <b>V</b>erify, <b>D</b>ocument."</p>
+
+<h3>Hardware symptom &rarr; likely cause</h3>
+<table>
+<tr><th>Symptom</th><th>Most likely cause / first action</th></tr>
+<tr><td>No display, fans spin, memory beep code</td><td>RAM &mdash; reseat / test modules</td></tr>
+<tr><td>Continuous reboots / shutdown under load, high temps</td><td>Overheating (fan, dust, dried thermal paste) or failing PSU</td></tr>
+<tr><td>Burning smell or smoke</td><td><b>Power off &amp; unplug immediately</b>; suspect PSU. Never open a PSU.</td></tr>
+<tr><td>Clicking / grinding HDD, files vanishing</td><td>Failing drive &mdash; <b>back up data now</b>, then replace (ideally with SSD)</td></tr>
+<tr><td>Frequent random BSODs after RAM upgrade</td><td>Faulty / unseated RAM &mdash; reseat, run MemTest</td></tr>
+<tr><td>Bulging / leaking capacitors</td><td>Failing motherboard &mdash; replace board</td></tr>
+<tr><td>Date/time &amp; BIOS settings reset when unplugged</td><td>Dead CMOS battery (CR2032)</td></tr>
+<tr><td>Black laptop screen but external monitor works</td><td>Internal panel, display cable, or backlight</td></tr>
+<tr><td>Distorted / artifact graphics, worse when hot</td><td>GPU overheating / failing card / bad driver</td></tr>
+<tr><td>No power at all (no fans/lights), outlet good</td><td>PSU switch/voltage selector, then test/replace PSU</td></tr>
+</table>
+
+<h3>Printer symptom &rarr; cause</h3>
+<table>
+<tr><th>Symptom (printer type)</th><th>Cause / fix</th></tr>
+<tr><td>Faded print, whole page (laser)</td><td>Low toner</td></tr>
+<tr><td>Ghost / repeated faint image (laser)</td><td>Worn imaging drum or failing fuser</td></tr>
+<tr><td>Toner smears / rubs off (laser)</td><td>Fuser not heating</td></tr>
+<tr><td>Vertical lines / missing lines (laser)</td><td>Scratched/dirty drum</td></tr>
+<tr><td>Horizontal white gaps, missing lines (inkjet)</td><td>Clogged nozzles &mdash; run head cleaning / nozzle check</td></tr>
+<tr><td>Frequent paper jams (any)</td><td>Worn pickup rollers, wrong paper, debris in path</td></tr>
+</table>
+
+<h3>Network symptom &rarr; cause</h3>
+<table>
+<tr><th>Symptom</th><th>Cause / next step</th></tr>
+<tr><td>Can ping by IP, not by name</td><td><b>DNS</b> problem &mdash; check DNS settings (nslookup)</td></tr>
+<tr><td>Address is <code>169.254.x.x</code> (APIPA)</td><td>No DHCP lease &mdash; check cable, switch port, DHCP server</td></tr>
+<tr><td>No connectivity, NIC link light off</td><td>Layer 1 &mdash; check cable &amp; switch port first</td></tr>
+<tr><td>Slow / intermittent on a gig link</td><td>Duplex / speed mismatch, or interference (wireless)</td></tr>
+<tr><td>Weak Wi-Fi far from AP</td><td>Coverage &mdash; reposition/add AP, repeater/mesh, change channel</td></tr>
+</table>
+
+<!-- ============ NETWORKING ============ -->
+<h2>2. Networking <span class="wt">~23%</span></h2>
+
+<h3>Common Ports (very high yield) &mdash; <span class="tcp">TCP</span> / <span class="udp">UDP</span> / <span class="both">both</span></h3>
+<div class="grid2">
+<table>
+<tr><th>Port</th><th>Service</th></tr>
+<tr><td class="port">20 / 21 <span class="tcp">T</span></td><td>FTP (data / control)</td></tr>
+<tr><td class="port">22 <span class="tcp">T</span></td><td>SSH, SFTP, SCP</td></tr>
+<tr><td class="port">23 <span class="tcp">T</span></td><td>Telnet (insecure)</td></tr>
+<tr><td class="port">25 <span class="tcp">T</span></td><td>SMTP (send mail)</td></tr>
+<tr><td class="port">53 <span class="both">T/U</span></td><td>DNS</td></tr>
+<tr><td class="port">67 / 68 <span class="udp">U</span></td><td>DHCP (server / client)</td></tr>
+<tr><td class="port">69 <span class="udp">U</span></td><td>TFTP</td></tr>
+<tr><td class="port">80 <span class="tcp">T</span></td><td>HTTP</td></tr>
+<tr><td class="port">110 <span class="tcp">T</span></td><td>POP3 (download mail)</td></tr>
+</table>
+<table>
+<tr><th>Port</th><th>Service</th></tr>
+<tr><td class="port">137-139 <span class="both">T/U</span></td><td>NetBIOS / NetBT</td></tr>
+<tr><td class="port">143 <span class="tcp">T</span></td><td>IMAP (sync mail)</td></tr>
+<tr><td class="port">161 / 162 <span class="udp">U</span></td><td>SNMP</td></tr>
+<tr><td class="port">389 <span class="both">T/U</span></td><td>LDAP</td></tr>
+<tr><td class="port">443 <span class="tcp">T</span></td><td>HTTPS (HTTP+TLS)</td></tr>
+<tr><td class="port">445 <span class="tcp">T</span></td><td>SMB / CIFS (file share)</td></tr>
+<tr><td class="port">3389 <span class="tcp">T</span></td><td>RDP (remote desktop)</td></tr>
+<tr><td class="port">993 / 995 <span class="tcp">T</span></td><td>IMAPS / POP3S (secure)</td></tr>
+<tr><td class="port">636 <span class="tcp">T</span></td><td>LDAPS (secure LDAP)</td></tr>
+</table>
+</div>
+<p class="note"><b>SSH (22) replaces Telnet (23)</b> &mdash; both remote CLI, but SSH is encrypted. Secure mail: SMTP-S 465/587, IMAPS 993, POP3S 995.</p>
+
+<h3>Copper &amp; Fiber Cabling</h3>
+<table>
+<tr><th>Cable</th><th>Speed / notes</th></tr>
+<tr><td>Cat 5</td><td>100 Mbps (Fast Ethernet)</td></tr>
+<tr><td>Cat 5e</td><td>1 Gbps, reduced crosstalk</td></tr>
+<tr><td>Cat 6</td><td>1 Gbps @100m; 10 Gbps only to ~55m</td></tr>
+<tr><td>Cat 6a</td><td><b>10 Gbps @ full 100m</b></td></tr>
+<tr><td>Cat 7 / 8</td><td>Shielded; 10 Gbps (Cat8 up to 40 Gbps, short)</td></tr>
+<tr><td>Coax RG-6 / RG-59</td><td>Cable internet/TV (RG-6 thicker, longer) / CCTV (RG-59)</td></tr>
+<tr><td>Multimode fiber</td><td>Short distance, LED, larger core (orange/aqua)</td></tr>
+<tr><td>Single-mode fiber</td><td><b>Long distance (km)</b>, laser, tiny core (yellow)</td></tr>
+</table>
+<ul class="two">
+<li>Max UTP copper run: <b>100m (328 ft)</b>.</li>
+<li><b>Plenum</b> cable required in HVAC air spaces (low-smoke jacket).</li>
+<li>Connectors: <b>RJ45</b> = Ethernet (8P8C); <b>RJ11</b> = phone; <b>F-type/BNC</b> = coax; <b>LC/SC/ST</b> = fiber.</li>
+<li>Wiring: <b>T568A/B</b>; straight-through = different devices, crossover = like devices (auto-MDIX now common).</li>
+</ul>
+
+<h3>Wireless Standards (802.11)</h3>
+<table>
+<tr><th>Std</th><th>Wi-Fi name</th><th>Band</th><th>Max (approx)</th></tr>
+<tr><td>a</td><td>&mdash;</td><td>5 GHz</td><td>54 Mbps</td></tr>
+<tr><td>b</td><td>&mdash;</td><td>2.4 GHz</td><td>11 Mbps</td></tr>
+<tr><td>g</td><td>&mdash;</td><td>2.4 GHz</td><td>54 Mbps</td></tr>
+<tr><td>n</td><td>Wi-Fi 4</td><td>2.4 &amp; 5 GHz</td><td>600 Mbps (MIMO)</td></tr>
+<tr><td>ac</td><td>Wi-Fi 5</td><td><b>5 GHz only</b></td><td>~1.3+ Gbps (MU-MIMO)</td></tr>
+<tr><td>ax</td><td>Wi-Fi 6 / 6E</td><td>2.4 &amp; 5 GHz (6E adds 6 GHz)</td><td>~9.6 Gbps</td></tr>
+</table>
+<ul class="two">
+<li>2.4 GHz: better range/penetration, more interference; non-overlapping channels <b>1, 6, 11</b>.</li>
+<li>5 GHz: faster, shorter range, more channels.</li>
+<li><b>Bluetooth</b> 2.4 GHz (~10m class 2). <b>NFC</b> ~4cm, contactless pay. <b>RFID</b> tags.</li>
+</ul>
+
+<h3>IP Addressing &amp; DNS</h3>
+<ul class="two">
+<li>IPv4 = <b>32-bit</b>; IPv6 = <b>128-bit</b> (hex, colons).</li>
+<li>Private ranges: <code>10.0.0.0/8</code>, <code>172.16.0.0/12</code>, <code>192.168.0.0/16</code>.</li>
+<li><b>APIPA</b> <code>169.254.0.0/16</code> = no DHCP reached. Loopback <code>127.0.0.1</code>.</li>
+<li><code>/24</code> = <code>255.255.255.0</code>; <code>/16</code> = <code>255.255.0.0</code>.</li>
+<li><b>NAT</b> maps many private IPs to one public IP.</li>
+<li>DHCP gives: IP, subnet mask, default gateway, DNS.</li>
+<li>DNS records: <b>A</b>=IPv4, <b>AAAA</b>=IPv6, <b>CNAME</b>=alias, <b>MX</b>=mail, <b>TXT</b>=SPF/DKIM/verify, <b>PTR</b>=reverse.</li>
+<li>VLAN segments a switch logically; VPN tunnels encrypted over internet.</li>
+</ul>
+
+<h3>Network Devices &amp; Concepts</h3>
+<ul class="two">
+<li><b>Router</b> = Layer 3, routes between networks.</li>
+<li><b>Switch</b> = Layer 2, forwards by MAC address.</li>
+<li><b>Hub</b> = Layer 1, repeats to all ports (dumb).</li>
+<li><b>Access point</b> bridges wireless to wired.</li>
+<li><b>Firewall</b> filters traffic by rules/ports.</li>
+<li><b>PoE</b> = power + data over one Ethernet cable (APs, cameras).</li>
+<li><b>ONT</b> = fiber to Ethernet; <b>modem</b> = ISP signal to digital.</li>
+<li>Cloud/SDN, NAS (file storage), legacy: 56k modem, dial-up.</li>
+</ul>
+
+<!-- ============ HARDWARE ============ -->
+<h2>3. Hardware <span class="wt">~25%</span></h2>
+
+<h3>Memory (RAM)</h3>
+<table>
+<tr><th>Type</th><th>Voltage</th><th>Desktop / Laptop pins</th></tr>
+<tr><td>DDR3</td><td>1.5 V</td><td>240-pin DIMM / 204-pin SODIMM</td></tr>
+<tr><td>DDR4</td><td>1.2 V</td><td>288-pin DIMM / 260-pin SODIMM</td></tr>
+<tr><td>DDR5</td><td>1.1 V</td><td>288-pin DIMM / 262-pin SODIMM</td></tr>
+</table>
+<ul class="two">
+<li>Generations are <b>NOT interchangeable</b> (different notch, voltage); slot is keyed.</li>
+<li><b>SODIMM</b> = laptop / small form factor.</li>
+<li><b>ECC</b> = error-correcting (servers); detects+corrects single-bit errors.</li>
+<li><b>Dual/quad channel</b> = matched sticks in matching (color-coded) slots for more bandwidth.</li>
+<li>XMP/EXPO = enable rated overclock speeds in BIOS.</li>
+</ul>
+
+<h3>Storage &amp; RAID</h3>
+<div class="grid2">
+<ul>
+<li><b>HDD</b>: platters + heads, moving parts; 5400/7200 RPM; cheap per TB.</li>
+<li><b>SSD</b>: no moving parts, faster, quieter.</li>
+<li><b>SATA III</b> = <b>6 Gb/s</b> (~600 MB/s). SATA I=1.5, II=3.</li>
+<li><b>M.2</b> form factor; <b>NVMe</b> runs over <b>PCIe</b> &mdash; far faster than SATA.</li>
+<li>M.2 keys: B, M, B+M (storage); A/E (Wi-Fi).</li>
+<li>eMMC (cheap soldered), eSATA (external).</li>
+</ul>
+<table>
+<tr><th>RAID</th><th>What / min disks</th></tr>
+<tr><td><b>0</b></td><td>Stripe, speed, <b>no</b> redundancy (min 2)</td></tr>
+<tr><td><b>1</b></td><td>Mirror, redundancy (min 2)</td></tr>
+<tr><td><b>5</b></td><td>Stripe + parity, 1-disk fault (min 3)</td></tr>
+<tr><td><b>6</b></td><td>Stripe + double parity, 2-disk fault (min 4)</td></tr>
+<tr><td><b>10</b></td><td>Mirror + stripe (min 4)</td></tr>
+</table>
+</div>
+
+<h3>Expansion, Power, CPU &amp; Cooling</h3>
+<ul class="two">
+<li><b>PCIe x16</b> = graphics card; also x1/x4/x8. Backward compatible.</li>
+<li>Power: <b>24-pin</b> main board, <b>4/8-pin EPS</b> = CPU, <b>6/8-pin PCIe</b> = GPU, SATA &amp; Molex for drives.</li>
+<li>PSU rails: +3.3V, +5V, +12V; pick adequate wattage; redundant PSUs in servers.</li>
+<li>CPU sockets: <b>LGA</b> = pins on board (Intel); <b>PGA</b> = pins on CPU (older AMD); ZIF lever.</li>
+<li>Cooling: heatsink + fan, or liquid (AIO). <b>Thermal paste</b> fills gaps for heat transfer.</li>
+<li>Motherboard sizes (large&rarr;small): E-ATX &gt; <b>ATX</b> &gt; microATX &gt; <b>Mini-ITX</b>.</li>
+<li><b>CMOS battery</b> = CR2032 (keeps clock/BIOS). POST runs at boot; beep codes signal errors.</li>
+<li>UEFI/BIOS: Secure Boot, TPM (encryption keys), boot order.</li>
+</ul>
+
+<h3>Display &amp; Peripheral Interfaces</h3>
+<table>
+<tr><th>Interface</th><th>Key facts</th></tr>
+<tr><td><b>VGA</b></td><td>Analog video only (blue, 15-pin)</td></tr>
+<tr><td><b>DVI</b></td><td>DVI-A analog, DVI-D digital, DVI-I both; video only</td></tr>
+<tr><td><b>HDMI</b></td><td>Digital <b>video + audio</b>; common on TVs</td></tr>
+<tr><td><b>DisplayPort</b></td><td>Digital A/V; <b>MST</b> daisy-chains monitors</td></tr>
+<tr><td><b>Thunderbolt 3/4</b></td><td>USB-C connector, up to <b>40 Gb/s</b>, A/V + data + power</td></tr>
+</table>
+<table>
+<tr><th>USB</th><th>Speed</th></tr>
+<tr><td>USB 2.0 (Hi-Speed)</td><td>480 Mb/s</td></tr>
+<tr><td>USB 3.0 / 3.1 Gen1 / 3.2 Gen1 (SuperSpeed, blue)</td><td>5 Gb/s</td></tr>
+<tr><td>USB 3.1 Gen2 / 3.2 Gen2</td><td>10 Gb/s</td></tr>
+<tr><td>USB 3.2 Gen 2x2</td><td>20 Gb/s</td></tr>
+<tr><td>USB4</td><td>up to 40 Gb/s (USB-C)</td></tr>
+</table>
+<p class="small"><b>USB-C</b> = reversible connector (not a speed). USB-A max cable ~5m (2.0) / ~3m (3.x).</p>
+
+<h3>Printers</h3>
+<ul class="two">
+<li><b>Laser</b>: toner, drum, laser, heated fuser. Imaging order: <b>Processing &rarr; Charging &rarr; Exposing &rarr; Developing &rarr; Transferring &rarr; Fusing &rarr; Cleaning</b>.</li>
+<li><b>Inkjet</b>: liquid ink, printheads; clean nozzles for gaps.</li>
+<li><b>Thermal</b>: heats special paper (receipts).</li>
+<li><b>Impact</b> (dot-matrix): pins strike ribbon &mdash; only type for <b>multi-part carbon forms</b>.</li>
+<li><b>3D</b>: FDM (filament), resin (SLA).</li>
+</ul>
+
+<!-- ============ MOBILE ============ -->
+<h2>4. Mobile Devices <span class="wt">~13%</span></h2>
+<ul class="two">
+<li><b>USB-C</b> = modern Android/laptops (reversible, data+power); <b>Lightning</b> = older Apple; microUSB legacy.</li>
+<li><b>Digitizer</b> = touch layer (image fine but no touch &rarr; replace digitizer).</li>
+<li><b>Inverter</b> = powers CCFL backlight (dim/faint image on old laptops).</li>
+<li>Wi-Fi antenna wires usually run through the display bezel.</li>
+<li>Laptop RAM = <b>SODIMM</b>; storage often <b>M.2</b>; Wi-Fi card = M.2 A/E.</li>
+<li><b>Hotspot/tethering</b> shares cellular (Wi-Fi/USB/Bluetooth).</li>
+<li><b>NFC</b> = tap-to-pay; <b>Bluetooth</b> pairing; GPS = location.</li>
+<li>Cellular: LTE/5G; <b>eSIM</b> vs physical SIM; PRL/baseband updates.</li>
+<li><b>Sync</b> to cloud keeps mail/contacts/calendar across devices.</li>
+<li>Security: screen lock/biometrics, <b>remote wipe</b>, full-device encryption, MDM, find-my-device.</li>
+<li><b>Swollen battery</b>: stop using, replace, recycle safely &mdash; never puncture/freeze.</li>
+<li>Display toggle = <b>Fn + monitor key</b>; airplane mode disables radios.</li>
+</ul>
+
+<!-- ============ CLOUD ============ -->
+<h2>5. Virtualization &amp; Cloud Computing <span class="wt">~11%</span></h2>
+
+<h3>Service Models (who manages what)</h3>
+<table>
+<tr><th>Model</th><th>You manage</th><th>Example</th></tr>
+<tr><td><b>IaaS</b></td><td>OS &amp; up (VMs, storage, net rented)</td><td>Cloud VMs / servers</td></tr>
+<tr><td><b>PaaS</b></td><td>Just your app/code</td><td>Managed dev platform</td></tr>
+<tr><td><b>SaaS</b></td><td>Nothing &mdash; just use it</td><td>Webmail, online office</td></tr>
+</table>
+
+<h3>Deployment, Characteristics &amp; Hypervisors</h3>
+<ul class="two">
+<li>Deployment: <b>Public</b>, <b>Private</b>, <b>Hybrid</b> (mix/burst), <b>Community</b>.</li>
+<li>5 traits: on-demand self-service, broad network access, <b>resource pooling</b> (multitenancy), <b>rapid elasticity</b>, <b>measured service</b> (pay-as-you-go).</li>
+<li><b>Type 1</b> hypervisor = bare-metal (no host OS). <b>Type 2</b> = hosted (runs on an OS).</li>
+<li>VMs need host CPU/RAM/disk + <b>VT-x / AMD-V</b> enabled in BIOS.</li>
+<li><b>Sandbox</b> = isolated test environment for untrusted code.</li>
+<li>Cloud file sync &amp; cloud backup; high availability &amp; metered billing.</li>
+</ul>
+
+<div class="note"><b>Rapid recall:</b> SSH=22 &middot; RDP=3389 &middot; HTTPS=443 &middot; DNS=53 &middot; DHCP=67/68 &middot; SMB=445 &middot; SMTP=25 &middot; IMAP=143 &middot; POP3=110 &middot; LDAP=389 &nbsp;|&nbsp; Cat6a=10G@100m &middot; SATA III=6Gb/s &middot; TB3=40Gb/s &middot; RAID5 min 3 / RAID10 min 4 &middot; CMOS=CR2032 &middot; PCIe x16=GPU &middot; Wi-Fi6=ax.</div>
+
+<div class="footer">
+  Original study aid aligned to the published CompTIA A+ Core 1 (220-1101) exam objectives. Not affiliated with or endorsed by CompTIA.
+  Verify any borderline detail against the official objectives. Use the <b>Print / Save as PDF</b> button (top right) for a paper copy. Good luck, Steve.
+</div>
+
+</div>
+</body>
+</html>

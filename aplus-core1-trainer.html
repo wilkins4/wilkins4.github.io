@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A+ Core 1 (220-1101) Trainer</title>
+<style>
+  :root{
+    --bg:#0e1116; --bg2:#161b22; --bg3:#1e252e; --panel:#11161d;
+    --txt:#e6edf3; --muted:#8b97a6; --line:#2a323c;
+    --accent:#3b82f6; --accent2:#2563eb; --accent-soft:#1d3a63;
+    --good:#22c55e; --good-soft:#10331f; --bad:#ef4444; --bad-soft:#3a1717;
+    --warn:#f59e0b; --shadow:0 6px 24px rgba(0,0,0,.35);
+    --radius:14px;
+  }
+  html[data-theme="light"]{
+    --bg:#f4f6fa; --bg2:#ffffff; --bg3:#eef2f7; --panel:#ffffff;
+    --txt:#10151c; --muted:#5a6675; --line:#dde3ea;
+    --accent:#2563eb; --accent2:#1d4ed8; --accent-soft:#dbe7ff;
+    --good:#16a34a; --good-soft:#dcfce7; --bad:#dc2626; --bad-soft:#fee2e2;
+    --warn:#d97706; --shadow:0 6px 24px rgba(20,30,50,.12);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg); color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5; -webkit-font-smoothing:antialiased; min-height:100vh;
+  }
+  .wrap{max-width:1040px; margin:0 auto; padding:20px 22px 60px;}
+  header.app{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:14px 0 18px; border-bottom:1px solid var(--line); margin-bottom:24px;
+    flex-wrap:wrap;
+  }
+  .brand{display:flex; align-items:center; gap:12px; cursor:pointer;}
+  .logo{
+    width:42px; height:42px; border-radius:11px; flex:none;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:18px;
+    box-shadow:var(--shadow);
+  }
+  .brand h1{font-size:18px; margin:0; font-weight:700; letter-spacing:.2px;}
+  .brand p{margin:0; font-size:12.5px; color:var(--muted);}
+  .top-actions{display:flex; gap:8px; align-items:center;}
+  button{font-family:inherit;}
+  .btn{
+    border:1px solid var(--line); background:var(--bg2); color:var(--txt);
+    padding:9px 15px; border-radius:10px; font-size:14px; cursor:pointer; font-weight:600;
+    transition:transform .05s ease, background .15s ease, border-color .15s ease;
+  }
+  .btn:hover{border-color:var(--accent); }
+  .btn:active{transform:translateY(1px);}
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .btn.primary:hover{background:var(--accent2);}
+  .btn.ghost{background:transparent;}
+  .btn.sm{padding:6px 11px; font-size:13px;}
+  .btn:disabled{opacity:.45; cursor:not-allowed;}
+  .icon-btn{
+    border:1px solid var(--line); background:var(--bg2); color:var(--txt);
+    width:40px; height:40px; border-radius:10px; cursor:pointer; font-size:17px; display:flex; align-items:center; justify-content:center;
+  }
+  .icon-btn:hover{border-color:var(--accent);}
+
+  .view{display:none; animation:fade .25s ease;}
+  .view.active{display:block;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+
+  .grid{display:grid; gap:16px;}
+  .cards3{grid-template-columns:repeat(3,1fr);}
+  .cards2{grid-template-columns:repeat(2,1fr);}
+  @media(max-width:820px){.cards3,.cards2{grid-template-columns:1fr;}}
+
+  .card{
+    background:var(--bg2); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px; box-shadow:var(--shadow);
+  }
+  .mode-card{cursor:pointer; transition:transform .12s ease, border-color .15s ease;}
+  .mode-card:hover{transform:translateY(-3px); border-color:var(--accent);}
+  .mode-card .mc-icon{font-size:30px; margin-bottom:8px;}
+  .mode-card h3{margin:4px 0 6px; font-size:18px;}
+  .mode-card p{margin:0; color:var(--muted); font-size:13.5px;}
+
+  h2.section{font-size:22px; margin:6px 0 4px;}
+  .sub{color:var(--muted); font-size:14px; margin:0 0 22px;}
+
+  .field{margin-bottom:20px;}
+  .field > label{display:block; font-weight:700; margin-bottom:9px; font-size:14.5px;}
+  .seg{display:flex; gap:10px; flex-wrap:wrap;}
+  .seg .opt{
+    border:1px solid var(--line); background:var(--bg3); padding:11px 16px; border-radius:11px; cursor:pointer;
+    font-size:14px; font-weight:600; flex:1; min-width:120px; text-align:center; transition:.12s;
+  }
+  .seg .opt small{display:block; color:var(--muted); font-weight:500; font-size:12px; margin-top:2px;}
+  .seg .opt.sel{border-color:var(--accent); background:var(--accent-soft); color:var(--txt);}
+  .seg .opt:hover{border-color:var(--accent);}
+
+  .toggle-row{display:flex; align-items:center; justify-content:space-between; gap:14px;
+    border:1px solid var(--line); background:var(--bg3); padding:13px 16px; border-radius:11px;}
+  .toggle-row .lbl b{display:block; font-size:14.5px;}
+  .toggle-row .lbl span{color:var(--muted); font-size:12.5px;}
+  .switch{position:relative; width:48px; height:27px; flex:none;}
+  .switch input{opacity:0; width:0; height:0;}
+  .slider{position:absolute; inset:0; background:var(--line); border-radius:30px; cursor:pointer; transition:.2s;}
+  .slider:before{content:""; position:absolute; height:21px; width:21px; left:3px; top:3px; background:#fff; border-radius:50%; transition:.2s;}
+  .switch input:checked + .slider{background:var(--accent);}
+  .switch input:checked + .slider:before{transform:translateX(21px);}
+
+  .runbar{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px; flex-wrap:wrap;}
+  .progress-meta{font-size:14px; color:var(--muted); font-weight:600;}
+  .progress-meta b{color:var(--txt);}
+  .timer{font-variant-numeric:tabular-nums; font-weight:700; font-size:16px; padding:6px 12px; border-radius:9px; background:var(--bg3); border:1px solid var(--line);}
+  .timer.warn{color:var(--warn); border-color:var(--warn);}
+  .timer.danger{color:var(--bad); border-color:var(--bad);}
+  .pbar{height:8px; background:var(--bg3); border-radius:6px; overflow:hidden; margin-bottom:22px; border:1px solid var(--line);}
+  .pbar > span{display:block; height:100%; background:linear-gradient(90deg,var(--accent),var(--accent2)); width:0; transition:width .25s ease;}
+
+  .domain-tag{display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.4px; text-transform:uppercase;
+    color:var(--accent); background:var(--accent-soft); padding:4px 10px; border-radius:20px; margin-bottom:12px;}
+  .q-stem{font-size:19px; font-weight:600; margin:0 0 18px; line-height:1.45;}
+  .multi-note{font-size:13px; color:var(--warn); font-weight:700; margin:-8px 0 16px;}
+  .options{display:flex; flex-direction:column; gap:11px;}
+  .opt-row{
+    display:flex; align-items:flex-start; gap:13px; border:1px solid var(--line); background:var(--bg2);
+    padding:14px 16px; border-radius:12px; cursor:pointer; transition:.12s; font-size:15px;
+  }
+  .opt-row:hover{border-color:var(--accent);}
+  .opt-row .key{flex:none; width:26px; height:26px; border-radius:7px; background:var(--bg3); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px;}
+  .opt-row.sel{border-color:var(--accent); background:var(--accent-soft);}
+  .opt-row.sel .key{background:var(--accent); color:#fff; border-color:var(--accent);}
+  .opt-row.correct{border-color:var(--good); background:var(--good-soft);}
+  .opt-row.correct .key{background:var(--good); color:#fff; border-color:var(--good);}
+  .opt-row.wrong{border-color:var(--bad); background:var(--bad-soft);}
+  .opt-row.wrong .key{background:var(--bad); color:#fff; border-color:var(--bad);}
+  .opt-row.locked{cursor:default;}
+
+  .explain{margin-top:18px; border-left:4px solid var(--accent); background:var(--bg3); padding:14px 16px; border-radius:10px; font-size:14.5px; display:none;}
+  .explain.show{display:block;}
+  .explain .verdict{font-weight:800; margin-bottom:5px; font-size:14px; letter-spacing:.3px; text-transform:uppercase;}
+  .explain .verdict.ok{color:var(--good);} .explain .verdict.no{color:var(--bad);}
+  .runner-actions{display:flex; justify-content:space-between; gap:12px; margin-top:22px; flex-wrap:wrap;}
+
+  .score-hero{text-align:center; padding:14px 0 8px;}
+  .score-ring{--p:0; width:170px; height:170px; border-radius:50%; margin:0 auto 14px;
+    background:conic-gradient(var(--ring,var(--accent)) calc(var(--p)*1%), var(--bg3) 0);
+    display:flex; align-items:center; justify-content:center; position:relative;}
+  .score-ring:after{content:""; position:absolute; inset:14px; border-radius:50%; background:var(--bg2);}
+  .score-ring .inner{position:relative; z-index:1; text-align:center;}
+  .score-ring .pct{font-size:40px; font-weight:800; line-height:1;}
+  .score-ring .frac{font-size:13px; color:var(--muted); margin-top:4px;}
+  .verdict-line{font-size:17px; font-weight:700; margin:4px 0 2px;}
+  .verdict-sub{color:var(--muted); font-size:14px; margin-top:0;}
+
+  table.dom{width:100%; border-collapse:collapse; margin-top:6px;}
+  table.dom th,table.dom td{text-align:left; padding:11px 10px; border-bottom:1px solid var(--line); font-size:14px;}
+  table.dom th{color:var(--muted); font-weight:600; font-size:12.5px; text-transform:uppercase; letter-spacing:.3px;}
+  .bar{height:9px; border-radius:6px; background:var(--bg3); overflow:hidden; min-width:120px;}
+  .bar > span{display:block; height:100%; border-radius:6px;}
+  .pill{font-size:12px; font-weight:700; padding:3px 9px; border-radius:20px;}
+  .pill.weak{background:var(--bad-soft); color:var(--bad);}
+  .pill.ok{background:var(--good-soft); color:var(--good);}
+  .pill.mid{background:rgba(245,158,11,.16); color:var(--warn);}
+
+  .review-item{border:1px solid var(--line); border-radius:12px; padding:16px; margin-bottom:14px; background:var(--bg2);}
+  .review-item .rq{font-weight:600; margin:8px 0 12px; font-size:15.5px;}
+  .review-item .ra{font-size:14px; margin:5px 0; padding-left:6px;}
+  .review-item .ra.yours{color:var(--bad);}
+  .review-item .ra.right{color:var(--good);}
+  .review-item .rexp{font-size:13.5px; color:var(--muted); margin-top:10px; border-top:1px dashed var(--line); padding-top:10px;}
+
+  .flash-wrap{display:flex; flex-direction:column; align-items:center; gap:18px;}
+  .flashcard{width:100%; max-width:720px; height:330px; perspective:1400px; cursor:pointer;}
+  .flash-inner{position:relative; width:100%; height:100%; transition:transform .5s; transform-style:preserve-3d;}
+  .flashcard.flipped .flash-inner{transform:rotateY(180deg);}
+  .flash-face{position:absolute; inset:0; backface-visibility:hidden; border:1px solid var(--line); border-radius:18px;
+    padding:30px; display:flex; flex-direction:column; justify-content:center; box-shadow:var(--shadow); background:var(--bg2);}
+  .flash-face .ftag{position:absolute; top:16px; left:18px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.4px; color:var(--accent);}
+  .flash-face .fhint{position:absolute; bottom:14px; left:0; right:0; text-align:center; color:var(--muted); font-size:12.5px;}
+  .flash-front .ftext{font-size:21px; font-weight:600; text-align:center; line-height:1.45;}
+  .flash-back{transform:rotateY(180deg); background:var(--bg3);}
+  .flash-back .fans{font-size:18px; font-weight:700; color:var(--good); text-align:center; margin-bottom:12px;}
+  .flash-back .fexp{font-size:14.5px; color:var(--txt); text-align:center; line-height:1.5;}
+  .flash-controls{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:center;}
+  .known-badge{font-size:12px; font-weight:700; padding:4px 10px; border-radius:20px;}
+  .known-badge.known{background:var(--good-soft); color:var(--good);}
+  .known-badge.unknown{background:var(--bg3); color:var(--muted);}
+
+  .filter-bar{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; align-items:center;}
+  .chip{border:1px solid var(--line); background:var(--bg2); padding:7px 13px; border-radius:20px; font-size:13px; cursor:pointer; font-weight:600;}
+  .chip.sel{background:var(--accent-soft); border-color:var(--accent);}
+
+  .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:24px;}
+  @media(max-width:700px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
+  .stat{background:var(--bg2); border:1px solid var(--line); border-radius:12px; padding:16px; text-align:center;}
+  .stat .num{font-size:28px; font-weight:800;}
+  .stat .lbl{font-size:12.5px; color:var(--muted); margin-top:3px;}
+
+  .hist-row{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:11px 14px; border:1px solid var(--line); border-radius:10px; margin-bottom:9px; background:var(--bg2); font-size:14px;}
+  .empty{color:var(--muted); text-align:center; padding:30px; font-size:14px;}
+  .back-link{color:var(--muted); font-size:14px; cursor:pointer; display:inline-flex; gap:6px; align-items:center; margin-bottom:16px; user-select:none;}
+  .back-link:hover{color:var(--accent);}
+  .footnote{color:var(--muted); font-size:12px; text-align:center; margin-top:34px; line-height:1.6;}
+  kbd{background:var(--bg3); border:1px solid var(--line); border-bottom-width:2px; border-radius:5px; padding:1px 6px; font-size:12px; font-family:inherit; font-weight:600;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="app">
+    <div class="brand" onclick="go('home')">
+      <div class="logo">A+</div>
+      <div>
+        <h1>A+ Core 1 Trainer</h1>
+        <p>CompTIA 220-1101 &middot; practice exams &amp; flashcards</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="btn ghost sm" onclick="go('stats')">Stats</button>
+      <button class="icon-btn" id="themeBtn" title="Toggle theme" onclick="toggleTheme()">&#9789;</button>
+    </div>
+  </header>
+
+  <section id="view-home" class="view active">
+    <h2 class="section">Choose a study mode</h2>
+    <p class="sub" id="home-sub">Built for the bootcamp qualifying exam. Pick how you want to drill today.</p>
+    <div class="grid cards3">
+      <div class="card mode-card" onclick="go('setup')">
+        <div class="mc-icon">&#128221;</div>
+        <h3>Practice Exam</h3>
+        <p>Timed, randomized exam (20 / 50 / 90 questions) with a scored results screen and per-domain breakdown.</p>
+      </div>
+      <div class="card mode-card" onclick="go('flashsetup')">
+        <div class="mc-icon">&#127183;</div>
+        <h3>Flashcards</h3>
+        <p>Flip-card review. Filter by domain, shuffle, and mark cards known or unknown as you go.</p>
+      </div>
+      <div class="card mode-card" onclick="go('drill')">
+        <div class="mc-icon">&#127919;</div>
+        <h3>Domain Drill</h3>
+        <p>Hammer one weak domain at a time &mdash; every question from a single objective area, instant feedback.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:18px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap;">
+        <div>
+          <h3 style="margin:0 0 4px; font-size:16px;">Question bank</h3>
+          <p style="margin:0; color:var(--muted); font-size:13.5px;" id="bank-summary">Loading&hellip;</p>
+        </div>
+        <button class="btn sm" onclick="go('stats')">View progress &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-setup" class="view">
+    <span class="back-link" onclick="go('home')">&larr; Back</span>
+    <h2 class="section">Practice Exam</h2>
+    <p class="sub">Configure your session. Questions and answer options are shuffled every time.</p>
+
+    <div class="card">
+      <div class="field">
+        <label>Exam length</label>
+        <div class="seg" id="len-seg">
+          <div class="opt" data-len="20">Quick<small>20 questions</small></div>
+          <div class="opt sel" data-len="50">Standard<small>50 questions</small></div>
+          <div class="opt" data-len="90">Full<small>90 questions</small></div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Domain focus</label>
+        <div class="seg" id="dom-seg" style="flex-wrap:wrap;"></div>
+      </div>
+      <div class="field" style="margin-bottom:0;">
+        <div class="toggle-row">
+          <div class="lbl">
+            <b>Timer</b>
+            <span>~1.2 min per question, exam-style countdown</span>
+          </div>
+          <label class="switch"><input type="checkbox" id="timer-toggle" checked><span class="slider"></span></label>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:20px; text-align:right;">
+      <button class="btn primary" style="padding:12px 26px;" onclick="startPractice()">Start exam &rarr;</button>
+    </div>
+  </section>
+
+  <section id="view-drill" class="view">
+    <span class="back-link" onclick="go('home')">&larr; Back</span>
+    <h2 class="section">Domain Drill</h2>
+    <p class="sub">Pick one domain. You will get every question in that area, untimed, with instant explanations.</p>
+    <div class="grid cards2" id="drill-cards"></div>
+  </section>
+
+  <section id="view-exam" class="view">
+    <div class="runbar">
+      <span class="back-link" style="margin:0;" onclick="quitExam()">&larr; Quit</span>
+      <div class="progress-meta"><b id="q-index">1</b> / <span id="q-total">50</span> &nbsp;&middot;&nbsp; <span id="answered-count">0</span> answered</div>
+      <div class="timer" id="timer" style="display:none;">00:00</div>
+    </div>
+    <div class="pbar"><span id="pbar-fill"></span></div>
+
+    <div class="card">
+      <span class="domain-tag" id="q-domain">Hardware</span>
+      <p class="q-stem" id="q-stem"></p>
+      <p class="multi-note" id="q-multi" style="display:none;">Choose TWO answers.</p>
+      <div class="options" id="q-options"></div>
+      <div class="explain" id="q-explain">
+        <div class="verdict" id="exp-verdict"></div>
+        <div id="exp-text"></div>
+      </div>
+    </div>
+
+    <div class="runner-actions">
+      <button class="btn ghost" id="prev-btn" onclick="prevQuestion()">&larr; Previous</button>
+      <div style="display:flex; gap:10px;">
+        <button class="btn" id="submit-btn" onclick="submitAnswer()" disabled>Submit</button>
+        <button class="btn primary" id="next-btn" onclick="nextQuestion()" style="display:none;">Next &rarr;</button>
+        <button class="btn primary" id="finish-btn" onclick="finishExam()" style="display:none;">Finish &amp; score</button>
+      </div>
+    </div>
+    <p class="footnote">Keys: <kbd>1</kbd>&ndash;<kbd>4</kbd> select &middot; <kbd>Enter</kbd> submit / next &middot; <kbd>&larr;</kbd> <kbd>&rarr;</kbd> navigate</p>
+  </section>
+
+  <section id="view-results" class="view">
+    <h2 class="section">Results</h2>
+    <p class="sub" id="results-sub"></p>
+    <div class="card">
+      <div class="score-hero">
+        <div class="score-ring" id="score-ring"><div class="inner"><div class="pct" id="score-pct">0%</div><div class="frac" id="score-frac">0 / 0</div></div></div>
+        <div class="verdict-line" id="score-verdict"></div>
+        <p class="verdict-sub" id="score-time"></p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:18px;">
+      <h3 style="margin:0 0 10px; font-size:16px;">Per-domain breakdown</h3>
+      <table class="dom"><thead><tr><th>Domain</th><th>Score</th><th style="width:42%;">Mastery</th><th>Status</th></tr></thead>
+        <tbody id="dom-breakdown"></tbody></table>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; margin:26px 0 12px; flex-wrap:wrap; gap:10px;">
+      <h3 style="margin:0; font-size:16px;">Review &mdash; <span id="missed-count">0</span> to revisit</h3>
+      <div>
+        <button class="btn sm ghost" id="review-filter-btn" onclick="toggleReviewFilter()">Show missed only</button>
+      </div>
+    </div>
+    <div id="review-list"></div>
+
+    <div style="display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;">
+      <button class="btn primary" onclick="go('setup')">New practice exam</button>
+      <button class="btn" onclick="go('home')">Home</button>
+    </div>
+  </section>
+
+  <section id="view-flashsetup" class="view">
+    <span class="back-link" onclick="go('home')">&larr; Back</span>
+    <h2 class="section">Flashcards</h2>
+    <p class="sub">Choose which domains to study, then flip through the deck.</p>
+    <div class="card">
+      <div class="field" style="margin-bottom:14px;">
+        <label>Domains</label>
+        <div class="filter-bar" id="flash-dom-filter" style="margin-bottom:0;"></div>
+      </div>
+      <div class="field" style="margin-bottom:0;">
+        <div class="toggle-row">
+          <div class="lbl"><b>Hide cards I already know</b><span>Skip ones you've marked as known</span></div>
+          <label class="switch"><input type="checkbox" id="flash-hideknown"><span class="slider"></span></label>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:20px; text-align:right;">
+      <button class="btn primary" style="padding:12px 26px;" onclick="startFlash()">Start &rarr;</button>
+    </div>
+  </section>
+
+  <section id="view-flash" class="view">
+    <div class="runbar">
+      <span class="back-link" style="margin:0;" onclick="go('flashsetup')">&larr; Back</span>
+      <div class="progress-meta"><b id="fc-index">1</b> / <span id="fc-total">0</span></div>
+      <div class="progress-meta"><span id="fc-known">0</span> known &middot; <span id="fc-left">0</span> left</div>
+    </div>
+    <div class="pbar"><span id="fc-pbar"></span></div>
+    <div class="flash-wrap">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="flash-inner">
+          <div class="flash-face flash-front">
+            <span class="ftag" id="fc-tag"></span>
+            <div class="ftext" id="fc-front"></div>
+            <span class="fhint">Click or press <kbd>Space</kbd> to flip</span>
+          </div>
+          <div class="flash-face flash-back">
+            <span class="ftag">Answer</span>
+            <div class="fans" id="fc-answer"></div>
+            <div class="fexp" id="fc-back"></div>
+            <span class="fhint">Click to flip back</span>
+          </div>
+        </div>
+      </div>
+      <div class="flash-controls">
+        <button class="btn" onclick="prevCard()">&larr; Prev</button>
+        <button class="btn" id="fc-mark-unknown" onclick="markCard(false)">Still learning</button>
+        <button class="btn primary" id="fc-mark-known" onclick="markCard(true)">I know this &rarr;</button>
+        <button class="btn ghost" onclick="nextCard()">Skip &rarr;</button>
+      </div>
+      <div><span class="known-badge unknown" id="fc-status">Not yet marked</span></div>
+      <p class="footnote">Keys: <kbd>Space</kbd> flip &middot; <kbd>&larr;</kbd> <kbd>&rarr;</kbd> navigate &middot; <kbd>K</kbd> known &middot; <kbd>J</kbd> still learning</p>
+    </div>
+  </section>
+
+  <section id="view-stats" class="view">
+    <span class="back-link" onclick="go('home')">&larr; Back</span>
+    <h2 class="section">Your progress</h2>
+    <p class="sub" id="stats-storage-note"></p>
+    <div class="stat-grid">
+      <div class="stat"><div class="num" id="st-attempts">0</div><div class="lbl">Exams taken</div></div>
+      <div class="stat"><div class="num" id="st-best">&ndash;</div><div class="lbl">Best score</div></div>
+      <div class="stat"><div class="num" id="st-avg">&ndash;</div><div class="lbl">Average score</div></div>
+      <div class="stat"><div class="num" id="st-known">0</div><div class="lbl">Cards known</div></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin:0 0 12px; font-size:16px;">Domain mastery (rolling)</h3>
+      <table class="dom"><thead><tr><th>Domain</th><th>Seen</th><th style="width:46%;">Mastery</th><th>%</th></tr></thead>
+        <tbody id="mastery-table"></tbody></table>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; margin:24px 0 10px;">
+      <h3 style="margin:0; font-size:16px;">Exam history</h3>
+      <button class="btn sm ghost" onclick="resetProgress()">Reset all progress</button>
+    </div>
+    <div id="history-list"></div>
+  </section>
+
+  <p class="footnote">
+    Original practice content aligned to the published CompTIA A+ Core 1 (220-1101) objectives.
+    Not affiliated with or endorsed by CompTIA. Works fully offline &mdash; your progress is stored only on this device.
+  </p>
+</div>
+
+<script>
+/* ===========================================================================
+   QUESTION BANK  — original items aligned to CompTIA A+ Core 1 (220-1101)
+   domain: one of the five objective domains
+   correct: array of option indices (length 2 => choose-two)
+   =========================================================================== */
+const DOMAINS = ["Mobile Devices","Networking","Hardware","Virtualization & Cloud","Troubleshooting"];
+
+const QUESTIONS = [
+/* ---------------- MOBILE DEVICES (13) ---------------- */
+{domain:"Mobile Devices", q:"A technician is upgrading the storage in a thin ultrabook that has no 2.5\" drive bay. The replacement must be solid-state and plug into a slot that runs over PCIe lanes. Which drive should be installed?",
+ options:["A 2.5\" SATA SSD","An M.2 NVMe SSD","A 5400 RPM 2.5\" HDD","An mSATA SSD"], correct:[1],
+ explanation:"M.2 NVMe SSDs use PCIe lanes for very high throughput and fit the slim M.2 slot common in modern ultrabooks. SATA-based options are slower and may not physically fit a board with no SATA drive bay."},
+
+{domain:"Mobile Devices", q:"A laptop's built-in Wi-Fi has failed and needs a replacement wireless card. In a current laptop, which slot most commonly houses the Wi-Fi/Bluetooth module?",
+ options:["PCIe x16","M.2 (A/E key)","DIMM","SATA"], correct:[1],
+ explanation:"Modern laptop Wi-Fi cards use a small M.2 slot keyed A or E. Older laptops used Mini PCIe, but PCIe x16, DIMM, and SATA are not used for wireless cards."},
+
+{domain:"Mobile Devices", q:"A user touches their laptop's touchscreen and nothing happens, yet the image displays perfectly. Which component should the technician replace?",
+ options:["The inverter","The LCD panel","The digitizer","The backlight"], correct:[2],
+ explanation:"The digitizer is the touch-sensing layer. If the picture is fine but touch input is dead, the digitizer (not the display itself) has failed."},
+
+{domain:"Mobile Devices", q:"On an older CCFL-backlit laptop, the screen image is barely visible and very dim, but is faintly readable under a bright lamp. Which part most likely failed?",
+ options:["The inverter","The digitizer","The system RAM","The Wi-Fi antenna"], correct:[0],
+ explanation:"The inverter converts DC to the high-voltage AC a CCFL backlight needs. When it fails the backlight goes dark while the LCD still produces a faint image."},
+
+{domain:"Mobile Devices", q:"Which connector is reversible and is used by most current Android phones and many laptops for both charging and high-speed data?",
+ options:["Micro-USB","Mini-USB","USB-C","Lightning"], correct:[2],
+ explanation:"USB-C is the reversible, oval connector used widely for charging and data. Lightning is Apple-only; Micro/Mini-USB are older and not reversible."},
+
+{domain:"Mobile Devices", q:"A user wants their laptop to reach the internet through their phone's cellular connection over Wi-Fi. What is this feature called?",
+ options:["NFC pairing","Mobile hotspot / tethering","Airplane mode","Bluetooth beaconing"], correct:[1],
+ explanation:"A mobile hotspot (tethering) shares the phone's cellular data with other devices over Wi-Fi, USB, or Bluetooth."},
+
+{domain:"Mobile Devices", q:"Which short-range technology lets a user tap their phone to a payment terminal to complete a contactless purchase?",
+ options:["NFC","Infrared (IR)","Bluetooth Low Energy","Wi-Fi Direct"], correct:[0],
+ explanation:"NFC (Near Field Communication) works over a few centimeters and is the basis for contactless mobile payments."},
+
+{domain:"Mobile Devices", q:"A company phone is lost and may contain sensitive data. Which mobile-management feature lets IT erase the device's data over the network?",
+ options:["Remote wipe","Geofencing","Remote backup","Full-device encryption"], correct:[0],
+ explanation:"Remote wipe deletes the data on a lost or stolen device remotely. Encryption protects data but does not erase it; geofencing and backup serve other purposes."},
+
+{domain:"Mobile Devices", q:"A laptop's lithium-ion battery has swollen and is pushing the trackpad upward. What is the correct response?",
+ options:["Keep using it until it fully discharges","Puncture the pouch to release the gas","Stop using it and replace the battery, disposing of it safely","Place it in a freezer to shrink it"], correct:[2],
+ explanation:"A swollen battery is a fire/rupture hazard. Stop using the device, replace the battery, and dispose of it through proper e-waste/recycling channels. Never puncture or freeze it."},
+
+{domain:"Mobile Devices", q:"A user reports their phone charges with one cable but not another, and the charging port is clean and undamaged. What is the most likely cause?",
+ options:["A failing SIM card","A defective charging cable","A corrupt mobile OS","A dead Wi-Fi radio"], correct:[1],
+ explanation:"If the same clean port charges with one cable but not the other, the cable that fails is the defective component."},
+
+{domain:"Mobile Devices", q:"A presenter wants their laptop to send video only to an attached external projector with the lid open. Which control typically toggles the laptop's display output mode?",
+ options:["Ctrl+Alt+Delete","The Fn key plus the display/CRT-LCD function key","Windows key + L","The Caps Lock key"], correct:[1],
+ explanation:"Laptops switch among internal/external/duplicate/extend output using Fn plus the dedicated display-toggle function key (often an F-key with a monitor icon)."},
+
+{domain:"Mobile Devices", q:"Which feature lets a phone or tablet keep email, contacts, and calendar entries consistent across multiple devices automatically?",
+ options:["Cloud-based synchronization","Airplane mode","A factory reset","USB On-The-Go"], correct:[0],
+ explanation:"Synchronizing data to a cloud account keeps mail, contacts, and calendars matched across all of a user's signed-in devices."},
+
+{domain:"Mobile Devices", q:"A field tech wants to make a tablet battery last through a long shift. Which TWO actions most directly reduce battery drain? (Choose two.)",
+ options:["Lower the screen brightness","Enable the mobile hotspot","Close unused background apps","Set the screen timeout longer","Turn on location for all apps"], correct:[0,2],
+ explanation:"Dimming the display and closing background apps cut the two biggest power consumers. A hotspot, a longer timeout, and broad location access all increase drain."},
+
+/* ---------------- NETWORKING (23) ---------------- */
+{domain:"Networking", q:"Which TCP port does HTTPS use by default?",
+ options:["80","8080","443","22"], correct:[2],
+ explanation:"HTTPS (HTTP over TLS) uses TCP port 443. Port 80 is plain HTTP."},
+
+{domain:"Networking", q:"A technician needs to remotely administer a Windows server's full graphical desktop. Which protocol and default port should be allowed through the firewall?",
+ options:["SSH on port 22","RDP on port 3389","Telnet on port 23","VNC on port 443"], correct:[1],
+ explanation:"Remote Desktop Protocol (RDP) provides a remote GUI session on Windows and uses TCP port 3389 by default."},
+
+{domain:"Networking", q:"Which protocol provides an encrypted command-line connection to a network device and should replace Telnet?",
+ options:["SSH (port 22)","FTP (port 21)","SMTP (port 25)","SNMP (port 161)"], correct:[0],
+ explanation:"SSH on port 22 encrypts the session, unlike Telnet (port 23) which sends everything in clear text."},
+
+{domain:"Networking", q:"A workstation can reach websites by IP address but not by name. Which service, running on port 53, is most likely failing?",
+ options:["DHCP","DNS","LDAP","SMB"], correct:[1],
+ explanation:"DNS (port 53) resolves hostnames to IP addresses. If IPs work but names don't, name resolution (DNS) is the problem."},
+
+{domain:"Networking", q:"Which protocol automatically assigns IP configuration to clients and uses UDP ports 67 and 68?",
+ options:["DNS","DHCP","SNMP","NTP"], correct:[1],
+ explanation:"DHCP leases IP addresses and related settings, using UDP port 67 (server) and 68 (client)."},
+
+{domain:"Networking", q:"A user maps a drive to a Windows file share. Which protocol and port carries Windows file/printer sharing traffic?",
+ options:["SMB on port 445","FTP on port 21","RDP on port 3389","IMAP on port 143"], correct:[0],
+ explanation:"SMB (Server Message Block) handles Windows file and printer sharing over TCP port 445."},
+
+{domain:"Networking", q:"A mail client should keep messages on the server and sync folders across devices. Which incoming-mail protocol and default (unencrypted) port fits?",
+ options:["POP3 on port 110","IMAP on port 143","SMTP on port 25","HTTP on port 80"], correct:[1],
+ explanation:"IMAP (port 143) keeps mail on the server and syncs state across devices. POP3 (110) typically downloads and removes mail."},
+
+{domain:"Networking", q:"Which protocol and port are used to send (relay) outgoing email between mail servers?",
+ options:["IMAP on port 143","POP3 on port 110","SMTP on port 25","LDAP on port 389"], correct:[2],
+ explanation:"SMTP on port 25 handles sending/relaying email. IMAP and POP3 are for retrieval."},
+
+{domain:"Networking", q:"Which TWO ports are associated with retrieving email over an encrypted (secure) connection? (Choose two.)",
+ options:["993 (IMAPS)","995 (POP3S)","23 (Telnet)","21 (FTP)","80 (HTTP)"], correct:[0,1],
+ explanation:"Secure mail retrieval uses IMAPS on 993 and POP3S on 995. Telnet, FTP, and HTTP are unrelated to encrypted mail retrieval."},
+
+{domain:"Networking", q:"A PC that normally gets an address from DHCP shows 169.254.18.7. What does this indicate?",
+ options:["A valid public IP from the ISP","The client could not reach a DHCP server (APIPA)","A manually set static address","A loopback test address"], correct:[1],
+ explanation:"169.254.x.x is APIPA, self-assigned when no DHCP server responds. It signals a DHCP/connectivity failure, not normal operation."},
+
+{domain:"Networking", q:"A network uses the subnet mask 255.255.255.0. What is the CIDR notation for this mask?",
+ options:["/16","/23","/24","/25"], correct:[2],
+ explanation:"255.255.255.0 sets 24 network bits, written as /24."},
+
+{domain:"Networking", q:"Which of the following is a private IPv4 address range (RFC 1918)?",
+ options:["172.16.0.0 – 172.31.255.255","11.0.0.0 – 11.255.255.255","169.254.0.0 – 169.254.255.255","224.0.0.0 – 239.255.255.255"], correct:[0],
+ explanation:"172.16.0.0/12 (172.16–172.31) is a private range. 169.254 is APIPA, 224–239 is multicast, and 11.x is public."},
+
+{domain:"Networking", q:"A run of cabling must carry 10 Gigabit Ethernet a full 100 meters. Which copper cable category is rated for this?",
+ options:["Cat 5","Cat 5e","Cat 6","Cat 6a"], correct:[3],
+ explanation:"Cat 6a supports 10 Gbps to 100 m. Plain Cat 6 supports 10 Gbps only to about 55 m, and Cat 5e tops out at 1 Gbps for typical runs."},
+
+{domain:"Networking", q:"Cabling is being installed in the space above a drop ceiling that is used for HVAC air return. Which cable type is required by fire code there?",
+ options:["Plenum-rated cable","Riser-rated cable","Direct-burial cable","Coaxial RG-6"], correct:[0],
+ explanation:"Plenum spaces handling building air require plenum-rated cable, whose jacket produces less toxic smoke when burning."},
+
+{domain:"Networking", q:"A campus needs a fiber link spanning several kilometers between buildings. Which fiber type is the right choice?",
+ options:["Single-mode fiber","Multi-mode fiber","Cat 6a UTP","Coaxial cable"], correct:[0],
+ explanation:"Single-mode fiber has a tiny core and uses laser light for long-distance runs (kilometers). Multi-mode is for shorter distances."},
+
+{domain:"Networking", q:"A home office router broadcasts on 2.4 GHz. Which channels are the three commonly used non-overlapping channels in that band (North America)?",
+ options:["1, 6, 11","2, 5, 9","1, 5, 10","3, 6, 9"], correct:[0],
+ explanation:"In the 2.4 GHz band, channels 1, 6, and 11 do not overlap, minimizing interference between nearby access points."},
+
+{domain:"Networking", q:"Which wireless standard is marketed as Wi-Fi 6 and operates on both the 2.4 GHz and 5 GHz bands?",
+ options:["802.11n","802.11ac","802.11ax","802.11g"], correct:[2],
+ explanation:"802.11ax (Wi-Fi 6) works on 2.4 and 5 GHz. 802.11ac (Wi-Fi 5) is 5 GHz only; 802.11g is 2.4 GHz legacy."},
+
+{domain:"Networking", q:"A device forwards packets between two different IP networks and chooses the best path based on Layer 3 addresses. What is it?",
+ options:["An unmanaged switch","A router","A hub","A media converter"], correct:[1],
+ explanation:"A router operates at Layer 3, forwarding traffic between IP networks and selecting routes. Switches and hubs work within a network."},
+
+{domain:"Networking", q:"How does an Ethernet switch decide which port to forward a frame out of?",
+ options:["By the destination MAC address in its MAC address table","By flooding every frame to all ports always","By the destination IP and a routing table","By the TCP port number"], correct:[0],
+ explanation:"A switch learns source MAC addresses per port and forwards frames to the port matching the destination MAC (Layer 2)."},
+
+{domain:"Networking", q:"In DNS, which record type maps a hostname to an IPv4 address?",
+ options:["MX","A","CNAME","PTR"], correct:[1],
+ explanation:"An A record maps a name to an IPv4 address. AAAA is for IPv6, MX for mail servers, CNAME is an alias, PTR is reverse lookup."},
+
+{domain:"Networking", q:"What is the primary purpose of NAT on a home/office router?",
+ options:["To encrypt all outbound traffic","To translate private internal IPs to a public IP for internet access","To assign DNS names to hosts","To boost the Wi-Fi signal"], correct:[1],
+ explanation:"NAT (Network Address Translation) lets many devices with private addresses share one public IP to reach the internet."},
+
+{domain:"Networking", q:"A wireless access point mounted on a ceiling has no nearby power outlet. Which technology delivers both data and electrical power to it over one Ethernet cable?",
+ options:["USB-PD","PoE (Power over Ethernet)","UPS","KVM"], correct:[1],
+ explanation:"PoE supplies DC power along the Ethernet cable, ideal for APs and IP cameras where running mains power is impractical."},
+
+{domain:"Networking", q:"When a DHCP server hands a client its configuration, which TWO items does it commonly assign? (Choose two.)",
+ options:["IP address","Subnet mask","Physical MAC address","CPU clock speed","Monitor resolution"], correct:[0,1],
+ explanation:"DHCP assigns logical settings such as the IP address, subnet mask, default gateway, and DNS servers. MAC, CPU speed, and resolution are not DHCP-assigned."},
+
+/* ---------------- HARDWARE (25) ---------------- */
+{domain:"Hardware", q:"A new motherboard's specification lists DDR5 memory slots. A technician tries to seat a DDR4 module and it will not fit. Why?",
+ options:["DDR4 and DDR5 use different notch positions and are not interchangeable","The DDR4 module is upside down","DDR5 requires the module be inserted at an angle","DDR4 must be installed in pairs first"], correct:[0],
+ explanation:"Each DDR generation has a differently placed key notch and is electrically incompatible, so a DDR4 stick will not fit a DDR5 slot."},
+
+{domain:"Hardware", q:"Which RAM form factor is used in laptops and small-form-factor PCs?",
+ options:["DIMM","SODIMM","RIMM","SIMM"], correct:[1],
+ explanation:"SODIMM (Small Outline DIMM) is the compact memory module used in laptops; full-size DIMMs go in desktops."},
+
+{domain:"Hardware", q:"A user wants maximum storage throughput by combining two drives with data striped across both, accepting no redundancy. Which RAID level is this?",
+ options:["RAID 0","RAID 1","RAID 5","RAID 10"], correct:[0],
+ explanation:"RAID 0 stripes data across disks for speed and capacity but has no fault tolerance — one failed drive loses everything."},
+
+{domain:"Hardware", q:"Which RAID level mirrors identical data across two drives so that one drive can fail without data loss?",
+ options:["RAID 0","RAID 1","RAID 5","JBOD"], correct:[1],
+ explanation:"RAID 1 (mirroring) writes the same data to both drives, providing redundancy if one fails."},
+
+{domain:"Hardware", q:"A small server uses striping with distributed parity and can tolerate a single drive failure. What is the minimum number of drives this RAID 5 array requires?",
+ options:["2","3","4","5"], correct:[1],
+ explanation:"RAID 5 needs at least three disks: data is striped with parity distributed across them, surviving one drive failure."},
+
+{domain:"Hardware", q:"Which RAID level combines mirroring and striping and requires a minimum of four drives?",
+ options:["RAID 5","RAID 6","RAID 10","RAID 0"], correct:[2],
+ explanation:"RAID 10 (1+0) mirrors pairs and stripes across them, needing at least four drives, offering both speed and redundancy."},
+
+{domain:"Hardware", q:"What is the maximum theoretical throughput of a SATA III (SATA 6Gb/s) interface?",
+ options:["1.5 Gb/s","3 Gb/s","6 Gb/s","16 Gb/s"], correct:[2],
+ explanation:"SATA III runs at 6 Gb/s (about 600 MB/s after overhead). SATA I is 1.5 Gb/s and SATA II is 3 Gb/s."},
+
+{domain:"Hardware", q:"Why does an NVMe SSD typically outperform a SATA SSD?",
+ options:["NVMe uses faster spinning platters","NVMe connects over PCIe lanes instead of the slower SATA bus","NVMe stores data magnetically","SATA SSDs have no cache"], correct:[1],
+ explanation:"NVMe drives communicate over high-bandwidth PCIe lanes, far exceeding the 6 Gb/s ceiling of the SATA interface."},
+
+{domain:"Hardware", q:"On a desktop power supply, which connector typically powers the CPU through the motherboard's dedicated socket near the processor?",
+ options:["24-pin main power","4/8-pin (EPS) CPU power","6/8-pin PCIe power","SATA power"], correct:[1],
+ explanation:"The 4-pin or 8-pin EPS connector feeds the CPU voltage regulators. The 24-pin powers the board overall; 6/8-pin PCIe feeds GPUs."},
+
+{domain:"Hardware", q:"Which expansion slot is the standard choice for installing a modern discrete graphics card?",
+ options:["PCIe x1","PCIe x16","PCI","M.2 (M key)"], correct:[1],
+ explanation:"Graphics cards use the PCIe x16 slot for maximum bandwidth. x1 and PCI are too slow; M.2 M-key is for NVMe storage."},
+
+{domain:"Hardware", q:"What is the purpose of thermal paste between a CPU and its heatsink?",
+ options:["To glue the heatsink permanently in place","To fill microscopic gaps and improve heat transfer to the heatsink","To insulate the CPU electrically","To prevent dust buildup"], correct:[1],
+ explanation:"Thermal paste fills tiny air gaps between the CPU lid and heatsink base so heat conducts efficiently away from the chip."},
+
+{domain:"Hardware", q:"On an Intel LGA socket, where are the connecting pins located?",
+ options:["On the underside of the CPU","On the motherboard socket","On the RAM modules","On the heatsink"], correct:[1],
+ explanation:"LGA (Land Grid Array) places the pins in the motherboard socket; the CPU has flat contact pads. PGA puts the pins on the CPU."},
+
+{domain:"Hardware", q:"A server needs memory that can detect and correct single-bit errors for reliability. Which RAM feature is required?",
+ options:["ECC","XMP","Dual-channel","CL latency"], correct:[0],
+ explanation:"ECC (Error-Correcting Code) memory detects and corrects single-bit errors, important for servers. XMP is an overclock profile, not error correction."},
+
+{domain:"Hardware", q:"Which display interface is common on consumer TVs and carries both digital video and audio over a single cable?",
+ options:["VGA","DVI-D","HDMI","PS/2"], correct:[2],
+ explanation:"HDMI carries digital video and audio together and is standard on TVs. VGA is analog video only; DVI-D carries video without audio."},
+
+{domain:"Hardware", q:"A user wants to daisy-chain multiple monitors from one video port using MST. Which interface natively supports this?",
+ options:["HDMI","DisplayPort","VGA","Composite"], correct:[1],
+ explanation:"DisplayPort supports Multi-Stream Transport (MST), letting several monitors be daisy-chained from a single port."},
+
+{domain:"Hardware", q:"A blue USB Type-A port labeled 'SS' (SuperSpeed) supports USB 3.0 / USB 3.2 Gen 1. What is its maximum data rate?",
+ options:["480 Mb/s","5 Gb/s","10 Gb/s","20 Gb/s"], correct:[1],
+ explanation:"USB 3.0 (a.k.a. USB 3.2 Gen 1, often blue) runs at 5 Gb/s. USB 2.0 is 480 Mb/s; 3.2 Gen 2 is 10 Gb/s; Gen 2x2 is 20 Gb/s."},
+
+{domain:"Hardware", q:"Thunderbolt 3 uses which physical connector and supports up to what bandwidth?",
+ options:["USB-C connector, up to 40 Gb/s","USB-A connector, up to 10 Gb/s","Mini DisplayPort, up to 20 Gb/s","RJ45, up to 1 Gb/s"], correct:[0],
+ explanation:"Thunderbolt 3 (and 4) use the USB-C connector and provide up to 40 Gb/s, carrying data, video, and power."},
+
+{domain:"Hardware", q:"A desktop loses the correct date and time and BIOS settings every time it is unplugged. Which component should be replaced?",
+ options:["The power supply","The CMOS battery (CR2032)","The CPU","The RAM"], correct:[1],
+ explanation:"A dead CMOS coin-cell battery (typically a CR2032) cannot keep the real-time clock and BIOS settings powered when the system is off."},
+
+{domain:"Hardware", q:"Which motherboard form factor is the smallest of these and is used in compact PC builds?",
+ options:["ATX","Micro-ATX","Mini-ITX","Extended ATX"], correct:[2],
+ explanation:"Mini-ITX (about 170 mm square) is the smallest listed. Order largest to smallest: E-ATX, ATX, Micro-ATX, Mini-ITX."},
+
+{domain:"Hardware", q:"A printer in an office uses a toner cartridge, a fuser assembly, and produces output via a drum and laser. Which printer type is this?",
+ options:["Inkjet","Thermal","Laser","Impact (dot-matrix)"], correct:[2],
+ explanation:"Toner, a photosensitive drum, a laser, and a heated fuser are hallmarks of a laser printer."},
+
+{domain:"Hardware", q:"Which printer type uses heat applied to special heat-sensitive paper and is common in receipt printers?",
+ options:["Thermal","Impact","Laser","3D"], correct:[0],
+ explanation:"Thermal printers heat specially coated paper to form the image — common for receipts. No ink or toner is used."},
+
+{domain:"Hardware", q:"A business needs multi-part carbon-copy forms printed (such as invoices), which requires physical strikes through the paper. Which printer type is appropriate?",
+ options:["Inkjet","Laser","Impact (dot-matrix)","Thermal"], correct:[2],
+ explanation:"Impact/dot-matrix printers strike a ribbon against the paper, the only common type able to print through multi-part carbon forms."},
+
+{domain:"Hardware", q:"Which expansion card would a technician install to add modern high-speed USB ports to a desktop that lacks them?",
+ options:["A sound card","A USB host adapter (expansion card)","A capture card","A TPM module"], correct:[1],
+ explanation:"A USB expansion (host adapter) card plugs into a PCIe slot to add USB ports to a system that does not have enough."},
+
+{domain:"Hardware", q:"A technician installs two identical RAM modules into the matching color-coded slots specified by the motherboard manual. Which performance feature is being enabled?",
+ options:["ECC error correction","Dual-channel memory","Virtual memory","Disk striping"], correct:[1],
+ explanation:"Populating the correct paired (color-matched) slots with matched modules enables dual-channel mode, widening the memory bus and increasing bandwidth. It is unrelated to ECC, paging, or RAID."},
+
+{domain:"Hardware", q:"Which TWO statements correctly describe an SSD compared with a traditional hard disk drive? (Choose two.)",
+ options:["It has no moving parts","It generally offers faster random access","It stores data on spinning magnetic platters","It is always cheaper per terabyte","It uses read/write heads on an actuator arm"], correct:[0,1],
+ explanation:"SSDs have no moving parts and faster access times. Platters, lower cost per TB, and actuator heads describe HDDs."},
+
+/* ---------------- VIRTUALIZATION & CLOUD (11) ---------------- */
+{domain:"Virtualization & Cloud", q:"A startup rents virtual machines, storage, and networking from a provider and installs and manages its own operating systems on them. Which cloud service model is this?",
+ options:["IaaS","PaaS","SaaS","DaaS"], correct:[0],
+ explanation:"Infrastructure as a Service (IaaS) provides raw compute, storage, and networking; the customer manages the OS and everything above it."},
+
+{domain:"Virtualization & Cloud", q:"Developers want a ready-made environment with the OS, runtime, and tools managed for them so they only deploy their application code. Which model fits?",
+ options:["IaaS","PaaS","SaaS","On-premises"], correct:[1],
+ explanation:"Platform as a Service (PaaS) supplies a managed development/runtime platform; the provider handles the underlying OS and middleware."},
+
+{domain:"Virtualization & Cloud", q:"A company uses a web-based email and office suite accessed entirely through a browser, with no software to install or servers to manage. Which model is this?",
+ options:["IaaS","PaaS","SaaS","HaaS"], correct:[2],
+ explanation:"Software as a Service (SaaS) delivers a complete application over the internet; the provider manages everything beneath it."},
+
+{domain:"Virtualization & Cloud", q:"An organization runs sensitive workloads in its own private cloud but bursts to a public cloud during peak demand. What is this arrangement called?",
+ options:["Community cloud","Hybrid cloud","Public cloud","Private cloud"], correct:[1],
+ explanation:"A hybrid cloud combines private and public cloud resources, allowing workloads to move or burst between them."},
+
+{domain:"Virtualization & Cloud", q:"Which type of hypervisor runs directly on the host's bare-metal hardware without a host operating system underneath it?",
+ options:["Type 1 (bare-metal)","Type 2 (hosted)","Type 3 (nested)","Type 0 (firmware)"], correct:[0],
+ explanation:"A Type 1 hypervisor installs straight onto the hardware. A Type 2 hypervisor runs as an application on top of an existing OS."},
+
+{domain:"Virtualization & Cloud", q:"A cloud platform can automatically add more resources within minutes when demand spikes and release them when it drops. Which cloud characteristic is this?",
+ options:["Rapid elasticity","Measured service","Resource pooling","Broad network access"], correct:[0],
+ explanation:"Rapid elasticity is the ability to quickly scale resources up or down to match demand."},
+
+{domain:"Virtualization & Cloud", q:"A cloud customer is billed only for the exact compute hours and storage they actually consume. Which cloud characteristic does this describe?",
+ options:["Measured service (metered/pay-as-you-go)","Resource pooling","On-demand self-service","Rapid elasticity"], correct:[0],
+ explanation:"Measured service meters usage so customers pay only for what they consume, like a utility bill."},
+
+{domain:"Virtualization & Cloud", q:"Several customers' virtual machines share the same underlying physical servers while remaining isolated from one another. Which cloud concept is this?",
+ options:["Resource pooling / multitenancy","Single tenancy","Cold site","Air gapping"], correct:[0],
+ explanation:"Resource pooling lets a provider serve multiple tenants from shared physical resources, with logical isolation between them."},
+
+{domain:"Virtualization & Cloud", q:"Before a desktop can run virtual machines efficiently with hardware acceleration, which BIOS/UEFI setting usually must be enabled?",
+ options:["Secure Boot","Hardware virtualization (Intel VT-x / AMD-V)","Fast Boot","Wake-on-LAN"], correct:[1],
+ explanation:"Hardware-assisted virtualization (Intel VT-x or AMD-V) must be enabled in firmware so the hypervisor can run VMs efficiently."},
+
+{domain:"Virtualization & Cloud", q:"A security analyst wants to open a suspicious file in an isolated environment that cannot affect the production system. What is this isolated environment called?",
+ options:["A sandbox","A honeypot","A DMZ","A VLAN"], correct:[0],
+ explanation:"A sandbox is an isolated environment (often a VM) used to safely test or run untrusted code without risking the host or network."},
+
+{domain:"Virtualization & Cloud", q:"When sizing a host to run several virtual machines, which host resource consideration is most important?",
+ options:["The host must have enough CPU cores, RAM, and storage to allocate to all the VMs","The host must run the same OS as every guest","Each VM must use a different brand of hypervisor","The host must be connected by fiber only"], correct:[0],
+ explanation:"VMs draw on the host's physical CPU, memory, and disk, so the host must have sufficient resources to allocate across all guests."},
+
+/* ---------------- HARDWARE & NETWORK TROUBLESHOOTING (28) ---------------- */
+{domain:"Troubleshooting", q:"According to CompTIA's six-step troubleshooting methodology, what is the FIRST step?",
+ options:["Establish a theory of probable cause","Identify the problem","Document the findings","Verify full system functionality"], correct:[1],
+ explanation:"Step 1 is Identify the problem (gather information, question the user, back up if possible) before forming any theory."},
+
+{domain:"Troubleshooting", q:"In CompTIA's methodology, what comes immediately AFTER you establish a theory of probable cause?",
+ options:["Document everything","Test the theory to determine the cause","Implement preventive measures","Identify the problem"], correct:[1],
+ explanation:"After forming a theory you test it. If confirmed, you proceed to a plan of action; if not, you form a new theory or escalate."},
+
+{domain:"Troubleshooting", q:"What is the LAST step of CompTIA's six-step troubleshooting process?",
+ options:["Verify full system functionality","Establish a plan of action","Document findings, actions, and outcomes","Test the theory"], correct:[2],
+ explanation:"The final step is to document findings, actions, and outcomes so the fix is recorded for future reference."},
+
+{domain:"Troubleshooting", q:"Order the methodology: after testing and confirming a theory, which step comes next?",
+ options:["Establish a plan of action to resolve the problem and implement the solution","Document the outcome","Question the user again","Identify the problem"], correct:[0],
+ explanation:"Once the theory is confirmed, you establish a plan of action and implement the solution before verifying functionality."},
+
+{domain:"Troubleshooting", q:"Just before documenting, which step ensures the fix actually worked and won't recur?",
+ options:["Verify full system functionality and, if applicable, implement preventive measures","Establish a theory","Identify the problem","Escalate to a vendor"], correct:[0],
+ explanation:"Step 5 verifies full functionality and adds preventive measures so the same problem is less likely to return."},
+
+{domain:"Troubleshooting", q:"A desktop powers on (fans spin) but there is no display and the board emits a memory beep code. Which is the best FIRST action?",
+ options:["Replace the power supply","Reseat or test the RAM modules","Reinstall the operating system","Replace the motherboard"], correct:[1],
+ explanation:"A memory beep code with no display points to RAM. Reseating or swapping the modules is the quick, low-cost first step."},
+
+{domain:"Troubleshooting", q:"A user reports a faint burning smell coming from their desktop. What should the technician do FIRST?",
+ options:["Continue using it to identify the smell","Immediately power off and unplug the system","Open a support ticket and wait","Spray compressed air into the vents while it runs"], correct:[1],
+ explanation:"A burning smell signals a possible electrical fault or failing PSU — power off and unplug immediately for safety before investigating."},
+
+{domain:"Troubleshooting", q:"A hard drive makes a repetitive clicking sound and files intermittently disappear. What is the priority action?",
+ options:["Defragment the drive","Back up the data immediately, the drive is failing","Update the BIOS","Increase the page file"], correct:[1],
+ explanation:"Clicking plus data loss indicates imminent mechanical drive failure. Back up critical data right away before replacing the drive."},
+
+{domain:"Troubleshooting", q:"A workstation throws frequent, varied blue screens (BSODs) that started after a RAM upgrade. What is the most likely cause to check first?",
+ options:["A failing or improperly seated memory module","A dead CMOS battery","An unplugged monitor","A full recycle bin"], correct:[0],
+ explanation:"Random BSODs right after a RAM change point to faulty or unseated memory; reseat and run a memory test (e.g., MemTest)."},
+
+{domain:"Troubleshooting", q:"A PC repeatedly shuts down on its own after a few minutes under heavy load, and the CPU temperature is very high. What is the most likely cause?",
+ options:["A DNS misconfiguration","Overheating due to a failed fan or dried thermal paste","A corrupt web browser","An expired SSL certificate"], correct:[1],
+ explanation:"Thermal shutdowns under load indicate cooling failure — a stopped fan, clogged heatsink, or degraded thermal paste."},
+
+{domain:"Troubleshooting", q:"A technician sees bulging, leaking capacitors on a motherboard near the CPU socket. What is the appropriate action?",
+ options:["Ignore them if the PC still boots","Replace the motherboard","Add more thermal paste","Update the network driver"], correct:[1],
+ explanation:"Distended/leaking capacitors indicate a failing motherboard that should be replaced; they cause instability and can fail completely."},
+
+{domain:"Troubleshooting", q:"Pages from a laser printer come out uniformly faded across the whole page. Which is the most likely cause?",
+ options:["Low toner","A torn drum belt","A network outage","A jammed paper tray"], correct:[0],
+ explanation:"Overall faint, faded output most commonly means the toner is low; shaking or replacing the cartridge resolves it."},
+
+{domain:"Troubleshooting", q:"A laser printer produces a faint repeated 'ghost' of a previous image down the page. Which components are the likely culprits?",
+ options:["The imaging drum or fuser","The paper tray rollers","The network cable","The print spooler service"], correct:[0],
+ explanation:"Ghost images are typically caused by a worn imaging drum or a failing fuser that doesn't fully clear the previous image."},
+
+{domain:"Troubleshooting", q:"An inkjet printer prints with horizontal white gaps/missing lines in text. What is the best first remedy?",
+ options:["Run the printhead cleaning/nozzle-check utility","Replace the motherboard","Reinstall the operating system","Replace the fuser"], correct:[0],
+ explanation:"Missing lines on inkjets usually mean clogged nozzles; running the cleaning/nozzle-check utility clears them. (Inkjets have no fuser.)"},
+
+{domain:"Troubleshooting", q:"A workstation can ping other devices by IP address but cannot browse to websites by name. Which is the best next troubleshooting step?",
+ options:["Replace the network cable","Check and correct the DNS server settings","Reseat the RAM","Replace the power supply"], correct:[1],
+ explanation:"Reaching hosts by IP but not by name is a classic DNS problem — verify the configured DNS servers (e.g., with nslookup)."},
+
+{domain:"Troubleshooting", q:"A newly connected PC has an address of 169.254.7.42 and cannot reach the internet. What is the most likely cause?",
+ options:["The DNS cache is full","The PC failed to obtain an address from DHCP (APIPA)","The subnet mask is /24","The browser is out of date"], correct:[1],
+ explanation:"A 169.254.x.x APIPA address means the client never received a DHCP lease — check the cable, switch port, and DHCP server."},
+
+{domain:"Troubleshooting", q:"A wired PC has no network connectivity and the NIC link light is off. What should the technician check FIRST?",
+ options:["The DNS records","The physical cable and switch-port connection","The default gateway latency","The antivirus definitions"], correct:[1],
+ explanation:"No link light means no Layer 1 connection. Start with the obvious physical layer: the cable, both connectors, and the switch port."},
+
+{domain:"Troubleshooting", q:"Users report slow, intermittent connections on a gigabit link that auto-negotiated incorrectly. Which issue should be suspected?",
+ options:["A duplex/speed mismatch","A dead CMOS battery","An expired domain name","An over-provisioned VM"], correct:[0],
+ explanation:"A duplex or speed mismatch (e.g., one side half-duplex) causes late collisions, retransmits, and slow, intermittent throughput."},
+
+{domain:"Troubleshooting", q:"Wi-Fi works fine near the access point but is weak and drops in a back room. Which is a reasonable remedy?",
+ options:["Lower the router's firmware version","Add a wireless repeater/extender or relocate/add an access point","Disable DHCP","Switch the cable from Cat6 to Cat5"], correct:[1],
+ explanation:"Weak signal at distance is a coverage problem; extend coverage with a repeater/mesh node or reposition/add an AP."},
+
+{domain:"Troubleshooting", q:"A laptop becomes hot and shuts off during video calls, and the fan area is packed with dust. What is the best fix?",
+ options:["Clean the dust from the fan/heatsink and ensure airflow (re-apply thermal paste if needed)","Replace the Wi-Fi card","Reinstall the web browser","Add more RAM"], correct:[0],
+ explanation:"Dust-clogged cooling causes overheating shutdowns; clean the fan and heatsink and restore airflow, re-pasting if the CPU runs hot."},
+
+{domain:"Troubleshooting", q:"A user's phone becomes hot and the battery drains rapidly even when idle. What is a sensible first step?",
+ options:["Replace the screen","Check for a misbehaving/background app consuming CPU and battery","Replace the SIM","Factory reset immediately without investigating"], correct:[1],
+ explanation:"Heat and fast drain at idle usually point to a runaway app. Check battery usage stats and stop or uninstall the offending app first."},
+
+{domain:"Troubleshooting", q:"A monitor shows random colored artifacts and distorted graphics that worsen as the GPU heats up. What is the most likely cause?",
+ options:["A failing/overheating graphics card or driver issue","A bad keyboard","A full hard drive","An incorrect time zone"], correct:[0],
+ explanation:"Visual artifacts that worsen with heat indicate a GPU problem — overheating, a failing card, or a faulty/outdated driver."},
+
+{domain:"Troubleshooting", q:"A PC has slowed to a crawl and the hard drive makes a grinding noise. After backing up, what is the appropriate fix?",
+ options:["Replace the failing hard drive (ideally with an SSD)","Add a second monitor","Update the BIOS clock","Disable Wi-Fi"], correct:[0],
+ explanation:"Grinding noise plus slow performance signals a mechanically failing HDD. After securing the data, replace the drive."},
+
+{domain:"Troubleshooting", q:"In a RAID 5 array, one drive fails but the system keeps running. What allows continued operation, and what should be done?",
+ options:["Parity data lets it run degraded; replace the failed drive so the array can rebuild","Nothing can be done; all data is lost","RAID 5 cannot survive any failure","The OS automatically deletes the array"], correct:[0],
+ explanation:"RAID 5 distributes parity, so it tolerates one failed drive and runs in a degraded state. Replace the drive and let the array rebuild."},
+
+{domain:"Troubleshooting", q:"A technician sees sparks and smoke from a power supply. Beyond cutting power, which is the correct safety practice?",
+ options:["Use water to cool the PSU","Unplug the unit, do not open the PSU, and replace it as a sealed unit","Open the PSU to repair the capacitors","Keep the system on to drain the charge"], correct:[1],
+ explanation:"PSUs hold dangerous stored charge and should never be opened. Cut power, unplug, and replace the entire sealed unit."},
+
+{domain:"Troubleshooting", q:"A desktop won't power on at all — no fans, no lights — even though the wall outlet is confirmed good. Which is the best early check?",
+ options:["Reinstall the OS","Verify the PSU power switch/voltage selector and test or swap the power supply","Update the GPU driver","Clear the browser cache"], correct:[1],
+ explanation:"With a known-good outlet and zero signs of power, suspect the PSU. Check its switch and voltage selector, then test or replace it."},
+
+{domain:"Troubleshooting", q:"A laptop display is completely black, but connecting an external monitor shows the desktop normally. Which internal component is most likely at fault?",
+ options:["The CPU","The internal display panel, its cable, or backlight","The hard drive","The network card"], correct:[1],
+ explanation:"If output works on an external monitor, the GPU and system are fine — the fault is in the internal panel, its ribbon cable, or backlight."},
+
+{domain:"Troubleshooting", q:"A PC randomly shuts down only under heavy gaming load. Which TWO causes should be investigated first? (Choose two.)",
+ options:["CPU/GPU overheating","An undersized or failing power supply","An incorrect DNS server","A misconfigured email client"], correct:[0,1],
+ explanation:"Shutdowns under load point to thermal issues (overheating) or a power supply that can't deliver enough clean power. DNS and email are unrelated."}
+];
+
+/* ===========================================================================
+   STORAGE  (graceful localStorage with in-memory fallback)
+   =========================================================================== */
+const Store = (function(){
+  let ok = false, mem = {};
+  try { const k="__t"; localStorage.setItem(k,"1"); localStorage.removeItem(k); ok = true; } catch(e){ ok = false; }
+  return {
+    available: ok,
+    get(key, def){
+      try{
+        if(ok){ const v = localStorage.getItem(key); return v===null?def:JSON.parse(v); }
+        return (key in mem)?mem[key]:def;
+      }catch(e){ return def; }
+    },
+    set(key, val){
+      try{ if(ok){ localStorage.setItem(key, JSON.stringify(val)); } else { mem[key]=val; } }catch(e){ mem[key]=val; }
+    },
+    clear(){
+      try{ if(ok){ ["aplus_history","aplus_mastery","aplus_known","aplus_theme"].forEach(k=>localStorage.removeItem(k)); } }catch(e){}
+      mem = {};
+    }
+  };
+})();
+
+/* ===========================================================================
+   STATE
+   =========================================================================== */
+let setup = { len:50, domain:"all", timer:true };
+let exam = null;
+let reviewMissedOnly = false;
+let flash = null;
+let knownCards = Store.get("aplus_known", {});
+
+/* ===========================================================================
+   HELPERS
+   =========================================================================== */
+function $(id){ return document.getElementById(id); }
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function arrEq(a,b){ if(a.length!==b.length) return false; const s=[...a].sort(), t=[...b].sort(); return s.every((v,i)=>v===t[i]); }
+function domainCount(d){ return QUESTIONS.filter(q=>q.domain===d).length; }
+function letter(i){ return String.fromCharCode(65+i); }
+
+function go(view){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  $('view-'+view).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(view==='stats') renderStats();
+  if(view==='setup') renderSetup();
+  if(view==='drill') renderDrill();
+  if(view==='flashsetup') renderFlashSetup();
+}
+
+/* ===========================================================================
+   THEME
+   =========================================================================== */
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  $('themeBtn').innerHTML = t==='light' ? '&#9728;' : '&#9789;';
+}
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+  applyTheme(cur); Store.set('aplus_theme', cur);
+}
+applyTheme(Store.get('aplus_theme','dark'));
+
+/* ===========================================================================
+   HOME / BANK SUMMARY
+   =========================================================================== */
+function renderBankSummary(){
+  const parts = DOMAINS.map(d=>domainCount(d)+" "+d.replace(" & Cloud","/Cloud"));
+  $('bank-summary').textContent = QUESTIONS.length+" questions • "+parts.join(" • ");
+}
+
+/* ===========================================================================
+   PRACTICE SETUP
+   =========================================================================== */
+function renderSetup(){
+  $('len-seg').querySelectorAll('.opt').forEach(o=>{
+    o.classList.toggle('sel', parseInt(o.dataset.len)===setup.len);
+    o.onclick = ()=>{ setup.len=parseInt(o.dataset.len); renderSetup(); };
+  });
+  const seg = $('dom-seg'); seg.innerHTML='';
+  const opts = [{k:"all",label:"All domains",sub:QUESTIONS.length+" Qs"}].concat(
+    DOMAINS.map(d=>({k:d,label:d,sub:domainCount(d)+" Qs"})));
+  opts.forEach(o=>{
+    const el=document.createElement('div'); el.className='opt'+(setup.domain===o.k?' sel':'');
+    el.innerHTML=o.label+"<small>"+o.sub+"</small>";
+    el.onclick=()=>{ setup.domain=o.k; renderSetup(); };
+    seg.appendChild(el);
+  });
+  $('timer-toggle').checked = setup.timer;
+  $('timer-toggle').onchange = e=>{ setup.timer = e.target.checked; };
+}
+
+/* ===========================================================================
+   DOMAIN DRILL
+   =========================================================================== */
+function renderDrill(){
+  const wrap=$('drill-cards'); wrap.innerHTML='';
+  const icons={"Mobile Devices":"📱","Networking":"🌐","Hardware":"🔧","Virtualization & Cloud":"☁️","Troubleshooting":"🔍"};
+  DOMAINS.forEach(d=>{
+    const c=document.createElement('div'); c.className='card mode-card';
+    c.innerHTML='<div class="mc-icon">'+icons[d]+'</div><h3>'+d+'</h3><p>'+domainCount(d)+' questions • untimed • instant feedback</p>';
+    c.onclick=()=>startDrill(d);
+    wrap.appendChild(c);
+  });
+}
+
+/* ===========================================================================
+   EXAM ENGINE  (shared by Practice + Drill)
+   =========================================================================== */
+function buildSession(pool, opts){
+  const qs = shuffle(pool).map(q=>{
+    const order = shuffle(q.options.map((_,i)=>i));
+    return {
+      ref:q,
+      order:order,
+      correctSet:order.map((origIdx,disp)=>q.correct.includes(origIdx)?disp:-1).filter(x=>x>=0),
+      multi:q.correct.length>1,
+      selected:[],
+      submitted:false,
+      correctOnSubmit:null
+    };
+  });
+  return {
+    questions:qs, idx:0, mode:opts.mode, instant:!!opts.instant,
+    timed:!!opts.timed, remaining:opts.timed?qs.length*72:0,
+    timerId:null, startTime:Date.now(), label:opts.label
+  };
+}
+
+function startPractice(){
+  let pool = setup.domain==="all" ? QUESTIONS : QUESTIONS.filter(q=>q.domain===setup.domain);
+  const n = Math.min(setup.len, pool.length);
+  pool = shuffle(pool).slice(0,n);
+  exam = buildSession(pool, {mode:"practice", instant:false, timed:setup.timer, label:(setup.domain==="all"?"Practice exam":setup.domain)});
+  beginExam();
+}
+function startDrill(domain){
+  const pool = QUESTIONS.filter(q=>q.domain===domain);
+  exam = buildSession(pool, {mode:"drill", instant:true, timed:false, label:domain+" drill"});
+  beginExam();
+}
+function beginExam(){
+  reviewMissedOnly=false;
+  go('exam');
+  $('q-total').textContent = exam.questions.length;
+  if(exam.timed){ $('timer').style.display='inline-block'; startTimer(); } else { $('timer').style.display='none'; }
+  renderQuestion();
+}
+
+function startTimer(){
+  clearInterval(exam.timerId);
+  updateTimerDisplay();
+  exam.timerId = setInterval(()=>{
+    exam.remaining--;
+    updateTimerDisplay();
+    if(exam.remaining<=0){ clearInterval(exam.timerId); finishExam(true); }
+  },1000);
+}
+function updateTimerDisplay(){
+  const m=Math.floor(exam.remaining/60), s=exam.remaining%60;
+  const t=$('timer'); t.textContent=(m<10?"0":"")+m+":"+(s<10?"0":"")+s;
+  t.className='timer'+(exam.remaining<=30?' danger':(exam.remaining<=120?' warn':''));
+}
+
+function renderQuestion(){
+  const q = exam.questions[exam.idx];
+  $('q-index').textContent = exam.idx+1;
+  $('answered-count').textContent = exam.questions.filter(x=>x.submitted).length;
+  $('pbar-fill').style.width = ((exam.idx)/(exam.questions.length)*100)+"%";
+  $('q-domain').textContent = q.ref.domain;
+  $('q-stem').textContent = q.ref.q;
+  $('q-multi').style.display = q.multi?'block':'none';
+
+  const box=$('q-options'); box.innerHTML='';
+  q.order.forEach((origIdx, disp)=>{
+    const row=document.createElement('div'); row.className='opt-row';
+    row.innerHTML='<div class="key">'+letter(disp)+'</div><div>'+q.ref.options[origIdx]+'</div>';
+    row.dataset.disp = disp;
+    if(q.submitted){
+      row.classList.add('locked');
+      if(q.correctSet.includes(disp)) row.classList.add('correct');
+      else if(q.selected.includes(disp)) row.classList.add('wrong');
+    } else {
+      if(q.selected.includes(disp)) row.classList.add('sel');
+      row.onclick=()=>toggleOption(disp);
+    }
+    box.appendChild(row);
+  });
+
+  const exp=$('q-explain');
+  if(q.submitted && (exam.instant || exam.mode==='drill')){
+    showExplanation(q);
+  } else { exp.classList.remove('show'); }
+
+  $('prev-btn').disabled = exam.idx===0;
+  const last = exam.idx===exam.questions.length-1;
+  const submitBtn=$('submit-btn'), nextBtn=$('next-btn'), finishBtn=$('finish-btn');
+  if(!q.submitted){
+    submitBtn.style.display='inline-block'; submitBtn.disabled=q.selected.length===0;
+    nextBtn.style.display='none'; finishBtn.style.display='none';
+    if(q.multi && q.selected.length!==2){ submitBtn.disabled=true; }
+  } else {
+    submitBtn.style.display='none';
+    if(last){ finishBtn.style.display='inline-block'; nextBtn.style.display='none'; }
+    else { nextBtn.style.display='inline-block'; finishBtn.style.display='none'; }
+  }
+}
+
+function toggleOption(disp){
+  const q=exam.questions[exam.idx];
+  if(q.submitted) return;
+  if(q.multi){
+    const i=q.selected.indexOf(disp);
+    if(i>=0) q.selected.splice(i,1);
+    else { if(q.selected.length>=2) q.selected.shift(); q.selected.push(disp); }
+  } else {
+    q.selected=[disp];
+  }
+  renderQuestion();
+}
+
+function showExplanation(q){
+  const exp=$('q-explain');
+  const ok = arrEq(q.selected, q.correctSet);
+  $('exp-verdict').textContent = ok?"Correct":"Incorrect";
+  $('exp-verdict').className = 'verdict '+(ok?'ok':'no');
+  const correctText = q.correctSet.map(d=>letter(d)).join(" & ");
+  $('exp-text').innerHTML = '<b>Answer: '+correctText+'.</b> '+q.ref.explanation;
+  exp.classList.add('show');
+}
+
+function submitAnswer(){
+  const q=exam.questions[exam.idx];
+  if(q.selected.length===0) return;
+  if(q.multi && q.selected.length!==2) return;
+  q.submitted=true;
+  q.correctOnSubmit = arrEq(q.selected, q.correctSet);
+  renderQuestion();
+}
+
+function nextQuestion(){ if(exam.idx<exam.questions.length-1){ exam.idx++; renderQuestion(); } }
+function prevQuestion(){ if(exam.idx>0){ exam.idx--; renderQuestion(); } }
+
+function quitExam(){
+  if(confirm("Quit this session? Your progress in it will be lost.")){
+    if(exam&&exam.timerId) clearInterval(exam.timerId);
+    exam=null; go('home');
+  }
+}
+
+function finishExam(auto){
+  if(exam.timerId) clearInterval(exam.timerId);
+  const total=exam.questions.length;
+  let correct=0;
+  const perDom={};
+  DOMAINS.forEach(d=>perDom[d]={c:0,t:0});
+  exam.questions.forEach(q=>{
+    const isC = q.submitted && arrEq(q.selected,q.correctSet);
+    if(isC) correct++;
+    perDom[q.ref.domain].t++;
+    if(isC) perDom[q.ref.domain].c++;
+  });
+  const elapsed=Math.round((Date.now()-exam.startTime)/1000);
+  renderResults({total,correct,perDom,elapsed,auto:!!auto,label:exam.label});
+  saveAttempt(correct,total,perDom,exam.label);
+  exam._finished=true;
+}
+
+/* ===========================================================================
+   RESULTS
+   =========================================================================== */
+function renderResults(r){
+  go('results');
+  const pct=Math.round(r.correct/r.total*100);
+  $('results-sub').textContent = r.label+(r.auto?" • time expired":"");
+  const ring=$('score-ring'); ring.style.setProperty('--p',pct);
+  ring.style.setProperty('--ring', pct>=80?'var(--good)':(pct>=60?'var(--warn)':'var(--bad)'));
+  $('score-pct').textContent=pct+"%";
+  $('score-frac').textContent=r.correct+" / "+r.total;
+  let verdict;
+  if(pct>=85){ verdict="Exam-ready — strong pass"; }
+  else if(pct>=75){ verdict="On track — solid pass range"; }
+  else if(pct>=60){ verdict="Borderline — keep drilling weak areas"; }
+  else { verdict="Needs work — review the missed items below"; }
+  $('score-verdict').textContent=verdict;
+  const m=Math.floor(r.elapsed/60), s=r.elapsed%60;
+  $('score-time').textContent="Time: "+m+"m "+(s<10?"0":"")+s+"s";
+
+  const tb=$('dom-breakdown'); tb.innerHTML='';
+  DOMAINS.forEach(d=>{
+    const o=r.perDom[d]; if(o.t===0) return;
+    const p=Math.round(o.c/o.t*100);
+    const cls = p>=80?'ok':(p>=60?'mid':'weak');
+    const barcol = p>=80?'var(--good)':(p>=60?'var(--warn)':'var(--bad)');
+    const status = p>=80?'Strong':(p>=60?'Fair':'Weak — focus here');
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td>'+d+'</td><td>'+o.c+'/'+o.t+'</td>'+
+      '<td><div class="bar"><span style="width:'+p+'%;background:'+barcol+'"></span></div></td>'+
+      '<td><span class="pill '+cls+'">'+status+'</span></td>';
+    tb.appendChild(tr);
+  });
+
+  renderReview();
+}
+
+function toggleReviewFilter(){ reviewMissedOnly=!reviewMissedOnly; renderReview(); }
+function renderReview(){
+  $('review-filter-btn').textContent = reviewMissedOnly?"Show all":"Show missed only";
+  const missed = exam.questions.filter(q=>!(q.submitted&&arrEq(q.selected,q.correctSet)));
+  $('missed-count').textContent = missed.length;
+  const list=$('review-list'); list.innerHTML='';
+  const items = reviewMissedOnly?missed:exam.questions;
+  if(items.length===0){ list.innerHTML='<div class="empty">Nothing to show — perfect score!</div>'; return; }
+  items.forEach(q=>{
+    const ok = q.submitted && arrEq(q.selected,q.correctSet);
+    const yourTxt = q.submitted ? q.selected.map(d=>letter(d)+". "+q.ref.options[q.order[d]]).join("; ") : "(not answered)";
+    const rightTxt = q.correctSet.map(d=>letter(d)+". "+q.ref.options[q.order[d]]).join("; ");
+    const div=document.createElement('div'); div.className='review-item';
+    div.innerHTML =
+      '<span class="domain-tag" style="margin-bottom:6px;">'+q.ref.domain+(ok?' ✓':' ✗')+'</span>'+
+      '<div class="rq">'+q.ref.q+'</div>'+
+      (ok?'' : '<div class="ra yours">Your answer: '+yourTxt+'</div>')+
+      '<div class="ra right">Correct: '+rightTxt+'</div>'+
+      '<div class="rexp">'+q.ref.explanation+'</div>';
+    list.appendChild(div);
+  });
+}
+
+/* ===========================================================================
+   PERSISTENCE: history + mastery
+   =========================================================================== */
+function saveAttempt(correct,total,perDom,label){
+  const hist=Store.get('aplus_history',[]);
+  hist.unshift({date:Date.now(), correct,total, pct:Math.round(correct/total*100), label});
+  Store.set('aplus_history', hist.slice(0,50));
+  const mastery=Store.get('aplus_mastery',{});
+  DOMAINS.forEach(d=>{
+    const o=perDom[d]; if(!o||o.t===0) return;
+    if(!mastery[d]) mastery[d]={c:0,t:0};
+    mastery[d].c+=o.c; mastery[d].t+=o.t;
+  });
+  Store.set('aplus_mastery', mastery);
+}
+
+/* ===========================================================================
+   STATS
+   =========================================================================== */
+function renderStats(){
+  $('stats-storage-note').textContent = Store.available
+    ? "Saved on this device. Nothing leaves your computer."
+    : "Heads up: browser storage is unavailable, so this session's stats won't persist after you close the file.";
+  const hist=Store.get('aplus_history',[]);
+  $('st-attempts').textContent = hist.length;
+  if(hist.length){
+    $('st-best').textContent = Math.max(...hist.map(h=>h.pct))+"%";
+    $('st-avg').textContent = Math.round(hist.reduce((a,h)=>a+h.pct,0)/hist.length)+"%";
+  } else { $('st-best').textContent="–"; $('st-avg').textContent="–"; }
+  $('st-known').textContent = Object.keys(knownCards).filter(k=>knownCards[k]).length;
+
+  const mastery=Store.get('aplus_mastery',{});
+  const mt=$('mastery-table'); mt.innerHTML='';
+  let any=false;
+  DOMAINS.forEach(d=>{
+    const o=mastery[d];
+    const seen=o?o.t:0, c=o?o.c:0;
+    const p=seen?Math.round(c/seen*100):0;
+    if(seen) any=true;
+    const barcol = p>=80?'var(--good)':(p>=60?'var(--warn)':'var(--bad)');
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td>'+d+'</td><td>'+seen+'</td>'+
+      '<td><div class="bar"><span style="width:'+(seen?p:0)+'%;background:'+barcol+'"></span></div></td>'+
+      '<td>'+(seen?p+'%':'–')+'</td>';
+    mt.appendChild(tr);
+  });
+  if(!any){ mt.innerHTML='<tr><td colspan="4" class="empty">Take a practice exam to start building mastery data.</td></tr>'; }
+
+  const hl=$('history-list'); hl.innerHTML='';
+  if(!hist.length){ hl.innerHTML='<div class="empty">No exams yet. Your scores will appear here.</div>'; }
+  else hist.forEach(h=>{
+    const d=new Date(h.date);
+    const dateStr=d.toLocaleDateString(undefined,{month:'short',day:'numeric'})+" "+d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
+    const row=document.createElement('div'); row.className='hist-row';
+    row.innerHTML='<div><b>'+h.pct+'%</b> &nbsp;<span style="color:var(--muted)">'+h.correct+'/'+h.total+'</span></div>'+
+      '<div style="color:var(--muted)">'+(h.label||'Practice')+'</div>'+
+      '<div style="color:var(--muted)">'+dateStr+'</div>';
+    hl.appendChild(row);
+  });
+}
+
+function resetProgress(){
+  if(confirm("Reset all exam history, mastery, and known-card marks on this device?")){
+    Store.clear(); knownCards={}; renderStats();
+  }
+}
+
+/* ===========================================================================
+   FLASHCARDS
+   =========================================================================== */
+let flashFilter = new Set(DOMAINS);
+function renderFlashSetup(){
+  const bar=$('flash-dom-filter'); bar.innerHTML='';
+  const allChip=document.createElement('div');
+  allChip.className='chip'+(flashFilter.size===DOMAINS.length?' sel':'');
+  allChip.textContent='All';
+  allChip.onclick=()=>{ flashFilter=new Set(DOMAINS); renderFlashSetup(); };
+  bar.appendChild(allChip);
+  DOMAINS.forEach(d=>{
+    const c=document.createElement('div'); c.className='chip'+(flashFilter.has(d)?' sel':'');
+    c.textContent=d+" ("+domainCount(d)+")";
+    c.onclick=()=>{ if(flashFilter.has(d)) flashFilter.delete(d); else flashFilter.add(d); if(flashFilter.size===0) flashFilter.add(d); renderFlashSetup(); };
+    bar.appendChild(c);
+  });
+}
+
+function startFlash(){
+  const hideKnown=$('flash-hideknown').checked;
+  let pool = QUESTIONS.map((q,i)=>({q,i})).filter(o=>flashFilter.has(o.q.domain));
+  if(hideKnown) pool = pool.filter(o=>!knownCards[o.i]);
+  if(pool.length===0){ alert("No cards match — try unchecking 'hide known' or adding domains."); return; }
+  flash={ cards:shuffle(pool), idx:0, flipped:false };
+  go('flash');
+  $('fc-total').textContent=flash.cards.length;
+  renderCard();
+}
+
+function renderCard(){
+  const card=flash.cards[flash.idx];
+  flash.flipped=false;
+  $('flashcard').classList.remove('flipped');
+  $('fc-index').textContent=flash.idx+1;
+  $('fc-tag').textContent=card.q.domain;
+  $('fc-front').textContent=card.q.q;
+  const correctText=card.q.correct.map(i=>card.q.options[i]).join("  +  ");
+  $('fc-answer').textContent=correctText;
+  $('fc-back').textContent=card.q.explanation;
+  $('fc-pbar').style.width=((flash.idx)/(flash.cards.length)*100)+"%";
+  updateFlashStatus();
+}
+function updateFlashStatus(){
+  const card=flash.cards[flash.idx];
+  const known=!!knownCards[card.i];
+  const badge=$('fc-status');
+  badge.className='known-badge '+(known?'known':'unknown');
+  badge.textContent=known?'Marked: I know this':'Not yet marked';
+  const total=flash.cards.length;
+  const knownInDeck=flash.cards.filter(c=>knownCards[c.i]).length;
+  $('fc-known').textContent=knownInDeck;
+  $('fc-left').textContent=total-knownInDeck;
+}
+function flipCard(){ flash.flipped=!flash.flipped; $('flashcard').classList.toggle('flipped',flash.flipped); }
+function nextCard(){ if(flash.idx<flash.cards.length-1){ flash.idx++; renderCard(); } else { alert("End of deck — great work!"); } }
+function prevCard(){ if(flash.idx>0){ flash.idx--; renderCard(); } }
+function markCard(known){
+  const card=flash.cards[flash.idx];
+  if(known) knownCards[card.i]=true; else delete knownCards[card.i];
+  Store.set('aplus_known', knownCards);
+  updateFlashStatus();
+  if(known) nextCard();
+}
+
+/* ===========================================================================
+   KEYBOARD
+   =========================================================================== */
+document.addEventListener('keydown', e=>{
+  const examActive=$('view-exam').classList.contains('active') && exam;
+  const flashActive=$('view-flash').classList.contains('active') && flash;
+  if(examActive){
+    const q=exam.questions[exam.idx];
+    if(e.key>='1' && e.key<='9'){
+      const disp=parseInt(e.key)-1;
+      if(disp<q.order.length && !q.submitted){ toggleOption(disp); e.preventDefault(); }
+    } else if(e.key==='Enter'){
+      e.preventDefault();
+      if(!q.submitted){ if($('submit-btn').disabled===false) submitAnswer(); }
+      else if(exam.idx<exam.questions.length-1) nextQuestion();
+      else finishExam();
+    } else if(e.key==='ArrowRight'){ if(q.submitted) nextQuestion(); }
+    else if(e.key==='ArrowLeft'){ prevQuestion(); }
+  } else if(flashActive){
+    if(e.key===' '){ e.preventDefault(); flipCard(); }
+    else if(e.key==='ArrowRight'){ nextCard(); }
+    else if(e.key==='ArrowLeft'){ prevCard(); }
+    else if(e.key.toLowerCase()==='k'){ markCard(true); }
+    else if(e.key.toLowerCase()==='j'){ markCard(false); }
+  }
+});
+
+/* ===========================================================================
+   INIT
+   =========================================================================== */
+renderBankSummary();
+renderSetup();
+</script>
+</body>
+</html>
