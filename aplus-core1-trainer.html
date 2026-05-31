@@ -441,7 +441,7 @@
 
 <script>
 /* ===========================================================================
-   QUESTION BANK  — original items aligned to CompTIA A+ Core 1 (220-1101)
+   QUESTION BANK   -  original items aligned to CompTIA A+ Core 1 (220-1101)
    domain: one of the five objective domains
    correct: array of option indices (length 2 => choose-two)
    =========================================================================== */
@@ -605,7 +605,7 @@ const QUESTIONS = [
 
 {domain:"Hardware", q:"A user wants maximum storage throughput by combining two drives with data striped across both, accepting no redundancy. Which RAID level is this?",
  options:["RAID 0","RAID 1","RAID 5","RAID 10"], correct:[0],
- explanation:"RAID 0 stripes data across disks for speed and capacity but has no fault tolerance — one failed drive loses everything."},
+ explanation:"RAID 0 stripes data across disks for speed and capacity but has no fault tolerance  -  one failed drive loses everything."},
 
 {domain:"Hardware", q:"Which RAID level mirrors identical data across two drives so that one drive can fail without data loss?",
  options:["RAID 0","RAID 1","RAID 5","JBOD"], correct:[1],
@@ -677,7 +677,7 @@ const QUESTIONS = [
 
 {domain:"Hardware", q:"Which printer type uses heat applied to special heat-sensitive paper and is common in receipt printers?",
  options:["Thermal","Impact","Laser","3D"], correct:[0],
- explanation:"Thermal printers heat specially coated paper to form the image — common for receipts. No ink or toner is used."},
+ explanation:"Thermal printers heat specially coated paper to form the image  -  common for receipts. No ink or toner is used."},
 
 {domain:"Hardware", q:"A business needs multi-part carbon-copy forms printed (such as invoices), which requires physical strikes through the paper. Which printer type is appropriate?",
  options:["Inkjet","Laser","Impact (dot-matrix)","Thermal"], correct:[2],
@@ -767,7 +767,7 @@ const QUESTIONS = [
 
 {domain:"Troubleshooting", q:"A user reports a faint burning smell coming from their desktop. What should the technician do FIRST?",
  options:["Continue using it to identify the smell","Immediately power off and unplug the system","Open a support ticket and wait","Spray compressed air into the vents while it runs"], correct:[1],
- explanation:"A burning smell signals a possible electrical fault or failing PSU — power off and unplug immediately for safety before investigating."},
+ explanation:"A burning smell signals a possible electrical fault or failing PSU  -  power off and unplug immediately for safety before investigating."},
 
 {domain:"Troubleshooting", q:"A hard drive makes a repetitive clicking sound and files intermittently disappear. What is the priority action?",
  options:["Defragment the drive","Back up the data immediately, the drive is failing","Update the BIOS","Increase the page file"], correct:[1],
@@ -779,7 +779,7 @@ const QUESTIONS = [
 
 {domain:"Troubleshooting", q:"A PC repeatedly shuts down on its own after a few minutes under heavy load, and the CPU temperature is very high. What is the most likely cause?",
  options:["A DNS misconfiguration","Overheating due to a failed fan or dried thermal paste","A corrupt web browser","An expired SSL certificate"], correct:[1],
- explanation:"Thermal shutdowns under load indicate cooling failure — a stopped fan, clogged heatsink, or degraded thermal paste."},
+ explanation:"Thermal shutdowns under load indicate cooling failure  -  a stopped fan, clogged heatsink, or degraded thermal paste."},
 
 {domain:"Troubleshooting", q:"A technician sees bulging, leaking capacitors on a motherboard near the CPU socket. What is the appropriate action?",
  options:["Ignore them if the PC still boots","Replace the motherboard","Add more thermal paste","Update the network driver"], correct:[1],
@@ -799,11 +799,11 @@ const QUESTIONS = [
 
 {domain:"Troubleshooting", q:"A workstation can ping other devices by IP address but cannot browse to websites by name. Which is the best next troubleshooting step?",
  options:["Replace the network cable","Check and correct the DNS server settings","Reseat the RAM","Replace the power supply"], correct:[1],
- explanation:"Reaching hosts by IP but not by name is a classic DNS problem — verify the configured DNS servers (e.g., with nslookup)."},
+ explanation:"Reaching hosts by IP but not by name is a classic DNS problem  -  verify the configured DNS servers (e.g., with nslookup)."},
 
 {domain:"Troubleshooting", q:"A newly connected PC has an address of 169.254.7.42 and cannot reach the internet. What is the most likely cause?",
  options:["The DNS cache is full","The PC failed to obtain an address from DHCP (APIPA)","The subnet mask is /24","The browser is out of date"], correct:[1],
- explanation:"A 169.254.x.x APIPA address means the client never received a DHCP lease — check the cable, switch port, and DHCP server."},
+ explanation:"A 169.254.x.x APIPA address means the client never received a DHCP lease  -  check the cable, switch port, and DHCP server."},
 
 {domain:"Troubleshooting", q:"A wired PC has no network connectivity and the NIC link light is off. What should the technician check FIRST?",
  options:["The DNS records","The physical cable and switch-port connection","The default gateway latency","The antivirus definitions"], correct:[1],
@@ -827,7 +827,7 @@ const QUESTIONS = [
 
 {domain:"Troubleshooting", q:"A monitor shows random colored artifacts and distorted graphics that worsen as the GPU heats up. What is the most likely cause?",
  options:["A failing/overheating graphics card or driver issue","A bad keyboard","A full hard drive","An incorrect time zone"], correct:[0],
- explanation:"Visual artifacts that worsen with heat indicate a GPU problem — overheating, a failing card, or a faulty/outdated driver."},
+ explanation:"Visual artifacts that worsen with heat indicate a GPU problem  -  overheating, a failing card, or a faulty/outdated driver."},
 
 {domain:"Troubleshooting", q:"A PC has slowed to a crawl and the hard drive makes a grinding noise. After backing up, what is the appropriate fix?",
  options:["Replace the failing hard drive (ideally with an SSD)","Add a second monitor","Update the BIOS clock","Disable Wi-Fi"], correct:[0],
@@ -841,13 +841,13 @@ const QUESTIONS = [
  options:["Use water to cool the PSU","Unplug the unit, do not open the PSU, and replace it as a sealed unit","Open the PSU to repair the capacitors","Keep the system on to drain the charge"], correct:[1],
  explanation:"PSUs hold dangerous stored charge and should never be opened. Cut power, unplug, and replace the entire sealed unit."},
 
-{domain:"Troubleshooting", q:"A desktop won't power on at all — no fans, no lights — even though the wall outlet is confirmed good. Which is the best early check?",
+{domain:"Troubleshooting", q:"A desktop won't power on at all  -  no fans, no lights  -  even though the wall outlet is confirmed good. Which is the best early check?",
  options:["Reinstall the OS","Verify the PSU power switch/voltage selector and test or swap the power supply","Update the GPU driver","Clear the browser cache"], correct:[1],
  explanation:"With a known-good outlet and zero signs of power, suspect the PSU. Check its switch and voltage selector, then test or replace it."},
 
 {domain:"Troubleshooting", q:"A laptop display is completely black, but connecting an external monitor shows the desktop normally. Which internal component is most likely at fault?",
  options:["The CPU","The internal display panel, its cable, or backlight","The hard drive","The network card"], correct:[1],
- explanation:"If output works on an external monitor, the GPU and system are fine — the fault is in the internal panel, its ribbon cable, or backlight."},
+ explanation:"If output works on an external monitor, the GPU and system are fine  -  the fault is in the internal panel, its ribbon cable, or backlight."},
 
 {domain:"Troubleshooting", q:"A PC randomly shuts down only under heavy gaming load. Which TWO causes should be investigated first? (Choose two.)",
  options:["CPU/GPU overheating","An undersized or failing power supply","An incorrect DNS server","A misconfigured email client"], correct:[0,1],
@@ -1136,10 +1136,10 @@ function renderResults(r){
   $('score-pct').textContent=pct+"%";
   $('score-frac').textContent=r.correct+" / "+r.total;
   let verdict;
-  if(pct>=85){ verdict="Exam-ready — strong pass"; }
-  else if(pct>=75){ verdict="On track — solid pass range"; }
-  else if(pct>=60){ verdict="Borderline — keep drilling weak areas"; }
-  else { verdict="Needs work — review the missed items below"; }
+  if(pct>=85){ verdict="Exam-ready  -  strong pass"; }
+  else if(pct>=75){ verdict="On track  -  solid pass range"; }
+  else if(pct>=60){ verdict="Borderline  -  keep drilling weak areas"; }
+  else { verdict="Needs work  -  review the missed items below"; }
   $('score-verdict').textContent=verdict;
   const m=Math.floor(r.elapsed/60), s=r.elapsed%60;
   $('score-time').textContent="Time: "+m+"m "+(s<10?"0":"")+s+"s";
@@ -1150,7 +1150,7 @@ function renderResults(r){
     const p=Math.round(o.c/o.t*100);
     const cls = p>=80?'ok':(p>=60?'mid':'weak');
     const barcol = p>=80?'var(--good)':(p>=60?'var(--warn)':'var(--bad)');
-    const status = p>=80?'Strong':(p>=60?'Fair':'Weak — focus here');
+    const status = p>=80?'Strong':(p>=60?'Fair':'Weak  -  focus here');
     const tr=document.createElement('tr');
     tr.innerHTML='<td>'+d+'</td><td>'+o.c+'/'+o.t+'</td>'+
       '<td><div class="bar"><span style="width:'+p+'%;background:'+barcol+'"></span></div></td>'+
@@ -1168,14 +1168,14 @@ function renderReview(){
   $('missed-count').textContent = missed.length;
   const list=$('review-list'); list.innerHTML='';
   const items = reviewMissedOnly?missed:exam.questions;
-  if(items.length===0){ list.innerHTML='<div class="empty">Nothing to show — perfect score!</div>'; return; }
+  if(items.length===0){ list.innerHTML='<div class="empty">Nothing to show  -  perfect score!</div>'; return; }
   items.forEach(q=>{
     const ok = q.submitted && arrEq(q.selected,q.correctSet);
     const yourTxt = q.submitted ? q.selected.map(d=>letter(d)+". "+q.ref.options[q.order[d]]).join("; ") : "(not answered)";
     const rightTxt = q.correctSet.map(d=>letter(d)+". "+q.ref.options[q.order[d]]).join("; ");
     const div=document.createElement('div'); div.className='review-item';
     div.innerHTML =
-      '<span class="domain-tag" style="margin-bottom:6px;">'+q.ref.domain+(ok?' ✓':' ✗')+'</span>'+
+      '<span class="domain-tag" style="margin-bottom:6px;">'+q.ref.domain+(ok?' ✓':' � - ')+'</span>'+
       '<div class="rq">'+q.ref.q+'</div>'+
       (ok?'' : '<div class="ra yours">Your answer: '+yourTxt+'</div>')+
       '<div class="ra right">Correct: '+rightTxt+'</div>'+
@@ -1274,7 +1274,7 @@ function startFlash(){
   const hideKnown=$('flash-hideknown').checked;
   let pool = QUESTIONS.map((q,i)=>({q,i})).filter(o=>flashFilter.has(o.q.domain));
   if(hideKnown) pool = pool.filter(o=>!knownCards[o.i]);
-  if(pool.length===0){ alert("No cards match — try unchecking 'hide known' or adding domains."); return; }
+  if(pool.length===0){ alert("No cards match  -  try unchecking 'hide known' or adding domains."); return; }
   flash={ cards:shuffle(pool), idx:0, flipped:false };
   go('flash');
   $('fc-total').textContent=flash.cards.length;
@@ -1306,7 +1306,7 @@ function updateFlashStatus(){
   $('fc-left').textContent=total-knownInDeck;
 }
 function flipCard(){ flash.flipped=!flash.flipped; $('flashcard').classList.toggle('flipped',flash.flipped); }
-function nextCard(){ if(flash.idx<flash.cards.length-1){ flash.idx++; renderCard(); } else { alert("End of deck — great work!"); } }
+function nextCard(){ if(flash.idx<flash.cards.length-1){ flash.idx++; renderCard(); } else { alert("End of deck  -  great work!"); } }
 function prevCard(){ if(flash.idx>0){ flash.idx--; renderCard(); } }
 function markCard(known){
   const card=flash.cards[flash.idx];

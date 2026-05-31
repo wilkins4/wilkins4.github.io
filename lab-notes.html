@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lab Notes | Stephen Wilkinson</title>
-  <meta name="description" content="Cybersecurity, networking, digital forensics, Windows, Linux, and troubleshooting notes from Stephen Wilkinson.">
+  <meta name="description" content="IT support, Linux, networking, Windows, and cybersecurity lab notes from Stephen Wilkinson.">
   <link rel="canonical" href="https://stephenwilkinson.dev/lab-notes.html">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
@@ -18,8 +18,7 @@
         <a href="index.html">Home</a>
         <a href="resume.html">Resume</a>
         <a href="index.html#education">Education</a>
-        <a href="index.html#projects">Projects</a>
-        <a href="aplus.html">A+ Study</a>
+        <a href="index.html#foundation">Foundation</a>
         <a href="index.html#contact">Contact</a>
       </nav>
     </div>
@@ -29,85 +28,113 @@
     <section class="page-hero">
       <div class="container">
         <p class="eyebrow">Lab notes</p>
-        <h1>Proof of learning, written clearly.</h1>
+        <h1>Hands-on practice written like support documentation.</h1>
         <p>
-          These notes document coursework, labs, troubleshooting practice, and certification study. They are written
-          to show process: what I tested, what I observed, what I changed, and what I learned.
+          These notes collect current lab work for Linux fundamentals, networking, Windows support, and security coursework.
+          The goal is to show how I test, document, validate, and improve instead of only listing tools.
         </p>
+        <div class="button-row">
+          <a class="button primary" href="projects.html">Project Hub</a>
+          <a class="button secondary" href="networking-lab.html">Networking Lab</a>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container content-grid">
         <aside class="content-card">
-          <h2>Lab writeup template</h2>
+          <h2>Lab Standard</h2>
+          <p>
+            Each public note should be useful to a reviewer who wants to understand the problem, the environment,
+            the exact checks performed, and what the result proved.
+          </p>
           <ul class="clean-list">
-            <li><strong>Objective:</strong> What was I trying to prove or learn?</li>
-            <li><strong>Environment:</strong> OS, tools, network, and constraints.</li>
-            <li><strong>Procedure:</strong> The steps I took.</li>
-            <li><strong>Findings:</strong> What I observed.</li>
-            <li><strong>Resolution:</strong> What changed or what I concluded.</li>
-            <li><strong>Lessons learned:</strong> What I would do differently next time.</li>
+            <li><strong>Objective:</strong> What skill or problem is being tested?</li>
+            <li><strong>Environment:</strong> OS, tools, services, and constraints.</li>
+            <li><strong>Procedure:</strong> Repeatable commands or steps.</li>
+            <li><strong>Validation:</strong> How I know the result is correct.</li>
+            <li><strong>Evidence:</strong> Sanitized output, screenshot, or summary.</li>
+            <li><strong>Next step:</strong> What would make the lab stronger.</li>
           </ul>
         </aside>
 
         <div class="content-stack">
           <article class="content-card">
-            <p class="project-type">Networking</p>
-            <h2>Networking and Packet Analysis</h2>
-            <p>Practice area for IP addressing, DNS, DHCP, routing basics, Wi-Fi troubleshooting, and Wireshark packet review.</p>
+            <div class="status-row">
+              <span class="status-tag">Active</span>
+              <span class="status-tag">Docker</span>
+              <span class="status-tag">Linux</span>
+            </div>
+            <p class="project-type">Linux Fundamentals</p>
+            <h2>Linux Exam Sandboxes</h2>
+            <p>
+              A repeatable Docker lab kit for practicing CLI navigation, users and groups, permissions, packages,
+              processes, services, logs, networking, archives, and Red Hat style administration.
+            </p>
             <ul class="clean-list">
-              <li>DNS lookup comparison notes</li>
-              <li>DHCP request and lease behavior</li>
-              <li>Common connectivity troubleshooting flow</li>
-              <li>Packet capture summaries in plain language</li>
+              <li>Ubuntu 24.04, Debian 12, and Rocky Linux 9 practice containers.</li>
+              <li>Dedicated network-client, CoreDNS, Nginx web, and broken-state containers.</li>
+              <li>PowerShell launcher for up, status, shell, reset, logs, and teardown workflows.</li>
             </ul>
             <div class="proof-links">
-              <a href="networking-lab.html">View sample lab writeup</a>
+              <a href="homelab-infrastructure.html">View infrastructure case study</a>
             </div>
           </article>
 
           <article class="content-card">
+            <div class="status-row">
+              <span class="status-tag">Active</span>
+              <span class="status-tag">Networking</span>
+            </div>
+            <p class="project-type">Troubleshooting</p>
+            <h2>DNS and Connectivity Troubleshooting</h2>
+            <p>
+              A networking lab that checks local interface state, route selection, DNS resolution, HTTP reachability,
+              sockets, and packet-level evidence against a controlled <code>exam.lab</code> environment.
+            </p>
+            <ul class="clean-list">
+              <li>Known DNS target: <code>dns.exam.lab</code>.</li>
+              <li>Known web target: <code>web.exam.lab</code>.</li>
+              <li>Validation script: <code>check-networking</code>.</li>
+            </ul>
+            <div class="proof-links">
+              <a href="networking-lab.html">View lab writeup</a>
+            </div>
+          </article>
+
+          <article class="content-card">
+            <div class="status-row">
+              <span class="status-tag">Next Writeup</span>
+              <span class="status-tag">Windows</span>
+            </div>
             <p class="project-type">Windows Client OS</p>
-            <h2>Windows Client OS</h2>
-            <p>Notes for account support, updates, software issues, logs, permissions, device setup, and ticket-style documentation.</p>
+            <h2>Ticket-Style Windows Notes</h2>
+            <p>
+              Planned public notes for account setup, updates, software issues, Event Viewer checks, permissions,
+              and basic support workflows. These should read like small help-desk cases, not class notes.
+            </p>
             <ul class="clean-list">
-              <li>Symptom, hypothesis, test, result, next step</li>
-              <li>Event Viewer and log review practice</li>
-              <li>Command notes with expected output</li>
+              <li>Symptom, hypothesis, test, result, next step.</li>
+              <li>Relevant command or GUI path.</li>
+              <li>Plain-language summary suitable for a user or teammate.</li>
             </ul>
           </article>
 
           <article class="content-card">
+            <div class="status-row">
+              <span class="status-tag">Next Writeup</span>
+              <span class="status-tag">Security</span>
+            </div>
             <p class="project-type">Digital Forensics</p>
-            <h2>Digital Forensics</h2>
-            <p>Writeups for Autopsy, file system analysis, evidence handling concepts, Windows artifacts, and timeline thinking.</p>
+            <h2>Forensics Coursework Notes</h2>
+            <p>
+              Planned public notes for Autopsy, file-system concepts, Windows artifacts, timeline thinking,
+              and evidence handling. The public version should avoid sensitive data and separate observation from interpretation.
+            </p>
             <ul class="clean-list">
-              <li>Separate facts, interpretation, and conclusion</li>
-              <li>Record tool versions and source data</li>
-              <li>Summarize findings for a non-specialist reader</li>
-            </ul>
-          </article>
-
-          <article class="content-card">
-            <p class="project-type">Linux Basics</p>
-            <h2>Linux Basics</h2>
-            <p>Command-line notes for navigation, files, permissions, services, logs, and basic troubleshooting practice.</p>
-            <ul class="clean-list">
-              <li>Common commands and expected output</li>
-              <li>Permission and service checks</li>
-              <li>Notes written for repeatable practice</li>
-            </ul>
-          </article>
-
-          <article class="content-card">
-            <p class="project-type">Troubleshooting Notes</p>
-            <h2>Infrastructure Change Notes</h2>
-            <p>Runbooks and change notes for DNS, Docker services, NAS backups, Wi-Fi updates, and safe rollback planning.</p>
-            <ul class="clean-list">
-              <li>What changed and why</li>
-              <li>Validation checks after the change</li>
-              <li>Rollback steps if something breaks</li>
+              <li>Facts observed from the tool or artifact.</li>
+              <li>Interpretation with confidence level.</li>
+              <li>Short conclusion written for a non-specialist reader.</li>
             </ul>
           </article>
         </div>
@@ -118,7 +145,7 @@
   <footer class="site-footer">
     <div class="container footer-wrap">
       <span>&copy; 2026 Stephen Wilkinson</span>
-      <a class="quiet-link" href="projects.html" rel="nofollow">Project login</a>
+      <a class="quiet-link" href="archive.html">Archive</a>
     </div>
   </footer>
 </body>

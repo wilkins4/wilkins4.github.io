@@ -155,7 +155,7 @@ let rng = makeRNG(state.seed);
 // --- Story Graph (data-driven) ---
 const N = {
   intro: {
-    text: `The fortress-monastery of St. Jove’s Hand has fallen to a World Eaters warband—goaded by Word Bearers' sermons. The wasteland ahead holds two ruins that may yield data or survivors. Choose your approach.`,
+    text: `The fortress-monastery of St. Jove’s Hand has fallen to a World Eaters warband - goaded by Word Bearers' sermons. The wasteland ahead holds two ruins that may yield data or survivors. Choose your approach.`,
     choices: [
       { label: 'Advance on the left ruin', next: 'left_approach', action: null, hotkey: '1' },
       { label: 'Advance on the right ruin', next: 'right_approach', action: null, hotkey: '2' }
@@ -172,7 +172,7 @@ const N = {
     ]
   },
   left_success: {
-    text: `Objective secured. A data-slate pings a distress signal from Imperial cultists in a gorge. Ork Kommandos converge—but Tyranid Termagants erupt to meet them.`,
+    text: `Objective secured. A data-slate pings a distress signal from Imperial cultists in a gorge. Ork Kommandos converge - but Tyranid Termagants erupt to meet them.`,
     choices: [
       { label: 'Join the fray on Tyranid side', next: (win)=> win ? 'help_nids_win' : 'help_nids_lose', action: (s)=> skirmish(s, 'nids'), hotkey: '1' },
       { label: 'Hold position; let them fight', next: (nidsWin)=> nidsWin ? 'watch_nids_win' : 'watch_orks_win', action: observeBattle, hotkey: '2' }
@@ -190,14 +190,14 @@ const N = {
 
   // Right path
   right_approach: {
-    text: `You pivot to the right ruin. Vox-caster static hints at a recorded message—Sister of Battle origin.`,
+    text: `You pivot to the right ruin. Vox-caster static hints at a recorded message - Sister of Battle origin.`,
     choices: [
       { label: 'Breach & clear (DC 3 Tactics)', next: (ok)=> ok ? 'right_success' : 'right_fail', action: (s)=> skillCheck(s,'tactics',3), hotkey: '1' },
       { label: 'Methodical entry', next: 'right_fail_soft', action: null, hotkey: '2' }
     ]
   },
   right_success: {
-    text: `Objective secured. Recording details the fall of St. Jove’s Hand. Orks close in—Termagants answer the noise.`,
+    text: `Objective secured. Recording details the fall of St. Jove’s Hand. Orks close in - Termagants answer the noise.`,
     choices: [
       { label: 'Support Tyranids vs Orks', next: (win)=> win ? 'help_nids_win' : 'help_nids_lose', action: (s)=> skirmish(s,'nids'), hotkey: '1' },
       { label: 'Let them fight it out', next: (nidsWin)=> nidsWin ? 'watch_nids_win' : 'watch_orks_win', action: observeBattle, hotkey: '2' }
@@ -223,7 +223,7 @@ const N = {
     choices: [ { label: 'Continue', next: 'end_fail', action: null, hotkey: '1' } ]
   },
   watch_nids_win: {
-    text: `You hold the line. Tyranids butcher the Orks—then skitter toward you. You cleanse the stragglers.`,
+    text: `You hold the line. Tyranids butcher the Orks - then skitter toward you. You cleanse the stragglers.`,
     choices: [ { label: 'Continue', next: 'end_win', action: (s)=> gainXP(s,1,'After-action +1 XP'), hotkey: '1' } ]
   },
   watch_orks_win: {

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Networking Lab Writeup | Stephen Wilkinson</title>
-  <meta name="description" content="Networking lab writeup from Stephen Wilkinson covering DNS lookup checks, connectivity troubleshooting, packet analysis, and clear technical documentation.">
+  <title>DNS and Connectivity Lab | Stephen Wilkinson</title>
+  <meta name="description" content="Networking lab writeup from Stephen Wilkinson covering DNS resolution, HTTP checks, sockets, packet capture, and troubleshooting validation.">
   <link rel="canonical" href="https://stephenwilkinson.dev/networking-lab.html">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
@@ -18,8 +18,7 @@
         <a href="index.html">Home</a>
         <a href="resume.html">Resume</a>
         <a href="index.html#education">Education</a>
-        <a href="index.html#projects">Projects</a>
-        <a href="aplus.html">A+ Study</a>
+        <a href="index.html#foundation">Foundation</a>
         <a href="index.html#contact">Contact</a>
       </nav>
     </div>
@@ -31,12 +30,13 @@
         <div class="status-row">
           <span class="status-tag">Lab Writeup</span>
           <span class="status-tag">Networking</span>
+          <span class="status-tag">DNS</span>
         </div>
-        <p class="eyebrow">Networking / Packet Analysis</p>
+        <p class="eyebrow">Networking / Troubleshooting</p>
         <h1>DNS and Connectivity Troubleshooting Lab</h1>
         <p>
-          A structured lab note for practicing DNS lookups, basic connectivity checks, packet observation,
-          and plain-language troubleshooting documentation.
+          A repeatable lab for separating DNS resolution failures from routing, HTTP service, local socket,
+          and packet-level issues in a controlled Linux sandbox environment.
         </p>
       </div>
     </section>
@@ -44,20 +44,19 @@
     <section class="section">
       <div class="container content-grid">
         <aside class="content-card">
-          <h2>Writeup Format</h2>
+          <h2>Lab Snapshot</h2>
           <ul class="clean-list">
-            <li>Objective</li>
-            <li>Environment</li>
-            <li>Procedure</li>
-            <li>Findings</li>
-            <li>Conclusion</li>
-            <li>Lessons learned</li>
+            <li><strong>Client:</strong> Ubuntu network-client container.</li>
+            <li><strong>DNS:</strong> CoreDNS at <code>172.31.90.53</code>.</li>
+            <li><strong>Web target:</strong> Nginx at <code>172.31.90.40</code>.</li>
+            <li><strong>Zone:</strong> <code>exam.lab</code>.</li>
+            <li><strong>Validation:</strong> <code>check-networking</code>.</li>
           </ul>
           <div class="tag-row">
-            <span class="tag">Networking</span>
             <span class="tag">DNS</span>
-            <span class="tag">Wireshark</span>
-            <span class="tag">Troubleshooting</span>
+            <span class="tag">HTTP</span>
+            <span class="tag">tcpdump</span>
+            <span class="tag">Linux</span>
           </div>
           <div class="proof-links">
             <a href="lab-notes.html">Back to lab notes</a>
@@ -68,55 +67,79 @@
           <article class="content-card">
             <h2>Objective</h2>
             <p>
-              Practice a repeatable troubleshooting flow for a common networking problem: confirming whether
-              a client can resolve names, reach a destination, and show useful evidence for the next step.
+              Practice a support-friendly troubleshooting flow: confirm the local network state, verify DNS,
+              test the target service, collect packet evidence, and write the result clearly enough for a handoff.
             </p>
           </article>
 
           <article class="content-card">
             <h2>Environment</h2>
+            <p>
+              This lab runs inside the Linux Exam Sandboxes project. The <code>net-client</code> container uses
+              the lab DNS service at <code>172.31.90.53</code>, and the web service answers at
+              <code>web.exam.lab</code>.
+            </p>
+            <pre><code>cd D:\Projects\04_IT_Journey\Labs\Linux_Exam_Sandboxes
+.\sandbox.ps1 up
+.\sandbox.ps1 shell net-client</code></pre>
+          </article>
+
+          <article class="content-card">
+            <h2>Baseline Checks</h2>
+            <p>
+              These commands establish whether the client has an address, a route, a DNS resolver, a valid
+              name lookup, and a reachable web target.
+            </p>
+            <pre><code>ip addr
+ip route
+cat /etc/resolv.conf
+getent hosts web.exam.lab
+dig @172.31.90.53 web.exam.lab
+curl -I http://web.exam.lab
+ss -tulpn
+tcpdump -ni any port 53 -c 5</code></pre>
+          </article>
+
+          <article class="content-card">
+            <h2>Expected Results</h2>
             <ul class="clean-list">
-              <li>Windows client for command-line checks.</li>
-              <li>Wireshark or packet capture tool for observing DNS traffic.</li>
-              <li>Known working internet connection.</li>
-              <li>Public DNS name used for repeatable lookup testing.</li>
+              <li><code>web.exam.lab</code> resolves to <code>172.31.90.40</code>.</li>
+              <li><code>dns.exam.lab</code> resolves to <code>172.31.90.53</code>.</li>
+              <li><code>curl -I http://web.exam.lab</code> returns an HTTP response from the Nginx target.</li>
+              <li><code>tcpdump</code> shows DNS query and response traffic when a lookup is repeated.</li>
             </ul>
           </article>
 
           <article class="content-card">
-            <h2>Procedure</h2>
+            <h2>Break/Fix Drill</h2>
+            <p>
+              To practice failure isolation, stop one service at a time from PowerShell, observe the symptom
+              from the client container, then restore the service and validate again.
+            </p>
+            <pre><code>docker stop linux-exam-dns
+docker start linux-exam-dns
+
+docker stop linux-exam-web
+docker start linux-exam-web</code></pre>
+          </article>
+
+          <article class="content-card">
+            <h2>Ticket-Style Summary</h2>
             <ul class="clean-list">
-              <li>Record the client IP configuration with a command such as ipconfig.</li>
-              <li>Check the configured DNS server and default gateway.</li>
-              <li>Run a DNS lookup for a known domain and record the response.</li>
-              <li>Ping or otherwise test reachability to separate name resolution from connectivity.</li>
-              <li>Capture a DNS query and response in Wireshark and summarize what happened in plain language.</li>
+              <li><strong>Symptom:</strong> A client may report that a site or internal service is unavailable.</li>
+              <li><strong>Hypothesis:</strong> The issue could be DNS resolution, routing, service availability, or local client configuration.</li>
+              <li><strong>Tests:</strong> Inspect client network state, query DNS directly, test HTTP, and capture DNS traffic.</li>
+              <li><strong>Result:</strong> The controlled lab shows which layer failed and which service restored the expected behavior.</li>
             </ul>
           </article>
 
           <article class="content-card">
-            <h2>Findings</h2>
-            <p>
-              This lab focuses on collecting evidence before changing settings. The important distinction is whether
-              the problem is DNS resolution, local network connectivity, default gateway routing, or the remote service.
-            </p>
-          </article>
-
-          <article class="content-card">
-            <h2>Conclusion</h2>
-            <p>
-              A short, consistent process makes basic network issues easier to explain. Record the symptom, test one
-              layer at a time, and write down the result before moving to the next hypothesis.
-            </p>
-          </article>
-
-          <article class="content-card">
-            <h2>Lessons Learned</h2>
+            <h2>Next Evidence To Add</h2>
             <ul class="clean-list">
-              <li>DNS failures and connectivity failures can look similar to end users.</li>
-              <li>Packet captures are most useful when paired with a written hypothesis.</li>
-              <li>Clear notes make it easier to hand off or revisit a troubleshooting case.</li>
-              <li>Future versions of this note should include sanitized screenshots and sample packet details.</li>
+              <li>Sanitized terminal output from a passing <code>check-networking</code> run.</li>
+              <li>One screenshot showing DNS failure while CoreDNS is stopped.</li>
+              <li>One packet capture summary showing query, response, source, destination, and protocol.</li>
+              <li>A short user-facing note for each failure mode.</li>
             </ul>
           </article>
         </div>
@@ -127,7 +150,7 @@
   <footer class="site-footer">
     <div class="container footer-wrap">
       <span>&copy; 2026 Stephen Wilkinson</span>
-      <a class="quiet-link" href="projects.html" rel="nofollow">Project login</a>
+      <a class="quiet-link" href="archive.html">Archive</a>
     </div>
   </footer>
 </body>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Homelab Infrastructure | Stephen Wilkinson</title>
-  <meta name="description" content="Homelab infrastructure case study from Stephen Wilkinson covering networking, DNS, backups, Docker services, documentation, and safe change management.">
+  <title>Linux Exam Sandbox Lab | Stephen Wilkinson</title>
+  <meta name="description" content="Linux exam sandbox case study from Stephen Wilkinson covering Docker lab infrastructure, DNS, web targets, break/fix practice, and support documentation.">
   <link rel="canonical" href="https://stephenwilkinson.dev/homelab-infrastructure.html">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
@@ -18,8 +18,7 @@
         <a href="index.html">Home</a>
         <a href="resume.html">Resume</a>
         <a href="index.html#education">Education</a>
-        <a href="index.html#projects">Projects</a>
-        <a href="aplus.html">A+ Study</a>
+        <a href="index.html#foundation">Foundation</a>
         <a href="index.html#contact">Contact</a>
       </nav>
     </div>
@@ -30,13 +29,14 @@
       <div class="container">
         <div class="status-row">
           <span class="status-tag">Case Study</span>
-          <span class="status-tag">In Progress</span>
+          <span class="status-tag">Active</span>
+          <span class="status-tag">Linux</span>
         </div>
-        <p class="eyebrow">Homelab / Networking</p>
-        <h1>Homelab Infrastructure &amp; Network Upgrade</h1>
+        <p class="eyebrow">Lab Infrastructure</p>
+        <h1>Linux Exam Sandbox Lab</h1>
         <p>
-          A practical home lab and network environment for learning support, networking, backups, DNS,
-          Docker services, and secure access without breaking household reliability.
+          A repeatable Docker lab for practicing Linux administration, networking, services, permissions,
+          logs, and troubleshooting without risking a daily-use machine.
         </p>
       </div>
     </section>
@@ -46,18 +46,18 @@
         <aside class="content-card">
           <h2>Project Snapshot</h2>
           <p>
-            This project is about documenting a real environment clearly enough that changes can be planned,
-            tested, explained, and rolled back.
+            The lab is built for fast repetitions: start clean containers, practice a topic, run checks,
+            break one service or setting, document the result, then reset.
           </p>
           <div class="tag-row">
-            <span class="tag">Networking</span>
-            <span class="tag">DNS</span>
-            <span class="tag">DHCP</span>
-            <span class="tag">NAS</span>
             <span class="tag">Docker</span>
-            <span class="tag">Backups</span>
+            <span class="tag">Linux</span>
+            <span class="tag">DNS</span>
+            <span class="tag">Nginx</span>
+            <span class="tag">Troubleshooting</span>
           </div>
           <div class="proof-links">
+            <a href="networking-lab.html">Networking lab</a>
             <a href="lab-notes.html">Back to lab notes</a>
           </div>
         </aside>
@@ -66,59 +66,65 @@
           <article class="content-card">
             <h2>Problem</h2>
             <p>
-              A home network is still a production environment for the people who rely on it. Changes need to be
-              useful for learning, but they also need to protect internet access, family devices, storage, and backups.
+              Reading command notes is not enough for support work. I need a place where I can repeatedly
+              practice Linux basics, service checks, DNS troubleshooting, and break/fix thinking with a clean reset path.
             </p>
           </article>
 
           <article class="content-card">
-            <h2>Solution</h2>
+            <h2>Built Environment</h2>
             <p>
-              I maintain a documented homelab plan that separates inventory, network layout, service notes,
-              backup expectations, and change records. The emphasis is on small improvements that can be tested
-              and reversed if something fails.
+              The lab uses Docker Compose plus a PowerShell helper script so I can start, inspect, enter,
+              reset, and tear down the environment from Windows.
             </p>
+            <pre><code>.\sandbox.ps1 up
+.\sandbox.ps1 status
+.\sandbox.ps1 shell ubuntu
+.\sandbox.ps1 shell net-client
+.\sandbox.ps1 reset
+.\sandbox.ps1 down</code></pre>
           </article>
 
           <article class="content-card">
-            <h2>Documented Areas</h2>
+            <h2>Inventory</h2>
             <ul class="clean-list">
-              <li>Device inventory for routers, access points, switches, storage, computers, and lab devices.</li>
-              <li>Network notes for DNS, DHCP, Wi-Fi, switching, and common connectivity checks.</li>
-              <li>Service notes for NAS storage, Docker-style services, and local utilities.</li>
-              <li>Backup planning with restore-verification expectations.</li>
-              <li>Security considerations for remote access, account access, and exposed services.</li>
+              <li><strong>Ubuntu 24.04:</strong> core CLI, files, permissions, apt, processes, and logs.</li>
+              <li><strong>Debian 12:</strong> service practice, cron, web packages, and Debian-family admin.</li>
+              <li><strong>Rocky Linux 9:</strong> Red Hat style practice with <code>dnf</code>, <code>rpm</code>, and SELinux command familiarity.</li>
+              <li><strong>Network client:</strong> DNS, routing, <code>curl</code>, <code>dig</code>, ping, traceroute, and packet tools.</li>
+              <li><strong>CoreDNS:</strong> local <code>exam.lab</code> zone for controlled DNS tests.</li>
+              <li><strong>Nginx web target:</strong> internal HTTP service for connectivity checks.</li>
+              <li><strong>Broken-state container:</strong> bad permissions and service files for repair drills.</li>
             </ul>
           </article>
 
           <article class="content-card">
-            <h2>Change Workflow</h2>
+            <h2>Study Coverage</h2>
             <ul class="clean-list">
-              <li>Write the problem and desired outcome before changing settings.</li>
-              <li>Record the current state and any settings that may need to be restored.</li>
-              <li>Make one small change at a time.</li>
-              <li>Validate with connectivity, service, and backup checks.</li>
-              <li>Keep rollback steps with the change note.</li>
+              <li>Navigation, text tools, search, files, and archives.</li>
+              <li>Users, groups, sudo, umask, ownership, modes, ACLs, and special bits.</li>
+              <li>Processes, packages, services, logs, cron, and web service checks.</li>
+              <li>DNS resolution, route inspection, HTTP checks, sockets, and packet capture.</li>
+              <li>Timed mock drills and resettable break/fix practice.</li>
             </ul>
           </article>
 
           <article class="content-card">
             <h2>What This Demonstrates</h2>
             <ul class="clean-list">
-              <li>Network documentation and troubleshooting discipline.</li>
-              <li>Practical understanding of DNS, DHCP, Wi-Fi, local services, and backups.</li>
-              <li>Awareness that technical changes affect real users.</li>
-              <li>Clear written handoff notes for future review.</li>
+              <li>Comfort working from PowerShell into Linux shell environments.</li>
+              <li>Practical command repetition instead of one-off tutorial work.</li>
+              <li>Understanding that troubleshooting needs a known-good baseline.</li>
+              <li>Documentation habits: objective, environment, procedure, validation, and next step.</li>
             </ul>
           </article>
 
           <article class="content-card">
-            <h2>Next Improvements</h2>
-            <ul class="clean-list">
-              <li>Add a sanitized network diagram.</li>
-              <li>Add a backup and restore checklist.</li>
-              <li>Add one completed change note with before, after, validation, and rollback sections.</li>
-            </ul>
+            <h2>Current Status</h2>
+            <p>
+              The lab structure and topic map exist. The next public-facing improvement is evidence: sanitized
+              screenshots, passing check output, and one completed break/fix note per topic area.
+            </p>
           </article>
         </div>
       </div>
@@ -128,7 +134,7 @@
   <footer class="site-footer">
     <div class="container footer-wrap">
       <span>&copy; 2026 Stephen Wilkinson</span>
-      <a class="quiet-link" href="projects.html" rel="nofollow">Project login</a>
+      <a class="quiet-link" href="archive.html">Archive</a>
     </div>
   </footer>
 </body>
