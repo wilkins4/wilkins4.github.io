@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Network+ Lab Writeup | Stephen Wilkinson</title>
+  <meta name="description" content="Network+ lab writeup from Stephen Wilkinson covering DNS lookup checks, connectivity troubleshooting, packet analysis, and clear technical documentation.">
+  <link rel="canonical" href="https://stephenwilkinson.dev/network-plus-lab.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html"><span class="brand-mark">SW</span><span>Stephen Wilkinson</span></a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="projects.html">Projects</a>
+        <a href="lab-notes.html">Lab Notes</a>
+        <a href="resume.html">Resume</a>
+        <a href="about.html">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container">
+        <div class="status-row">
+          <span class="status-tag">Lab Writeup</span>
+          <span class="status-tag">Network+</span>
+        </div>
+        <p class="eyebrow">Networking / Packet Analysis</p>
+        <h1>Network+ DNS and Connectivity Troubleshooting Lab</h1>
+        <p>
+          A structured lab note for practicing DNS lookups, basic connectivity checks, packet observation,
+          and plain-language troubleshooting documentation.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container content-grid">
+        <aside class="content-card">
+          <h2>Writeup Format</h2>
+          <ul class="clean-list">
+            <li>Objective</li>
+            <li>Environment</li>
+            <li>Procedure</li>
+            <li>Findings</li>
+            <li>Conclusion</li>
+            <li>Lessons learned</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">Network+</span>
+            <span class="tag">DNS</span>
+            <span class="tag">Wireshark</span>
+            <span class="tag">Troubleshooting</span>
+          </div>
+          <div class="proof-links">
+            <a href="lab-notes.html">Back to lab notes</a>
+          </div>
+        </aside>
+
+        <div class="content-stack">
+          <article class="content-card">
+            <h2>Objective</h2>
+            <p>
+              Practice a repeatable troubleshooting flow for a common networking problem: confirming whether
+              a client can resolve names, reach a destination, and show useful evidence for the next step.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <h2>Environment</h2>
+            <ul class="clean-list">
+              <li>Windows client for command-line checks.</li>
+              <li>Wireshark or packet capture tool for observing DNS traffic.</li>
+              <li>Known working internet connection.</li>
+              <li>Public DNS name used for repeatable lookup testing.</li>
+            </ul>
+          </article>
+
+          <article class="content-card">
+            <h2>Procedure</h2>
+            <ul class="clean-list">
+              <li>Record the client IP configuration with a command such as ipconfig.</li>
+              <li>Check the configured DNS server and default gateway.</li>
+              <li>Run a DNS lookup for a known domain and record the response.</li>
+              <li>Ping or otherwise test reachability to separate name resolution from connectivity.</li>
+              <li>Capture a DNS query and response in Wireshark and summarize what happened in plain language.</li>
+            </ul>
+          </article>
+
+          <article class="content-card">
+            <h2>Findings</h2>
+            <p>
+              This lab focuses on collecting evidence before changing settings. The important distinction is whether
+              the problem is DNS resolution, local network connectivity, default gateway routing, or the remote service.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <h2>Conclusion</h2>
+            <p>
+              A short, consistent process makes basic network issues easier to explain. Record the symptom, test one
+              layer at a time, and write down the result before moving to the next hypothesis.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <h2>Lessons Learned</h2>
+            <ul class="clean-list">
+              <li>DNS failures and connectivity failures can look similar to end users.</li>
+              <li>Packet captures are most useful when paired with a written hypothesis.</li>
+              <li>Clear notes make it easier to hand off or revisit a troubleshooting case.</li>
+              <li>Future versions of this note should include sanitized screenshots and sample packet details.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <span>&copy; 2026 Stephen Wilkinson</span>
+      <a href="projects.html#cybersecurity-labs">Back to cybersecurity labs</a>
+    </div>
+  </footer>
+</body>
+</html>

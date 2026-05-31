@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Homelab Infrastructure | Stephen Wilkinson</title>
+  <meta name="description" content="Homelab infrastructure case study from Stephen Wilkinson covering networking, DNS, backups, Docker services, documentation, and safe change management.">
+  <link rel="canonical" href="https://stephenwilkinson.dev/homelab-infrastructure.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html"><span class="brand-mark">SW</span><span>Stephen Wilkinson</span></a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="projects.html">Projects</a>
+        <a href="lab-notes.html">Lab Notes</a>
+        <a href="resume.html">Resume</a>
+        <a href="about.html">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container">
+        <div class="status-row">
+          <span class="status-tag">Case Study</span>
+          <span class="status-tag">In Progress</span>
+        </div>
+        <p class="eyebrow">Homelab / Networking</p>
+        <h1>Homelab Infrastructure &amp; Network Upgrade</h1>
+        <p>
+          A practical home lab and network environment for learning support, networking, backups, DNS,
+          Docker services, and secure access without breaking household reliability.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container content-grid">
+        <aside class="content-card">
+          <h2>Project Snapshot</h2>
+          <p>
+            This project is about documenting a real environment clearly enough that changes can be planned,
+            tested, explained, and rolled back.
+          </p>
+          <div class="tag-row">
+            <span class="tag">Networking</span>
+            <span class="tag">DNS</span>
+            <span class="tag">DHCP</span>
+            <span class="tag">NAS</span>
+            <span class="tag">Docker</span>
+            <span class="tag">Backups</span>
+          </div>
+          <div class="proof-links">
+            <a href="projects.html#homelab">Back to project</a>
+          </div>
+        </aside>
+
+        <div class="content-stack">
+          <article class="content-card">
+            <h2>Problem</h2>
+            <p>
+              A home network is still a production environment for the people who rely on it. Changes need to be
+              useful for learning, but they also need to protect internet access, family devices, storage, and backups.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <h2>Solution</h2>
+            <p>
+              I maintain a documented homelab plan that separates inventory, network layout, service notes,
+              backup expectations, and change records. The emphasis is on small improvements that can be tested
+              and reversed if something fails.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <h2>Documented Areas</h2>
+            <ul class="clean-list">
+              <li>Device inventory for routers, access points, switches, storage, computers, and lab devices.</li>
+              <li>Network notes for DNS, DHCP, Wi-Fi, switching, and common connectivity checks.</li>
+              <li>Service notes for NAS storage, Docker-style services, and local utilities.</li>
+              <li>Backup planning with restore-verification expectations.</li>
+              <li>Security considerations for remote access, account access, and exposed services.</li>
+            </ul>
+          </article>
+
+          <article class="content-card">
+            <h2>Change Workflow</h2>
+            <ul class="clean-list">
+              <li>Write the problem and desired outcome before changing settings.</li>
+              <li>Record the current state and any settings that may need to be restored.</li>
+              <li>Make one small change at a time.</li>
+              <li>Validate with connectivity, service, and backup checks.</li>
+              <li>Keep rollback steps with the change note.</li>
+            </ul>
+          </article>
+
+          <article class="content-card">
+            <h2>What This Demonstrates</h2>
+            <ul class="clean-list">
+              <li>Network documentation and troubleshooting discipline.</li>
+              <li>Practical understanding of DNS, DHCP, Wi-Fi, local services, and backups.</li>
+              <li>Awareness that technical changes affect real users.</li>
+              <li>Clear written handoff notes for future review.</li>
+            </ul>
+          </article>
+
+          <article class="content-card">
+            <h2>Next Improvements</h2>
+            <ul class="clean-list">
+              <li>Add a sanitized network diagram.</li>
+              <li>Add a backup and restore checklist.</li>
+              <li>Add one completed change note with before, after, validation, and rollback sections.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <span>&copy; 2026 Stephen Wilkinson</span>
+      <a href="projects.html">Back to projects</a>
+    </div>
+  </footer>
+</body>
+</html>
