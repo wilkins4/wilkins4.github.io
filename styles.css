@@ -709,6 +709,10 @@ h3 {
   font-size: 0.95rem;
 }
 
+.print-contact {
+  display: none;
+}
+
 .archive-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -795,7 +799,7 @@ h3 {
 @media print {
   @page {
     size: letter;
-    margin: 0.35in;
+    margin: 0.45in;
   }
 
   .site-header,
@@ -833,8 +837,9 @@ h3 {
   }
 
   body.resume-page {
-    font-size: 9.2pt;
-    line-height: 1.25;
+    background: #fff;
+    font-size: 9.8pt;
+    line-height: 1.3;
   }
 
   body.resume-page .container {
@@ -842,41 +847,58 @@ h3 {
     max-width: none;
   }
 
+  body.resume-page a {
+    color: #111 !important;
+    text-decoration: none;
+  }
+
   body.resume-page .page-hero {
-    border-bottom: 1px solid #bbb;
-    padding: 0 0 0.08in;
+    border-bottom: 2px solid #111;
+    padding: 0 0 0.09in;
     background: #fff !important;
   }
 
-  body.resume-page .page-hero .eyebrow {
+  body.resume-page .page-hero .eyebrow,
+  body.resume-page .page-hero .container > p:not(.print-contact) {
     display: none;
   }
 
   body.resume-page .page-hero h1 {
-    font-size: 24pt;
+    font-size: 25pt;
     line-height: 1;
-    margin-bottom: 0.05in;
+    margin-bottom: 0.035in;
   }
 
-  body.resume-page .page-hero p {
-    max-width: none;
+  body.resume-page .print-contact {
+    display: block;
     margin: 0;
+    color: #222 !important;
     font-size: 9.2pt;
-    line-height: 1.25;
+    line-height: 1.2;
   }
 
   body.resume-page .section {
-    padding: 0.1in 0 0;
+    padding: 0.15in 0 0;
   }
 
   body.resume-page .resume-layout {
-    grid-template-columns: 1.55in minmax(0, 1fr);
-    gap: 0.18in;
+    display: block;
   }
 
-  body.resume-page .resume-sidebar,
+  body.resume-page .resume-sidebar {
+    display: none;
+  }
+
   body.resume-page .resume-main {
-    gap: 0.08in;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.13in 0.26in;
+  }
+
+  body.resume-page .resume-main .content-card:nth-child(1),
+  body.resume-page .resume-main .content-card:nth-child(2),
+  body.resume-page .resume-main .content-card:nth-child(5) {
+    grid-column: 1 / -1;
   }
 
   body.resume-page .content-card {
@@ -887,41 +909,60 @@ h3 {
   }
 
   body.resume-page .content-card h2 {
-    margin: 0 0 0.035in;
-    border-bottom: 1px solid #bbb;
-    padding-bottom: 0.015in;
-    font-size: 11pt;
-    line-height: 1.1;
+    margin: 0 0 0.045in;
+    border-bottom: 1px solid #999;
+    padding-bottom: 0.02in;
+    font-size: 10pt;
+    line-height: 1.05;
+    letter-spacing: 0.035em;
+    text-transform: uppercase;
   }
 
   body.resume-page .content-card h3 {
-    margin: 0.045in 0 0.015in;
+    margin: 0.045in 0 0.012in;
     font-size: 9.4pt;
     line-height: 1.15;
   }
 
   body.resume-page .content-card p,
   body.resume-page .content-card li {
-    margin: 0 0 0.025in;
-    font-size: 8.7pt;
-    line-height: 1.22;
+    margin: 0 0 0.03in;
+    font-size: 9.05pt;
+    line-height: 1.27;
   }
 
   body.resume-page .clean-list {
     margin: 0;
-    padding-left: 0.14in;
+    padding-left: 0.2in;
+  }
+
+  body.resume-page .clean-list li::marker {
+    font-size: 7pt;
   }
 
   body.resume-page .core-skills li + li {
-    margin-top: 0.035in;
+    margin-top: 0;
+  }
+
+  body.resume-page .core-skills {
+    columns: 2;
+    column-gap: 0.28in;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  body.resume-page .core-skills li {
+    break-inside: avoid;
+    margin-bottom: 0.06in;
   }
 
   body.resume-page .core-skills strong {
-    display: inline;
+    display: block;
     color: #111 !important;
   }
 
   body.resume-page .section-intro {
     margin-bottom: 0.025in;
+    color: #333 !important;
   }
 }
