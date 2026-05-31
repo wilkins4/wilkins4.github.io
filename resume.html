@@ -38,9 +38,11 @@
         </p>
         <div class="button-row">
           <a class="button secondary" href="mailto:stephen@stephenwilkinson.dev" aria-label="Email Stephen Wilkinson">Email me</a>
+          <button class="button secondary" type="button" data-copy-email="stephen@stephenwilkinson.dev" aria-describedby="resume-email-feedback">Copy email</button>
           <a class="button secondary" href="https://github.com/wilkins4" target="_blank" rel="noopener noreferrer">GitHub</a>
           <a class="button secondary" href="Stephen-Wilkinson-Resume.pdf" download="Stephen-Wilkinson-Resume.pdf">Download Resume PDF</a>
         </div>
+        <p class="contact-feedback" id="resume-email-feedback" aria-live="polite"></p>
       </div>
     </section>
 
@@ -119,5 +121,69 @@
       <a class="quiet-link" href="archive.html" rel="nofollow">Archive</a>
     </div>
   </footer>
+  <script>
+    (() => {
+      const copyButton = document.querySelector("[data-copy-email]");
+      const feedback = document.querySelector("#resume-email-feedback");
+
+      if (!copyButton || !feedback) {
+        return;
+      }
+
+      const originalLabel = copyButton.textContent;
+      let feedbackTimeout;
+
+      const setFeedback = (message) => {
+        feedback.textContent = message;
+        window.clearTimeout(feedbackTimeout);
+        feedbackTimeout = window.setTimeout(() => {
+          feedback.textContent = "";
+          copyButton.textContent = originalLabel;
+        }, 2800);
+      };
+
+      const copyWithFallback = (email) => {
+        const field = document.createElement("textarea");
+        field.value = email;
+        field.setAttribute("readonly", "");
+        field.style.position = "fixed";
+        field.style.top = "-9999px";
+        document.body.appendChild(field);
+        field.select();
+        const copied = document.execCommand("copy");
+        field.remove();
+
+        if (!copied) {
+          throw new Error("Copy command failed");
+        }
+      };
+
+      const copyEmail = async (email) => {
+        if (navigator.clipboard && window.isSecureContext) {
+          try {
+            await navigator.clipboard.writeText(email);
+            return;
+          } catch {
+            copyWithFallback(email);
+            return;
+          }
+        }
+
+        copyWithFallback(email);
+      };
+
+      copyButton.addEventListener("click", async () => {
+        const email = copyButton.dataset.copyEmail;
+
+        try {
+          await copyEmail(email);
+          copyButton.textContent = "Copied";
+          setFeedback("Email copied");
+        } catch {
+          setFeedback(email);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

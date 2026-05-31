@@ -338,8 +338,10 @@ img {
   min-height: 44px;
   border-radius: var(--radius);
   padding: 0.78rem 1rem;
+  font: inherit;
   font-weight: 800;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .button-icon {
@@ -367,6 +369,17 @@ img {
 
 .button:hover {
   transform: translateY(-1px);
+}
+
+.contact-feedback {
+  margin: 0.7rem 0 0;
+  color: var(--warm-soft);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.contact-feedback:empty {
+  display: none;
 }
 
 .section,
