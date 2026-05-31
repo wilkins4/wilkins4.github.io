@@ -544,6 +544,15 @@ h3 {
   color: var(--text);
 }
 
+.core-skills li + li {
+  margin-top: 0.8rem;
+}
+
+.core-skills strong {
+  display: block;
+  color: var(--text);
+}
+
 .snapshot-section {
   background: var(--surface);
   color: var(--text);
