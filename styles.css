@@ -84,6 +84,12 @@ img {
   gap: 1rem;
 }
 
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
 .nav-wrap {
   min-height: 68px;
 }
@@ -118,7 +124,8 @@ img {
 
 .site-nav a,
 .text-link,
-.footer-wrap a {
+.footer-wrap a,
+.footer-links a {
   color: var(--ink);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.22rem;

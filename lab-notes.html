@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lab Notes | Stephen Wilkinson</title>
-  <meta name="description" content="Cybersecurity, networking, digital forensics, and homelab notes from Stephen Wilkinson.">
+  <meta name="description" content="Cybersecurity, networking, digital forensics, Windows, Linux, and troubleshooting notes from Stephen Wilkinson.">
   <link rel="canonical" href="https://stephenwilkinson.dev/lab-notes.html">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
@@ -15,9 +15,9 @@
     <div class="container nav-wrap">
       <a class="brand" href="index.html"><span class="brand-mark">SW</span><span>Stephen Wilkinson</span></a>
       <nav class="site-nav" aria-label="Primary navigation">
-        <a href="projects.html">Projects</a>
-        <a href="lab-notes.html">Lab Notes</a>
+        <a href="index.html">Home</a>
         <a href="resume.html">Resume</a>
+        <a href="lab-notes.html">Lab Notes</a>
         <a href="about.html">About</a>
         <a href="index.html#contact">Contact</a>
       </nav>
@@ -30,9 +30,8 @@
         <p class="eyebrow">Lab notes</p>
         <h1>Proof of learning, written clearly.</h1>
         <p>
-          This page is the organizing frame for security, networking, and forensics notes. The goal is to turn
-          coursework and homelab work into short, readable writeups with objectives, tools, steps, findings,
-          conclusions, and lessons learned.
+          These notes document coursework, labs, troubleshooting practice, and certification study. They are written
+          to show process: what I tested, what I observed, what I changed, and what I learned.
         </p>
       </div>
     </section>
@@ -54,7 +53,7 @@
         <div class="content-stack">
           <article class="content-card">
             <p class="project-type">Networking</p>
-            <h2>Network+ and Packet Analysis Labs</h2>
+            <h2>Networking and Packet Analysis</h2>
             <p>Practice area for IP addressing, DNS, DHCP, routing basics, Wi-Fi troubleshooting, and Wireshark packet review.</p>
             <ul class="clean-list">
               <li>DNS lookup comparison notes</li>
@@ -63,13 +62,24 @@
               <li>Packet capture summaries in plain language</li>
             </ul>
             <div class="proof-links">
-              <a href="network-plus-lab.html">View sample lab writeup</a>
+              <a href="networking-lab.html">View sample lab writeup</a>
             </div>
           </article>
 
           <article class="content-card">
+            <p class="project-type">Windows Client OS</p>
+            <h2>Windows Client OS</h2>
+            <p>Notes for account support, updates, software issues, logs, permissions, device setup, and ticket-style documentation.</p>
+            <ul class="clean-list">
+              <li>Symptom, hypothesis, test, result, next step</li>
+              <li>Event Viewer and log review practice</li>
+              <li>Command notes with expected output</li>
+            </ul>
+          </article>
+
+          <article class="content-card">
             <p class="project-type">Digital Forensics</p>
-            <h2>Forensics Coursework Portfolio</h2>
+            <h2>Digital Forensics</h2>
             <p>Writeups for Autopsy, file system analysis, evidence handling concepts, Windows artifacts, and timeline thinking.</p>
             <ul class="clean-list">
               <li>Separate facts, interpretation, and conclusion</li>
@@ -79,18 +89,18 @@
           </article>
 
           <article class="content-card">
-            <p class="project-type">Windows / Linux</p>
-            <h2>Operating System Troubleshooting</h2>
-            <p>Ticket-style notes for Windows Client OS coursework, Linux CLI practice, account support, logs, updates, permissions, and services.</p>
+            <p class="project-type">Linux Basics</p>
+            <h2>Linux Basics</h2>
+            <p>Command-line notes for navigation, files, permissions, services, logs, and basic troubleshooting practice.</p>
             <ul class="clean-list">
-              <li>Symptom, hypothesis, test, result, next step</li>
-              <li>Event Viewer and log review practice</li>
-              <li>Command notes with expected output</li>
+              <li>Common commands and expected output</li>
+              <li>Permission and service checks</li>
+              <li>Notes written for repeatable practice</li>
             </ul>
           </article>
 
           <article class="content-card">
-            <p class="project-type">Homelab</p>
+            <p class="project-type">Troubleshooting Notes</p>
             <h2>Infrastructure Change Notes</h2>
             <p>Runbooks and change notes for DNS, Docker services, NAS backups, Wi-Fi updates, and safe rollback planning.</p>
             <ul class="clean-list">
@@ -98,9 +108,6 @@
               <li>Validation checks after the change</li>
               <li>Rollback steps if something breaks</li>
             </ul>
-            <div class="proof-links">
-              <a href="homelab-infrastructure.html">View homelab writeup</a>
-            </div>
           </article>
         </div>
       </div>
@@ -110,7 +117,12 @@
   <footer class="site-footer">
     <div class="container footer-wrap">
       <span>&copy; 2026 Stephen Wilkinson</span>
-      <a href="archive.html">Archive &amp; experiments</a>
+      <div class="footer-links">
+        <a href="archive.html">Archive</a>
+        <a href="https://github.com/wilkins4" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/stephen-wilkinson" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="mailto:stephen@stephenwilkinson.dev">Email</a>
+      </div>
     </div>
   </footer>
 </body>
