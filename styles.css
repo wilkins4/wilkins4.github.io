@@ -793,6 +793,11 @@ h3 {
 }
 
 @media print {
+  @page {
+    size: letter;
+    margin: 0.35in;
+  }
+
   .site-header,
   .site-footer,
   .button-row,
@@ -825,5 +830,98 @@ h3 {
   p,
   li {
     color: #111 !important;
+  }
+
+  body.resume-page {
+    font-size: 9.2pt;
+    line-height: 1.25;
+  }
+
+  body.resume-page .container {
+    width: 100%;
+    max-width: none;
+  }
+
+  body.resume-page .page-hero {
+    border-bottom: 1px solid #bbb;
+    padding: 0 0 0.08in;
+    background: #fff !important;
+  }
+
+  body.resume-page .page-hero .eyebrow {
+    display: none;
+  }
+
+  body.resume-page .page-hero h1 {
+    font-size: 24pt;
+    line-height: 1;
+    margin-bottom: 0.05in;
+  }
+
+  body.resume-page .page-hero p {
+    max-width: none;
+    margin: 0;
+    font-size: 9.2pt;
+    line-height: 1.25;
+  }
+
+  body.resume-page .section {
+    padding: 0.1in 0 0;
+  }
+
+  body.resume-page .resume-layout {
+    grid-template-columns: 1.55in minmax(0, 1fr);
+    gap: 0.18in;
+  }
+
+  body.resume-page .resume-sidebar,
+  body.resume-page .resume-main {
+    gap: 0.08in;
+  }
+
+  body.resume-page .content-card {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    break-inside: auto;
+  }
+
+  body.resume-page .content-card h2 {
+    margin: 0 0 0.035in;
+    border-bottom: 1px solid #bbb;
+    padding-bottom: 0.015in;
+    font-size: 11pt;
+    line-height: 1.1;
+  }
+
+  body.resume-page .content-card h3 {
+    margin: 0.045in 0 0.015in;
+    font-size: 9.4pt;
+    line-height: 1.15;
+  }
+
+  body.resume-page .content-card p,
+  body.resume-page .content-card li {
+    margin: 0 0 0.025in;
+    font-size: 8.7pt;
+    line-height: 1.22;
+  }
+
+  body.resume-page .clean-list {
+    margin: 0;
+    padding-left: 0.14in;
+  }
+
+  body.resume-page .core-skills li + li {
+    margin-top: 0.035in;
+  }
+
+  body.resume-page .core-skills strong {
+    display: inline;
+    color: #111 !important;
+  }
+
+  body.resume-page .section-intro {
+    margin-bottom: 0.025in;
   }
 }
