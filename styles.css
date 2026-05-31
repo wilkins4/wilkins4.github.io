@@ -520,6 +520,20 @@ h3 {
   color: var(--amber);
 }
 
+#focus .status-tag,
+#focus .status-tag.active,
+#focus .status-tag.in-progress,
+#focus .status-tag.learning {
+  border-color: rgba(255, 255, 255, 0.18);
+  padding: 0.45rem 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #d8dee9;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
 .proof-links {
   display: flex;
   flex-wrap: wrap;
