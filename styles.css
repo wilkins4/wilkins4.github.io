@@ -412,6 +412,15 @@ h3 {
   margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
 }
 
+#focus .section-heading {
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+
+.section-heading > .status-row {
+  margin-top: 0.9rem;
+  margin-bottom: 0;
+}
+
 .inline-heading {
   display: flex;
   align-items: end;
