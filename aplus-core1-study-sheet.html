@@ -51,7 +51,7 @@
   @media(max-width:680px){.grid2,.two{grid-template-columns:1fr; column-count:1;}}
 
   .footer{margin-top:28px; border-top:1px solid var(--line); padding-top:10px; color:var(--muted); font-size:11.5px;}
-  .toolbar{max-width:880px; margin:14px auto -6px; text-align:right;}
+  .toolbar{max-width:880px; margin:14px auto -6px; display:flex; justify-content:flex-end; gap:8px; flex-wrap:wrap;}
   .toolbar button{font-family:inherit; border:1px solid var(--line); background:#fff; padding:7px 14px; border-radius:7px; cursor:pointer; font-weight:600; font-size:13px;}
   .toolbar button:hover{border-color:var(--accent); color:var(--accent);}
 
@@ -66,7 +66,11 @@
 </style>
 </head>
 <body>
-<div class="toolbar"><button onclick="window.print()">Print / Save as PDF</button></div>
+<div class="toolbar">
+  <button onclick="location.href='aplus.html'">A+ Hub</button>
+  <button onclick="location.href='aplus-core1-trainer.html'">Practice Trainer</button>
+  <button onclick="window.print()">Print / Save as PDF</button>
+</div>
 <div class="page">
 
 <header class="top">
