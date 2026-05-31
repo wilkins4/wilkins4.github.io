@@ -507,6 +507,18 @@ h3 {
   color: var(--text-muted);
 }
 
+.quiet-link {
+  font-size: 0.85rem;
+  opacity: 0.55;
+  text-decoration: none;
+}
+
+.quiet-link:hover,
+.quiet-link:focus {
+  opacity: 1;
+  text-decoration: underline;
+}
+
 .page-hero {
   position: relative;
   overflow: hidden;
