@@ -374,6 +374,10 @@ img {
   border-color: rgba(122, 162, 247, 0.56);
 }
 
+.contact-panel .email-action {
+  margin-top: 1rem;
+}
+
 .button {
   display: inline-flex;
   align-items: center;

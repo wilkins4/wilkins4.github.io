@@ -8,6 +8,7 @@
   <link rel="canonical" href="https://stephenwilkinson.dev/resume.html">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
+  <script src="contact-copy.js" defer></script>
 </head>
 <body class="resume-page">
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -123,69 +124,5 @@
       <a class="quiet-link" href="archive.html" rel="nofollow">Archive</a>
     </div>
   </footer>
-  <script>
-    (() => {
-      const copyButton = document.querySelector("[data-copy-email]");
-      const feedback = document.querySelector("#resume-email-feedback");
-
-      if (!copyButton || !feedback) {
-        return;
-      }
-
-      const originalLabel = copyButton.textContent;
-      let feedbackTimeout;
-
-      const setFeedback = (message) => {
-        feedback.textContent = message;
-        window.clearTimeout(feedbackTimeout);
-        feedbackTimeout = window.setTimeout(() => {
-          feedback.textContent = "";
-          copyButton.textContent = originalLabel;
-        }, 2800);
-      };
-
-      const copyWithFallback = (email) => {
-        const field = document.createElement("textarea");
-        field.value = email;
-        field.setAttribute("readonly", "");
-        field.style.position = "fixed";
-        field.style.top = "-9999px";
-        document.body.appendChild(field);
-        field.select();
-        const copied = document.execCommand("copy");
-        field.remove();
-
-        if (!copied) {
-          throw new Error("Copy command failed");
-        }
-      };
-
-      const copyEmail = async (email) => {
-        if (navigator.clipboard && window.isSecureContext) {
-          try {
-            await navigator.clipboard.writeText(email);
-            return;
-          } catch {
-            copyWithFallback(email);
-            return;
-          }
-        }
-
-        copyWithFallback(email);
-      };
-
-      copyButton.addEventListener("click", async () => {
-        const email = copyButton.dataset.copyEmail;
-
-        try {
-          await copyEmail(email);
-          copyButton.textContent = "Copied";
-          setFeedback("Email copied");
-        } catch {
-          setFeedback(email);
-        }
-      });
-    })();
-  </script>
 </body>
 </html>

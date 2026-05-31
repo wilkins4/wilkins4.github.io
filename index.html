@@ -13,6 +13,7 @@
   <link rel="canonical" href="https://stephenwilkinson.dev/">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
+  <script src="contact-copy.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
@@ -143,7 +144,11 @@
           <p class="section-kicker">Contact</p>
           <h2>Open to IT support roles.</h2>
           <p>Entry-level help desk, desktop support, and junior security support.</p>
-          <p><a href="mailto:stephen@stephenwilkinson.dev">stephen@stephenwilkinson.dev</a></p>
+          <div class="email-action" aria-label="Email Stephen Wilkinson">
+            <a href="mailto:stephen@stephenwilkinson.dev">stephen@stephenwilkinson.dev</a>
+            <button type="button" data-copy-email="stephen@stephenwilkinson.dev" aria-describedby="home-email-feedback">Copy</button>
+          </div>
+          <p class="contact-feedback" id="home-email-feedback" aria-live="polite"></p>
         </div>
         <div class="button-row">
           <a class="button primary" href="mailto:stephen@stephenwilkinson.dev">Email Stephen</a>
