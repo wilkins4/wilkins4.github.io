@@ -1,1 +1,61 @@
-# Stephen Wilkinson's Portfolio
+# Stephen Wilkinson Portfolio
+
+Static GitHub Pages portfolio for Stephen Wilkinson, focused on IT support readiness, cybersecurity coursework, lab documentation, and selected project evidence.
+
+Live site: [stephenwilkinson.dev](https://stephenwilkinson.dev)
+
+## Site Structure
+
+| Area | File | Purpose |
+| --- | --- | --- |
+| Home | `index.html` | Role focus, featured work, skills, education, and contact |
+| Project hub | `projects.html` | Organized entry point for current work, labs, and archive routing |
+| Resume | `resume.html` | Web resume and PDF download |
+| About | `about.html` | Background, current direction, and work style |
+| Lab notes | `lab-notes.html` | Index of support-style lab documentation |
+| Linux lab | `homelab-infrastructure.html` | Docker/Linux lab case study |
+| Networking lab | `networking-lab.html` | DNS and connectivity troubleshooting writeup |
+| A+ tools | `aplus.html` | CompTIA A+ study tools index |
+| Archive | `archive.html` | Older utilities, games, and prototypes |
+
+## Repository Layout
+
+Most public pages remain at the repository root to preserve existing GitHub Pages URLs. Organization is handled through `projects.html`, `archive.html`, and this README instead of moving deployed files and breaking links.
+
+```text
+.
+|-- index.html
+|-- projects.html
+|-- resume.html
+|-- about.html
+|-- lab-notes.html
+|-- homelab-infrastructure.html
+|-- networking-lab.html
+|-- aplus.html
+|-- archive.html
+|-- styles.css
+|-- contact-copy.js
+|-- Stephen-Wilkinson-Resume.pdf
+|-- dungeon-party-rpg/
+|-- frameforge-arena/
+|-- mini-rts-clash/
+`-- roadkill-pilgrimage/
+```
+
+## Local Preview
+
+Run a simple local server from the repo root:
+
+```powershell
+python -m http.server 8080
+```
+
+Then open [http://localhost:8080](http://localhost:8080).
+
+## Maintenance Notes
+
+- Keep career-facing pages linked from `projects.html` and the main navigation.
+- Put older experiments behind `archive.html` instead of the homepage.
+- Update `sitemap.xml` when adding or removing public indexed pages.
+- Keep large generated game builds in their own folders.
+- Use short, support-style project notes: objective, environment, procedure, validation, evidence, and next step.

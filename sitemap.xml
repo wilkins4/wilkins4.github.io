@@ -2,14 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://stephenwilkinson.dev/</loc>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-04</lastmod>
   </url>
   <url>
     <loc>https://stephenwilkinson.dev/resume.html</loc>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-04</lastmod>
   </url>
   <url>
     <loc>https://stephenwilkinson.dev/about.html</loc>
-    <lastmod>2026-05-31</lastmod>
+    <lastmod>2026-06-04</lastmod>
+  </url>
+  <url>
+    <loc>https://stephenwilkinson.dev/projects.html</loc>
+    <lastmod>2026-06-04</lastmod>
+  </url>
+  <url>
+    <loc>https://stephenwilkinson.dev/lab-notes.html</loc>
+    <lastmod>2026-06-04</lastmod>
+  </url>
+  <url>
+    <loc>https://stephenwilkinson.dev/homelab-infrastructure.html</loc>
+    <lastmod>2026-06-04</lastmod>
+  </url>
+  <url>
+    <loc>https://stephenwilkinson.dev/networking-lab.html</loc>
+    <lastmod>2026-06-04</lastmod>
+  </url>
+  <url>
+    <loc>https://stephenwilkinson.dev/aplus.html</loc>
+    <lastmod>2026-06-04</lastmod>
   </url>
 </urlset>
