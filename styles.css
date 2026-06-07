@@ -528,6 +528,11 @@ h3 {
   margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
 }
 
+.compact-intro {
+  max-width: 720px;
+  margin: 0.75rem 0 0;
+}
+
 #focus .section-heading {
   margin-bottom: clamp(1.25rem, 3vw, 2rem);
 }
