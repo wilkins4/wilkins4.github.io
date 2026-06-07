@@ -60,7 +60,7 @@ Most public pages remain at the repository root to preserve existing GitHub Page
 | --- | --- | --- |
 | Public pages | Resume, contact, work index, and current notebooks | `index.html`, `resume.html`, `projects.html`, `lab-notes.html` |
 | Lab notebooks | Ongoing Linux and networking notes that still need more real captured output over time | `homelab-infrastructure.html`, `networking-lab.html` |
-| Workbench | Useful drafts and study tools that are reachable but not promoted | A+ tools, Windows draft, older games, utilities, prototypes |
+| Workbench | Drafts, study tools, and older experiments kept separate from the main pages | A+ tools, Windows draft, older games, utilities, prototypes |
 
 ## Local Preview
 
