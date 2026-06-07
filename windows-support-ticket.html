@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Windows Support Ticket Lab | Stephen Wilkinson</title>
+  <meta name="description" content="Windows support ticket lab from Stephen Wilkinson covering a network printer offline issue, triage, validation, escalation criteria, and user-facing documentation.">
+  <link rel="canonical" href="https://stephenwilkinson.dev/windows-support-ticket.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="index.html"><span class="brand-mark">SW</span><span>Stephen Wilkinson</span></a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Work</a>
+        <a href="lab-notes.html">Labs</a>
+        <a href="resume.html">Resume</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container">
+        <div class="status-row">
+          <span class="status-tag">Ticket Lab</span>
+          <span class="status-tag">Windows 11</span>
+          <span class="status-tag">Printer</span>
+        </div>
+        <p class="eyebrow">Windows Support</p>
+        <h1>Network Printer Offline After Router Change</h1>
+        <p>
+          A ticket-style Windows support case showing intake, scope control, network checks,
+          printer port repair, validation, and a plain-language user update.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container content-grid">
+        <aside class="content-card">
+          <h2>Ticket Snapshot</h2>
+          <ul class="clean-list">
+            <li><strong>Ticket:</strong> HD-2026-0524-001.</li>
+            <li><strong>Type:</strong> Tier 1 help desk / desktop support simulation.</li>
+            <li><strong>Device:</strong> Windows 11 laptop.</li>
+            <li><strong>Issue:</strong> LAN printer showed offline for one user.</li>
+            <li><strong>Status:</strong> Resolved and documented.</li>
+          </ul>
+          <div class="tag-row">
+            <span class="tag">Windows</span>
+            <span class="tag">Printing</span>
+            <span class="tag">DHCP</span>
+            <span class="tag">User Support</span>
+          </div>
+          <div class="proof-links">
+            <a href="lab-notes.html">Back to lab notes</a>
+          </div>
+        </aside>
+
+        <div class="content-stack">
+          <article class="content-card">
+            <h2>Objective</h2>
+            <p>
+              Practice a support workflow that starts with user impact, confirms scope, tests the simplest
+              network assumptions, fixes the Windows printer configuration, and closes with validation.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <h2>Environment</h2>
+            <ul class="clean-list">
+              <li>User reports a front-office printer as offline from a Windows 11 laptop.</li>
+              <li>Another workstation can print, so the problem is likely user-device specific.</li>
+              <li>The printer is reachable on the LAN, but the office recently changed router/DHCP settings.</li>
+              <li>Private IP addresses are documentation placeholders, not a real customer network.</li>
+            </ul>
+          </article>
+
+          <article class="content-card">
+            <h2>Procedure</h2>
+            <ol class="clean-list">
+              <li>Confirmed the user could print to PDF, separating application print flow from printer delivery.</li>
+              <li>Confirmed another workstation could print to the same device, narrowing scope to one laptop.</li>
+              <li>Opened Windows Settings, then Printers and scanners, and confirmed the queue showed offline.</li>
+              <li>Compared the printer display IP with the laptop's configured Standard TCP/IP Port.</li>
+              <li>Tested the old and new printer addresses with <code>ping</code>.</li>
+              <li>Added a new Standard TCP/IP Port for the current printer address.</li>
+              <li>Printed a Windows test page, then asked the user to print the original form.</li>
+            </ol>
+          </article>
+
+          <article class="content-card evidence-card">
+            <h2>Evidence</h2>
+            <pre><code>PS&gt; ping 192.168.1.44
+Request timed out.
+
+PS&gt; ping 192.168.1.87
+Reply from 192.168.1.87: bytes=32 time&lt;1ms TTL=64
+
+Printer Properties &gt; Ports
+Old TCP/IP port: 192.168.1.44
+New TCP/IP port: 192.168.1.87
+
+Windows test page: printed successfully</code></pre>
+            <figure class="evidence-figure">
+              <img src="evidence-windows-printer.svg" alt="Sanitized Windows printer ticket validation screenshot">
+              <figcaption>Sanitized screenshot-style evidence from the ticket simulation.</figcaption>
+            </figure>
+          </article>
+
+          <article class="content-card">
+            <h2>What Failed, Isolation, Fix</h2>
+            <ul class="clean-list">
+              <li><strong>What failed:</strong> The laptop still sent print jobs to the printer's old TCP/IP port.</li>
+              <li><strong>How I isolated it:</strong> Printing worked from another workstation, the old IP did not reply, and the new printer IP did reply.</li>
+              <li><strong>How I verified the fix:</strong> Windows test page printed successfully, then the user's original form printed successfully.</li>
+            </ul>
+          </article>
+
+          <article class="content-card">
+            <h2>User-Facing Update</h2>
+            <p>
+              Your printer was working, but your laptop was still sending print jobs to the printer's old
+              network address. I updated the printer port to the current address and confirmed that both
+              the test page and your form printed successfully.
+            </p>
+          </article>
+
+          <article class="content-card">
+            <h2>Escalation Criteria</h2>
+            <ul class="clean-list">
+              <li>Printer cannot obtain an IP address.</li>
+              <li>Multiple users lose printer or network connectivity.</li>
+              <li>The printer responds to ping but print jobs fail for all users.</li>
+              <li>Printer deployment is controlled by print server, group policy, or endpoint management tooling.</li>
+              <li>The issue involves VLAN routing, firewall rules, or managed switch configuration outside Tier 1 permissions.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <span>&copy; 2026 Stephen Wilkinson</span>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="projects.html">Work</a>
+        <a href="lab-notes.html">Lab Notes</a>
+        <a href="about.html">About</a>
+        <a class="quiet-link" href="archive.html" rel="nofollow">Archive</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

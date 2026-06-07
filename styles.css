@@ -768,6 +768,27 @@ h3 {
   text-transform: uppercase;
 }
 
+.evidence-card {
+  border-color: rgba(122, 162, 247, 0.18);
+}
+
+.evidence-figure {
+  margin: 1rem 0 0;
+}
+
+.evidence-figure img {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(13, 17, 23, 0.88);
+}
+
+.evidence-figure figcaption {
+  margin-top: 0.55rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
 .resume-layout {
   display: grid;
   grid-template-columns: minmax(260px, 0.42fr) minmax(0, 1fr);

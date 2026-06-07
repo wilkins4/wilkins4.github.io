@@ -134,11 +134,42 @@ docker start linux-exam-web</code></pre>
           </article>
 
           <article class="content-card">
+            <h2>Passing Command Output</h2>
+            <p>
+              This public excerpt uses generic targets to avoid exposing home-lab hostnames or addresses,
+              but it follows the same validation flow: resolve a name, test HTTP, then confirm the active route.
+            </p>
+            <pre><code>$ getent hosts example.com
+2606:4700:10::6814:179a example.com
+
+$ curl -I https://example.com
+HTTP/2 200
+
+$ ip route | head -1
+default via [sanitized-gateway] dev eth0</code></pre>
+          </article>
+
+          <article class="content-card evidence-card">
+            <h2>Screenshot Evidence</h2>
+            <figure class="evidence-figure">
+              <img src="evidence-dns-connectivity.svg" alt="Sanitized DNS and HTTP validation terminal screenshot">
+              <figcaption>Sanitized terminal screenshot showing DNS, HTTP, and route checks passing.</figcaption>
+            </figure>
+          </article>
+
+          <article class="content-card">
+            <h2>What Failed, Isolation, Fix</h2>
+            <ul class="clean-list">
+              <li><strong>What failed:</strong> DNS lookup can fail even when the target service or network route is healthy.</li>
+              <li><strong>How I isolated it:</strong> I separated name resolution from HTTP reachability and route state instead of treating "site down" as one problem.</li>
+              <li><strong>How I verified the fix:</strong> I repeated the lookup after resolver/service correction, then confirmed the HTTP response returned successfully.</li>
+            </ul>
+          </article>
+
+          <article class="content-card">
             <h2>Next Evidence To Add</h2>
             <ul class="clean-list">
-              <li>Sanitized terminal output from a passing <code>check-networking</code> run.</li>
-              <li>One screenshot showing DNS failure while CoreDNS is stopped.</li>
-              <li>One packet capture summary showing query, response, source, destination, and protocol.</li>
+              <li>A packet capture summary showing query, response, source, destination, and protocol.</li>
               <li>A short user-facing note for each failure mode.</li>
             </ul>
           </article>

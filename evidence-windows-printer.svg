@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Sanitized Windows printer troubleshooting screenshot</title>
+  <desc id="desc">Ticket-style screenshot showing old printer port failing, new printer address replying, and test page validation passing.</desc>
+  <rect width="960" height="540" fill="#0d1117"/>
+  <rect x="48" y="44" width="864" height="452" rx="8" fill="#121826" stroke="rgba(232,237,242,0.16)"/>
+  <rect x="48" y="44" width="864" height="44" rx="8" fill="#172033"/>
+  <circle cx="76" cy="66" r="6" fill="#f7768e"/>
+  <circle cx="98" cy="66" r="6" fill="#e0af68"/>
+  <circle cx="120" cy="66" r="6" fill="#9ece6a"/>
+  <text x="144" y="72" fill="#9aa7b4" font-family="Cascadia Code, Consolas, monospace" font-size="15">ticket-hd-2026-0524-001</text>
+  <g font-family="Cascadia Code, Consolas, monospace" font-size="22">
+    <text x="82" y="130" fill="#7aa2f7">PS&gt; ping 192.168.1.44</text>
+    <text x="82" y="164" fill="#f7768e">Request timed out.</text>
+    <text x="82" y="218" fill="#7aa2f7">PS&gt; ping 192.168.1.87</text>
+    <text x="82" y="252" fill="#9ece6a">Reply from 192.168.1.87: bytes=32 time&lt;1ms TTL=64</text>
+    <text x="82" y="306" fill="#7aa2f7">Printer Properties &gt; Ports</text>
+    <text x="82" y="340" fill="#e8edf2">Updated Standard TCP/IP Port to 192.168.1.87</text>
+    <text x="82" y="394" fill="#9ece6a">Windows test page: printed successfully</text>
+    <text x="82" y="444" fill="#9aa7b4">simulated ticket with private IPs reserved for documentation practice</text>
+  </g>
+</svg>

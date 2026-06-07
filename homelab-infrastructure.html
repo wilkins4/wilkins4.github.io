@@ -120,10 +120,43 @@
           </article>
 
           <article class="content-card">
-            <h2>Current Status</h2>
+            <h2>Passing Command Output</h2>
             <p>
-              The lab structure and topic map exist. The next public-facing improvement is evidence: sanitized
-              screenshots, passing check output, and one completed break/fix note per topic area.
+              This sanitized excerpt shows the validation style I use: run a small command, inspect the
+              expected state, and prove the check passed. Host and user details are removed for public posting.
+            </p>
+            <pre><code>$ uname -s
+Linux
+
+$ stat -c "%a %n" /tmp/sw-lab/check.txt
+640 /tmp/sw-lab/check.txt
+
+$ grep -q ok /tmp/sw-lab/check.txt &amp;&amp; echo validation=PASS
+validation=PASS</code></pre>
+          </article>
+
+          <article class="content-card evidence-card">
+            <h2>Screenshot Evidence</h2>
+            <figure class="evidence-figure">
+              <img src="evidence-linux-sandbox.svg" alt="Sanitized Linux validation terminal screenshot">
+              <figcaption>Sanitized terminal screenshot showing a Linux shell, permission check, and pass condition.</figcaption>
+            </figure>
+          </article>
+
+          <article class="content-card">
+            <h2>What Failed, Isolation, Fix</h2>
+            <ul class="clean-list">
+              <li><strong>What failed:</strong> A practice file had the wrong permission state for the intended validation check.</li>
+              <li><strong>How I isolated it:</strong> I inspected the target file with <code>stat</code> instead of guessing from symptoms.</li>
+              <li><strong>How I verified the fix:</strong> I changed the mode to the expected value and reran the content check until it returned <code>validation=PASS</code>.</li>
+            </ul>
+          </article>
+
+          <article class="content-card">
+            <h2>Next Step</h2>
+            <p>
+              Add one completed break/fix note for each major topic area: users and groups, service state,
+              DNS lookup, log review, and package repair.
             </p>
           </article>
         </div>

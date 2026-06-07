@@ -1,6 +1,6 @@
 # Stephen Wilkinson Portfolio
 
-Static GitHub Pages portfolio for Stephen Wilkinson, focused on IT support readiness, cybersecurity coursework, lab documentation, and selected project evidence.
+Static GitHub Pages portfolio for Stephen Wilkinson, focused on IT support readiness, cybersecurity coursework, lab documentation, troubleshooting evidence, and selected project proof.
 
 Live site: [stephenwilkinson.dev](https://stephenwilkinson.dev)
 
@@ -9,18 +9,19 @@ Live site: [stephenwilkinson.dev](https://stephenwilkinson.dev)
 | Area | File | Purpose |
 | --- | --- | --- |
 | Home | `index.html` | Role focus, featured work, skills, education, and contact |
-| Project hub | `projects.html` | Organized entry point for current work, labs, and archive routing |
-| Resume | `resume.html` | Web resume and PDF download |
+| Project hub | `projects.html` | Three-tier entry point for resume proof, lab notes, and archive/workbench routing |
+| Resume | `resume.html` | Web resume with public-safe contact details |
 | About | `about.html` | Background, current direction, and work style |
 | Lab notes | `lab-notes.html` | Index of support-style lab documentation |
 | Linux lab | `homelab-infrastructure.html` | Docker/Linux lab case study |
 | Networking lab | `networking-lab.html` | DNS and connectivity troubleshooting writeup |
-| A+ tools | `aplus.html` | CompTIA A+ study tools index |
+| Windows case | `windows-support-ticket.html` | Ticket-style Windows printer support case |
+| A+ tools | `aplus.html` | Tier 3 CompTIA A+ study tools index |
 | A+ Core 1 sheet | `aplus-core1-study-sheet.html` | Core 1 one-hour cram sheet |
 | A+ Core 1 trainer | `aplus-core1-trainer.html` | Core 1 practice trainer and flashcards |
 | A+ Core 2 sheet | `aplus-core2-study-sheet.html` | Core 2 one-hour cram sheet |
 | A+ Core 2 flashcards | `aplus-core2-flashcards.html` | Core 2 filtered flashcard deck |
-| Archive | `archive.html` | Older utilities, games, and prototypes |
+| Archive | `archive.html` | Older study tools, utilities, games, and prototypes |
 
 ## Repository Layout
 
@@ -35,20 +36,31 @@ Most public pages remain at the repository root to preserve existing GitHub Page
 |-- lab-notes.html
 |-- homelab-infrastructure.html
 |-- networking-lab.html
+|-- windows-support-ticket.html
 |-- aplus.html
 |-- aplus-core1-study-sheet.html
 |-- aplus-core1-trainer.html
 |-- aplus-core2-study-sheet.html
 |-- aplus-core2-flashcards.html
 |-- archive.html
+|-- evidence-linux-sandbox.svg
+|-- evidence-dns-connectivity.svg
+|-- evidence-windows-printer.svg
 |-- styles.css
 |-- contact-copy.js
-|-- Stephen-Wilkinson-Resume.pdf
 |-- dungeon-party-rpg/
 |-- frameforge-arena/
 |-- mini-rts-clash/
 `-- roadkill-pilgrimage/
 ```
+
+## Project Tiers
+
+| Tier | Public role | Pages |
+| --- | --- | --- |
+| Tier 1 | Homepage/resume proof: strongest job evidence only | Linux sandbox, DNS/connectivity lab, Windows support ticket, resume |
+| Tier 2 | Project hub and lab notes: polished detail | `projects.html`, `lab-notes.html`, case-study pages |
+| Tier 3 | Archive/workbench: useful but not promoted | A+ study tools, older games, utilities, prototypes |
 
 ## Local Preview
 
@@ -67,3 +79,16 @@ Then open [http://localhost:8080](http://localhost:8080).
 - Update `sitemap.xml` when adding or removing public indexed pages.
 - Keep large generated game builds in their own folders.
 - Use short, support-style project notes: objective, environment, procedure, validation, evidence, and next step.
+- Keep phone numbers and raw home-lab details out of public HTML, PDFs, screenshots, and workbench pages.
+
+## Suggested GitHub Repository Metadata
+
+Description:
+
+```text
+Static portfolio focused on IT support readiness, cybersecurity coursework, lab documentation, and troubleshooting evidence.
+```
+
+Website: `https://stephenwilkinson.dev`
+
+Topics: `portfolio`, `github-pages`, `it-support`, `cybersecurity`, `networking`, `linux`, `windows`, `documentation`, `help-desk`

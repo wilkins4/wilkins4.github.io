@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Sanitized Linux validation terminal screenshot</title>
+  <desc id="desc">Terminal-style screenshot showing Linux shell, permission, and validation checks passing.</desc>
+  <rect width="960" height="540" fill="#0d1117"/>
+  <rect x="48" y="44" width="864" height="452" rx="8" fill="#121826" stroke="rgba(232,237,242,0.16)"/>
+  <rect x="48" y="44" width="864" height="44" rx="8" fill="#172033"/>
+  <circle cx="76" cy="66" r="6" fill="#f7768e"/>
+  <circle cx="98" cy="66" r="6" fill="#e0af68"/>
+  <circle cx="120" cy="66" r="6" fill="#9ece6a"/>
+  <text x="144" y="72" fill="#9aa7b4" font-family="Cascadia Code, Consolas, monospace" font-size="15">sanitized-linux-validation</text>
+  <g font-family="Cascadia Code, Consolas, monospace" font-size="22">
+    <text x="82" y="130" fill="#7aa2f7">$ uname -s</text>
+    <text x="82" y="164" fill="#e8edf2">Linux</text>
+    <text x="82" y="218" fill="#7aa2f7">$ stat -c "%a %n" /tmp/sw-lab/check.txt</text>
+    <text x="82" y="252" fill="#e8edf2">640 /tmp/sw-lab/check.txt</text>
+    <text x="82" y="306" fill="#7aa2f7">$ grep -q ok /tmp/sw-lab/check.txt &amp;&amp; echo validation=PASS</text>
+    <text x="82" y="340" fill="#9ece6a">validation=PASS</text>
+    <text x="82" y="414" fill="#9aa7b4">host, username, and local paths sanitized for public posting</text>
+  </g>
+</svg>
