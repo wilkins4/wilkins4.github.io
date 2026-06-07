@@ -382,6 +382,7 @@ img {
 .email-action a {
   display: inline-flex;
   align-items: center;
+  flex: 1 1 auto;
   min-height: 44px;
   min-width: 0;
   padding: 0.78rem 1rem;
@@ -389,7 +390,7 @@ img {
   font-weight: 800;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.22rem;
-  overflow-wrap: anywhere;
+  white-space: nowrap;
 }
 
 .email-action button {
@@ -471,6 +472,13 @@ img {
 
 .contact-feedback:empty {
   display: none;
+}
+
+#education,
+#skills,
+#experience,
+#contact {
+  scroll-margin-top: 5.5rem;
 }
 
 .section,
@@ -1004,6 +1012,14 @@ h3 {
 
   .email-action a {
     flex: 1 1 auto;
+    padding-right: 0.65rem;
+    font-size: clamp(0.78rem, 3.45vw, 0.92rem);
+    line-height: 1;
+  }
+
+  .email-action button {
+    flex: 0 0 auto;
+    padding: 0 0.7rem;
   }
 
   .footer-wrap {

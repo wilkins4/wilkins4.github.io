@@ -1,6 +1,6 @@
-# Stephen Wilkinson Portfolio
+# Stephen Wilkinson Resume Site
 
-Static GitHub Pages portfolio for Stephen Wilkinson, focused on IT support readiness, cybersecurity coursework, lab documentation, and ongoing technical notes.
+Static GitHub Pages resume site for Stephen Wilkinson, focused on entry-level IT support, help desk, desktop support, and junior security support roles.
 
 Live site: [stephenwilkinson.dev](https://stephenwilkinson.dev)
 
@@ -8,13 +8,13 @@ Live site: [stephenwilkinson.dev](https://stephenwilkinson.dev)
 
 | Area | File | Purpose |
 | --- | --- | --- |
-| Home | `index.html` | Role focus, featured work, skills, education, and contact |
-| Work index | `projects.html` | Entry point for public pages, lab notebooks, drafts, and archive/workbench routing |
+| Home | `index.html` | Resume-first landing page with contact, education, skills, experience, and role target |
+| Work index | `projects.html` | Noindexed supplemental index for lab notes, study materials, and archived work |
 | Resume | `resume.html` | Web resume with public-safe contact details |
 | About | `about.html` | Background, current direction, and work style |
-| Lab notes | `lab-notes.html` | Index of support-style lab documentation |
-| Linux lab | `homelab-infrastructure.html` | Docker/Linux lab case study |
-| Networking lab | `networking-lab.html` | DNS and connectivity troubleshooting writeup |
+| Lab notes | `lab-notes.html` | Noindexed index of support-style lab documentation |
+| Linux lab | `homelab-infrastructure.html` | Noindexed Docker/Linux lab note |
+| Networking lab | `networking-lab.html` | Noindexed DNS and connectivity troubleshooting note |
 | Windows draft | `windows-support-ticket.html` | Noindexed draft support-ticket simulation |
 | A+ tools | `aplus.html` | Tier 3 CompTIA A+ study tools index |
 | A+ Core 1 sheet | `aplus-core1-study-sheet.html` | Core 1 one-hour cram sheet |
@@ -25,7 +25,7 @@ Live site: [stephenwilkinson.dev](https://stephenwilkinson.dev)
 
 ## Repository Layout
 
-Most public pages remain at the repository root to preserve existing GitHub Pages URLs. Organization is handled through `projects.html`, `archive.html`, and this README instead of moving deployed files and breaking links.
+Most pages remain at the repository root to preserve existing GitHub Pages URLs. The homepage and resume are the only sitemap-promoted pages; workbench material stays reachable but secondary.
 
 ```text
 .
@@ -58,9 +58,9 @@ Most public pages remain at the repository root to preserve existing GitHub Page
 
 | Area | Public role | Pages |
 | --- | --- | --- |
-| Public pages | Resume, contact, work index, and current notebooks | `index.html`, `resume.html`, `projects.html`, `lab-notes.html` |
-| Lab notebooks | Ongoing Linux and networking notes that still need more real captured output over time | `homelab-infrastructure.html`, `networking-lab.html` |
-| Workbench | Drafts, study tools, and older experiments kept separate from the main pages | A+ tools, Windows draft, older games, utilities, prototypes |
+| Employer-facing | Resume, contact, education, skills, and experience | `index.html`, `resume.html` |
+| Supplemental | Lab notes and work index kept out of the primary path | `projects.html`, `lab-notes.html`, `homelab-infrastructure.html`, `networking-lab.html` |
+| Workbench | Drafts, study tools, and older experiments kept separate from the main resume page | A+ tools, Windows draft, older games, utilities, prototypes |
 
 ## Local Preview
 
@@ -74,8 +74,8 @@ Then open [http://localhost:8080](http://localhost:8080).
 
 ## Maintenance Notes
 
-- Keep career-facing pages linked from `projects.html` and the main navigation.
-- Put older experiments and practice drafts behind `archive.html` or workbench links instead of the homepage.
+- Keep the main navigation limited to resume, education, skills, and contact.
+- Keep older experiments, lab notes, and practice drafts out of the homepage body.
 - Update `sitemap.xml` when adding or removing public indexed pages.
 - Keep large generated game builds in their own folders.
 - Use short, support-style project notes: objective, environment, procedure, validation, evidence, and next step.
@@ -86,9 +86,9 @@ Then open [http://localhost:8080](http://localhost:8080).
 Description:
 
 ```text
-Static portfolio focused on IT support readiness, cybersecurity coursework, lab documentation, and ongoing technical notes.
+Resume-first GitHub Pages site for entry-level IT support readiness, education, skills, and contact.
 ```
 
 Website: `https://stephenwilkinson.dev`
 
-Topics: `portfolio`, `github-pages`, `it-support`, `cybersecurity`, `networking`, `linux`, `windows`, `documentation`, `help-desk`
+Topics: `resume`, `github-pages`, `it-support`, `help-desk`, `desktop-support`, `cybersecurity`, `documentation`
