@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Windows Support Ticket Lab | Stephen Wilkinson</title>
   <meta name="description" content="Windows support ticket lab from Stephen Wilkinson covering a network printer offline issue, triage, validation, escalation criteria, and user-facing documentation.">
+  <meta name="robots" content="noindex, nofollow">
   <link rel="canonical" href="https://stephenwilkinson.dev/windows-support-ticket.html">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
@@ -35,7 +36,7 @@
         <p class="eyebrow">Windows Support</p>
         <h1>Network Printer Offline After Router Change</h1>
         <p>
-          A ticket-style Windows support case showing intake, scope control, network checks,
+          A draft support-ticket simulation for practicing intake, scope control, network checks,
           printer port repair, validation, and a plain-language user update.
         </p>
       </div>
@@ -47,10 +48,10 @@
           <h2>Ticket Snapshot</h2>
           <ul class="clean-list">
             <li><strong>Ticket:</strong> HD-2026-0524-001.</li>
-            <li><strong>Type:</strong> Tier 1 help desk / desktop support simulation.</li>
+            <li><strong>Type:</strong> Help desk / desktop support practice scenario.</li>
             <li><strong>Device:</strong> Windows 11 laptop.</li>
             <li><strong>Issue:</strong> LAN printer showed offline for one user.</li>
-            <li><strong>Status:</strong> Resolved and documented.</li>
+            <li><strong>Status:</strong> Draft simulation.</li>
           </ul>
           <div class="tag-row">
             <span class="tag">Windows</span>
@@ -58,7 +59,7 @@
             <span class="tag">DHCP</span>
             <span class="tag">User Support</span>
           </div>
-          <div class="proof-links">
+          <div class="resource-links">
             <a href="lab-notes.html">Back to lab notes</a>
           </div>
         </aside>
@@ -96,7 +97,7 @@
           </article>
 
           <article class="content-card evidence-card">
-            <h2>Evidence</h2>
+            <h2>Example Validation Notes</h2>
             <pre><code>PS&gt; ping 192.168.1.44
 Request timed out.
 
@@ -110,7 +111,7 @@ New TCP/IP port: 192.168.1.87
 Windows test page: printed successfully</code></pre>
             <figure class="evidence-figure">
               <img src="evidence-windows-printer.svg" alt="Sanitized Windows printer ticket validation screenshot">
-              <figcaption>Sanitized screenshot-style evidence from the ticket simulation.</figcaption>
+              <figcaption>Illustrative screenshot-style note from the ticket simulation.</figcaption>
             </figure>
           </article>
 
@@ -139,7 +140,7 @@ Windows test page: printed successfully</code></pre>
               <li>Multiple users lose printer or network connectivity.</li>
               <li>The printer responds to ping but print jobs fail for all users.</li>
               <li>Printer deployment is controlled by print server, group policy, or endpoint management tooling.</li>
-              <li>The issue involves VLAN routing, firewall rules, or managed switch configuration outside Tier 1 permissions.</li>
+              <li>The issue involves VLAN routing, firewall rules, or managed switch configuration outside first-line support permissions.</li>
             </ul>
           </article>
         </div>

@@ -1,6 +1,6 @@
 # Stephen Wilkinson Portfolio
 
-Static GitHub Pages portfolio for Stephen Wilkinson, focused on IT support readiness, cybersecurity coursework, lab documentation, troubleshooting evidence, and selected project proof.
+Static GitHub Pages portfolio for Stephen Wilkinson, focused on IT support readiness, cybersecurity coursework, lab documentation, and ongoing technical notes.
 
 Live site: [stephenwilkinson.dev](https://stephenwilkinson.dev)
 
@@ -9,13 +9,13 @@ Live site: [stephenwilkinson.dev](https://stephenwilkinson.dev)
 | Area | File | Purpose |
 | --- | --- | --- |
 | Home | `index.html` | Role focus, featured work, skills, education, and contact |
-| Project hub | `projects.html` | Three-tier entry point for resume proof, lab notes, and archive/workbench routing |
+| Work index | `projects.html` | Entry point for public pages, lab notebooks, drafts, and archive/workbench routing |
 | Resume | `resume.html` | Web resume with public-safe contact details |
 | About | `about.html` | Background, current direction, and work style |
 | Lab notes | `lab-notes.html` | Index of support-style lab documentation |
 | Linux lab | `homelab-infrastructure.html` | Docker/Linux lab case study |
 | Networking lab | `networking-lab.html` | DNS and connectivity troubleshooting writeup |
-| Windows case | `windows-support-ticket.html` | Ticket-style Windows printer support case |
+| Windows draft | `windows-support-ticket.html` | Noindexed draft support-ticket simulation |
 | A+ tools | `aplus.html` | Tier 3 CompTIA A+ study tools index |
 | A+ Core 1 sheet | `aplus-core1-study-sheet.html` | Core 1 one-hour cram sheet |
 | A+ Core 1 trainer | `aplus-core1-trainer.html` | Core 1 practice trainer and flashcards |
@@ -54,13 +54,13 @@ Most public pages remain at the repository root to preserve existing GitHub Page
 `-- roadkill-pilgrimage/
 ```
 
-## Project Tiers
+## Site Organization
 
-| Tier | Public role | Pages |
+| Area | Public role | Pages |
 | --- | --- | --- |
-| Tier 1 | Homepage/resume proof: strongest job evidence only | Linux sandbox, DNS/connectivity lab, Windows support ticket, resume |
-| Tier 2 | Project hub and lab notes: polished detail | `projects.html`, `lab-notes.html`, case-study pages |
-| Tier 3 | Archive/workbench: useful but not promoted | A+ study tools, older games, utilities, prototypes |
+| Public pages | Resume, contact, work index, and current notebooks | `index.html`, `resume.html`, `projects.html`, `lab-notes.html` |
+| Lab notebooks | Ongoing Linux and networking notes that still need more real captured output over time | `homelab-infrastructure.html`, `networking-lab.html` |
+| Workbench | Useful drafts and study tools that are reachable but not promoted | A+ tools, Windows draft, older games, utilities, prototypes |
 
 ## Local Preview
 
@@ -75,7 +75,7 @@ Then open [http://localhost:8080](http://localhost:8080).
 ## Maintenance Notes
 
 - Keep career-facing pages linked from `projects.html` and the main navigation.
-- Put older experiments behind `archive.html` instead of the homepage.
+- Put older experiments and practice drafts behind `archive.html` or workbench links instead of the homepage.
 - Update `sitemap.xml` when adding or removing public indexed pages.
 - Keep large generated game builds in their own folders.
 - Use short, support-style project notes: objective, environment, procedure, validation, evidence, and next step.
@@ -86,7 +86,7 @@ Then open [http://localhost:8080](http://localhost:8080).
 Description:
 
 ```text
-Static portfolio focused on IT support readiness, cybersecurity coursework, lab documentation, and troubleshooting evidence.
+Static portfolio focused on IT support readiness, cybersecurity coursework, lab documentation, and ongoing technical notes.
 ```
 
 Website: `https://stephenwilkinson.dev`

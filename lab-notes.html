@@ -27,16 +27,15 @@
   <main id="main-content">
     <section class="page-hero">
       <div class="container">
-        <p class="eyebrow">Lab notes</p>
-        <h1>Hands-on practice written like support documentation.</h1>
+        <p class="eyebrow">Lab notebook</p>
+        <h1>Ongoing practice notes and draft writeups.</h1>
         <p>
-          These notes collect current lab work for Linux fundamentals, networking, Windows support, and security coursework.
-          The goal is to show how I test, document, validate, and improve instead of only listing tools.
+          These pages collect current lab work for Linux fundamentals, networking, Windows support, and security coursework.
+          Some notes are polished enough to read; others are placeholders for future evidence and cleanup.
         </p>
         <div class="button-row">
-          <a class="button primary" href="projects.html">Project Hub</a>
+          <a class="button primary" href="projects.html">Work Index</a>
           <a class="button secondary" href="networking-lab.html">Networking Lab</a>
-          <a class="button secondary" href="windows-support-ticket.html">Windows Case</a>
         </div>
       </div>
     </section>
@@ -44,17 +43,17 @@
     <section class="section">
       <div class="container content-grid">
         <aside class="content-card">
-          <h2>Lab Standard</h2>
+          <h2>Notebook Format</h2>
           <p>
-            Each public note should be useful to a reviewer who wants to understand the problem, the environment,
-            the exact checks performed, and what the result proved.
+            The target format is support-style documentation. Not every note is there yet, but this is the shape
+            each page is moving toward.
           </p>
           <ul class="clean-list">
             <li><strong>Objective:</strong> What skill or problem is being tested?</li>
             <li><strong>Environment:</strong> OS, tools, services, and constraints.</li>
             <li><strong>Procedure:</strong> Repeatable commands or steps.</li>
             <li><strong>Validation:</strong> How I know the result is correct.</li>
-            <li><strong>Evidence:</strong> Sanitized output, screenshot, or summary.</li>
+            <li><strong>Notes:</strong> Sanitized output, screenshot, summary, or gap to fill.</li>
             <li><strong>Next step:</strong> What would make the lab stronger.</li>
           </ul>
         </aside>
@@ -62,7 +61,7 @@
         <div class="content-stack">
           <article class="content-card">
             <div class="status-row">
-              <span class="status-tag">Active</span>
+              <span class="status-tag">Notebook</span>
               <span class="status-tag">Docker</span>
               <span class="status-tag">Linux</span>
             </div>
@@ -77,14 +76,14 @@
               <li>Dedicated network-client, CoreDNS, Nginx web, and broken-state containers.</li>
               <li>PowerShell launcher for up, status, shell, reset, logs, and teardown workflows.</li>
             </ul>
-            <div class="proof-links">
-              <a href="homelab-infrastructure.html">View infrastructure case study</a>
+            <div class="resource-links">
+              <a href="homelab-infrastructure.html">Open Linux notes</a>
             </div>
           </article>
 
           <article class="content-card">
             <div class="status-row">
-              <span class="status-tag">Active</span>
+              <span class="status-tag">Notebook</span>
               <span class="status-tag">Networking</span>
             </div>
             <p class="project-type">Troubleshooting</p>
@@ -98,29 +97,29 @@
               <li>Known web target: <code>web.exam.lab</code>.</li>
               <li>Validation script: <code>check-networking</code>.</li>
             </ul>
-            <div class="proof-links">
-              <a href="networking-lab.html">View lab writeup</a>
+            <div class="resource-links">
+              <a href="networking-lab.html">Open networking notes</a>
             </div>
           </article>
 
           <article class="content-card">
             <div class="status-row">
-              <span class="status-tag active">Published</span>
+              <span class="status-tag">Draft</span>
               <span class="status-tag">Windows</span>
             </div>
             <p class="project-type">Windows Client OS</p>
-            <h2>Windows Printer Ticket Lab</h2>
+            <h2>Draft Support Ticket</h2>
             <p>
-              A ticket-style case for a Windows 11 laptop where a LAN printer showed offline after a router/DHCP change.
-              The writeup covers intake, scope confirmation, printer port repair, validation, and escalation criteria.
+              A simulated support-ticket writeup for a Windows 11 printer issue after a router/DHCP change.
+              It is useful practice, but it is not a finished public case study.
             </p>
             <ul class="clean-list">
               <li>Symptom, hypothesis, test, result, and final user update.</li>
               <li>Relevant Windows GUI path and command output.</li>
               <li>Plain-language closure note suitable for a user or teammate.</li>
             </ul>
-            <div class="proof-links">
-              <a href="windows-support-ticket.html">View Windows support case</a>
+            <div class="resource-links">
+              <a href="windows-support-ticket.html" rel="nofollow">Open draft ticket</a>
             </div>
           </article>
 
