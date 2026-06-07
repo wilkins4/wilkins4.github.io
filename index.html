@@ -35,23 +35,47 @@
   </header>
 
   <main id="main-content">
-    <section class="hero">
-      <div class="container hero-content single-column">
+    <section class="hero resume-hero">
+      <div class="container hero-content resume-first">
         <div class="hero-text">
-          <p class="eyebrow">Cybersecurity student | IT support | Practical troubleshooting</p>
+          <p class="eyebrow">IT support | Cybersecurity student</p>
           <h1>Stephen Wilkinson</h1>
-          <p class="hero-copy">Cybersecurity student building toward IT support, networking, and junior security support.</p>
+          <p class="hero-copy">Cybersecurity student preparing for IT support, networking, and junior security support roles.</p>
           <p class="hero-detail">
-            I am studying cybersecurity at Eastern Florida State College and preparing for entry-level IT support, help desk,
-            desktop support, and junior security support roles. My background includes web development, technical documentation,
-            home lab work, Windows troubleshooting, networking fundamentals, and hands-on problem solving.
+            Background in web development, technical documentation, Windows troubleshooting, and home lab networking.
           </p>
-          <div class="button-row" aria-label="Primary links">
-            <a class="button primary" href="#contact">Contact Me</a>
-            <a class="button secondary" href="projects.html">View Work</a>
+          <div class="hero-actions" aria-label="Resume and email">
+            <div class="email-action" aria-label="Email Stephen Wilkinson">
+              <a href="mailto:stephen@stephenwilkinson.dev">stephen@stephenwilkinson.dev</a>
+              <button type="button" data-copy-email="stephen@stephenwilkinson.dev" aria-describedby="home-email-feedback">Copy</button>
+            </div>
             <a class="button secondary" href="resume.html">View Resume</a>
           </div>
+          <p class="contact-feedback" id="home-email-feedback" aria-live="polite"></p>
         </div>
+
+        <aside class="resume-brief" aria-label="Quick resume summary">
+          <article class="brief-card">
+            <p class="project-type">Resume and education</p>
+            <h2>IT support candidate</h2>
+            <ul class="clean-list">
+              <li>Help desk, desktop support, and junior security support.</li>
+              <li>EFSC: Cybersecurity, in progress.</li>
+              <li>Canisius: B.S. Digital Media Arts, 2016.</li>
+              <li>CompTIA A+ in progress.</li>
+            </ul>
+          </article>
+
+          <article class="brief-card">
+            <p class="project-type">Contact</p>
+            <h2>Contact details</h2>
+            <ul class="clean-list">
+              <li>Palm Bay, Florida.</li>
+              <li>Email: stephen@stephenwilkinson.dev.</li>
+              <li>Resume available as a public HTML page.</li>
+            </ul>
+          </article>
+        </aside>
       </div>
     </section>
 
@@ -87,30 +111,30 @@
       <div class="container">
         <div class="inline-heading section-heading">
           <div>
-            <p class="section-kicker">Work</p>
-            <h2>Current public pages</h2>
+            <p class="section-kicker">Notebook</p>
+            <h2>Current technical notes</h2>
           </div>
-          <a class="button secondary" href="projects.html">Work Index</a>
+          <a class="button secondary" href="lab-notes.html">Lab Notes</a>
         </div>
         <div class="project-grid">
           <article class="project-card">
-            <p class="project-type">Resume</p>
-            <h3>Web Resume</h3>
-            <p>Public resume focused on IT support, networking, cybersecurity coursework, troubleshooting, and documentation.</p>
+            <p class="project-type">Linux</p>
+            <h3>Linux Sandbox Notes</h3>
+            <p>Working notes for Linux command-line practice, permissions, services, DNS, and resettable lab drills.</p>
             <div class="resource-links">
-              <a href="resume.html">View resume</a>
+              <a href="homelab-infrastructure.html">Open Linux notes</a>
+            </div>
+          </article>
+          <article class="project-card">
+            <p class="project-type">Networking</p>
+            <h3>DNS and Connectivity Notes</h3>
+            <p>Working notes for separating DNS lookup, route, HTTP, socket, and packet-capture questions.</p>
+            <div class="resource-links">
+              <a href="networking-lab.html">Open DNS notes</a>
             </div>
           </article>
           <article class="project-card">
             <p class="project-type">Index</p>
-            <h3>Work Index</h3>
-            <p>A short map of public pages, lab notebooks, drafts, and older workbench projects.</p>
-            <div class="resource-links">
-              <a href="projects.html">Open work index</a>
-            </div>
-          </article>
-          <article class="project-card">
-            <p class="project-type">Notebook</p>
             <h3>Lab Notes</h3>
             <p>Ongoing Linux, networking, Windows, and security notes written in a support-style format.</p>
             <div class="resource-links">
@@ -118,11 +142,11 @@
             </div>
           </article>
           <article class="project-card">
-            <p class="project-type">Workbench</p>
-            <h3>Archive</h3>
-            <p>Older study tools, browser utilities, games, and experiments kept in a separate workbench.</p>
+            <p class="project-type">Map</p>
+            <h3>Work Index</h3>
+            <p>A short map of public pages, lab notebooks, drafts, and older workbench projects.</p>
             <div class="resource-links">
-              <a href="archive.html" rel="nofollow">Open archive</a>
+              <a href="projects.html">Open work index</a>
             </div>
           </article>
         </div>
@@ -156,27 +180,47 @@
       </div>
     </section>
 
-    <section class="section education-section" id="education">
+    <section class="section education-section" id="links">
       <div class="container">
         <div class="section-heading">
-          <p class="section-kicker">Education</p>
-          <h2>Coursework and background</h2>
+          <p class="section-kicker">Links</p>
+          <h2>Everything else lives down here.</h2>
         </div>
         <div class="three-grid">
           <article class="focus-item">
-            <p class="project-type">In progress</p>
-            <h3>Eastern Florida State College</h3>
-            <p>Cybersecurity coursework focused on networking, Windows systems, digital forensics, security foundations, and technical troubleshooting.</p>
+            <p class="project-type">Public</p>
+            <h3>Career pages</h3>
+            <p>Resume, work index, lab notes, and contact links.</p>
+            <div class="resource-links">
+              <a href="resume.html">Resume</a>
+              <a href="projects.html">Work Index</a>
+              <a href="lab-notes.html">Lab Notes</a>
+              <a href="#contact">Contact</a>
+            </div>
           </article>
           <article class="focus-item">
-            <p class="project-type">Completed, 2016</p>
-            <h3>Canisius University</h3>
-            <p>B.S. Digital Media Arts. Built a foundation in technical communication, project work, design thinking, and problem solving.</p>
+            <p class="project-type">Workbench</p>
+            <h3>Study tools and drafts</h3>
+            <p>A+ study pages and draft support notes stay in the workbench.</p>
+            <div class="resource-links">
+              <a href="aplus.html" rel="nofollow">A+ Study Hub</a>
+              <a href="windows-support-ticket.html" rel="nofollow">Draft Ticket</a>
+              <a href="archive.html" rel="nofollow">Archive</a>
+            </div>
           </article>
           <article class="focus-item">
-            <p class="project-type">Certification focus</p>
-            <h3>CompTIA A+</h3>
-            <p>In progress. Current study includes hardware, operating systems, networking, security fundamentals, and support workflows.</p>
+            <p class="project-type">Hidden</p>
+            <h3>Games and experiments</h3>
+            <p>Older game builds and small experiments are tucked away here, separate from the resume path.</p>
+            <details class="easter-egg-links">
+              <summary>Open game links</summary>
+              <div class="resource-links">
+                <a href="frameforge-arena/" rel="nofollow">FrameForge Arena</a>
+                <a href="roadkill-pilgrimage/" rel="nofollow">Roadkill Pilgrimage</a>
+                <a href="mini-rts-clash/" rel="nofollow">Mini RTS Clash</a>
+                <a href="dungeon-party-rpg/" rel="nofollow">Dungeon Party RPG</a>
+              </div>
+            </details>
           </article>
         </div>
       </div>
@@ -190,9 +234,9 @@
           <p>Entry-level help desk, desktop support, and junior security support.</p>
           <div class="email-action" aria-label="Email Stephen Wilkinson">
             <a href="mailto:stephen@stephenwilkinson.dev">stephen@stephenwilkinson.dev</a>
-            <button type="button" data-copy-email="stephen@stephenwilkinson.dev" aria-describedby="home-email-feedback">Copy</button>
+            <button type="button" data-copy-email="stephen@stephenwilkinson.dev" aria-describedby="contact-email-feedback">Copy</button>
           </div>
-          <p class="contact-feedback" id="home-email-feedback" aria-live="polite"></p>
+          <p class="contact-feedback" id="contact-email-feedback" aria-live="polite"></p>
         </div>
         <div class="button-row">
           <a class="button primary" href="mailto:stephen@stephenwilkinson.dev">Email Stephen</a>
