@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A+ Core 2 (220-1202) Flashcards</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --bg2:#ffffff; --bg3:#f1f3f6; --panel:#ffffff;
+    --txt:#121820; --muted:#657080; --line:#d9dee7;
+    --accent:#1f5fbf; --accent2:#184f9f; --accent-soft:#edf4ff;
+    --good:#1c7a43; --good-soft:#eaf7ef; --bad:#b3261e; --bad-soft:#fdeceb;
+    --warn:#9a6700; --violet:#1f5fbf; --shadow:0 1px 2px rgba(17,24,39,.06);
+    --radius:8px;
+  }
+  html[data-theme="dark"]{
+    --bg:#111418; --bg2:#171b21; --bg3:#20252d; --panel:#171b21;
+    --txt:#edf1f5; --muted:#9aa5b1; --line:#303741;
+    --accent:#7aa7ff; --accent2:#a8c4ff; --accent-soft:#1f2c42;
+    --good:#61d394; --good-soft:#17261d; --bad:#ff8f86; --bad-soft:#301b1b;
+    --warn:#f5be4f; --violet:#7aa7ff; --shadow:none;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg); color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.5; -webkit-font-smoothing:antialiased; min-height:100vh;
+  }
+  .wrap{max-width:1040px; margin:0 auto; padding:22px 22px 56px;}
+  header.app{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px; padding:8px 0 18px; border-bottom:1px solid var(--line); margin-bottom:22px;
+    flex-wrap:wrap;
+  }
+  .brand{display:flex; align-items:center; gap:11px;}
+  .logo{
+    width:38px; height:38px; border-radius:8px; flex:none;
+    background:var(--accent); border:1px solid var(--accent);
+    display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:17px;
+  }
+  .brand h1{font-size:18px; margin:0; font-weight:750; letter-spacing:0;}
+  .brand p{margin:0; font-size:12.5px; color:var(--muted);}
+  .top-actions{display:flex; gap:8px; align-items:center; flex-wrap:wrap;}
+  button{font-family:inherit;}
+  .btn{
+    border:1px solid var(--line); background:var(--bg2); color:var(--txt);
+    padding:8px 13px; border-radius:8px; font-size:13.5px; cursor:pointer; font-weight:650;
+    transition:background .12s ease, border-color .12s ease, color .12s ease;
+  }
+  .btn:hover{border-color:var(--accent); color:var(--accent);}
+  .btn:active{background:var(--bg3);}
+  .btn.primary{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .btn.primary:hover{background:var(--accent2);}
+  .btn.ghost{background:transparent;}
+  .btn.sm{padding:6px 10px; font-size:12.5px;}
+  .btn:disabled{opacity:.45; cursor:not-allowed;}
+  .btn:disabled:hover{border-color:var(--line); color:var(--txt);}
+  .icon-btn{
+    border:1px solid var(--line); background:var(--bg2); color:var(--txt);
+    width:36px; height:36px; border-radius:8px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .icon-btn:hover{border-color:var(--accent);}
+  .icon{width:17px;height:17px;display:block;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .panel{
+    background:var(--bg2); border:1px solid var(--line); border-radius:var(--radius);
+    padding:18px; box-shadow:var(--shadow);
+  }
+  .layout{display:grid; grid-template-columns:270px minmax(0,1fr); gap:18px; align-items:start;}
+  .layout > section.panel{background:transparent; border:0; box-shadow:none; padding:0;}
+  @media(max-width:860px){.layout{grid-template-columns:1fr;}}
+  h2{font-size:15.5px; margin:0 0 12px;}
+  .sub{color:var(--muted); font-size:13px; margin:0 0 14px;}
+  .chips{display:flex; gap:7px; flex-wrap:wrap;}
+  .chip{
+    border:1px solid var(--line); background:transparent; color:var(--txt);
+    padding:6px 9px; border-radius:8px; font-size:12.5px; cursor:pointer; font-weight:650;
+  }
+  .chip:hover{border-color:var(--accent);}
+  .chip.sel{background:var(--accent-soft); border-color:var(--accent); color:var(--accent);}
+  .toggle-row{display:flex; align-items:center; justify-content:space-between; gap:12px;
+    border:1px solid var(--line); background:var(--bg3); padding:11px 12px; border-radius:8px; margin-top:14px;}
+  .toggle-row b{display:block; font-size:13.5px;}
+  .toggle-row span{display:block; color:var(--muted); font-size:12px;}
+  .switch{position:relative; width:42px; height:24px; flex:none;}
+  .switch input{opacity:0; width:0; height:0;}
+  .slider{position:absolute; inset:0; background:var(--line); border-radius:30px; cursor:pointer; transition:.2s;}
+  .slider:before{content:""; position:absolute; height:18px; width:18px; left:3px; top:3px; background:#fff; border-radius:50%; transition:.2s;}
+  .switch input:checked + .slider{background:var(--accent);}
+  .switch input:checked + .slider:before{transform:translateX(18px);}
+  .stats{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:14px;}
+  .stat{border:1px solid var(--line); background:transparent; border-radius:8px; padding:10px; text-align:center;}
+  .stat .num{font-size:22px; font-weight:800; line-height:1;}
+  .stat .lbl{font-size:11.5px; color:var(--muted); margin-top:5px;}
+  .card-head{display:flex; justify-content:space-between; align-items:center; gap:14px; margin-bottom:12px; flex-wrap:wrap;}
+  .domain-tag{display:inline-block; font-size:11.5px; font-weight:800; letter-spacing:0; text-transform:uppercase;
+    color:var(--accent); background:transparent; padding:0;}
+  .progress-meta{font-size:13.5px; color:var(--muted); font-weight:700;}
+  .progress-meta b{color:var(--txt);}
+  .pbar{height:4px; background:var(--bg3); border-radius:999px; overflow:hidden; margin-bottom:18px;}
+  .pbar span{display:block; height:100%; width:0; background:var(--accent); transition:width .2s ease;}
+  .flashcard{width:100%; height:344px; cursor:pointer;}
+  .flash-inner{position:relative; width:100%; height:100%;}
+  .face{position:absolute; inset:0; border:1px solid var(--line); border-radius:8px;
+    padding:32px; display:flex; flex-direction:column; justify-content:center; background:var(--panel);
+    transition:opacity .16s ease, visibility .16s ease;}
+  .face .label{position:absolute; top:16px; left:18px; font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:0; color:var(--muted);}
+  .front-text{font-size:22px; font-weight:700; text-align:center; line-height:1.42; max-width:760px; margin:0 auto;}
+  .back{background:var(--panel); opacity:0; visibility:hidden; pointer-events:none;}
+  .flashcard.flipped .front{opacity:0; visibility:hidden; pointer-events:none;}
+  .flashcard.flipped .back{opacity:1; visibility:visible; pointer-events:auto;}
+  .answer{font-size:19px; font-weight:800; color:var(--good); text-align:center; margin-bottom:12px; line-height:1.35;}
+  .explain{font-size:15px; color:var(--txt); text-align:center; line-height:1.5; max-width:760px; margin:0 auto;}
+  .actions{display:flex; justify-content:space-between; gap:10px; margin-top:14px; flex-wrap:wrap;}
+  .left-actions,.right-actions{display:flex; gap:8px; flex-wrap:wrap;}
+  .badge{font-size:12px; font-weight:700; padding:4px 8px; border-radius:8px; align-self:center;}
+  .badge.known{background:var(--good-soft); color:var(--good);}
+  .badge.unknown{background:var(--bg3); color:var(--muted);}
+  .empty{color:var(--muted); text-align:center; padding:36px 16px;}
+  .list{margin-top:14px; max-height:260px; overflow:auto; border:1px solid var(--line); border-radius:8px;}
+  .row{display:flex; justify-content:space-between; gap:10px; padding:9px 10px; border-bottom:1px solid var(--line); font-size:12.5px;}
+  .row:last-child{border-bottom:0;}
+  .row span:last-child{color:var(--muted); font-weight:700;}
+  @media(max-width:620px){
+    .wrap{padding:14px 14px 42px;}
+    header.app{align-items:flex-start;}
+    .flashcard{height:392px;}
+    .face{padding:28px 20px;}
+    .front-text{font-size:19px;}
+    .answer{font-size:17.5px;}
+    .actions{display:block;}
+    .left-actions,.right-actions{margin-top:8px;}
+    .actions .btn{width:100%; justify-content:center;}
+    .top-actions .btn{width:auto;}
+    .icon-btn{width:36px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="app">
+    <div class="brand">
+      <div class="logo">A+</div>
+      <div>
+        <h1>A+ Core 2 Flashcards</h1>
+        <p>CompTIA 220-1202 &middot; focused final-review deck</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="btn sm ghost" onclick="location.href='aplus.html'">A+ Hub</button>
+      <button class="btn sm ghost" onclick="location.href='aplus-core2-study-sheet.html'">Study Sheet</button>
+      <button class="btn sm ghost" id="resetKnownBtn">Reset known</button>
+      <button class="icon-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v2"/><path d="M12 19v2"/><path d="M5.6 5.6 7 7"/><path d="m17 17 1.4 1.4"/><path d="M3 12h2"/><path d="M19 12h2"/><path d="m5.6 18.4 1.4-1.4"/><path d="m17 7 1.4-1.4"/><circle cx="12" cy="12" r="4"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel">
+      <h2>Deck</h2>
+      <p class="sub"><span id="deckCount">0</span> cards aligned to the 220-1202 domains.</p>
+      <div class="chips" id="domainChips"></div>
+      <div class="toggle-row">
+        <div>
+          <b>Hide known</b>
+          <span>Start from remaining cards</span>
+        </div>
+        <label class="switch"><input type="checkbox" id="hideKnown"><span class="slider"></span></label>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="num" id="knownCount">0</div><div class="lbl">Known</div></div>
+        <div class="stat"><div class="num" id="leftCount">0</div><div class="lbl">Remaining</div></div>
+      </div>
+      <button class="btn primary" style="width:100%; margin-top:16px;" id="startBtn">Start deck</button>
+      <div class="list" id="domainList"></div>
+    </aside>
+
+    <section class="panel">
+      <div class="card-head">
+        <span class="domain-tag" id="cardDomain">Operating Systems</span>
+        <span class="progress-meta"><b id="cardIndex">1</b> / <span id="cardTotal">0</span></span>
+      </div>
+      <div class="pbar"><span id="progress"></span></div>
+
+      <div class="flashcard" id="flashcard" tabindex="0" role="button" aria-label="Flip flashcard">
+        <div class="flash-inner">
+          <div class="face front">
+            <div class="label">Prompt</div>
+            <div class="front-text" id="frontText"></div>
+          </div>
+          <div class="face back">
+            <div class="label">Answer</div>
+            <div class="answer" id="answerText"></div>
+            <div class="explain" id="explainText"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <div class="left-actions">
+          <button class="btn" id="prevBtn">Previous</button>
+          <button class="btn" id="flipBtn">Flip</button>
+          <button class="btn" id="nextBtn">Next</button>
+        </div>
+        <div class="right-actions">
+          <span class="badge unknown" id="knownBadge">Not marked</span>
+          <button class="btn" id="unknownBtn">Still learning</button>
+          <button class="btn primary" id="knownBtn">I know this</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+const DOMAINS = [
+  {name:"Operating Systems", weight:28},
+  {name:"Security", weight:28},
+  {name:"Software Troubleshooting", weight:23},
+  {name:"Operational Procedures", weight:21}
+];
+
+const CARDS = [
+  {domain:"Operating Systems", front:"Which workstation operating systems are explicitly in scope for Core 2?", answer:"Windows, Linux, macOS, and Chrome OS.", explain:"The exam also covers mobile OSs: iOS, iPadOS, and Android."},
+  {domain:"Operating Systems", front:"Which Windows filesystem supports permissions, EFS, compression, quotas, and is the normal modern Windows choice?", answer:"NTFS.", explain:"ReFS is also Windows-focused but emphasizes resiliency; FAT32/exFAT are common for removable compatibility."},
+  {domain:"Operating Systems", front:"Which filesystem is commonly used for removable flash media and supports files larger than 4 GB?", answer:"exFAT.", explain:"FAT32 is highly compatible but has a 4 GB individual file-size limit."},
+  {domain:"Operating Systems", front:"Which filesystem should you associate with current Apple devices?", answer:"APFS.", explain:"Apple File System is the modern macOS/iOS/iPadOS filesystem."},
+  {domain:"Operating Systems", front:"Which partition style is modern and UEFI-friendly: GPT or MBR?", answer:"GPT.", explain:"MBR is older/legacy. GPT is the modern GUID Partition Table used with UEFI systems."},
+  {domain:"Operating Systems", front:"What is the safest first step before an OS upgrade or reinstall?", answer:"Back up user files and preferences.", explain:"Also verify application, driver, hardware, and product life-cycle compatibility."},
+  {domain:"Operating Systems", front:"Clean install vs. upgrade: which keeps existing apps and user data when supported?", answer:"Upgrade / in-place upgrade.", explain:"A clean install starts fresh and usually requires restoring data and reinstalling applications."},
+  {domain:"Operating Systems", front:"What installation method applies a standardized prebuilt OS build to many computers?", answer:"Image deployment.", explain:"Imaging is common for repeatable fleet setup."},
+  {domain:"Operating Systems", front:"Which Windows edition feature is most associated with business networks: domain join or workgroup?", answer:"Domain join.", explain:"Domains centralize authentication and policy through Active Directory; workgroups are peer-to-peer."},
+  {domain:"Operating Systems", front:"Which Windows editions usually provide domain join, BitLocker management, Group Policy Editor, and RDP host?", answer:"Windows Pro and Enterprise editions.", explain:"Windows Home is missing several business management features."},
+  {domain:"Operating Systems", front:"What two platform requirements are important Windows 11 exam clues?", answer:"TPM and UEFI.", explain:"The objectives call out TPM and UEFI hardware requirements for Windows 11."},
+  {domain:"Operating Systems", front:"Which command opens Event Viewer?", answer:"eventvwr.msc.", explain:"Use Event Viewer for system, application, security, driver, boot, and service logs."},
+  {domain:"Operating Systems", front:"Which command opens Disk Management?", answer:"diskmgmt.msc.", explain:"Disk Management handles partitions, volumes, drive letters, and disk initialization."},
+  {domain:"Operating Systems", front:"Which command opens Device Manager?", answer:"devmgmt.msc.", explain:"Device Manager is the first GUI stop for driver and hardware-device issues."},
+  {domain:"Operating Systems", front:"Which command opens Local Users and Groups?", answer:"lusrmgr.msc.", explain:"Use it to manage local users and groups on supported Windows editions."},
+  {domain:"Operating Systems", front:"Which Windows tool shows CPU, memory, disk, and network activity in detail?", answer:"Resource Monitor (resmon.exe).", explain:"Task Manager is quicker; Resource Monitor gives deeper per-process resource views."},
+  {domain:"Operating Systems", front:"Which Windows command repairs protected system files?", answer:"sfc.", explain:"System File Checker is commonly run as sfc /scannow."},
+  {domain:"Operating Systems", front:"Which commands refresh and report Group Policy?", answer:"gpupdate and gpresult.", explain:"gpupdate refreshes policy; gpresult shows which policies applied."},
+  {domain:"Operating Systems", front:"Which command maps or lists Windows network shares/drives?", answer:"net use.", explain:"UNC paths use the pattern \\\\server\\share."},
+  {domain:"Operating Systems", front:"Which command is best for robust file copying during migrations or backups?", answer:"robocopy.", explain:"Robocopy is more resilient and feature-rich than basic copy operations."},
+  {domain:"Operating Systems", front:"Which command tests DNS name resolution from the command line?", answer:"nslookup.", explain:"If IP connectivity works but names fail, test DNS."},
+  {domain:"Operating Systems", front:"tracert vs. pathping: which adds packet-loss and latency statistics?", answer:"pathping.", explain:"tracert shows the route; pathping combines route tracing with ping-like statistics."},
+  {domain:"Operating Systems", front:"Which Windows command displays active connections and listening ports?", answer:"netstat.", explain:"netstat is useful when investigating local network connections."},
+  {domain:"Operating Systems", front:"Which macOS file type is a disk image commonly used to distribute apps?", answer:".dmg.", explain:".pkg is an installer package, and .app is an application bundle."},
+  {domain:"Operating Systems", front:"Which macOS feature provides built-in backups?", answer:"Time Machine.", explain:"FileVault is disk encryption; Keychain stores passwords/certificates/keys."},
+  {domain:"Operating Systems", front:"Which macOS feature provides full-disk encryption?", answer:"FileVault.", explain:"It is the macOS counterpart to BitLocker-style full-volume protection."},
+  {domain:"Operating Systems", front:"Which Linux file stores local hostname mappings?", answer:"/etc/hosts.", explain:"/etc/resolv.conf relates to DNS resolver config; /etc/fstab controls mounts."},
+  {domain:"Operating Systems", front:"Which Linux file stores password hashes and should be tightly protected?", answer:"/etc/shadow.", explain:"/etc/passwd stores account information, but password hashes live in /etc/shadow."},
+  {domain:"Operating Systems", front:"Which Linux commands change file permissions and ownership?", answer:"chmod and chown.", explain:"chmod changes mode/permissions; chown changes owner/group."},
+  {domain:"Operating Systems", front:"Which Linux package managers are named in the Core 2 objectives?", answer:"apt and dnf.", explain:"apt is common on Debian/Ubuntu families; dnf is common on Fedora/RHEL-family systems."},
+  {domain:"Operating Systems", front:"Which Linux command reports disk free space?", answer:"df.", explain:"du estimates disk usage by files/directories; df reports filesystem free space."},
+  {domain:"Operating Systems", front:"What application requirement mismatch often blocks installing modern software on older systems?", answer:"32-bit vs. 64-bit compatibility.", explain:"Also check OS support, CPU/RAM/storage, GPU/VRAM, drivers, and external tokens."},
+  {domain:"Operating Systems", front:"What cloud productivity control determines which users can use paid services?", answer:"Licensing assignment.", explain:"Identity synchronization and licensing are major cloud productivity administration topics."},
+
+  {domain:"Security", front:"What security principle gives users only the access needed for their job?", answer:"Principle of least privilege.", explain:"It limits damage from mistakes, malware, or compromised accounts."},
+  {domain:"Security", front:"What security model assumes no implicit trust and continuously verifies identity, device, and context?", answer:"Zero Trust.", explain:"Zero Trust is a logical security concept in the Core 2 objectives."},
+  {domain:"Security", front:"What is an access control vestibule used for?", answer:"Controlled one-person entry into a secure area.", explain:"It prevents tailgating and enforces controlled physical access."},
+  {domain:"Security", front:"Retina, fingerprint, palm, facial, and voice recognition are examples of what factor?", answer:"Biometrics.", explain:"Biometrics are the 'something you are' authentication factor."},
+  {domain:"Security", front:"What does MFA require?", answer:"Two or more authentication factor categories.", explain:"Examples include password, hardware token, authenticator app, SMS, voice call, TOTP, OTP, and biometrics."},
+  {domain:"Security", front:"What does SSO provide?", answer:"One authentication session used across multiple applications.", explain:"SAML is a common standard for passing authentication assertions."},
+  {domain:"Security", front:"What does PAM control?", answer:"Privileged access.", explain:"Privileged Access Management is often paired with just-in-time access."},
+  {domain:"Security", front:"BitLocker vs. EFS: which encrypts the whole drive?", answer:"BitLocker.", explain:"EFS encrypts individual files/folders. BitLocker To Go applies BitLocker to removable drives."},
+  {domain:"Security", front:"NTFS permissions vs. share permissions: which apply locally and over the network?", answer:"NTFS permissions.", explain:"Share permissions apply only when accessing through the share. Effective access is the most restrictive result."},
+  {domain:"Security", front:"What Windows feature prompts before elevated system changes?", answer:"User Account Control (UAC).", explain:"UAC helps prevent silent administrative changes."},
+  {domain:"Security", front:"Which account type should users normally use day to day: standard or administrator?", answer:"Standard user.", explain:"Use administrator access only when needed."},
+  {domain:"Security", front:"Which Wi-Fi encryption should you prefer with WPA2/WPA3?", answer:"AES.", explain:"TKIP is legacy and should be avoided when AES is available."},
+  {domain:"Security", front:"Which centralized authentication service is common with enterprise Wi-Fi / 802.1X?", answer:"RADIUS.", explain:"TACACS+ is more associated with network-device administration AAA."},
+  {domain:"Security", front:"Which authentication protocol is ticket-based and common in Windows domains?", answer:"Kerberos.", explain:"Kerberos uses tickets to authenticate users and services."},
+  {domain:"Security", front:"Which malware disguises itself as useful software?", answer:"Trojan.", explain:"A Trojan relies on tricking the user into running it."},
+  {domain:"Security", front:"Which malware hides deeply and may alter OS behavior?", answer:"Rootkit.", explain:"Rootkits are hard to detect and may require offline scanning or reinstallation."},
+  {domain:"Security", front:"Which malware encrypts or blocks access to data and demands payment?", answer:"Ransomware.", explain:"Isolation, backups, and incident response matter more than paying attackers."},
+  {domain:"Security", front:"Which malware records keystrokes?", answer:"Keylogger.", explain:"It can steal passwords, messages, and payment data."},
+  {domain:"Security", front:"Which malware runs largely in memory or legitimate tools instead of obvious files?", answer:"Fileless malware.", explain:"It is harder to catch with simple file-based detection."},
+  {domain:"Security", front:"What is a PUP?", answer:"Potentially unwanted program.", explain:"PUPs are often bundled with other software and may cause ads, tracking, or poor performance."},
+  {domain:"Security", front:"Vishing and smishing are forms of what attack?", answer:"Phishing.", explain:"Vishing uses voice calls; smishing uses SMS/text messages."},
+  {domain:"Security", front:"What is whaling?", answer:"Phishing that targets executives or high-value leaders.", explain:"Spear phishing targets a specific person/group; whaling focuses on big targets."},
+  {domain:"Security", front:"What is an evil twin attack?", answer:"A rogue Wi-Fi access point imitating a legitimate network.", explain:"Users connect to the fake AP and expose traffic or credentials."},
+  {domain:"Security", front:"What is an on-path attack?", answer:"Interception or manipulation of traffic between two parties.", explain:"It is the modern term for man-in-the-middle style interception."},
+  {domain:"Security", front:"Brute-force vs. dictionary attack: which uses a wordlist?", answer:"Dictionary attack.", explain:"Brute force tries broad combinations; dictionary attacks use likely passwords/words."},
+  {domain:"Security", front:"What is business email compromise (BEC)?", answer:"Fraud using compromised or impersonated business email.", explain:"It often tries to redirect payments, payroll, gift cards, or sensitive data."},
+  {domain:"Security", front:"What is the first step in the SOHO malware removal process?", answer:"Investigate and verify malware symptoms.", explain:"Do not start random cleanup before confirming the issue."},
+  {domain:"Security", front:"After verifying malware symptoms, what should happen next?", answer:"Quarantine the infected system.", explain:"Isolation limits spread and protects other systems."},
+  {domain:"Security", front:"When should System Restore be re-enabled during malware removal?", answer:"After remediation, scans/updates, and cleanup.", explain:"The process ends by enabling System Restore, creating a restore point, and educating the user."},
+  {domain:"Security", front:"Which data destruction method works for magnetic drives but not SSDs?", answer:"Degaussing.", explain:"Degaussing disrupts magnetic storage; SSDs require wiping/sanitize or physical destruction."},
+  {domain:"Security", front:"What document proves a third-party disposal vendor destroyed media?", answer:"Certificate of destruction.", explain:"It supports audit and compliance requirements."},
+  {domain:"Security", front:"Why is standard formatting not a secure disposal method?", answer:"It does not reliably erase recoverable data.", explain:"Use secure wiping/sanitization or physical destruction when data confidentiality matters."},
+  {domain:"Security", front:"What SOHO router change should happen immediately during setup?", answer:"Change the default administrator password.", explain:"Also update firmware, secure management, and configure strong Wi-Fi encryption."},
+  {domain:"Security", front:"Why is disabling SSID broadcast not strong wireless security?", answer:"The network can still be discovered.", explain:"Use WPA2/WPA3 with AES and a strong passphrase instead."},
+  {domain:"Security", front:"What browser clue indicates a secure HTTPS site identity problem?", answer:"Certificate warning.", explain:"Do not ignore certificate warnings on sensitive sites."},
+  {domain:"Security", front:"What browser setting encrypts DNS lookups when supported?", answer:"Secure DNS.", explain:"It can reduce DNS snooping/tampering depending on browser and provider configuration."},
+
+  {domain:"Software Troubleshooting", front:"A Windows PC shows BSODs right after a driver update. What is a likely first fix?", answer:"Boot recovery/Safe Mode and roll back the driver.", explain:"Also check Event Viewer and recent changes."},
+  {domain:"Software Troubleshooting", front:"A PC is suddenly slow. Which tools quickly identify CPU, memory, disk, and startup pressure?", answer:"Task Manager and Resource Monitor.", explain:"Look for runaway processes, startup apps, low disk, malware, and memory pressure."},
+  {domain:"Software Troubleshooting", front:"A system says 'No OS found.' What should you check first?", answer:"Boot order and whether the drive is detected.", explain:"Also consider corrupt boot files, failed drive, disconnected storage, or wrong UEFI/legacy settings."},
+  {domain:"Software Troubleshooting", front:"A Windows service will not start. What should you inspect?", answer:"Event Viewer, dependencies, service account, and startup type.", explain:"The error log usually points to permissions, missing dependencies, or bad configuration."},
+  {domain:"Software Troubleshooting", front:"An application crashes after an update. What is a reasonable fix path?", answer:"Patch, repair, roll back, or reinstall the application.", explain:"Also verify app requirements and user-profile settings."},
+  {domain:"Software Troubleshooting", front:"Low memory warnings usually point to what categories?", answer:"Too many apps, memory leak, insufficient RAM, or pagefile pressure.", explain:"Use Task Manager/Resource Monitor to find the process consuming memory."},
+  {domain:"Software Troubleshooting", front:"USB controller resource warnings may be caused by what?", answer:"Too many USB devices/controllers, driver issues, or power management.", explain:"Try different ports, remove hubs/devices, and update chipset/USB drivers."},
+  {domain:"Software Troubleshooting", front:"Slow profile load in Windows often points to what?", answer:"Roaming profile, network share, Group Policy, logon script, or corrupt profile.", explain:"Domain environments add network and policy dependencies to sign-in."},
+  {domain:"Software Troubleshooting", front:"Time drift on a desktop can be caused by what small hardware part?", answer:"CMOS battery.", explain:"Also check time zone and NTP/time synchronization."},
+  {domain:"Software Troubleshooting", front:"A mobile app fails to launch. What are good first steps?", answer:"Force close, restart, update, clear cache/data, or reinstall.", explain:"Check storage, compatibility, permissions, and OS version too."},
+  {domain:"Software Troubleshooting", front:"A mobile app will not install or update. What should you check?", answer:"Storage, network, app store account, OS version, and restrictions.", explain:"MDM profiles or vendor EOL status can block updates."},
+  {domain:"Software Troubleshooting", front:"A phone battery drains quickly after installing an app. What should you suspect?", answer:"A rogue/background app or excessive radio/location usage.", explain:"Check battery usage, permissions, and background activity."},
+  {domain:"Software Troubleshooting", front:"A mobile screen will not autorotate. What should you check first?", answer:"Rotation lock and whether the app supports rotation.", explain:"Then restart/update and consider a sensor fault."},
+  {domain:"Software Troubleshooting", front:"Bluetooth will not reconnect to a known device. What is a common fix?", answer:"Forget/unpair and then pair again.", explain:"Also verify range, battery, radio state, and interference."},
+  {domain:"Software Troubleshooting", front:"What mobile configuration increases security risk by allowing unofficial app behavior?", answer:"Developer mode, root access, or jailbreak.", explain:"Unofficial app stores and unauthorized/malicious apps are also risk clues."},
+  {domain:"Software Troubleshooting", front:"High mobile data usage plus unexpected ads and fake warnings suggests what?", answer:"Potential mobile malware or malicious app.", explain:"Remove suspicious apps, update, scan if available, revoke permissions, or wipe if needed."},
+  {domain:"Software Troubleshooting", front:"Random browser redirects and frequent pop-ups usually indicate what category?", answer:"Browser hijacker, adware, malicious extension, or malware.", explain:"Check extensions, clear cache/data, scan, and reset browser settings if needed."},
+  {domain:"Software Troubleshooting", front:"False antivirus alerts asking you to call a number are likely what?", answer:"Scareware / fake security warning.", explain:"Do not call the number or install the offered tool."},
+  {domain:"Software Troubleshooting", front:"Missing, renamed, or inaccessible personal files can be a symptom of what severe threat?", answer:"Ransomware or other malware.", explain:"Isolate the system and preserve evidence/backups before remediation."},
+  {domain:"Software Troubleshooting", front:"OS update failures can be caused by what?", answer:"Low storage, network issues, corruption, compatibility, policy restrictions, or malware.", explain:"Check error codes, free space, services, and update logs."},
+  {domain:"Software Troubleshooting", front:"What should you do before cleaning a suspected infected PC on the network?", answer:"Isolate/quarantine it.", explain:"Containment prevents spread and protects shared resources."},
+  {domain:"Software Troubleshooting", front:"Certificate warnings in a browser can indicate what?", answer:"Expired/invalid certificate, wrong site, interception, or system time issue.", explain:"Check URL and time settings; do not bypass warnings for sensitive work."},
+
+  {domain:"Operational Procedures", front:"What information belongs in a good support ticket?", answer:"User, device, issue description, category, severity, escalation, notes, and resolution.", explain:"Clear notes let another technician continue the work."},
+  {domain:"Operational Procedures", front:"What does CMDB stand for?", answer:"Configuration Management Database.", explain:"It tracks assets, configurations, relationships, and ownership."},
+  {domain:"Operational Procedures", front:"What document defines expected service targets and responsibilities?", answer:"SLA.", explain:"Service-level agreements can be internal or external/third-party."},
+  {domain:"Operational Procedures", front:"Which checklist covers setting up accounts, access, devices, and apps for a new employee?", answer:"New user / onboarding checklist.", explain:"Offboarding checklists remove access and recover assets when someone leaves."},
+  {domain:"Operational Procedures", front:"What change-management item explains how to undo a failed change?", answer:"Rollback plan.", explain:"A backup plan and sandbox testing also reduce risk."},
+  {domain:"Operational Procedures", front:"What change type handles urgent production-impacting work?", answer:"Emergency change.", explain:"Standard changes are preapproved/routine; normal changes follow the full process."},
+  {domain:"Operational Procedures", front:"What is a change freeze?", answer:"A period when changes are restricted.", explain:"It protects critical business periods from avoidable disruption."},
+  {domain:"Operational Procedures", front:"Why use a maintenance window?", answer:"To schedule work when user/business impact is lowest.", explain:"Change timing is part of risk and impact management."},
+  {domain:"Operational Procedures", front:"Full vs. incremental backup: which backup is fastest but needs more restore pieces?", answer:"Incremental.", explain:"Incremental copies changes since the last backup of any type."},
+  {domain:"Operational Procedures", front:"Differential backup copies changes since when?", answer:"Since the last full backup.", explain:"It grows until the next full but is simpler to restore than a long incremental chain."},
+  {domain:"Operational Procedures", front:"What is the 3-2-1 backup rule?", answer:"3 copies, 2 different media types, 1 offsite/offline copy.", explain:"It protects against local failure, deletion, and site-level incidents."},
+  {domain:"Operational Procedures", front:"What does GFS mean in backup rotation?", answer:"Grandfather-father-son.", explain:"It keeps daily, weekly, and monthly backup generations."},
+  {domain:"Operational Procedures", front:"What should you do with backups besides create them?", answer:"Test restores regularly.", explain:"Untested backups are only assumptions."},
+  {domain:"Operational Procedures", front:"What protects components from electrostatic discharge?", answer:"ESD strap, ESD mat, antistatic bags, and proper grounding.", explain:"Handle parts by edges and store them correctly."},
+  {domain:"Operational Procedures", front:"What is the first safety step before repairing a PC internally?", answer:"Disconnect power.", explain:"Also use proper grounding and component-handling procedures."},
+  {domain:"Operational Procedures", front:"What document gives handling/disposal safety details for chemicals and materials?", answer:"MSDS/SDS.", explain:"Use it for items such as toner, batteries, and cleaning materials."},
+  {domain:"Operational Procedures", front:"Surge, brownout, blackout: which is complete power loss?", answer:"Blackout.", explain:"Brownout is reduced voltage; surge is a spike."},
+  {domain:"Operational Procedures", front:"UPS vs. surge suppressor: which provides temporary power during an outage?", answer:"UPS.", explain:"A surge suppressor protects against voltage spikes but does not keep equipment running."},
+  {domain:"Operational Procedures", front:"What preserves evidence handling integrity during incident response?", answer:"Chain of custody.", explain:"Document who collected, handled, transferred, and stored evidence."},
+  {domain:"Operational Procedures", front:"Why make a copy/image of a drive during incident response?", answer:"To preserve data integrity while investigating.", explain:"Work from the copy when possible, not the original evidence."},
+  {domain:"Operational Procedures", front:"What policy defines what users are allowed to do with company systems?", answer:"Acceptable use policy (AUP).", explain:"It sets boundaries for permitted and prohibited activity."},
+  {domain:"Operational Procedures", front:"What agreement protects confidential information shared between parties?", answer:"NDA or MNDA.", explain:"MNDA is mutual; both sides protect confidential information."},
+  {domain:"Operational Procedures", front:"Name three regulated data examples in Core 2.", answer:"Payment card data, government-issued information, PII, or healthcare data.", explain:"The exam expects awareness of regulated data and retention requirements."},
+  {domain:"Operational Procedures", front:"Which scripting extension is for PowerShell?", answer:".ps1.", explain:"Other objective file types include .bat, .vbs, .sh, .js, and .py."},
+  {domain:"Operational Procedures", front:"Name three common scripting use cases.", answer:"Automation, restarting machines, remapping drives, installing apps, backups, gathering data, or initiating updates.", explain:"Scripts save time but can also introduce malware or unwanted settings changes."},
+  {domain:"Operational Procedures", front:"RDP vs. SSH: which is a secure command-line remote access method?", answer:"SSH.", explain:"RDP is a remote graphical desktop protocol."},
+  {domain:"Operational Procedures", front:"What does RMM provide?", answer:"Remote monitoring and management.", explain:"It is common in managed support environments for monitoring, remote actions, and maintenance."},
+  {domain:"Operational Procedures", front:"What should remote access tools use to reduce security risk?", answer:"Encryption, MFA, least privilege, auditing, and trusted tools.", explain:"Remote access can expose sensitive systems if poorly controlled."},
+  {domain:"Operational Procedures", front:"Which AI limitation means it may confidently invent incorrect details?", answer:"Hallucinations.", explain:"The objectives also call out bias and accuracy limits."},
+  {domain:"Operational Procedures", front:"Private vs. public AI decisions should focus on what?", answer:"Data security, data source, and data privacy.", explain:"Sensitive company/customer data should follow policy and approved tooling."}
+];
+
+const $ = (id) => document.getElementById(id);
+const Store = {
+  get(key, fallback){
+    try{
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    }catch(e){ return fallback; }
+  },
+  set(key, value){
+    try{ localStorage.setItem(key, JSON.stringify(value)); }catch(e){}
+  },
+  remove(key){
+    try{ localStorage.removeItem(key); }catch(e){}
+  }
+};
+let selected = new Set(DOMAINS.map(d => d.name));
+let known = Store.get("aplus_core2_known_cards", {});
+let deck = [];
+let index = 0;
+let flipped = false;
+
+function iconMoon(){
+  return '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 7.5A8.5 8.5 0 1 1 12 3Z"/></svg>';
+}
+function iconSun(){
+  return '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v2"/><path d="M12 19v2"/><path d="M5.6 5.6 7 7"/><path d="m17 17 1.4 1.4"/><path d="M3 12h2"/><path d="M19 12h2"/><path d="m5.6 18.4 1.4-1.4"/><path d="m17 7 1.4-1.4"/><circle cx="12" cy="12" r="4"/></svg>';
+}
+function shuffle(items){
+  const a = items.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+function countDomain(name){
+  return CARDS.filter(card => card.domain === name).length;
+}
+function renderSidebar(){
+  $("deckCount").textContent = CARDS.length;
+  const chips = $("domainChips");
+  chips.innerHTML = "";
+  const all = document.createElement("button");
+  all.type = "button";
+  all.className = "chip" + (selected.size === DOMAINS.length ? " sel" : "");
+  all.textContent = "All";
+  all.setAttribute("aria-pressed", selected.size === DOMAINS.length ? "true" : "false");
+  all.onclick = () => { selected = new Set(DOMAINS.map(d => d.name)); renderSidebar(); };
+  chips.appendChild(all);
+  DOMAINS.forEach(domain => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "chip" + (selected.has(domain.name) ? " sel" : "");
+    chip.textContent = domain.name;
+    chip.setAttribute("aria-pressed", selected.has(domain.name) ? "true" : "false");
+    chip.onclick = () => {
+      if(selected.has(domain.name)) selected.delete(domain.name);
+      else selected.add(domain.name);
+      if(selected.size === 0) selected.add(domain.name);
+      renderSidebar();
+    };
+    chips.appendChild(chip);
+  });
+  const list = $("domainList");
+  list.innerHTML = "";
+  DOMAINS.forEach(domain => {
+    const row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = "<span>" + domain.name + " (" + domain.weight + "%)</span><span>" + countDomain(domain.name) + "</span>";
+    list.appendChild(row);
+  });
+  renderKnownStats();
+}
+function filteredCards(){
+  let cards = CARDS.map((card, i) => ({...card, id:i})).filter(card => selected.has(card.domain));
+  if($("hideKnown").checked) cards = cards.filter(card => !known[card.id]);
+  return cards;
+}
+function startDeck(){
+  deck = shuffle(filteredCards());
+  index = 0;
+  flipped = false;
+  $("flashcard").classList.remove("flipped");
+  $("flashcard").setAttribute("aria-pressed", "false");
+  if(deck.length === 0){
+    $("cardDomain").textContent = "Deck";
+    $("frontText").textContent = "No cards match the current filters.";
+    $("answerText").textContent = "Adjust the deck filters.";
+    $("explainText").textContent = "";
+    $("cardTotal").textContent = "0";
+    $("cardIndex").textContent = "0";
+    $("progress").style.width = "0%";
+    updateKnownBadge();
+    setControlState();
+    return;
+  }
+  renderCard();
+}
+function renderCard(){
+  const card = deck[index];
+  flipped = false;
+  $("flashcard").classList.remove("flipped");
+  $("flashcard").setAttribute("aria-pressed", "false");
+  $("cardDomain").textContent = card.domain;
+  $("cardIndex").textContent = index + 1;
+  $("cardTotal").textContent = deck.length;
+  $("frontText").textContent = card.front;
+  $("answerText").textContent = card.answer;
+  $("explainText").textContent = card.explain;
+  $("progress").style.width = ((index + 1) / deck.length * 100) + "%";
+  updateKnownBadge();
+  setControlState();
+}
+function flip(){
+  if(deck.length === 0) return;
+  flipped = !flipped;
+  $("flashcard").classList.toggle("flipped", flipped);
+  $("flashcard").setAttribute("aria-pressed", flipped ? "true" : "false");
+}
+function next(){
+  if(index < deck.length - 1){
+    index++;
+    renderCard();
+  }
+}
+function previous(){
+  if(index > 0){
+    index--;
+    renderCard();
+  }
+}
+function markCard(isKnown){
+  if(deck.length === 0) return;
+  const id = deck[index].id;
+  if(isKnown) known[id] = true;
+  else delete known[id];
+  Store.set("aplus_core2_known_cards", known);
+  updateKnownBadge();
+  renderKnownStats();
+  if(isKnown && $("hideKnown").checked){
+    deck.splice(index, 1);
+    if(deck.length === 0){
+      startDeck();
+      return;
+    }
+    index = Math.min(index, deck.length - 1);
+    renderCard();
+    return;
+  }
+  if(isKnown) next();
+}
+function updateKnownBadge(){
+  if(deck.length === 0){
+    $("knownBadge").className = "badge unknown";
+    $("knownBadge").textContent = "Not marked";
+    return;
+  }
+  const isKnown = !!known[deck[index].id];
+  $("knownBadge").className = "badge " + (isKnown ? "known" : "unknown");
+  $("knownBadge").textContent = isKnown ? "Marked known" : "Not marked";
+}
+function setControlState(){
+  const hasCards = deck.length > 0;
+  $("prevBtn").disabled = !hasCards || index === 0;
+  $("nextBtn").disabled = !hasCards || index >= deck.length - 1;
+  $("flipBtn").disabled = !hasCards;
+  $("knownBtn").disabled = !hasCards;
+  $("unknownBtn").disabled = !hasCards;
+  $("flashcard").setAttribute("aria-disabled", hasCards ? "false" : "true");
+}
+function renderKnownStats(){
+  const totalKnown = Object.keys(known).filter(id => known[id]).length;
+  $("knownCount").textContent = totalKnown;
+  $("leftCount").textContent = Math.max(CARDS.length - totalKnown, 0);
+}
+function resetKnown(){
+  if(confirm("Reset all known-card marks for Core 2?")){
+    known = {};
+    Store.remove("aplus_core2_known_cards");
+    renderKnownStats();
+    if($("hideKnown").checked) startDeck();
+    else updateKnownBadge();
+  }
+}
+function applyTheme(theme){
+  document.documentElement.setAttribute("data-theme", theme);
+  $("themeBtn").innerHTML = theme === "light" ? iconMoon() : iconSun();
+  Store.set("aplus_core2_theme", theme);
+}
+function toggleTheme(){
+  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  applyTheme(current === "dark" ? "light" : "dark");
+}
+
+$("startBtn").onclick = startDeck;
+$("hideKnown").onchange = startDeck;
+$("flashcard").onclick = flip;
+$("flipBtn").onclick = flip;
+$("nextBtn").onclick = next;
+$("prevBtn").onclick = previous;
+$("knownBtn").onclick = () => markCard(true);
+$("unknownBtn").onclick = () => markCard(false);
+$("resetKnownBtn").onclick = resetKnown;
+$("themeBtn").onclick = toggleTheme;
+document.addEventListener("keydown", (event) => {
+  const tag = event.target && event.target.tagName;
+  if(["BUTTON", "INPUT", "SELECT", "TEXTAREA"].includes(tag)) return;
+  if(event.key === " "){ event.preventDefault(); flip(); }
+  else if(event.key === "ArrowRight") next();
+  else if(event.key === "ArrowLeft") previous();
+  else if(event.key.toLowerCase() === "k") markCard(true);
+  else if(event.key.toLowerCase() === "j") markCard(false);
+});
+
+applyTheme(Store.get("aplus_core2_theme", "light"));
+renderSidebar();
+startDeck();
+</script>
+</body>
+</html>

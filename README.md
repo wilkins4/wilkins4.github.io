@@ -16,6 +16,10 @@ Live site: [stephenwilkinson.dev](https://stephenwilkinson.dev)
 | Linux lab | `homelab-infrastructure.html` | Docker/Linux lab case study |
 | Networking lab | `networking-lab.html` | DNS and connectivity troubleshooting writeup |
 | A+ tools | `aplus.html` | CompTIA A+ study tools index |
+| A+ Core 1 sheet | `aplus-core1-study-sheet.html` | Core 1 one-hour cram sheet |
+| A+ Core 1 trainer | `aplus-core1-trainer.html` | Core 1 practice trainer and flashcards |
+| A+ Core 2 sheet | `aplus-core2-study-sheet.html` | Core 2 one-hour cram sheet |
+| A+ Core 2 flashcards | `aplus-core2-flashcards.html` | Core 2 filtered flashcard deck |
 | Archive | `archive.html` | Older utilities, games, and prototypes |
 
 ## Repository Layout
@@ -32,6 +36,10 @@ Most public pages remain at the repository root to preserve existing GitHub Page
 |-- homelab-infrastructure.html
 |-- networking-lab.html
 |-- aplus.html
+|-- aplus-core1-study-sheet.html
+|-- aplus-core1-trainer.html
+|-- aplus-core2-study-sheet.html
+|-- aplus-core2-flashcards.html
 |-- archive.html
 |-- styles.css
 |-- contact-copy.js

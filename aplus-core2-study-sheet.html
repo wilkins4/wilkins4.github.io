@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A+ Core 2 (220-1202) - One-Hour Cram Sheet</title>
+<style>
+  :root{
+    --ink:#16202b; --muted:#5b6b7b; --line:#d8dee6; --soft:#f3f6fa;
+    --accent:#1f5fbf; --accent-bg:#e9f0fb; --good:#1c7a43; --bad:#b3261e; --warn:#9a6700;
+    --hi:#fff6d6;
+  }
+  *{box-sizing:border-box;}
+  html{font-size:15px;}
+  body{
+    margin:0; background:#e8ebf0; color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.45;
+  }
+  .page{max-width:880px; margin:22px auto; background:#fff; padding:34px 40px 48px; box-shadow:0 2px 18px rgba(0,0,0,.12); border-radius:8px;}
+  header.top{border-bottom:3px solid var(--accent); padding-bottom:14px; margin-bottom:8px;}
+  header.top h1{font-size:25px; margin:0 0 4px; letter-spacing:.2px;}
+  header.top .meta{color:var(--muted); font-size:13px;}
+  .exambox{display:flex; gap:10px; flex-wrap:wrap; margin:16px 0 6px;}
+  .exambox .pill{background:var(--accent-bg); border:1px solid #cfe0f7; color:var(--accent);
+    border-radius:7px; padding:7px 11px; font-size:12.5px; font-weight:600;}
+  .exambox .pill b{font-weight:800;}
+
+  h2{font-size:18px; margin:26px 0 8px; padding:6px 10px; background:var(--accent); color:#fff; border-radius:6px;}
+  h2 .wt{float:right; font-weight:600; opacity:.92; font-size:13.5px;}
+  h3{font-size:14.5px; margin:16px 0 5px; color:var(--accent); border-bottom:1px solid var(--line); padding-bottom:3px;}
+  p{margin:6px 0;}
+  ul{margin:6px 0 6px; padding-left:20px;}
+  ol{margin:6px 0 6px; padding-left:22px;}
+  li{margin:3px 0;}
+  b.k{color:var(--ink);}
+  .small{font-size:12.5px; color:var(--muted);}
+  .two{column-count:2; column-gap:26px;}
+  .two li{break-inside:avoid;}
+  .note{background:var(--hi); border-left:4px solid var(--warn); padding:8px 12px; border-radius:5px; margin:10px 0; font-size:13px;}
+  .tip{background:#eafaf0; border-left:4px solid var(--good); padding:8px 12px; border-radius:5px; margin:10px 0; font-size:13px;}
+
+  table{width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:13px;}
+  th,td{border:1px solid var(--line); padding:5px 9px; text-align:left; vertical-align:top;}
+  th{background:var(--soft); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.3px; color:var(--muted);}
+  td code, code{background:var(--soft); padding:1px 5px; border-radius:4px; font-family:"SF Mono",Menlo,Consolas,monospace; font-size:12.5px;}
+  tr:nth-child(even) td{background:#fafcfe;}
+  .cmd{font-family:"SF Mono",Menlo,Consolas,monospace; font-size:12.5px; color:var(--accent); font-weight:800; white-space:nowrap;}
+  .danger{color:var(--bad); font-weight:800;}
+  .ok{color:var(--good); font-weight:800;}
+  .warn{color:var(--warn); font-weight:800;}
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:0 26px;}
+  @media(max-width:680px){.grid2,.two{grid-template-columns:1fr; column-count:1;}}
+
+  .footer{margin-top:28px; border-top:1px solid var(--line); padding-top:10px; color:var(--muted); font-size:11.5px;}
+  .toolbar{max-width:880px; margin:14px auto -6px; display:flex; justify-content:flex-end; gap:8px; flex-wrap:wrap;}
+  .toolbar button{font-family:inherit; border:1px solid var(--line); background:#fff; padding:7px 14px; border-radius:7px; cursor:pointer; font-weight:600; font-size:13px;}
+  .toolbar button:hover{border-color:var(--accent); color:var(--accent);}
+
+  @media print{
+    body{background:#fff;}
+    .page{box-shadow:none; margin:0; max-width:none; padding:0 6mm; border-radius:0;}
+    .toolbar{display:none;}
+    h2{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    .note,.tip,.exambox .pill,th,tr:nth-child(even) td{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+    h2{break-after:avoid;} table,ul,ol{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <button onclick="location.href='aplus.html'">A+ Hub</button>
+  <button onclick="location.href='aplus-core2-flashcards.html'">Flashcards</button>
+  <button onclick="window.print()">Print / Save as PDF</button>
+</div>
+<div class="page">
+
+<header class="top">
+  <h1>CompTIA A+ Core 2 (220-1202) - One-Hour Cram Sheet</h1>
+  <div class="meta">High-yield facts across all four domains - built for a final review pass</div>
+  <div class="exambox">
+    <span class="pill"><b>90</b> questions max</span>
+    <span class="pill"><b>90</b> minutes</span>
+    <span class="pill">Multiple-choice + performance-based</span>
+    <span class="pill">Scaled <b>100-900</b>, pass <b>700</b></span>
+    <span class="pill">OS 28% &middot; Security 28% &middot; Troubleshooting 23% &middot; Ops 21%</span>
+  </div>
+</header>
+
+<div class="tip"><b>Strategy:</b> Operating Systems + Security = <b>56%</b> of the exam. Spend most of the hour on command-line tools, Windows utilities, permissions/encryption, malware removal, and symptoms-to-fix troubleshooting.</div>
+
+<!-- ============ OPERATING SYSTEMS ============ -->
+<h2>1. Operating Systems <span class="wt">~28%</span></h2>
+
+<h3>OS types, filesystems, and install choices</h3>
+<div class="grid2">
+<table>
+<tr><th>Item</th><th>Know this</th></tr>
+<tr><td>Workstation OSs</td><td>Windows, Linux, macOS, Chrome OS.</td></tr>
+<tr><td>Mobile OSs</td><td>iOS, iPadOS, Android.</td></tr>
+<tr><td>NTFS / ReFS</td><td>Modern Windows filesystems. NTFS supports permissions, EFS, quotas, compression; ReFS emphasizes resiliency.</td></tr>
+<tr><td>FAT32</td><td>Broad compatibility; 4 GB max file size; weak security features.</td></tr>
+<tr><td>exFAT</td><td>Flash/removable media; handles files larger than 4 GB; cross-platform.</td></tr>
+<tr><td>ext4 / XFS</td><td>Linux filesystems.</td></tr>
+<tr><td>APFS</td><td>Modern Apple filesystem for macOS/iOS devices.</td></tr>
+</table>
+<ul>
+<li><b>Clean install</b>: wipe/replace OS; cleanest fix but requires backup and reinstall.</li>
+<li><b>Upgrade / in-place</b>: keeps apps/files when supported; check compatibility first.</li>
+<li><b>Image deployment</b>: repeatable standardized build; often used for fleets.</li>
+<li><b>Repair install</b>: fixes OS files while preserving data when possible.</li>
+<li><b>Recovery partition</b>: vendor restore tools on local disk.</li>
+<li><b>GPT</b>: modern partition table, UEFI-friendly. <b>MBR</b>: legacy BIOS-era partitioning.</li>
+<li>Before upgrades: <b>back up files/user preferences</b>, verify drivers, apps, hardware, and product life cycle.</li>
+</ul>
+</div>
+
+<h3>Windows editions and account context</h3>
+<ul class="two">
+<li><b>Domain</b> = centralized AD authentication/policy. <b>Workgroup</b> = peer-to-peer local accounts.</li>
+<li><b>Windows Home</b> lacks key business features such as domain join, Group Policy Editor, BitLocker management, and RDP host.</li>
+<li><b>Windows Pro/Enterprise</b> are the usual business choices for domain join, RDP host, BitLocker, and policy control.</li>
+<li><b>N editions</b> omit some media technologies for regulatory markets.</li>
+<li>Windows 11 requires modern hardware such as <b>TPM</b> and <b>UEFI</b> support.</li>
+<li>RDP availability question? Client exists widely; <b>hosting</b> RDP sessions is the business-edition feature.</li>
+</ul>
+
+<h3>Windows GUI tools and snap-ins</h3>
+<table>
+<tr><th>Tool</th><th>Best use</th></tr>
+<tr><td class="cmd">eventvwr.msc</td><td>Event Viewer: logs for boot, driver, app, service, security, and crash clues.</td></tr>
+<tr><td class="cmd">diskmgmt.msc</td><td>Disk Management: partitions, volumes, drive letters, initialize disks.</td></tr>
+<tr><td class="cmd">taskschd.msc</td><td>Task Scheduler: run actions on time/event triggers.</td></tr>
+<tr><td class="cmd">devmgmt.msc</td><td>Device Manager: drivers, disabled devices, hardware errors.</td></tr>
+<tr><td class="cmd">certmgr.msc</td><td>Certificate Manager: user certificate stores.</td></tr>
+<tr><td class="cmd">lusrmgr.msc</td><td>Local Users and Groups: local account/group management.</td></tr>
+<tr><td class="cmd">perfmon.msc</td><td>Performance Monitor: counters, trends, bottleneck data.</td></tr>
+<tr><td class="cmd">gpedit.msc</td><td>Local Group Policy Editor: local policy settings, not usually Home edition.</td></tr>
+<tr><td class="cmd">msinfo32</td><td>System Information: hardware, BIOS/UEFI, drivers, environment summary.</td></tr>
+<tr><td class="cmd">resmon</td><td>Resource Monitor: CPU, memory, disk, network process activity.</td></tr>
+<tr><td class="cmd">msconfig</td><td>System Configuration: boot options, startup troubleshooting.</td></tr>
+<tr><td class="cmd">cleanmgr / dfrgui</td><td>Disk Cleanup / Defragment and Optimize Drives.</td></tr>
+<tr><td class="cmd">regedit</td><td>Registry Editor. Back up/export before changes.</td></tr>
+</table>
+
+<h3>Windows command line: fastest recall</h3>
+<table>
+<tr><th>Command</th><th>Purpose</th></tr>
+<tr><td class="cmd">cd / dir</td><td>Change directory / list directory contents.</td></tr>
+<tr><td class="cmd">ipconfig</td><td>View IP config; <code>/all</code>, <code>/release</code>, <code>/renew</code>, <code>/flushdns</code> are common.</td></tr>
+<tr><td class="cmd">ping</td><td>Basic reachability and latency test.</td></tr>
+<tr><td class="cmd">tracert / pathping</td><td>Trace route path; pathping adds loss/latency statistics.</td></tr>
+<tr><td class="cmd">nslookup</td><td>DNS lookup testing.</td></tr>
+<tr><td class="cmd">netstat</td><td>Open connections/listening ports.</td></tr>
+<tr><td class="cmd">net use</td><td>Map/list network shares and drives.</td></tr>
+<tr><td class="cmd">chkdsk</td><td>Filesystem/disk error scan and repair.</td></tr>
+<tr><td class="cmd">diskpart</td><td>Advanced disk/partition CLI. Be careful: destructive commands exist.</td></tr>
+<tr><td class="cmd">format</td><td>Format a volume.</td></tr>
+<tr><td class="cmd">md / rmdir</td><td>Make/remove directories.</td></tr>
+<tr><td class="cmd">robocopy</td><td>Robust file copy for migrations/backups.</td></tr>
+<tr><td class="cmd">sfc</td><td>System File Checker; repairs protected Windows system files.</td></tr>
+<tr><td class="cmd">gpupdate / gpresult</td><td>Refresh policy / report applied policies.</td></tr>
+<tr><td class="cmd">hostname / whoami / winver</td><td>Computer name / current identity / Windows version.</td></tr>
+</table>
+
+<h3>Windows networking and settings</h3>
+<ul class="two">
+<li>IP config includes <b>IP address</b>, subnet mask, default gateway, and DNS servers.</li>
+<li><b>Static</b> IP = manually assigned. <b>Dynamic</b> IP = DHCP assigned.</li>
+<li><b>Public network</b> profile is restrictive. <b>Private network</b> allows discovery/sharing more often.</li>
+<li>VPN creates an encrypted tunnel; proxy forwards web traffic; metered connection restricts background usage.</li>
+<li>Windows Defender Firewall can allow/block apps and ports; check profile-specific rules.</li>
+<li>Network paths use UNC format: <code>\\server\share</code>. Mapped drives assign a letter to a share.</li>
+<li>Power Options: sleep, hibernate, lid action, fast startup, USB selective suspend.</li>
+<li>File Explorer Options: show hidden files and show/hide file extensions.</li>
+</ul>
+
+<h3>macOS and Linux client tools</h3>
+<div class="grid2">
+<ul>
+<li>macOS app packages: <code>.dmg</code> disk image, <code>.pkg</code> installer, <code>.app</code> application bundle.</li>
+<li>macOS folders: <code>/Applications</code>, <code>/Users</code>, <code>/Library</code>, <code>/System</code>, <code>/Users/Library</code>.</li>
+<li><b>Time Machine</b> = backups. <b>FileVault</b> = disk encryption. <b>Keychain</b> = passwords/certs/keys.</li>
+<li><b>Spotlight</b> searches; <b>Mission Control</b> manages desktops/windows; <b>Force Quit</b> kills stuck apps.</li>
+<li>Use <b>Disk Utility</b> for disks/volumes and <b>Terminal</b> for CLI.</li>
+</ul>
+<ul>
+<li>Linux files: <code>/etc/passwd</code> users, <code>/etc/shadow</code> password hashes, <code>/etc/hosts</code> local names, <code>/etc/fstab</code> mounts, <code>/etc/resolv.conf</code> DNS.</li>
+<li>File commands: <code>ls</code>, <code>pwd</code>, <code>mv</code>, <code>cp</code>, <code>rm</code>, <code>chmod</code>, <code>chown</code>, <code>grep</code>, <code>find</code>.</li>
+<li>Admin/package: <code>su</code>, <code>sudo</code>, <code>apt</code>, <code>dnf</code>.</li>
+<li>Network/info: <code>ip</code>, <code>ping</code>, <code>curl</code>, <code>dig</code>, <code>traceroute</code>, <code>man</code>, <code>top</code>, <code>ps</code>, <code>du</code>, <code>df</code>.</li>
+<li><b>systemd</b> manages services; <b>kernel</b> is the OS core; <b>bootloader</b> starts the OS.</li>
+</ul>
+</div>
+
+<h3>Applications and cloud productivity</h3>
+<ul class="two">
+<li>Check 32-bit vs. 64-bit, OS compatibility, CPU/RAM/storage, VRAM/GPU, external hardware tokens, and driver dependencies.</li>
+<li>Distribution methods: physical media, mountable ISO, downloadable package, and image deployment.</li>
+<li>Consider impact to device performance, network bandwidth, business operations, and support burden.</li>
+<li>Cloud productivity: email, storage/sync folders, spreadsheets, videoconferencing, presentations, word processing, and instant messaging.</li>
+<li>Identity synchronization connects local/cloud identities; licensing assignment controls who can use paid cloud services.</li>
+</ul>
+
+<!-- ============ SECURITY ============ -->
+<h2>2. Security <span class="wt">~28%</span></h2>
+
+<h3>Physical, access, and logical controls</h3>
+<table>
+<tr><th>Control</th><th>Purpose / clue</th></tr>
+<tr><td>Bollards / fences / guards</td><td>Physical perimeter protection; stop vehicles or unauthorized entry.</td></tr>
+<tr><td>Access control vestibule</td><td>One-person controlled entry area; formerly called a mantrap.</td></tr>
+<tr><td>Badge reader / key fob / smart card</td><td>Possession-based access control.</td></tr>
+<tr><td>Biometrics</td><td>Retina, fingerprint, palm, facial, or voice recognition; "something you are."</td></tr>
+<tr><td>Video surveillance / alarms / sensors</td><td>Detect, deter, and provide evidence.</td></tr>
+<tr><td>Least privilege</td><td>Give users only the access required to do the job.</td></tr>
+<tr><td>Zero Trust</td><td>Never implicitly trust; continuously verify identity, device, and context.</td></tr>
+<tr><td>ACL</td><td>Rule list that allows/denies access to objects or traffic.</td></tr>
+<tr><td>MFA</td><td>Two or more factor categories: know, have, are, location/behavior.</td></tr>
+<tr><td>SSO / SAML</td><td>Single login across apps; SAML passes authentication assertions.</td></tr>
+<tr><td>PAM / JIT access</td><td>Limit privileged access and grant it only when needed.</td></tr>
+<tr><td>MDM / DLP / IAM</td><td>Manage mobile devices, prevent data leakage, and control identities/access.</td></tr>
+</table>
+
+<h3>Windows security settings</h3>
+<ul class="two">
+<li><b>Defender Antivirus</b>: activate/deactivate, update definitions, scan for malware.</li>
+<li><b>Firewall</b>: enable/disable, configure application and port rules.</li>
+<li><b>Standard user</b> for daily work; <b>administrator</b> for system changes; disable Guest.</li>
+<li><b>Windows Hello</b>: PIN, fingerprint, facial recognition, passwordless options.</li>
+<li><b>Run as administrator</b> elevates one app. <b>UAC</b> prompts before elevated changes.</li>
+<li><b>NTFS permissions</b> apply locally and over network. <b>Share permissions</b> apply only through network shares. Most restrictive effective permission wins.</li>
+<li><b>Inheritance</b> flows parent folder permissions to child objects unless blocked.</li>
+<li><b>BitLocker</b> encrypts full drives; <b>BitLocker To Go</b> encrypts removable drives; <b>EFS</b> encrypts individual files/folders.</li>
+<li>Active Directory tasks: join domain, apply Group Policy, assign logon scripts/home folders, move OUs, select security groups, configure folder redirection.</li>
+</ul>
+
+<h3>Wireless security and authentication</h3>
+<table>
+<tr><th>Item</th><th>Know this</th></tr>
+<tr><td>WPA2</td><td>Modern baseline wireless security; use AES when possible.</td></tr>
+<tr><td>WPA3</td><td>Newer/stronger wireless security.</td></tr>
+<tr><td>TKIP</td><td>Legacy WPA encryption; avoid when AES is available.</td></tr>
+<tr><td>AES</td><td>Preferred strong encryption for Wi-Fi.</td></tr>
+<tr><td>RADIUS</td><td>Centralized authentication common with 802.1X enterprise Wi-Fi.</td></tr>
+<tr><td>TACACS+</td><td>AAA often used for network device administration.</td></tr>
+<tr><td>Kerberos</td><td>Ticket-based authentication common in Windows domains.</td></tr>
+</table>
+
+<h3>Malware, social engineering, and threats</h3>
+<div class="grid2">
+<ul>
+<li><b>Trojan</b>: malware disguised as useful software.</li>
+<li><b>Rootkit</b>: hides deeply and may alter OS/kernel behavior.</li>
+<li><b>Virus</b>: attaches to files/programs and spreads when executed.</li>
+<li><b>Spyware/keylogger/stalkerware</b>: monitors user activity or keystrokes.</li>
+<li><b>Ransomware</b>: encrypts/blocks data and demands payment.</li>
+<li><b>Boot sector virus</b>: infects startup area.</li>
+<li><b>Cryptominer</b>: steals CPU/GPU cycles.</li>
+<li><b>Fileless malware</b>: runs in memory/legitimate tools; harder to find.</li>
+<li><b>Adware/PUP</b>: unwanted ads or bundled software.</li>
+</ul>
+<ul>
+<li><b>Phishing</b>: deceptive message. <b>Vishing</b>: voice. <b>Smishing</b>: SMS. <b>QR phishing</b>: malicious QR.</li>
+<li><b>Spear phishing</b> targets a person/group. <b>Whaling</b> targets executives.</li>
+<li><b>Tailgating</b>: following into a secure area. <b>Shoulder surfing</b>: watching secrets being entered.</li>
+<li><b>Evil twin</b>: rogue Wi-Fi AP that imitates a real one.</li>
+<li><b>On-path attack</b>: attacker intercepts traffic between parties.</li>
+<li><b>Brute force</b> tries all options; <b>dictionary</b> uses wordlists.</li>
+<li><b>SQL injection / XSS</b>: input validation web app attacks.</li>
+<li><b>BEC</b>: business email compromise. <b>Supply chain</b>: compromise through vendor/pipeline.</li>
+<li>Vulnerabilities: unpatched, unprotected, non-compliant, EOL systems, and unmanaged BYOD.</li>
+</ul>
+</div>
+<p class="small">Detection/removal tools include recovery console, EDR, MDR, XDR, antivirus, anti-malware, email security gateways, software firewalls, user education, and OS reinstall/reimage when needed.</p>
+
+<h3>SOHO malware removal process (memorize order)</h3>
+<ol>
+  <li>Investigate and verify malware symptoms.</li>
+  <li>Quarantine infected system.</li>
+  <li>Disable System Restore in Windows Home.</li>
+  <li>Remediate infected systems.</li>
+  <li>Update anti-malware software.</li>
+  <li>Use scan/removal techniques such as Safe Mode or preinstallation environment.</li>
+  <li>Reimage/reinstall if necessary.</li>
+  <li>Schedule scans and run updates.</li>
+  <li>Enable System Restore and create a restore point in Windows Home.</li>
+  <li>Educate the end user.</li>
+</ol>
+
+<h3>Hardening, mobile security, and data destruction</h3>
+<div class="grid2">
+<ul>
+<li>Use data-at-rest encryption, BIOS/UEFI passwords, screen locks, password managers, account lockout, timeout/screen lock, and restricted user permissions.</li>
+<li>Disable Guest, unused services, and AutoRun; change default administrator passwords.</li>
+<li>Password quality: length, character variety, uniqueness, complexity, and appropriate expiration policy.</li>
+<li>Mobile: encryption, screen locks, OS/app updates, endpoint security, locator apps, remote wipe, remote backup, failed-login restrictions, MDM profiles.</li>
+<li>BYOD gives flexibility; corporate-owned devices give stronger control.</li>
+</ul>
+<table>
+<tr><th>Destruction method</th><th>Best clue</th></tr>
+<tr><td>Drilling / shredding / incineration</td><td>Physical destruction of media.</td></tr>
+<tr><td>Degaussing</td><td>Magnetic destruction for HDD/tape; not useful for SSDs.</td></tr>
+<tr><td>Erasing/wiping</td><td>Overwrite/sanitize before reuse or recycling.</td></tr>
+<tr><td>Standard formatting</td><td>Not secure by itself.</td></tr>
+<tr><td>Certificate of destruction</td><td>Proof from a third-party disposal vendor.</td></tr>
+</table>
+</div>
+
+<h3>SOHO network and browser security</h3>
+<ul class="two">
+<li>Router basics: change default password, update firmware, use secure management access, place device physically securely.</li>
+<li>Disable unused ports and risky services; be cautious with <b>UPnP</b> and port forwarding.</li>
+<li>Wireless: change SSID, use WPA2/WPA3 with AES, configure guest access, understand SSID broadcast hiding is not real security.</li>
+<li>Screened subnet isolates public-facing services from the internal LAN.</li>
+<li>Browser: install from trusted sources, check hashes when provided, patch regularly, and only use trusted extensions/plugins.</li>
+<li>Use valid certificates/HTTPS, password managers, pop-up blockers, private browsing, cache/data clearing, ad blockers, proxy settings, and secure DNS where appropriate.</li>
+</ul>
+
+<!-- ============ SOFTWARE TROUBLESHOOTING ============ -->
+<h2>3. Software Troubleshooting <span class="wt">~23%</span></h2>
+
+<h3>Windows symptom - likely cause / first move</h3>
+<table>
+<tr><th>Symptom</th><th>Think / do first</th></tr>
+<tr><td>BSOD after driver or update</td><td>Boot Safe Mode/recovery, roll back driver/update, check Event Viewer and dump clues.</td></tr>
+<tr><td>Degraded performance</td><td>Task Manager/Resource Monitor: CPU, RAM, disk, startup apps, malware, low storage.</td></tr>
+<tr><td>Boot issues / No OS found</td><td>Boot order, disconnected/failing drive, corrupt boot files, wrong partition/UEFI settings.</td></tr>
+<tr><td>Frequent shutdowns</td><td>Power, thermals, updates, malware, or crash/restart setting.</td></tr>
+<tr><td>Services not starting</td><td>Check service account, dependencies, Event Viewer, startup type.</td></tr>
+<tr><td>Applications crashing</td><td>Patch/repair/reinstall app, verify requirements, profile/settings, Event Viewer.</td></tr>
+<tr><td>Low memory warnings</td><td>Close apps, find leaks, add RAM, check pagefile/virtual memory.</td></tr>
+<tr><td>USB controller resource warnings</td><td>Too many USB devices/controllers, driver/chipset issue, power management.</td></tr>
+<tr><td>System instability</td><td>Recent changes, driver updates, malware scan, SFC, hardware diagnostics.</td></tr>
+<tr><td>Slow profile load</td><td>Roaming profile, network share, GPO/logon script, corrupt profile.</td></tr>
+<tr><td>Time drift</td><td>Time zone/NTP sync; on desktops also suspect CMOS battery.</td></tr>
+</table>
+
+<h3>Mobile OS and application troubleshooting</h3>
+<table>
+<tr><th>Symptom</th><th>Likely fix path</th></tr>
+<tr><td>App fails to launch or crashes</td><td>Force close, update app/OS, clear cache/data, reinstall, verify compatibility.</td></tr>
+<tr><td>App fails to update/install</td><td>Check storage, network, app store account, OS version, restrictions/profiles.</td></tr>
+<tr><td>Slow response</td><td>Close background apps, restart, free storage, update, check battery health.</td></tr>
+<tr><td>OS fails to update</td><td>Check storage, battery/charger, Wi-Fi, vendor support/EOL, MDM restrictions.</td></tr>
+<tr><td>Battery life issues</td><td>Screen brightness, rogue apps, radios/location, battery health, updates.</td></tr>
+<tr><td>Random reboots</td><td>Bad app/update, OS corruption, battery/thermal issue, hardware fault.</td></tr>
+<tr><td>Bluetooth/Wi-Fi/NFC issues</td><td>Toggle radio, forget/re-pair, reset network settings, verify range/interference.</td></tr>
+<tr><td>Screen does not autorotate</td><td>Rotation lock, app support, sensor issue, restart/update.</td></tr>
+</table>
+
+<h3>Security symptoms on PCs and mobile</h3>
+<ul class="two">
+<li>Mobile risk clues: unofficial app stores, developer mode, root/jailbreak, unauthorized app, app spoofing.</li>
+<li>Mobile compromise symptoms: high network traffic, high data usage, ads, fake warnings, slow response, limited/no internet, odd app behavior, leaked data.</li>
+<li>PC security symptoms: false antivirus alerts, desktop alerts, altered/missing/renamed files, cannot access files, unwanted OS notifications, update failures.</li>
+<li>Browser symptoms: pop-ups, certificate warnings, redirects, degraded browser performance.</li>
+<li>First protect data and isolate suspicious systems; then follow the malware removal process.</li>
+<li>For fake security warnings, do not call displayed numbers or install offered tools.</li>
+</ul>
+
+<!-- ============ OPERATIONAL PROCEDURES ============ -->
+<h2>4. Operational Procedures <span class="wt">~21%</span></h2>
+
+<h3>Ticketing, documentation, and asset management</h3>
+<ul class="two">
+<li>Ticket essentials: user info, device info, issue description, category, severity, escalation level, progress notes, and resolution.</li>
+<li>Write clear, concise notes so another tech can continue the work.</li>
+<li>Asset management: inventory lists, CMDB, asset tags/IDs, procurement life cycle, warranty/licensing, assigned users.</li>
+<li>Documents: incident reports, SOPs, custom install procedures, onboarding/offboarding checklists, SLAs, and knowledge base articles.</li>
+<li><b>SLA</b> defines expected service level; can be internal or external/third-party.</li>
+</ul>
+
+<h3>Change management</h3>
+<table>
+<tr><th>Required thought</th><th>What it means</th></tr>
+<tr><td>Purpose and scope</td><td>Why the change is needed and what systems/users are included.</td></tr>
+<tr><td>Type</td><td>Standard, normal, or emergency change.</td></tr>
+<tr><td>Date/time</td><td>Use maintenance windows; respect change freezes.</td></tr>
+<tr><td>Risk and impact</td><td>Risk level, affected systems, business effect.</td></tr>
+<tr><td>Rollback and backup plan</td><td>How to restore service if the change fails.</td></tr>
+<tr><td>Sandbox testing</td><td>Validate before production when possible.</td></tr>
+<tr><td>Approvals and review</td><td>Change board approval, responsible staff, peer review, end-user acceptance.</td></tr>
+</table>
+
+<h3>Backups and recovery</h3>
+<table>
+<tr><th>Backup type</th><th>Fast recall</th></tr>
+<tr><td>Full</td><td>Copies all selected data; easiest restore, longest backup.</td></tr>
+<tr><td>Incremental</td><td>Copies changes since last backup of any type; fastest backup, more restore steps.</td></tr>
+<tr><td>Differential</td><td>Copies changes since last full backup; grows until next full, simpler restore than incremental.</td></tr>
+<tr><td>Synthetic full</td><td>Builds a new full backup from prior full + incrementals without rereading the client.</td></tr>
+<tr><td>3-2-1 rule</td><td>3 copies, 2 media types, 1 offsite/offline copy.</td></tr>
+<tr><td>GFS</td><td>Grandfather-father-son rotation: monthly/weekly/daily generations.</td></tr>
+<tr><td>Recovery</td><td>Restore in-place/overwrite or to an alternate location; test backups on a schedule.</td></tr>
+</table>
+
+<h3>Safety, environment, and privacy</h3>
+<ul class="two">
+<li>Use ESD straps/mats, antistatic bags, proper grounding, careful component handling/storage, and cable management.</li>
+<li>Disconnect power before repairing a PC; use proper lifting, fire safety, safety goggles, and air filter mask when needed.</li>
+<li>Use MSDS/SDS for handling/disposal. Dispose of batteries, toner, devices, and assets properly.</li>
+<li>Control temperature, humidity, ventilation, dust, and equipment placement.</li>
+<li>Power events: surge = voltage spike, brownout = reduced voltage, blackout = power loss. UPS helps with outages; surge suppressor handles spikes.</li>
+<li>Incident response: chain of custody, inform management/law enforcement as necessary, preserve data with a drive image, document incident, follow order of volatility.</li>
+<li>Know EULA/DRM, valid licenses, perpetual vs. subscription-style usage, personal vs. corporate use, open-source license, NDA/MNDA.</li>
+<li>Regulated data: payment cards, government IDs, PII, healthcare data, and retention requirements. AUP defines acceptable use.</li>
+</ul>
+
+<h3>Professionalism, scripting, remote access, and AI</h3>
+<div class="grid2">
+<ul>
+<li>Be on time, dress for the environment, use professional language, avoid jargon when appropriate, actively listen, and avoid interruptions.</li>
+<li>With difficult customers: do not argue, dismiss, judge, or get defensive. Clarify, restate, set expectations, document work, and follow up.</li>
+<li>Protect confidential/private materials on desks, computers, printers, and screens.</li>
+<li>Script types: <code>.bat</code>, <code>.ps1</code>, <code>.vbs</code>, <code>.sh</code>, <code>.js</code>, <code>.py</code>.</li>
+<li>Script uses: automation, restart machines, remap drives, install apps, backups, gather info, initiate updates.</li>
+<li>Script risks: malware, unintended settings changes, browser/system crashes due to mishandled resources.</li>
+</ul>
+<ul>
+<li>Remote access: RDP, VPN, VNC, SSH, RMM, SPICE, WinRM, and third-party screen sharing/video/file transfer/desktop management.</li>
+<li><b>RDP</b> = Windows remote GUI. <b>SSH</b> = secure remote CLI. <b>VPN</b> = secure tunnel. <b>RMM</b> = managed support/monitoring tool.</li>
+<li>Secure remote access with MFA, least privilege, encryption, auditing, user consent, and vendor/tool trust.</li>
+<li>AI basics: app integration, appropriate-use policy, plagiarism concerns.</li>
+<li>AI limitations: bias, hallucinations, accuracy limits.</li>
+<li>Private vs. public AI: data security, data source, and data privacy determine whether sensitive information can be used.</li>
+</ul>
+</div>
+
+<div class="note"><b>Rapid recall:</b> Pass score 700 &middot; Core 2 domains: OS 28, Security 28, Troubleshooting 23, Ops 21 &middot; Home lacks domain join/RDP host/gpedit/BitLocker management &middot; NTFS = permissions/EFS &middot; exFAT = large removable files &middot; Time Machine = macOS backup &middot; FileVault/BitLocker = full-disk encryption &middot; EFS = file/folder encryption &middot; WPA3/WPA2+AES &middot; Malware removal starts by verifying symptoms and quarantining &middot; 3-2-1 backup &middot; Chain of custody preserves evidence.</div>
+
+<div class="footer">
+  Original study aid aligned to the published CompTIA A+ Core 2 (220-1202) V15 exam objectives document version 4.0. Not affiliated with or endorsed by CompTIA.
+  Verify any borderline detail against the official objectives. Use the <b>Print / Save as PDF</b> button (top right) for a paper copy. Good luck, Steve.
+</div>
+
+</div>
+</body>
+</html>
