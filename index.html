@@ -43,14 +43,9 @@
           <p class="hero-detail">
             Background in web development, technical documentation, Windows troubleshooting, and home lab networking.
           </p>
-          <div class="hero-actions" aria-label="Resume and email">
-            <div class="email-action" aria-label="Email Stephen Wilkinson">
-              <a href="mailto:stephen@stephenwilkinson.dev">stephen@stephenwilkinson.dev</a>
-              <button type="button" data-copy-email="stephen@stephenwilkinson.dev" aria-describedby="home-email-feedback">Copy</button>
-            </div>
+          <div class="hero-actions" aria-label="Resume">
             <a class="button secondary" href="resume.html">View Resume</a>
           </div>
-          <p class="contact-feedback" id="home-email-feedback" aria-live="polite"></p>
         </div>
 
         <aside class="resume-brief" aria-label="Quick resume summary">
@@ -58,19 +53,23 @@
             <p class="project-type">Education</p>
             <h2>Education</h2>
             <ul class="clean-list">
-              <li>EFSC: Cybersecurity, in progress.</li>
+              <li>Eastern Florida State College: Cybersecurity, in progress.</li>
               <li>Canisius: B.S. Digital Media Arts, 2016.</li>
               <li>CompTIA A+ in progress.</li>
             </ul>
           </article>
 
-          <article class="brief-card">
+          <article class="brief-card" id="contact">
             <p class="project-type">Contact</p>
             <h2>Contact details</h2>
             <ul class="clean-list">
               <li>Palm Bay, Florida.</li>
-              <li>Email: stephen@stephenwilkinson.dev.</li>
             </ul>
+            <div class="email-action" aria-label="Email Stephen Wilkinson">
+              <a href="mailto:stephen@stephenwilkinson.dev">stephen@stephenwilkinson.dev</a>
+              <button type="button" data-copy-email="stephen@stephenwilkinson.dev" aria-describedby="home-email-feedback">Copy</button>
+            </div>
+            <p class="contact-feedback" id="home-email-feedback" aria-live="polite"></p>
           </article>
         </aside>
       </div>
@@ -124,23 +123,6 @@
       </div>
     </section>
 
-    <section class="section contact-section" id="contact">
-      <div class="container contact-panel">
-        <div>
-          <p class="section-kicker">Contact</p>
-          <p>Entry-level help desk, desktop support, and junior security support.</p>
-          <div class="email-action" aria-label="Email Stephen Wilkinson">
-            <a href="mailto:stephen@stephenwilkinson.dev">stephen@stephenwilkinson.dev</a>
-            <button type="button" data-copy-email="stephen@stephenwilkinson.dev" aria-describedby="contact-email-feedback">Copy</button>
-          </div>
-          <p class="contact-feedback" id="contact-email-feedback" aria-live="polite"></p>
-        </div>
-        <div class="button-row">
-          <a class="button primary" href="mailto:stephen@stephenwilkinson.dev">Email Stephen</a>
-          <a class="button secondary" href="https://github.com/wilkins4" target="_blank" rel="noopener noreferrer">GitHub</a>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">

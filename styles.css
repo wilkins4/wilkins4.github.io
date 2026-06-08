@@ -301,6 +301,11 @@ img {
   color: var(--text-muted);
 }
 
+.brief-card .email-action {
+  width: 100%;
+  margin-top: 0.85rem;
+}
+
 .hero-card {
   position: relative;
   z-index: 1;
