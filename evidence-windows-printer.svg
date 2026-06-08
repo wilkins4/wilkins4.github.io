@@ -16,6 +16,7 @@
     <text x="82" y="306" fill="#7aa2f7">Printer Properties &gt; Ports</text>
     <text x="82" y="340" fill="#e8edf2">Updated Standard TCP/IP Port to 192.168.1.87</text>
     <text x="82" y="394" fill="#9ece6a">Windows test page: printed successfully</text>
-    <text x="82" y="444" fill="#9aa7b4">simulated ticket with private IPs reserved for documentation practice</text>
+    <text x="82" y="444" fill="#9aa7b4">simulated ticket; private IPs reserved</text>
+    <text x="82" y="476" fill="#9aa7b4">for documentation practice</text>
   </g>
 </svg>
