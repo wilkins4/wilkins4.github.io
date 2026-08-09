@@ -332,7 +332,28 @@
     const license = `WILKINSON WORKSHOP PERSONAL USE LICENSE\nVersion 1.0\n\nCopyright (c) 2026 Stephen Wilkinson. All rights reserved.\n\nYou may download, print, and modify this product for personal, noncommercial hobby use.\n\nYou may not redistribute, sell, sublicense, publish, or share the digital files or modified digital files. You may not sell physical prints without separate written commercial permission.\n\nThis product is provided as-is without warranty. You are responsible for safe printer operation, resin handling, ventilation, washing, curing, and disposal.\n`;
 
     const printLog = "date,printer,resin,layer_height_mm,normal_exposure_s,bottom_exposure_s,lift_settings,wash_time_min,cure_time_min,result,notes\n";
-    const source = `/*\n * Wilkinson Workshop Test Plate v${VERSION}\n * The production STL is generated in the browser from a piecewise-constant\n * heightfield. Edit workshop/assets/workshop-product-generator.js in the\n * public source repository to change feature rectangles and regenerate it.\n * Product page: https://stephenwilkinson.dev/workshop/original-files/workshop-test-plate/\n */\n`;
+    const sourceFeatures = buildFeatures();
+    const raised = sourceFeatures.filter((feature) => feature.mode === "max");
+    const recessed = sourceFeatures.filter((feature) => feature.mode === "min");
+    const format = (value) => Number(value.toFixed(4));
+    const sourceLines = [
+      `// Wilkinson Workshop Test Plate v${VERSION}`,
+      "// Free personal-use digital beta. Physical resin validation is pending.",
+      "$fn = 32;",
+      "",
+      "difference() {",
+      "  union() {",
+      `    cube([${WIDTH}, ${DEPTH}, ${BASE_TOP}], center = false);`
+    ];
+    raised.forEach((feature) => {
+      sourceLines.push(`    translate([${format(feature.x0)}, ${format(feature.y0)}, ${BASE_TOP}]) cube([${format(feature.x1 - feature.x0)}, ${format(feature.y1 - feature.y0)}, ${format(feature.z - BASE_TOP)}], center = false); // ${feature.label}`);
+    });
+    sourceLines.push("  }");
+    recessed.forEach((feature) => {
+      sourceLines.push(`  translate([${format(feature.x0)}, ${format(feature.y0)}, ${format(feature.z)}]) cube([${format(feature.x1 - feature.x0)}, ${format(feature.y1 - feature.y0)}, ${format(BASE_TOP - feature.z + 0.02)}], center = false); // ${feature.label}`);
+    });
+    sourceLines.push("}", "");
+    const source = sourceLines.join("\n");
     const manifest = {
       productId: PRODUCT_ID,
       name: "Workshop Test Plate",
@@ -343,7 +364,7 @@
       physicalValidation: false,
       includedFiles: [
         `${root}STL/Workshop-Test-Plate-v${VERSION}.stl`,
-        `${root}Source/Workshop-Test-Plate-v${VERSION}.js`,
+        `${root}Source/Workshop-Test-Plate-v${VERSION}.scad`,
         `${root}README.md`,
         `${root}LICENSE.txt`,
         `${root}Print-Log.csv`,
@@ -354,7 +375,7 @@
 
     const files = [
       { name: `${root}STL/Workshop-Test-Plate-v${VERSION}.stl`, bytes: stl.bytes },
-      { name: `${root}Source/Workshop-Test-Plate-v${VERSION}.js`, bytes: textFile(source) },
+      { name: `${root}Source/Workshop-Test-Plate-v${VERSION}.scad`, bytes: textFile(source) },
       { name: `${root}README.md`, bytes: textFile(readme) },
       { name: `${root}LICENSE.txt`, bytes: textFile(license) },
       { name: `${root}Print-Log.csv`, bytes: textFile(printLog) },
