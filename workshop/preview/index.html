@@ -1,0 +1,70 @@
+    <!doctype html>
+    <html lang="en">
+    <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d0f0d">
+      <title>Workshop Foundation Preview</title>
+      <meta name="description" content="Reviewer checklist and route index for the Wilkinson Workshop foundation.">
+      <meta name="robots" content="noindex, nofollow">
+      <link rel="canonical" href="https://stephenwilkinson.dev/workshop/preview/">
+      <link rel="icon" type="image/svg+xml" href="../assets/workshop-mark.svg">
+      <link rel="stylesheet" href="../assets/workshop.css">
+
+      <script src="../assets/catalog.js" defer></script>
+      <script src="../assets/workshop.js" defer></script>
+    </head>
+    <body class="workshop-site" data-page="preview" data-root="../">
+      <a class="ws-skip-link" href="#main-content">Skip to main content</a>
+      <div data-workshop-header></div>
+      <main class="ws-main" id="main-content">
+
+<section class="ws-page-hero">
+  <div class="ws-container">
+    <p class="ws-eyebrow">Noindex reviewer route</p>
+    <h1>Workshop deployment preview</h1>
+    <p class="ws-page-copy">This route is a compact review dashboard for the foundation. It is intentionally excluded from search indexing and public navigation.</p>
+  </div>
+</section>
+
+<section class="ws-section">
+  <div class="ws-container ws-info-grid">
+    <article class="ws-preview-card">
+      <h2>Preview routes</h2>
+      <ul class="ws-route-list">
+        <li><a href="../"><span>Workshop home</span><code>/workshop/</code></a></li>
+        <li><a href="../original-files/"><span>Original files</span><code>/original-files/</code></a></li>
+        <li><a href="../gear/"><span>Gear catalog</span><code>/gear/</code></a></li>
+        <li><a href="../creators/"><span>Creators</span><code>/creators/</code></a></li>
+        <li><a href="../vendors/"><span>Vendors</span><code>/vendors/</code></a></li>
+        <li><a href="../guides/"><span>Guides</span><code>/guides/</code></a></li>
+        <li><a href="../physical-shop/"><span>Physical shop</span><code>/physical-shop/</code></a></li>
+        <li><a href="../disclosures/"><span>Disclosures</span><code>/disclosures/</code></a></li>
+      </ul>
+    </article>
+
+    <article class="ws-preview-card">
+      <h2>Acceptance checklist</h2>
+      <ul>
+        <li>Existing portfolio HTML and CSS remain unchanged.</li>
+        <li>Workshop styles load only inside the Workshop directory.</li>
+        <li>All catalog pages share the same structured data source.</li>
+        <li>Search, category, and personal-use filters update without reloads.</li>
+        <li>Mobile navigation is keyboard accessible and closes with Escape.</li>
+        <li>External links open safely and emit an analytics-ready event.</li>
+        <li>Cards expose release, use, affiliate, and verification status.</li>
+      </ul>
+    </article>
+
+    <article class="ws-preview-card">
+      <h2>Deployment</h2>
+      <p>The Workshop is plain HTML, CSS, JavaScript, and SVG. After the branch is merged into the current GitHub Pages repository, it deploys at <code>/workshop/</code> without a package install or build command.</p>
+      <p>For a local preview, serve the repository root with <code>python -m http.server 8080</code> and open <code>http://localhost:8080/workshop/</code>.</p>
+    </article>
+  </div>
+</section>
+      </main>
+      <div data-workshop-footer></div>
+    </body>
+    </html>
