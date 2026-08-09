@@ -8,7 +8,7 @@
     const entry = (catalog.originalFiles || []).find((candidate) => candidate.id === "workshop-test-plate");
     if (entry) {
       Object.assign(entry, {
-        summary: "A free digital beta for comparing raised and recessed detail, peg and hole clearance, shallow relief, and repeated texture fields before committing to a larger resin print.",
+        summary: "A free digital beta for comparing raised and recessed detail, square post and recess clearance, relief height, and repeated texture fields before committing to a larger resin print.",
         tested: false,
         status: "Digital beta available",
         statusTone: "ready",
@@ -19,17 +19,15 @@
         linkStatus: "internal-download",
         photoStatus: "ready",
         image: "media/products/workshop-test-plate-v0.1.0-product.svg",
-        imageAlt: "Digital render of the Wilkinson Workshop Test Plate showing raised lines, recessed grooves, pegs, holes, relief steps, and texture fields.",
+        imageAlt: "Digital render of the Wilkinson Workshop Test Plate showing raised lines, recessed grooves, square posts, recesses, relief steps, and texture fields.",
         releaseVersion: "0.1.0",
         releaseDate: "2026-08-09",
-        downloadUrl: "downloads/workshop-test-plate-v0.1.0/manifest.json",
-        packageManifestUrl: "downloads/workshop-test-plate-v0.1.0/manifest.json",
-        downloadMode: "base64-chunks",
-        downloadBytes: 249479,
-        downloadSha256: "e077b7e78785a627a2169d86da840d6739bba57ffd7d047d9c04ca207d366622",
+        downloadMode: "generated-browser-package",
+        downloadBytes: 718020,
+        downloadSha256: "f824074d32579b8bc62fffedee33b473045e4fb8cb8d8e14fe84bd7c16bd5e4b",
         geometryValidated: true,
         physicalValidation: false,
-        tags: Array.from(new Set([...(entry.tags || []), "download", "digital beta", "watertight", "cadquery"]))
+        tags: Array.from(new Set([...(entry.tags || []), "download", "digital beta", "watertight", "parametric"]))
       });
     }
 
@@ -43,12 +41,11 @@
         version: "0.1.0",
         status: "digital-beta",
         physicalValidation: false,
-        downloadUrl: "downloads/workshop-test-plate-v0.1.0/manifest.json",
-        packageManifestUrl: "downloads/workshop-test-plate-v0.1.0/manifest.json",
-        downloadMode: "base64-chunks",
-        downloadBytes: 249479,
-        sha256: "e077b7e78785a627a2169d86da840d6739bba57ffd7d047d9c04ca207d366622",
-        included: ["STL", "CadQuery source", "print log", "license", "validation report", "preview images"]
+        downloadMode: "generated-browser-package",
+        downloadBytes: 718020,
+        sha256: "f824074d32579b8bc62fffedee33b473045e4fb8cb8d8e14fe84bd7c16bd5e4b",
+        triangleCount: 14272,
+        included: ["STL", "parametric JavaScript source", "print log", "license", "validation report"]
       }
     ];
 
