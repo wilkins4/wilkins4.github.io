@@ -19,5 +19,16 @@
     if (entry) Object.assign(entry, changes);
   });
 
+  const extensionSource = document.currentScript?.src || "";
+  const extensionBase = extensionSource.slice(0, extensionSource.lastIndexOf("/") + 1);
+  const commercePatch = document.createElement("script");
+  commercePatch.src = `${extensionBase}catalog-commerce.js`;
+  commercePatch.addEventListener("load", () => {
+    const commerceUi = document.createElement("script");
+    commerceUi.src = `${extensionBase}workshop-commerce.js`;
+    document.head.appendChild(commerceUi);
+  }, { once: true });
+  document.head.appendChild(commercePatch);
+
   window.WORKSHOP_BETA_APPLIED = true;
 }());
