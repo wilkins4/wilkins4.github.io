@@ -1,75 +1,136 @@
-    <!doctype html>
-    <html lang="en">
-    <head>
-
+<!doctype html>
+<html lang="en">
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0d0f0d">
-      <title>Workshop Public Beta Preview</title>
-      <meta name="description" content="Reviewer checklist and route index for the Wilkinson Workshop foundation.">
-      <meta name="robots" content="noindex, nofollow">
-      <link rel="canonical" href="https://stephenwilkinson.dev/workshop/preview/">
-      <link rel="icon" type="image/svg+xml" href="../assets/workshop-mark.svg">
-      <link rel="stylesheet" href="../assets/workshop.css">
+  <title>Workshop Launch Dashboard</title>
+  <meta name="description" content="Noindex operations dashboard for Wilkinson Workshop catalog, product releases, media, storefronts, and link status.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://stephenwilkinson.dev/workshop/preview/">
+  <link rel="icon" type="image/svg+xml" href="../assets/workshop-mark.svg">
+  <link rel="stylesheet" href="../assets/workshop.css">
+  <script src="../assets/catalog.js" defer></script>
+  <script src="../assets/workshop.js" defer></script>
+</head>
+<body class="workshop-site" data-page="preview" data-root="../">
+  <a class="ws-skip-link" href="#main-content">Skip to main content</a>
+  <div data-workshop-header></div>
+  <main class="ws-main" id="main-content">
+    <section class="ws-page-hero">
+      <div class="ws-container">
+        <p class="ws-eyebrow">Noindex operations route</p>
+        <h1>Workshop launch dashboard</h1>
+        <p class="ws-page-copy">Catalog state, downloadable products, original-photo assignments, storefront tasks, link status, and deployment checks. This route is excluded from search indexing and public navigation.</p>
+      </div>
+    </section>
 
-      <script src="../assets/catalog.js" defer></script>
-      <script src="../assets/workshop.js" defer></script>
-    </head>
-    <body class="workshop-site" data-page="preview" data-root="../">
-      <a class="ws-skip-link" href="#main-content">Skip to main content</a>
-      <div data-workshop-header></div>
-      <main class="ws-main" id="main-content">
+    <section class="ws-section ws-section-compact">
+      <div class="ws-container">
+        <div class="ws-section-heading">
+          <div>
+            <p class="ws-section-kicker">Current state</p>
+            <h2>Catalog and launch totals</h2>
+          </div>
+        </div>
+        <div class="ws-dashboard-grid" data-launch-dashboard></div>
+      </div>
+    </section>
 
-<section class="ws-page-hero">
-  <div class="ws-container">
-    <p class="ws-eyebrow">Noindex reviewer route</p>
-    <h1>Workshop deployment preview</h1>
-    <p class="ws-page-copy">This route is a compact review dashboard for the public beta. It is intentionally excluded from search indexing and public navigation.</p>
-  </div>
-</section>
+    <section class="ws-section ws-section-compact">
+      <div class="ws-container">
+        <div class="ws-section-heading">
+          <div>
+            <p class="ws-section-kicker">Product releases</p>
+            <h2>Downloadable packages</h2>
+          </div>
+          <p>The first package is generated locally from the public parametric source and verified against a deterministic release hash.</p>
+        </div>
+        <div class="ws-release-plan-grid" data-release-plan></div>
+      </div>
+    </section>
 
-<section class="ws-section">
-  <div class="ws-container ws-info-grid">
-    <article class="ws-preview-card">
-      <h2>Preview routes</h2>
-      <ul class="ws-route-list">
-        <li><a href="../"><span>Workshop home</span><code>/workshop/</code></a></li>
-        <li><a href="../original-files/"><span>Original files</span><code>/original-files/</code></a></li>
-        <li><a href="../gear/"><span>Gear catalog</span><code>/gear/</code></a></li>
-        <li><a href="../creators/"><span>Creators</span><code>/creators/</code></a></li>
-        <li><a href="../vendors/"><span>Vendors</span><code>/vendors/</code></a></li>
-        <li><a href="../guides/"><span>Guides</span><code>/guides/</code></a></li>
-        <li><a href="../guides/resin-printing-miniatures/"><span>Resin workflow</span><code>/guides/resin-printing-miniatures/</code></a></li>
-        <li><a href="../guides/sprue-glue-gap-filling/"><span>Sprue glue workflow</span><code>/guides/sprue-glue-gap-filling/</code></a></li>
-        <li><a href="../guides/miniature-photography/"><span>Photography workflow</span><code>/guides/miniature-photography/</code></a></li>
-        <li><a href="../physical-shop/"><span>Physical shop</span><code>/physical-shop/</code></a></li>
-        <li><a href="../disclosures/"><span>Disclosures</span><code>/disclosures/</code></a></li>
-      </ul>
-    </article>
+    <section class="ws-section ws-section-compact">
+      <div class="ws-container">
+        <div class="ws-section-heading">
+          <div>
+            <p class="ws-section-kicker">Original media</p>
+            <h2>Photography queue</h2>
+          </div>
+          <p>Adding these exact WebP files automatically replaces the branded placeholders on public pages.</p>
+        </div>
+        <div class="ws-media-plan-grid" data-media-plan></div>
+      </div>
+    </section>
 
-    <article class="ws-preview-card">
-      <h2>Acceptance checklist</h2>
-      <ul>
-        <li>Existing portfolio HTML and CSS remain unchanged.</li>
-        <li>Workshop styles load only inside the Workshop directory.</li>
-        <li>All catalog pages share the same structured data source.</li>
-        <li>Search, category, and personal-use filters update without reloads.</li>
-        <li>Mobile navigation is keyboard accessible and closes with Escape.</li>
-        <li>External links open safely and emit an analytics-ready event.</li>
-        <li>Cards expose release, use, affiliate, and verification status.</li>
-        <li>Twenty gear entries and three published guides render from the shared catalog.</li>
-        <li>Guide pages render selected related gear in a reusable card grid.</li>
-      </ul>
-    </article>
+    <section class="ws-section ws-section-compact">
+      <div class="ws-container">
+        <div class="ws-section-heading">
+          <div>
+            <p class="ws-section-kicker">External commerce</p>
+            <h2>Storefront and account queue</h2>
+          </div>
+          <p>No seller profile, storefront URL, or affiliate identifier is treated as active until it is confirmed.</p>
+        </div>
+        <div class="ws-storefront-grid" data-storefront-plan></div>
+      </div>
+    </section>
 
-    <article class="ws-preview-card">
-      <h2>Deployment</h2>
-      <p>The Workshop is plain HTML, CSS, JavaScript, and SVG. After the branch is merged into the current GitHub Pages repository, it deploys at <code>/workshop/</code> without a package install or build command.</p>
-      <p>For a local preview, serve the repository root with <code>python -m http.server 8080</code> and open <code>http://localhost:8080/workshop/</code>.</p>
-    </article>
-  </div>
-</section>
-      </main>
-      <div data-workshop-footer></div>
-    </body>
-    </html>
+    <section class="ws-section ws-section-compact">
+      <div class="ws-container">
+        <div class="ws-section-heading">
+          <div>
+            <p class="ws-section-kicker">Catalog audit</p>
+            <h2>Every entry and destination state</h2>
+          </div>
+        </div>
+        <div data-link-audit></div>
+      </div>
+    </section>
+
+    <section class="ws-section ws-section-compact">
+      <div class="ws-container ws-info-grid">
+        <article class="ws-preview-card">
+          <h2>Public routes</h2>
+          <ul class="ws-route-list">
+            <li><a href="../"><span>Workshop home</span><code>/workshop/</code></a></li>
+            <li><a href="../original-files/"><span>Original files</span><code>/original-files/</code></a></li>
+            <li><a href="../original-files/workshop-test-plate/"><span>Test Plate release</span><code>/workshop-test-plate/</code></a></li>
+            <li><a href="../gear/"><span>Gear catalog</span><code>/gear/</code></a></li>
+            <li><a href="../gear/elegoo-saturn-4-ultra/"><span>Saturn 4 Ultra</span><code>/elegoo-saturn-4-ultra/</code></a></li>
+            <li><a href="../gear/bambu-a1-mini-combo/"><span>A1 Mini setup</span><code>/bambu-a1-mini-combo/</code></a></li>
+            <li><a href="../gear/resin-mixture/"><span>Resin mixture</span><code>/resin-mixture/</code></a></li>
+            <li><a href="../gear/sprue-glue-toolkit/"><span>Sprue glue toolkit</span><code>/sprue-glue-toolkit/</code></a></li>
+            <li><a href="../guides/"><span>Guides</span><code>/guides/</code></a></li>
+            <li><a href="../creators/"><span>Creators</span><code>/creators/</code></a></li>
+            <li><a href="../vendors/"><span>Vendors</span><code>/vendors/</code></a></li>
+            <li><a href="../physical-shop/"><span>Physical shop</span><code>/physical-shop/</code></a></li>
+            <li><a href="../disclosures/"><span>Disclosures</span><code>/disclosures/</code></a></li>
+          </ul>
+        </article>
+
+        <article class="ws-preview-card">
+          <h2>Acceptance checklist</h2>
+          <ul>
+            <li>Existing portfolio HTML and CSS remain unchanged.</li>
+            <li>Workshop code and styling remain inside the Workshop directory.</li>
+            <li>Catalog filters and mobile navigation work without reloads.</li>
+            <li>Every monetized destination will carry a visible disclosure.</li>
+            <li>The Test Plate package is deterministic and hash checked.</li>
+            <li>The STL is watertight, consistently wound, and connected.</li>
+            <li>Physical resin validation remains clearly marked as pending.</li>
+            <li>No payments, customer accounts, or card data are handled here.</li>
+          </ul>
+        </article>
+
+        <article class="ws-preview-card">
+          <h2>Deployment</h2>
+          <p>The Workshop remains plain HTML, CSS, JavaScript, and SVG. Merging the draft pull request into the current GitHub Pages publishing branch deploys it without a package install or build command.</p>
+          <p>For local review, run <code>python -m http.server 8080</code> from the repository root and open <code>http://localhost:8080/workshop/preview/</code>.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+  <div data-workshop-footer></div>
+</body>
+</html>
