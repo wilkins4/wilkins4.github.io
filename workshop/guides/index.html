@@ -1,0 +1,60 @@
+    <!doctype html>
+    <html lang="en">
+    <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d0f0d">
+      <title>Workshop Guides | Wilkinson Workshop</title>
+      <meta name="description" content="Planned practical guides for resin printing, sprue glue, gap filling, miniature photography, and hobby workflows.">
+
+      <link rel="canonical" href="https://stephenwilkinson.dev/workshop/guides/">
+      <link rel="icon" type="image/svg+xml" href="../assets/workshop-mark.svg">
+      <link rel="stylesheet" href="../assets/workshop.css">
+
+      <script src="../assets/catalog.js" defer></script>
+      <script src="../assets/workshop.js" defer></script>
+    </head>
+    <body class="workshop-site" data-page="guides" data-root="../">
+      <a class="ws-skip-link" href="#main-content">Skip to main content</a>
+      <div data-workshop-header></div>
+      <main class="ws-main" id="main-content">
+
+<section class="ws-page-hero">
+  <div class="ws-container">
+    <p class="ws-eyebrow">Useful before monetized</p>
+    <h1>Guides built from real projects and repeatable workflows</h1>
+    <p class="ws-page-copy">The first guide queue connects directly to the gear catalog. Each finished article will include original photographs, limitations, settings, and only the products relevant to the task.</p>
+  </div>
+</section>
+
+    <section class="ws-section">
+      <div class="ws-container" data-filter-scope data-collection="guides">
+
+        <div class="ws-filter-shell">
+          <form class="ws-filter-form" role="search" onsubmit="return false;">
+            <div class="ws-field">
+              <label for="catalog-search">Search catalog</label>
+              <input id="catalog-search" type="search" placeholder="Search names, categories, and tags" autocomplete="off" data-filter-search>
+            </div>
+            <div class="ws-field">
+              <label for="catalog-category">Category</label>
+              <select id="catalog-category" data-filter-category>
+                <option value="">All categories</option>
+              </select>
+            </div>
+            <span aria-hidden="true"></span>
+          </form>
+          <div class="ws-filter-summary">
+            <span data-filter-count aria-live="polite">0 entries</span>
+            <button class="ws-filter-clear" type="button" data-filter-clear>Clear filters</button>
+          </div>
+        </div>
+        <div class="ws-card-grid" data-filter-grid></div>
+        <noscript><p class="ws-noscript">JavaScript is required to filter and render the structured Workshop catalog.</p></noscript>
+      </div>
+    </section>
+      </main>
+      <div data-workshop-footer></div>
+    </body>
+    </html>
