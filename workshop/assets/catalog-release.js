@@ -23,8 +23,8 @@
         releaseVersion: "0.1.0",
         releaseDate: "2026-08-09",
         downloadMode: "generated-browser-package",
-        downloadBytes: 718020,
-        downloadSha256: "f824074d32579b8bc62fffedee33b473045e4fb8cb8d8e14fe84bd7c16bd5e4b",
+        downloadBytes: 722573,
+        downloadSha256: "68e67e56503b4e22eea811351e6a9c7cc7acac6d5495631d43fb6b2dace3d02c",
         geometryValidated: true,
         physicalValidation: false,
         tags: Array.from(new Set([...(entry.tags || []), "download", "digital beta", "watertight", "parametric"]))
@@ -42,10 +42,10 @@
         status: "digital-beta",
         physicalValidation: false,
         downloadMode: "generated-browser-package",
-        downloadBytes: 718020,
-        sha256: "f824074d32579b8bc62fffedee33b473045e4fb8cb8d8e14fe84bd7c16bd5e4b",
+        downloadBytes: 722573,
+        sha256: "68e67e56503b4e22eea811351e6a9c7cc7acac6d5495631d43fb6b2dace3d02c",
         triangleCount: 14272,
-        included: ["STL", "parametric JavaScript source", "print log", "license", "validation report"]
+        included: ["STL", "editable OpenSCAD source", "print log", "license", "validation report"]
       }
     ];
 
