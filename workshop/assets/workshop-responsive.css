@@ -141,11 +141,13 @@
   .ws-path-grid,
   .ws-info-grid,
   .ws-check-grid,
-  .ws-detail-grid {
+  .ws-detail-grid,
+  .ws-guide-layout {
     grid-template-columns: 1fr;
   }
 
-  .ws-detail-panel {
+  .ws-detail-panel,
+  .ws-guide-aside {
     position: static;
   }
 
@@ -225,6 +227,10 @@
 
   .ws-detail-visual {
     min-height: 320px;
+  }
+
+  .ws-guide-checklist {
+    grid-template-columns: 1fr;
   }
 }
 

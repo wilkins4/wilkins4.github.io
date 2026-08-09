@@ -41,7 +41,7 @@
     target.innerHTML = `
       <div class="ws-announcement">
         <div class="ws-container">
-          <p><strong>Foundation preview</strong> Product status is visible and all future checkout links remain external.</p>
+          <p><strong>Public beta</strong> Three workflow guides are live. Checkout remains external and no paid affiliate links are active.</p>
         </div>
       </div>
       <header class="ws-site-header">
@@ -192,6 +192,16 @@
   function renderStaticCatalogGrids() {
     document.querySelectorAll("[data-catalog-grid]:not([data-filter-grid])").forEach((grid) => {
       let entries = getCollection(grid.dataset.collection);
+      const selectedIds = (grid.dataset.entryIds || "")
+        .split(",")
+        .map((value) => value.trim())
+        .filter(Boolean);
+
+      if (selectedIds.length) {
+        const entriesById = new Map(entries.map((entry) => [entry.id, entry]));
+        entries = selectedIds.map((id) => entriesById.get(id)).filter(Boolean);
+      }
+
       if (grid.dataset.featured === "true") {
         entries = entries.filter((entry) => entry.featured);
       }
@@ -286,10 +296,27 @@
     });
   }
 
-  renderHeader();
-  renderFooter();
-  initializeNavigation();
-  renderStaticCatalogGrids();
-  initializeFilters();
-  initializeOutboundTracking();
+  function initializeWorkshop() {
+    renderHeader();
+    renderFooter();
+    initializeNavigation();
+    renderStaticCatalogGrids();
+    initializeFilters();
+    initializeOutboundTracking();
+  }
+
+  function loadCatalogExtension() {
+    if (window.WORKSHOP_BETA_APPLIED) {
+      initializeWorkshop();
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = pathFromRoot("assets/catalog-beta.js");
+    script.addEventListener("load", initializeWorkshop, { once: true });
+    script.addEventListener("error", initializeWorkshop, { once: true });
+    document.head.appendChild(script);
+  }
+
+  loadCatalogExtension();
 }());
