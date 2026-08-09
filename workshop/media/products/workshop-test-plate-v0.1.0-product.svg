@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+<title id="title">Workshop Test Plate digital model</title>
+<desc id="desc">Technical perspective illustration of the Workshop Test Plate with raised lines, recessed grooves, pegs, holes, relief steps, and four texture fields.</desc>
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0b0d0b"/><stop offset="1" stop-color="#171b15"/></linearGradient>
+  <linearGradient id="plate" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d9c8aa"/><stop offset=".55" stop-color="#a89069"/><stop offset="1" stop-color="#766343"/></linearGradient>
+  <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#d6a34a" stroke-opacity=".08"/></pattern>
+  <filter id="shadow"><feDropShadow dx="0" dy="32" stdDeviation="28" flood-color="#000" flood-opacity=".65"/></filter>
+</defs>
+<rect width="1600" height="1000" fill="url(#bg)"/><rect width="1600" height="1000" fill="url(#grid)"/>
+<text x="90" y="105" fill="#d6a34a" font-family="system-ui,sans-serif" font-size="28" font-weight="800" letter-spacing="4">WILKINSON WORKSHOP</text>
+<text x="90" y="155" fill="#f3eadc" font-family="system-ui,sans-serif" font-size="54" font-weight="850">TEST PLATE v0.1.0</text>
+<g transform="translate(245 255) skewY(-8)" filter="url(#shadow)">
+  <rect x="0" y="38" width="1110" height="575" rx="30" fill="#5a4932"/>
+  <rect x="0" y="0" width="1110" height="575" rx="30" fill="url(#plate)" stroke="#f0dfc0" stroke-opacity=".55" stroke-width="4"/>
+  <g fill="#3b3022" opacity=".9">
+    <rect x="90" y="110" width="250" height="8" rx="4"/><rect x="90" y="142" width="250" height="12" rx="6"/><rect x="90" y="179" width="250" height="18" rx="9"/><rect x="90" y="224" width="250" height="26" rx="13"/><rect x="90" y="276" width="250" height="34" rx="17"/>
+  </g>
+  <g fill="none" stroke="#59472f" stroke-width="8"><path d="M400 105h250"/><path d="M400 150h250" stroke-width="12"/><path d="M400 200h250" stroke-width="18"/><path d="M400 260h250" stroke-width="26"/><path d="M400 330h250" stroke-width="34"/></g>
+  <g fill="#4b3b27" stroke="#f5e4c4" stroke-opacity=".25"><circle cx="755" cy="120" r="10"/><circle cx="805" cy="120" r="15"/><circle cx="865" cy="120" r="20"/><circle cx="935" cy="120" r="27"/><circle cx="1015" cy="120" r="36"/></g>
+  <g fill="#5f4d34"><circle cx="755" cy="225" r="10"/><circle cx="805" cy="225" r="15"/><circle cx="865" cy="225" r="20"/><circle cx="935" cy="225" r="27"/><circle cx="1015" cy="225" r="36"/></g>
+  <g><rect x="80" y="385" width="170" height="110" rx="12" fill="#8b7350"/><rect x="280" y="372" width="170" height="123" rx="12" fill="#9b825b"/><rect x="480" y="357" width="170" height="138" rx="12" fill="#ad9369"/></g>
+  <g stroke="#4a3a27" stroke-width="8"><rect x="700" y="370" width="155" height="125" rx="10" fill="#99815c"/><path d="M710 395h135M710 420h135M710 445h135M710 470h135"/><rect x="875" y="370" width="155" height="125" rx="10" fill="#99815c"/><path d="M885 390l135 85M885 430l105 65M915 380l105 65M885 475l135-85M885 435l95-60M925 495l95-60"/></g>
+  <g fill="#493a28"><circle cx="735" cy="535" r="7"/><circle cx="775" cy="535" r="7"/><circle cx="815" cy="535" r="7"/><circle cx="855" cy="535" r="7"/><path d="M900 520l22 15-22 15-22-15zM955 520l22 15-22 15-22-15zM1010 520l22 15-22 15-22-15z"/></g>
+</g>
+<g font-family="system-ui,sans-serif"><rect x="90" y="830" width="1420" height="90" rx="16" fill="#10130f" stroke="#d6a34a" stroke-opacity=".35"/><text x="130" y="885" fill="#f3eadc" font-size="29" font-weight="700">60 × 40 × 2.6 mm max</text><text x="570" y="885" fill="#b8aa95" font-size="26">Digital geometry validated</text><text x="1110" y="885" fill="#d6a34a" font-size="26" font-weight="750">Physical test pending</text></g>
+</svg>
