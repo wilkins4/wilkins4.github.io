@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1180" role="img" aria-labelledby="title desc">
+<title id="title">Workshop Test Plate feature map</title>
+<desc id="desc">Top-down diagram labeling the raised line, recessed groove, peg and hole, relief step, and texture test areas on a 60 by 40 millimeter plate.</desc>
+<defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#d6a34a" stroke-opacity=".08"/></pattern></defs>
+<rect width="1600" height="1180" fill="#0c0f0c"/><rect width="1600" height="1180" fill="url(#grid)"/>
+<text x="90" y="90" fill="#d6a34a" font-family="system-ui,sans-serif" font-size="28" font-weight="800" letter-spacing="4">FEATURE MAP</text>
+<text x="90" y="145" fill="#f3eadc" font-family="system-ui,sans-serif" font-size="52" font-weight="850">WORKSHOP TEST PLATE v0.1.0</text>
+<g transform="translate(205 245)"><rect width="1190" height="700" rx="30" fill="#d2c0a2" stroke="#f3eadc" stroke-width="4"/>
+<g font-family="system-ui,sans-serif" fill="#251f18"><text x="70" y="65" font-size="24" font-weight="800">A. RAISED LINES</text><text x="415" y="65" font-size="24" font-weight="800">B. RECESSED GROOVES</text><text x="800" y="65" font-size="24" font-weight="800">C. PEGS / HOLES</text></g>
+<g fill="#423425"><rect x="80" y="115" width="260" height="5"/><rect x="80" y="150" width="260" height="8"/><rect x="80" y="190" width="260" height="13"/><rect x="80" y="235" width="260" height="20"/><rect x="80" y="290" width="260" height="28"/></g>
+<g stroke="#5a4630" fill="none"><path d="M430 115h260" stroke-width="5"/><path d="M430 155h260" stroke-width="8"/><path d="M430 200h260" stroke-width="13"/><path d="M430 255h260" stroke-width="20"/><path d="M430 320h260" stroke-width="28"/></g>
+<g fill="#55422d"><circle cx="825" cy="135" r="7"/><circle cx="875" cy="135" r="11"/><circle cx="935" cy="135" r="16"/><circle cx="1005" cy="135" r="22"/><circle cx="1090" cy="135" r="30"/></g><g fill="#c3ad8a" stroke="#55422d" stroke-width="5"><circle cx="825" cy="255" r="7"/><circle cx="875" cy="255" r="11"/><circle cx="935" cy="255" r="16"/><circle cx="1005" cy="255" r="22"/><circle cx="1090" cy="255" r="30"/></g>
+<g font-family="system-ui,sans-serif" fill="#251f18"><text x="70" y="405" font-size="24" font-weight="800">D. RELIEF STEPS</text><text x="525" y="405" font-size="24" font-weight="800">E. TEXTURE FIELDS</text></g>
+<g><rect x="80" y="455" width="160" height="125" rx="10" fill="#a78d65"/><rect x="265" y="440" width="160" height="140" rx="10" fill="#927852"/><rect x="450" y="420" width="160" height="160" rx="10" fill="#7e6544"/></g>
+<g stroke="#55422d" fill="#b49b75" stroke-width="6"><rect x="670" y="435" width="210" height="150" rx="10"/><path d="M685 465h180M685 500h180M685 535h180M685 570h180"/><rect x="910" y="435" width="210" height="150" rx="10"/><path d="M925 455l180 110M925 500l140 85M965 440l140 85M925 565l180-110M925 520l140-85M965 585l140-85"/></g>
+<g font-family="system-ui,sans-serif" font-size="19" fill="#4a3a27"><text x="85" y="625">0.10 / 0.40 / 0.80 mm</text><text x="675" y="625">parallel / crosshatch / rivet / diamond</text></g></g>
+<g stroke="#d6a34a" stroke-width="3" fill="none"><path d="M205 990h1190M205 975v30M1395 975v30"/><path d="M150 245v700M135 245h30M135 945h30"/></g><g fill="#d6a34a" font-family="system-ui,sans-serif" font-size="24" font-weight="750"><text x="740" y="1035">60 mm</text><text x="95" y="610" transform="rotate(-90 95 610)">40 mm</text></g>
+<text x="205" y="1110" fill="#b8aa95" font-family="system-ui,sans-serif" font-size="24">Nominal geometry. Use the included Print-Log.csv to record machine, resin, layer height, exposure, wash, cure, and observations.</text>
+</svg>
