@@ -10,6 +10,7 @@ The Workshop now includes its first real downloadable product:
 - Free personal-use digital beta
 - Deterministic browser-generated ZIP
 - Watertight, consistently wound, single-component STL
+- Editable OpenSCAD source
 - 14,272 triangles
 - 60 x 40 x 2.8 mm maximum bounds
 - Physical resin print validation still pending
@@ -44,7 +45,7 @@ The noindex operations dashboard is `/workshop/preview/`.
 - `assets/catalog-release.js` records downloadable product versions, expected byte counts, hashes, and validation state.
 - `assets/workshop.js` renders shared navigation, cards, filters, and outbound tracking.
 - `assets/workshop-commerce.js` activates future images and renders catalog, media, storefront, and link dashboards.
-- `assets/workshop-product-generator.js` generates the Test Plate STL and versioned ZIP entirely in the visitor's browser.
+- `assets/workshop-product-generator.js` generates the Test Plate STL, editable OpenSCAD source, documentation, and versioned ZIP entirely in the visitor's browser.
 - `assets/workshop-release.js` verifies the generated package and starts the download.
 - `assets/workshop.css` imports only Workshop styles and does not change the existing portfolio stylesheet.
 
@@ -57,7 +58,7 @@ The Test Plate is represented as a piecewise-constant parametric heightfield. Th
 1. Creates the raised lines, recessed channels, clearance blocks, relief steps, and texture fields.
 2. Builds one closed triangle mesh with bottom, top, perimeter walls, and internal height-transition walls.
 3. Writes a binary STL with deterministic geometry and triangle ordering.
-4. Creates the README, personal-use license, print log, validation report, and manifest.
+4. Creates editable OpenSCAD source plus the README, personal-use license, print log, validation report, and manifest.
 5. Packages those files in a deterministic stored ZIP.
 6. Verifies the finished byte count and SHA-256 against `catalog-release.js`.
 7. Downloads the package locally without sending product data or customer information to a server.
@@ -66,8 +67,8 @@ Current deterministic release record:
 
 ```text
 File: Workshop-Test-Plate-v0.1.0.zip
-Bytes: 718020
-SHA-256: f824074d32579b8bc62fffedee33b473045e4fb8cb8d8e14fe84bd7c16bd5e4b
+Bytes: 722573
+SHA-256: 68e67e56503b4e22eea811351e6a9c7cc7acac6d5495631d43fb6b2dace3d02c
 ```
 
 ## Product release rules
@@ -121,7 +122,7 @@ Successful product downloads dispatch `workshop:download` with:
   productId: "workshop-test-plate-v0.1.0",
   sourcePage: "/workshop/original-files/workshop-test-plate/",
   version: "0.1.0",
-  bytes: 718020
+  bytes: 722573
 }
 ```
 
