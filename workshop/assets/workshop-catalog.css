@@ -1,0 +1,416 @@
+.ws-page-hero {
+  border-bottom: 1px solid var(--ws-border);
+  padding: clamp(4rem, 9vw, 7rem) 0 clamp(3rem, 7vw, 5rem);
+}
+
+.ws-page-hero h1 {
+  max-width: 830px;
+  font-size: clamp(2.7rem, 6.4vw, 5.4rem);
+}
+
+.ws-page-copy {
+  max-width: 760px;
+  margin: 1.25rem 0 0;
+  color: var(--ws-muted);
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+}
+
+.ws-section {
+  padding: clamp(3.5rem, 8vw, 6.5rem) 0;
+}
+
+.ws-section + .ws-section {
+  border-top: 1px solid var(--ws-border);
+}
+
+.ws-section-compact {
+  padding: clamp(2.25rem, 5vw, 3.5rem) 0;
+}
+
+.ws-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.8rem;
+}
+
+.ws-section-heading h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.ws-section-heading p:not(.ws-section-kicker) {
+  max-width: 620px;
+  margin: 0;
+  color: var(--ws-muted);
+}
+
+.ws-path-grid,
+.ws-card-grid,
+.ws-info-grid,
+.ws-check-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.ws-path-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ws-path-card {
+  position: relative;
+  min-height: 260px;
+  overflow: hidden;
+  border: 1px solid var(--ws-border);
+  border-radius: var(--ws-radius);
+  padding: 1.35rem;
+  background: var(--ws-surface);
+  color: var(--ws-text);
+  text-decoration: none;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.ws-path-card::before {
+  content: attr(data-index);
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: var(--ws-faint);
+  font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.76rem;
+}
+
+.ws-path-card::after {
+  content: "";
+  position: absolute;
+  right: -4rem;
+  bottom: -5rem;
+  width: 12rem;
+  height: 12rem;
+  border: 1px solid rgba(214, 163, 74, 0.19);
+  border-radius: 50%;
+}
+
+.ws-path-card:hover,
+.ws-path-card:focus-visible {
+  transform: translateY(-3px);
+  border-color: var(--ws-border-strong);
+  background: var(--ws-surface-strong);
+}
+
+.ws-path-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--ws-border-strong);
+  border-radius: 12px;
+  background: rgba(214, 163, 74, 0.08);
+  color: var(--ws-brass-strong);
+  font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.ws-path-card h3 {
+  margin: 2.4rem 0 0.6rem;
+  font-size: 1.45rem;
+}
+
+.ws-path-card p {
+  margin: 0;
+  max-width: 34ch;
+  color: var(--ws-muted);
+}
+
+.ws-path-link {
+  position: absolute;
+  bottom: 1.3rem;
+  left: 1.35rem;
+  color: var(--ws-brass-strong);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.ws-card-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ws-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--ws-border);
+  border-radius: var(--ws-radius);
+  background: var(--ws-surface);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.ws-card-media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 160px;
+  border-bottom: 1px solid var(--ws-border);
+  background:
+    radial-gradient(circle at 50% 44%, rgba(243, 234, 220, 0.08), transparent 38%),
+    linear-gradient(145deg, rgba(214, 163, 74, 0.12), rgba(13, 15, 13, 0.3));
+}
+
+.ws-card-media[data-tone="resin"] {
+  background:
+    radial-gradient(circle at 50% 44%, rgba(119, 162, 184, 0.2), transparent 38%),
+    linear-gradient(145deg, rgba(119, 162, 184, 0.12), rgba(13, 15, 13, 0.3));
+}
+
+.ws-card-media[data-tone="fdm"] {
+  background:
+    radial-gradient(circle at 50% 44%, rgba(141, 166, 111, 0.2), transparent 38%),
+    linear-gradient(145deg, rgba(141, 166, 111, 0.12), rgba(13, 15, 13, 0.3));
+}
+
+.ws-card-media[data-tone="tool"] {
+  background:
+    radial-gradient(circle at 50% 44%, rgba(214, 163, 74, 0.22), transparent 38%),
+    linear-gradient(145deg, rgba(214, 163, 74, 0.12), rgba(13, 15, 13, 0.3));
+}
+
+.ws-card-media[data-tone="market"] {
+  background:
+    radial-gradient(circle at 50% 44%, rgba(188, 90, 77, 0.18), transparent 38%),
+    linear-gradient(145deg, rgba(188, 90, 77, 0.1), rgba(13, 15, 13, 0.3));
+}
+
+.ws-card-icon {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border: 1px solid rgba(243, 234, 220, 0.22);
+  border-radius: 18px;
+  background: rgba(13, 15, 13, 0.58);
+  color: var(--ws-text);
+  font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.25);
+}
+
+.ws-card-status {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  border: 1px solid var(--ws-border);
+  border-radius: 999px;
+  padding: 0.3rem 0.55rem;
+  background: rgba(13, 15, 13, 0.8);
+  color: var(--ws-muted);
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.03em;
+}
+
+.ws-card-status[data-status-tone="ready"] {
+  border-color: rgba(141, 166, 111, 0.45);
+  color: #b9d69b;
+}
+
+.ws-card-status[data-status-tone="building"] {
+  border-color: rgba(214, 163, 74, 0.48);
+  color: var(--ws-brass-strong);
+}
+
+.ws-card-status[data-status-tone="planned"] {
+  border-color: rgba(119, 162, 184, 0.42);
+  color: #a7cede;
+}
+
+.ws-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.2rem;
+}
+
+.ws-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  min-height: 1.6rem;
+}
+
+.ws-badge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--ws-border);
+  border-radius: 999px;
+  padding: 0.22rem 0.48rem;
+  color: var(--ws-muted);
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.ws-badge-original {
+  border-color: rgba(214, 163, 74, 0.42);
+  color: var(--ws-brass-strong);
+}
+
+.ws-badge-used {
+  border-color: rgba(141, 166, 111, 0.42);
+  color: #b9d69b;
+}
+
+.ws-badge-affiliate {
+  border-color: rgba(188, 90, 77, 0.45);
+  color: #e39a90;
+}
+
+.ws-card h3 {
+  margin: 0.8rem 0 0.45rem;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.ws-card h3 a {
+  text-decoration: none;
+}
+
+.ws-card h3 a:hover,
+.ws-card h3 a:focus-visible {
+  color: var(--ws-brass-strong);
+}
+
+.ws-card p {
+  margin: 0;
+  color: var(--ws-muted);
+}
+
+.ws-card-details {
+  margin: 0.85rem 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ws-faint);
+  font-size: 0.8rem;
+}
+
+.ws-card-details li + li {
+  margin-top: 0.24rem;
+}
+
+.ws-card-footer {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 0.9rem;
+  margin-top: auto;
+  padding-top: 1.15rem;
+}
+
+.ws-card-verified {
+  color: var(--ws-faint);
+  font-size: 0.7rem;
+}
+
+.ws-card .ws-button {
+  min-height: 40px;
+  padding: 0.58rem 0.72rem;
+  font-size: 0.78rem;
+}
+
+.ws-filter-shell {
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--ws-border);
+  border-radius: var(--ws-radius);
+  background: rgba(23, 25, 20, 0.86);
+}
+
+.ws-filter-form {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(180px, 0.42fr) auto;
+  gap: 0.85rem;
+  align-items: end;
+  padding: 1rem;
+}
+
+.ws-field {
+  display: grid;
+  gap: 0.38rem;
+}
+
+.ws-field label,
+.ws-filter-label {
+  color: var(--ws-muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.ws-field input,
+.ws-field select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--ws-border);
+  border-radius: var(--ws-radius-sm);
+  padding: 0.65rem 0.75rem;
+  background: #0f110e;
+  color: var(--ws-text);
+  outline: 0;
+}
+
+.ws-field input:focus,
+.ws-field select:focus {
+  border-color: var(--ws-brass);
+  box-shadow: 0 0 0 3px rgba(214, 163, 74, 0.12);
+}
+
+.ws-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 44px;
+  color: var(--ws-muted);
+  font-size: 0.85rem;
+  font-weight: 750;
+}
+
+.ws-checkbox input {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--ws-brass);
+}
+
+.ws-filter-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--ws-border);
+  padding: 0.72rem 1rem;
+  color: var(--ws-faint);
+  font-size: 0.78rem;
+}
+
+.ws-filter-clear {
+  border: 0;
+  padding: 0.2rem;
+  background: transparent;
+  color: var(--ws-brass-strong);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.ws-empty-state {
+  grid-column: 1 / -1;
+  border: 1px dashed var(--ws-border-strong);
+  border-radius: var(--ws-radius);
+  padding: 2.4rem 1rem;
+  color: var(--ws-muted);
+  text-align: center;
+}

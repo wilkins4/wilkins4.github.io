@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d0f0d">
+  <title>My Resin Printing Workflow for Miniatures | Wilkinson Workshop</title>
+  <meta name="description" content="A repeatable resin printing workflow for miniatures using documented profiles, safer handling, a tougher resin blend, and structured failure review.">
+  <link rel="canonical" href="https://stephenwilkinson.dev/workshop/guides/resin-printing-miniatures/">
+  <link rel="icon" type="image/svg+xml" href="../../assets/workshop-mark.svg">
+  <link rel="stylesheet" href="../../assets/workshop.css">
+  <meta property="og:title" content="My Resin Printing Workflow for Miniatures">
+  <meta property="og:description" content="A repeatable resin printing workflow for miniatures using documented profiles, safer handling, a tougher resin blend, and structured failure review.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://stephenwilkinson.dev/workshop/guides/resin-printing-miniatures/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"My Resin Printing Workflow for Miniatures","description":"A repeatable resin printing workflow for miniatures using documented profiles, safer handling, a tougher resin blend, and structured failure review.","author":{"@type":"Person","name":"Stephen Wilkinson"},"datePublished":"2026-08-09","dateModified":"2026-08-09","mainEntityOfPage":"https://stephenwilkinson.dev/workshop/guides/resin-printing-miniatures/"}</script>
+  <script src="../../assets/catalog.js" defer></script>
+  <script src="../../assets/workshop.js" defer></script>
+</head>
+<body class="workshop-site" data-page="guides" data-root="../../">
+  <a class="ws-skip-link" href="#main-content">Skip to main content</a>
+  <div data-workshop-header></div>
+  <main class="ws-main" id="main-content">
+    <section class="ws-page-hero">
+      <div class="ws-container ws-guide-header">
+        <nav class="ws-breadcrumbs" aria-label="Breadcrumb">
+          <a href="../../">Workshop</a><span>/</span><a href="../">Guides</a><span>/</span><span aria-current="page">My Resin Printing Workflow for Miniatures</span>
+        </nav>
+        <p class="ws-eyebrow">Resin printing workflow</p>
+        <h1>My Resin Printing Workflow for Miniatures</h1>
+        <p class="ws-page-copy">The goal is not one magic exposure setting. It is a controlled process that makes failures explainable and successful prints repeatable across the Saturn 4 Ultra and Saturn 8K.</p>
+        <div class="ws-guide-meta">
+          <span>Written by Stephen Wilkinson</span>
+          <span>Updated August 9, 2026</span>
+          <span>9 minute read</span>
+          <span>No paid links</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="ws-section">
+      <div class="ws-container ws-guide-layout">
+        <article class="ws-guide-main">
+          <section class="ws-guide-section" id="setup">
+            <p class="ws-section-kicker">01. Current setup</p>
+            <h2>Give each printer and material a defined role</h2>
+            <p>The primary resin setup uses an Elegoo Saturn 4 Ultra, with a Saturn 8K available as an older comparison platform. The working miniature resin blend is Elegoo ABS-Like Pro 2 with roughly 10 percent Siraya Tech Tenacious added for more flex in thin weapons, spikes, and gaming pieces.</p>
+            <div class="ws-guide-note">
+              <strong>The ratio is a starting record, not a universal profile.</strong>
+              <p>Resin age, room temperature, pigment, layer height, machine condition, and model geometry can all change the result. Keep one controlled profile and adjust one variable at a time.</p>
+            </div>
+            <div class="ws-guide-checklist">
+              <div><strong>Primary printer</strong><span>Saturn 4 Ultra for current miniature production and repeatable tests.</span></div>
+              <div><strong>Secondary printer</strong><span>Saturn 8K for comparison, overflow, and known older profiles.</span></div>
+              <div><strong>Rigid resin</strong><span>ABS-Like Pro 2 provides the main body of the mixture.</span></div>
+              <div><strong>Flexible additive</strong><span>Tenacious is added in a recorded ratio to reduce brittle failures.</span></div>
+            </div>
+          </section>
+          <section class="ws-guide-section" id="safety">
+            <p class="ws-section-kicker">02. Safety and workspace</p>
+            <h2>Treat uncured resin as a controlled material</h2>
+            <p>Use the current safety data sheet for every resin in the mixture. Keep uncured resin and contaminated tools away from skin, food areas, children, and pets. Use nitrile gloves, eye protection, ventilation appropriate to the workspace, and a washable containment surface.</p>
+            <ul class="ws-guide-list">
+              <li>Keep clean tools and contaminated tools physically separated.</li>
+              <li>Label mixed resin with the components, ratio, and date.</li>
+              <li>Do not pour uncured resin or contaminated wash liquid into household drains.</li>
+              <li>Follow local rules and the manufacturer guidance for curing and disposal.</li>
+              <li>Stop and clean a spill before continuing the print workflow.</li>
+            </ul>
+          </section>
+          <section class="ws-guide-section" id="workflow">
+            <p class="ws-section-kicker">03. Print workflow</p>
+            <h2>Use the same sequence for every serious print</h2>
+            <ol class="ws-guide-steps">
+              <li><strong>Define the goal.</strong> Decide whether the job is a display model, gaming piece, stamp plate, dimensional test, or support test.</li>
+              <li><strong>Inspect and mix.</strong> Check the vat, release film, build plate, and resin. Mix settled pigment thoroughly without introducing unnecessary bubbles.</li>
+              <li><strong>Confirm the profile.</strong> Match printer, resin batch, layer height, and room conditions to a named slicer profile.</li>
+              <li><strong>Orient for the weakest feature.</strong> Protect faces, weapon tips, thin banners, flat plates, and drainage paths before optimizing speed.</li>
+              <li><strong>Review supports manually.</strong> Auto-supports are a first pass. Inspect islands, long unsupported edges, cups, suction risks, and contact points.</li>
+              <li><strong>Run a final preflight.</strong> Confirm the correct printer, resin profile, plate clearance, file version, and expected print time.</li>
+              <li><strong>Wash in stages.</strong> Remove bulk resin first, use a cleaner final wash, then let the part dry before judging the surface.</li>
+              <li><strong>Inspect before final cure.</strong> Remove supports when appropriate, check for trapped liquid, and reject cracked or hollow parts that cannot be cleaned safely.</li>
+              <li><strong>Cure only as much as needed.</strong> Rotate the part for even exposure and avoid using extra cure time as a substitute for proper washing.</li>
+              <li><strong>Record the result.</strong> Save what worked, what failed, and the next single change to test.</li>
+            </ol>
+          </section>
+          <section class="ws-guide-section" id="record">
+            <p class="ws-section-kicker">04. Settings record</p>
+            <h2>Document variables before changing them</h2>
+            <p>A good print log is more valuable than a screenshot of someone else&#39;s settings. Store the file version and the conditions that actually produced the part.</p>
+            <div class="ws-guide-table-wrap">
+              <table class="ws-guide-table">
+                <thead><tr><th>Field</th><th>What to record</th><th>Why it matters</th></tr></thead>
+                <tbody>
+                  <tr><td>Printer and firmware</td><td>Exact machine and current version</td><td>Profiles are not interchangeable between machines.</td></tr>
+                  <tr><td>Resin batch</td><td>Brand, product, color, mix ratio, and mix date</td><td>Pigment and flexible additives change exposure and strength.</td></tr>
+                  <tr><td>Room conditions</td><td>Approximate temperature and major changes</td><td>Cold resin and large temperature swings can change viscosity and reliability.</td></tr>
+                  <tr><td>Exposure profile</td><td>Layer height, normal exposure, bottom layers, and transition</td><td>This is the baseline for detail and plate adhesion.</td></tr>
+                  <tr><td>Motion profile</td><td>Lift distance, lift speed, retract speed, and rest settings</td><td>Motion can cause support failure even when exposure is correct.</td></tr>
+                  <tr><td>Outcome</td><td>Pass, partial, fail, location on plate, and photos</td><td>Patterns across the plate often expose mechanical issues.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section class="ws-guide-section" id="troubleshooting">
+            <p class="ws-section-kicker">05. Failure triage</p>
+            <h2>Classify the failure before changing settings</h2>
+            <div class="ws-guide-table-wrap">
+              <table class="ws-guide-table">
+                <thead><tr><th>Symptom</th><th>Check first</th><th>Avoid</th></tr></thead>
+                <tbody>
+                  <tr><td>Nothing on the plate</td><td>File, screen test, build plate seating, vat condition, and bottom exposure</td><td>Increasing every exposure value at once.</td></tr>
+                  <tr><td>Rafts print, model fails</td><td>Support contacts, islands, orientation, suction, and lift behavior</td><td>Blaming resin strength before inspecting supports.</td></tr>
+                  <tr><td>Thin details break</td><td>Orientation, support removal, cure time, and resin blend</td><td>Overcuring a brittle part to make it stronger.</td></tr>
+                  <tr><td>Soft or glossy surface</td><td>Wash quality, trapped resin, drying time, and cure coverage</td><td>Curing a part that is still wet with wash liquid.</td></tr>
+                  <tr><td>Repeated failure in one zone</td><td>Plate level, release film, screen, debris, and local support load</td><td>Treating a mechanical pattern as a slicer-only problem.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </article>
+
+        <aside class="ws-guide-aside" aria-label="Guide contents">
+          <h2>In this guide</h2>
+          <ol class="ws-guide-toc">
+            <li><a href="#setup">Current setup</a></li>
+            <li><a href="#safety">Safety and workspace</a></li>
+            <li><a href="#workflow">Print workflow</a></li>
+            <li><a href="#record">Settings record</a></li>
+            <li><a href="#troubleshooting">Failure triage</a></li>
+          </ol>
+          <div class="ws-inline-actions">
+            <a class="ws-button ws-button-secondary" href="../">All guides</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="ws-section">
+      <div class="ws-container">
+        <div class="ws-section-heading">
+          <div>
+            <p class="ws-section-kicker">Related catalog</p>
+            <h2>Tools referenced in this workflow</h2>
+          </div>
+          <p>These cards distinguish equipment already used in the Workshop from links that are still pending.</p>
+        </div>
+        <div class="ws-card-grid" data-catalog-grid data-collection="gear" data-entry-ids="elegoo-saturn-4-ultra,elegoo-saturn-8k,elegoo-abs-like-resin,siraya-tech-tenacious,nitrile-gloves,silicone-work-mat"></div>
+      </div>
+    </section>
+
+    <section class="ws-section">
+      <div class="ws-container">
+        <div class="ws-section-heading">
+          <div>
+            <p class="ws-section-kicker">Continue</p>
+            <h2>Build the next part of the workflow</h2>
+          </div>
+        </div>
+        <div class="ws-path-grid">
+        <a class="ws-path-card" href="../sprue-glue-gap-filling/" data-index="01">
+          <span class="ws-path-icon" aria-hidden="true">SG</span>
+          <h3>Close the assembly seams</h3>
+          <p>Use the precision gap-filling workflow after printed and plastic parts are cleaned and fitted.</p>
+          <span class="ws-path-link">Open guide</span>
+        </a>
+        <a class="ws-path-card" href="../miniature-photography/" data-index="02">
+          <span class="ws-path-icon" aria-hidden="true">MP</span>
+          <h3>Document the finished result</h3>
+          <p>Build a repeatable photo station for project records, listings, and future comparisons.</p>
+          <span class="ws-path-link">Open guide</span>
+        </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div data-workshop-footer></div>
+</body>
+</html>
