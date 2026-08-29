@@ -1,0 +1,60 @@
+    <!doctype html>
+    <html lang="en">
+    <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d0f0d">
+      <title>STL Creators and Marketplaces | Wilkinson Workshop</title>
+      <meta name="description" content="A structured directory for STL creators, marketplaces, licensing notes, and personally printed recommendations.">
+
+      <link rel="canonical" href="https://stephenwilkinson.dev/workshop/creators/">
+      <link rel="icon" type="image/svg+xml" href="../assets/workshop-mark.svg">
+      <link rel="stylesheet" href="../assets/workshop.css">
+
+      <script src="../assets/catalog.js" defer></script>
+      <script src="../assets/workshop.js" defer></script>
+    </head>
+    <body class="workshop-site" data-page="creators" data-root="../">
+      <a class="ws-skip-link" href="#main-content">Skip to main content</a>
+      <div data-workshop-header></div>
+      <main class="ws-main" id="main-content">
+
+<section class="ws-page-hero">
+  <div class="ws-container">
+    <p class="ws-eyebrow">Third-party files</p>
+    <h1>Creators and marketplaces, with licensing context</h1>
+    <p class="ws-page-copy">The foundation begins with marketplace directory entries. Individual creators can be added later with personal-print status, commercial-license availability, and a verification date.</p>
+  </div>
+</section>
+
+    <section class="ws-section">
+      <div class="ws-container" data-filter-scope data-collection="creators">
+        <div class="ws-callout" style="margin-bottom: 1rem;"><span class="ws-callout-icon" aria-hidden="true">L</span><div><h2>Commercial permission is never assumed</h2><p>A storefront link does not grant permission to sell physical prints. Commercial terms must be recorded separately for each creator and product.</p></div></div>
+        <div class="ws-filter-shell">
+          <form class="ws-filter-form" role="search" onsubmit="return false;">
+            <div class="ws-field">
+              <label for="catalog-search">Search catalog</label>
+              <input id="catalog-search" type="search" placeholder="Search names, categories, and tags" autocomplete="off" data-filter-search>
+            </div>
+            <div class="ws-field">
+              <label for="catalog-category">Category</label>
+              <select id="catalog-category" data-filter-category>
+                <option value="">All categories</option>
+              </select>
+            </div>
+            <span aria-hidden="true"></span>
+          </form>
+          <div class="ws-filter-summary">
+            <span data-filter-count aria-live="polite">0 entries</span>
+            <button class="ws-filter-clear" type="button" data-filter-clear>Clear filters</button>
+          </div>
+        </div>
+        <div class="ws-card-grid" data-filter-grid></div>
+        <noscript><p class="ws-noscript">JavaScript is required to filter and render the structured Workshop catalog.</p></noscript>
+      </div>
+    </section>
+      </main>
+      <div data-workshop-footer></div>
+    </body>
+    </html>

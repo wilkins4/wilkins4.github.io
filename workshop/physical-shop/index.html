@@ -1,0 +1,60 @@
+    <!doctype html>
+    <html lang="en">
+    <head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d0f0d">
+      <title>Physical Hobby Products | Wilkinson Workshop</title>
+      <meta name="description" content="Planned physical versions of original Workshop files and properly licensed third-party prints sold through external marketplaces.">
+
+      <link rel="canonical" href="https://stephenwilkinson.dev/workshop/physical-shop/">
+      <link rel="icon" type="image/svg+xml" href="../assets/workshop-mark.svg">
+      <link rel="stylesheet" href="../assets/workshop.css">
+
+      <script src="../assets/catalog.js" defer></script>
+      <script src="../assets/workshop.js" defer></script>
+    </head>
+    <body class="workshop-site" data-page="physical-shop" data-root="../">
+      <a class="ws-skip-link" href="#main-content">Skip to main content</a>
+      <div data-workshop-header></div>
+      <main class="ws-main" id="main-content">
+
+<section class="ws-page-hero">
+  <div class="ws-container">
+    <p class="ws-eyebrow">External marketplace listings</p>
+    <h1>Physical products begin with a controlled pilot</h1>
+    <p class="ws-page-copy">The first physical listings will stay small, repeatable, and easy to ship. This page routes visitors to external marketplaces and never processes payments directly.</p>
+  </div>
+</section>
+
+    <section class="ws-section">
+      <div class="ws-container" data-filter-scope data-collection="physicalProducts">
+        <div class="ws-callout" style="margin-bottom: 1rem;"><span class="ws-callout-icon" aria-hidden="true">✓</span><div><h2>License registry required</h2><p>Third-party physical prints will not be listed until creator, product, license tier, attribution, receipt, restrictions, and verification date are documented.</p></div></div>
+        <div class="ws-filter-shell">
+          <form class="ws-filter-form" role="search" onsubmit="return false;">
+            <div class="ws-field">
+              <label for="catalog-search">Search catalog</label>
+              <input id="catalog-search" type="search" placeholder="Search names, categories, and tags" autocomplete="off" data-filter-search>
+            </div>
+            <div class="ws-field">
+              <label for="catalog-category">Category</label>
+              <select id="catalog-category" data-filter-category>
+                <option value="">All categories</option>
+              </select>
+            </div>
+            <span aria-hidden="true"></span>
+          </form>
+          <div class="ws-filter-summary">
+            <span data-filter-count aria-live="polite">0 entries</span>
+            <button class="ws-filter-clear" type="button" data-filter-clear>Clear filters</button>
+          </div>
+        </div>
+        <div class="ws-card-grid" data-filter-grid></div>
+        <noscript><p class="ws-noscript">JavaScript is required to filter and render the structured Workshop catalog.</p></noscript>
+      </div>
+    </section>
+      </main>
+      <div data-workshop-footer></div>
+    </body>
+    </html>

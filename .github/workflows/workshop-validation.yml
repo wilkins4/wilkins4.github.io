@@ -1,0 +1,49 @@
+name: Workshop validation
+
+on:
+  pull_request:
+    paths:
+      - "workshop/**"
+      - "sitemap.xml"
+      - ".github/workflows/workshop-validation.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "workshop/**"
+      - "sitemap.xml"
+      - ".github/workflows/workshop-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: workshop-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Static site and product release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check JavaScript syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            node --check "$file"
+          done < <(find workshop -type f -name '*.js' -print0 | sort -z)
+
+      - name: Validate Workshop routes and release
+        run: node workshop/scripts/validate-workshop.mjs
